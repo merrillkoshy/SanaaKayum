@@ -604,6 +604,9 @@
       object-position: center;
     }
   }
+  .swiper-container {
+    max-height: 100%;
+  }
   .swiper-container-vertical {
     height: 100%;
   }

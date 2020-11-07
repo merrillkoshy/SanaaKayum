@@ -5,24 +5,33 @@ import thunkMiddleware from "redux-thunk";
 // import reducers from "./reducers";
 import rootReducer from "./redux/reducers/rootReducer";
 import promise from "redux-promise";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 let store;
+const persistConfig = {
+  key: "primary",
+  storage,
+  whitelist: ["exampleData"] // place to select which state you want to persist
+};
 
-function initStore(initialState) {
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+function makeStore(initialState) {
   return createStore(
-    rootReducer,
+    persistedReducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware, promise))
   );
 }
 
 export const initializeStore = preloadedState => {
-  let _store = store ?? initStore(preloadedState);
+  let _store = store ?? makeStore(preloadedState);
 
   // After navigating to a page with an initial Redux state, merge that state
   // with the current state in the store, and create a new store
   if (preloadedState && store) {
-    _store = initStore({
+    _store = makeStore({
       ...store.getState(),
       ...preloadedState
     });

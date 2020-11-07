@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, forwardRef } from "react";
 
 import { useToasts } from "react-toast-notifications";
 import { getDiscountPrice } from "../../helpers/product";
@@ -8,19 +8,18 @@ import ProductModal from "./ProductModal";
 import { isSafari } from "react-device-detect";
 const slugify = require("@sindresorhus/slugify");
 
-const ProductGridSingle = ({
-  product,
-  currency,
-  addToCart,
-  uID,
-  addToWishlist,
-  addToCompare,
-  cartItem,
-  wishlistItem,
-  compareItem,
-  sliderClassName,
-  spaceBottomClass
-}) => {
+const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
+  const { uID } = props;
+  const { product } = props;
+  const { currency } = props;
+  const { addToCart } = props;
+  const { addToWishlist } = props;
+  const { addToCompare } = props;
+  const { cartItem } = props;
+  const { wishlistItem } = props;
+  const { compareItem } = props;
+  const { sliderClassName } = props;
+  const { spaceBottomClass } = props;
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
 
@@ -37,15 +36,13 @@ const ProductGridSingle = ({
           sliderClassName ? sliderClassName : ""
         }`}
       >
-        <div
-          className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
-        >
-          <div className="product-img">
-            <a
-              href={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${slugify(
-                product.description
-              )}`}
-            >
+        <a className="next_wrapper" href={href} onClick={onClick} ref={ref}>
+          <div
+            className={`product-wrap ${
+              spaceBottomClass ? spaceBottomClass : ""
+            }`}
+          >
+            <div className="product-img">
               <img
                 className="default-img"
                 src={
@@ -88,137 +85,112 @@ const ProductGridSingle = ({
               ) : (
                 ""
               )}
-            </a>
-            <div className="product-action">
-              <div className="pro-same-action pro-wishlist">
-                <button
-                  aria-label="wishlist-add"
-                  className={wishlistItem !== undefined ? "active" : ""}
-                  disabled={wishlistItem !== undefined}
-                  title={
-                    wishlistItem !== undefined
-                      ? "Added to wishlist"
-                      : "Add to wishlist"
-                  }
-                  onClick={() => {
-                    addToWishlist(product, addToast, uID);
-                  }}
-                >
-                  <i className="pe-7s-like" />
-                </button>
-              </div>
-              <div className="pro-same-action pro-cart">
-                {product.affiliateLink ? (
-                  <a
-                    href={product.affiliateLink}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {" "}
-                    Buy now{" "}
-                  </a>
-                ) : product.variation && product.variation.length >= 1 ? (
-                  <a
-                    href={`${
-                      process.env.NEXT_PUBLIC_PUBLIC_URL
-                    }/product/${slugify(product.description)}`}
-                  >
-                    Select Option
-                  </a>
-                ) : product.stock && product.stock > 0 ? (
+
+              <div className="product-action">
+                <div className="pro-same-action pro-wishlist">
                   <button
-                    onClick={() => {
-                      addToCart(product, addToast, uID);
-                    }}
-                    className={
-                      cartItem !== undefined && cartItem.quantity > 0
-                        ? "active"
-                        : ""
-                    }
-                    disabled={cartItem !== undefined && cartItem.quantity > 0}
+                    aria-label="wishlist-add"
+                    className={wishlistItem !== undefined ? "active" : ""}
+                    disabled={wishlistItem !== undefined}
                     title={
-                      cartItem !== undefined ? "Added to cart" : "Add to cart"
+                      wishlistItem !== undefined
+                        ? "Added to wishlist"
+                        : "Add to wishlist"
                     }
+                    onClick={() => {
+                      addToWishlist(product, addToast, uID);
+                    }}
                   >
-                    {" "}
-                    <i className="pe-7s-cart"></i>{" "}
-                    {cartItem !== undefined && cartItem.quantity > 0
-                      ? "Added"
-                      : "Add to cart"}
+                    <i className="pe-7s-like" />
                   </button>
+                </div>
+                <div className="pro-same-action pro-cart">
+                  {product.affiliateLink ? (
+                    "Buy now "
+                  ) : product.variation && product.variation.length >= 1 ? (
+                    "Select Option"
+                  ) : product.stock && product.stock > 0 ? (
+                    <button
+                      onClick={() => {
+                        addToCart(product, addToast, uID);
+                      }}
+                      className={
+                        cartItem !== undefined && cartItem.quantity > 0
+                          ? "active"
+                          : ""
+                      }
+                      disabled={cartItem !== undefined && cartItem.quantity > 0}
+                      title={
+                        cartItem !== undefined ? "Added to cart" : "Add to cart"
+                      }
+                    >
+                      {" "}
+                      <i className="pe-7s-cart"></i>{" "}
+                      {cartItem !== undefined && cartItem.quantity > 0
+                        ? "Added"
+                        : "Add to cart"}
+                    </button>
+                  ) : (
+                    <button disabled className="active">
+                      Out of Stock
+                    </button>
+                  )}
+                </div>
+                <div className="pro-same-action pro-quickview">
+                  <button onClick={() => setModalShow(true)} title="Quick View">
+                    <i className="pe-7s-look" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            {product.discount || product.new ? (
+              <div className="product-img-badges">
+                {product.discount ? (
+                  <span className="pink">-{product.discount}%</span>
                 ) : (
-                  <button disabled className="active">
-                    Out of Stock
-                  </button>
+                  ""
                 )}
-              </div>
-              <div className="pro-same-action pro-quickview">
-                <button onClick={() => setModalShow(true)} title="Quick View">
-                  <i className="pe-7s-look" />
-                </button>
-              </div>
-            </div>
-          </div>
-          {product.discount || product.new ? (
-            <div className="product-img-badges">
-              {product.discount ? (
-                <span className="pink">-{product.discount}%</span>
-              ) : (
-                ""
-              )}
-              {product.new ? <span className="purple">New</span> : ""}
-            </div>
-          ) : (
-            ""
-          )}
-          <div className="product-content text-center">
-            <h3>
-              <strong>
-                <a
-                  href={`${
-                    process.env.NEXT_PUBLIC_PUBLIC_URL
-                  }/product/${slugify(product.description)}`}
-                >
-                  {product.article}
-                </a>
-              </strong>
-              {" | "}
-              <a
-                href={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${slugify(
-                  product.description
-                )}`}
-              >
-                {product.collectionName}
-              </a>
-            </h3>
-            {product.rating && product.rating > 0 ? (
-              <div className="product-rating d-none">
-                <Rating ratingValue={product.rating} />
+                {product.new ? <span className="purple">New</span> : ""}
               </div>
             ) : (
               ""
             )}
-            <div className="product-price">
-              {discountedPrice !== null ? (
-                <Fragment>
-                  {/* {/* <span>{currency.currencySymbol + finalDiscountedPrice}</span>{" "} */}
-                  <span>{`AED ` + finalDiscountedPrice}</span>{" "}
-                  <span className="old">
-                    {/* {currency.currencySymbol + finalProductPrice} */}
-                    {`AED `}
-                    <strong> {finalProductPrice}</strong>
-                  </span>
-                </Fragment>
+            <div className="product-content text-center">
+              <h3>
+                <strong>{product.article}</strong>
+                {" | "}
+
+                {product.collectionName}
+              </h3>
+              {product.rating && product.rating > 0 ? (
+                <div className="product-rating d-none">
+                  <Rating ratingValue={product.rating} />
+                </div>
               ) : (
-                // <span>{currency.currencySymbol + finalProductPrice} </span>
-                <span>
-                  {`AED `}
-                  <strong> {finalProductPrice}</strong>{" "}
-                </span>
+                ""
               )}
+              <div className="product-price">
+                {discountedPrice !== null ? (
+                  <Fragment>
+                    {/* {/* <span>{currency.currencySymbol + finalDiscountedPrice}</span>{" "} */}
+                    <span>{`AED ` + finalDiscountedPrice}</span>{" "}
+                    <span className="old">
+                      {/* {currency.currencySymbol + finalProductPrice} */}
+                      {`AED `}
+                      <strong> {finalProductPrice}</strong>
+                    </span>
+                  </Fragment>
+                ) : (
+                  // <span>{currency.currencySymbol + finalProductPrice} </span>
+                  <span>
+                    {`AED `}
+                    <strong> {finalProductPrice}</strong>{" "}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
       {/* product modal */}
       <ProductModal
@@ -240,7 +212,7 @@ const ProductGridSingle = ({
       />
     </Fragment>
   );
-};
+});
 
 ProductGridSingle.propTypes = {
   addToCart: PropTypes.func,

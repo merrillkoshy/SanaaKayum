@@ -10,6 +10,64 @@ const ProductSlider = props => {
   const { products } = props;
 
   const [comp, setComp] = useState("");
+
+  const getProducts = sliders => {
+    const key = sliders.filterKey;
+    const productList = products.filter((items, i) => {
+      if (items[key] === sliders.filterValue) return items;
+    });
+
+    return [...new Set(productList)].slice(
+      0,
+      sliders.limit ? sliders.limit : productList.length
+    );
+  };
+  const params = {
+    effect: "fade",
+    loop: false,
+    breakpoints: {
+      1200: {
+        spaceBetween: 10,
+        slidesPerView: 6,
+        direction: "horizontal"
+      },
+      992: {
+        spaceBetween: 10,
+        slidesPerView: 5,
+        direction: "horizontal"
+      },
+      768: {
+        spaceBetween: 8,
+        slidesPerView: 4,
+        direction: "horizontal"
+      },
+      640: {
+        spaceBetween: 6,
+        slidesPerView: 3,
+        direction: "horizontal"
+      },
+      320: {
+        spaceBetween: 3,
+        slidesPerView: 2,
+        direction: "horizontal"
+      }
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
+    renderPrevButton: () => (
+      <button className="swiper-button-prev ht-swiper-button-nav">
+        <i className="pe-7s-angle-left" />
+      </button>
+    ),
+    renderNextButton: () => (
+      <button className="swiper-button-next ht-swiper-button-nav">
+        <i className="pe-7s-angle-right" />
+      </button>
+    )
+  };
+
   useEffect(
     () =>
       setComp(
@@ -104,43 +162,6 @@ const ProductSlider = props => {
       ),
     [props.sliders]
   );
-
-  const getProducts = sliders => {
-    const key = sliders.filterKey;
-    const productList = products.filter((items, i) => {
-      if (items[key] === sliders.filterValue) return items;
-    });
-
-    return [...new Set(productList)].slice(
-      0,
-      sliders.limit ? sliders.limit : productList.length
-    );
-  };
-  const params = {
-    effect: "fade",
-    loop: true,
-    speed: 1000,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    watchSlidesVisibility: true,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
-    },
-    renderPrevButton: () => (
-      <button className="swiper-button-prev ht-swiper-button-nav">
-        <i className="pe-7s-angle-left" />
-      </button>
-    ),
-    renderNextButton: () => (
-      <button className="swiper-button-next ht-swiper-button-nav">
-        <i className="pe-7s-angle-right" />
-      </button>
-    )
-  };
-
   return comp ? comp : "";
 };
 

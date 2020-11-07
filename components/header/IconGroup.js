@@ -11,6 +11,7 @@ import { logoutUser } from "../../redux/actions/userActions";
 
 import { resetWishlist } from "../../redux/actions/wishlistActions";
 import { resetCompare } from "../../redux/actions/compareActions";
+import Link from "next/link";
 
 const IconGroup = ({
   userData,
@@ -25,19 +26,21 @@ const IconGroup = ({
   logoutUser
 }) => {
   const initUname = (
-    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>Login</a>
+    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
+      <a>Login</a>
+    </Link>
   );
   const initInteraction = (
     <ul>
       <li>
-        <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
-          Register
-        </a>
+        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
+          <a>Register</a>
+        </Link>
       </li>
       <li>
-        <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
-          Login
-        </a>
+        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
+          <a>Login</a>
+        </Link>
       </li>
     </ul>
   );

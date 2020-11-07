@@ -14,9 +14,15 @@ import {
   fetchSliders
 } from "../redux/actions/productActions";
 import client from "../constants/config";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import LoadingScreen from "../helpers/LoadingScreen";
 
 export default function App({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
+  const persistor = persistStore(store, {}, function() {
+    persistor.persist();
+  });
 
   var productMap = [];
   var lowerCords = [];
@@ -63,18 +69,20 @@ export default function App({ Component, pageProps }) {
     });
   return (
     <Provider store={store}>
-      <ToastProvider placement="bottom-left">
-        <BreadcrumbsProvider>
-          <ScrollToTop>
-            <Helmet
-              htmlAttributes={{ lang: "en", amp: undefined }} // amp takes no value
-              titleTemplate="%s | Sana'a Kayum"
-              titleAttributes={{ itemprop: "name", lang: "en" }}
-            />
-            <Component {...pageProps} />
-          </ScrollToTop>
-        </BreadcrumbsProvider>
-      </ToastProvider>
+      <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+        <ToastProvider placement="bottom-left">
+          <BreadcrumbsProvider>
+            <ScrollToTop>
+              <Helmet
+                htmlAttributes={{ lang: "en", amp: undefined }} // amp takes no value
+                titleTemplate="%s | Sana'a Kayum"
+                titleAttributes={{ itemprop: "name", lang: "en" }}
+              />
+              <Component {...pageProps} />
+            </ScrollToTop>
+          </BreadcrumbsProvider>
+        </ToastProvider>
+      </PersistGate>
     </Provider>
   );
 }

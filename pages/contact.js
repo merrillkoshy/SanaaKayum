@@ -2,13 +2,11 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
-import LayoutOne from "../../layouts/LayoutOne";
-import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
-import HeaderMeta from "../../components/header/HeaderMeta";
+import LayoutOne from "../layouts/LayoutOne";
+import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
+import HeaderMeta from "../components/header/HeaderMeta";
 
-const Contact = ({ location }) => {
-  const { pathname } = location;
-
+const Contact = ({}) => {
   return (
     <Fragment>
       <HeaderMeta
@@ -21,15 +19,9 @@ const Contact = ({ location }) => {
         color={"#000000"}
       />
 
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + "/"}>
-        Home
-      </BreadcrumbsItem>
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + pathname}>
-        Contact
-      </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb />
+
         <div className="contact-area pt-100 pb-100">
           <div className="container">
             {/* <div className="contact-map mb-10">

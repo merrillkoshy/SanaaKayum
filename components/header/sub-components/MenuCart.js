@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 
 import { useToasts } from "react-toast-notifications";
 import { isSafari } from "react-device-detect";
+import Link from "next/link";
 const slugify = require("@sindresorhus/slugify");
 const MenuCart = ({ cartData, uID, deleteFromCart }) => {
   let cartTotalPrice = 0;
@@ -31,35 +32,37 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
                 return (
                   <li className="single-shopping-cart" key={key}>
                     <div className="shopping-cart-img">
-                      <a
-                        href={`${
-                          process.env.NEXT_PUBLIC_PUBLIC_URL
-                        }/product/${slugify(single.description)}`}
+                      <Link
+                        href={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${
+                          single.serialNumber
+                        }/${slugify(single.description)}`}
                       >
-                        <img
-                          alt=""
-                          src={
-                            isSafari
-                              ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                                single.images[0].fields.file.url
-                              : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                                  single.images[0].fields.file.url}?fm=jpg`
-                          }
-                          className="img-fluid"
-                        />
-                      </a>
+                        <a>
+                          <img
+                            alt=""
+                            src={
+                              isSafari
+                                ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                  single.images[0].fields.file.url
+                                : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                    single.images[0].fields.file.url}?fm=jpg`
+                            }
+                            className="img-fluid"
+                          />
+                        </a>
+                      </Link>
                     </div>
                     <div className="shopping-cart-title">
                       <h4>
-                        <a
-                          href={
-                            process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            "/product/" +
-                            slugify(single.description)
-                          }
+                        <Link
+                          href={`${
+                            process.env.NEXT_PUBLIC_PUBLIC_URL
+                          }/product/${single.serialNumber}/${slugify(
+                            single.description
+                          )}`}
                         >
-                          {single.description}
-                        </a>
+                          <a>{single.description}</a>
+                        </Link>
                       </h4>
 
                       <h6>Qty: {single.quantity}</h6>
@@ -99,18 +102,12 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
             </h4>
           </div>
           <div className="shopping-cart-btn btn-hover text-center">
-            <a
-              className="default-btn"
-              href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/cart"}
-            >
-              view cart
-            </a>
-            <a
-              className="default-btn"
-              href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/checkout"}
-            >
-              checkout
-            </a>
+            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/cart"}>
+              <a className="default-btn">view cart</a>
+            </Link>
+            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/checkout"}>
+              <a className="default-btn">checkout</a>
+            </Link>
           </div>
         </Fragment>
       ) : (

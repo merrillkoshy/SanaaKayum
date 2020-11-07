@@ -4,26 +4,26 @@ import { Link } from "react-router-dom";
 import MetaTags from "react-meta-tags";
 import { connect } from "react-redux";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
-import { getDiscountPrice } from "../../helpers/product";
-import LayoutOne from "../../layouts/LayoutOne";
+import { getDiscountPrice } from "../helpers/product";
+import LayoutOne from "../layouts/LayoutOne";
 import { useHistory } from "react-router-dom";
-import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+
 import uuid from "uuid/v4";
 import {
   CountryDropdown,
   RegionDropdown,
   CountryRegionData
 } from "react-country-region-selector";
-import clientMgr from "../../constants/contentManager";
+import clientMgr from "../constants/contentManager";
 import { document } from "ssr-window";
 
 const axios = require("axios").default;
-const Checkout = ({ location, cartItems, currency, user }) => {
+const Checkout = ({ cartItems, currency, user }) => {
   const [country, selectCountry] = useState("");
   const [region, selectRegion] = useState("");
   const history = useHistory();
   var userData = user.user;
-  const { pathname } = location;
+
   let cartTotalPrice = 0;
   const order = response => {
     var orderData = {
@@ -78,15 +78,10 @@ const Checkout = ({ location, cartItems, currency, user }) => {
           content="Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
         />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + "/"}>
-        Home
-      </BreadcrumbsItem>
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + pathname}>
-        Checkout
-      </BreadcrumbsItem>
+
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb />
+
         <div className="checkout-area pt-95 pb-100">
           <div className="container">
             {cartItems && cartItems.length >= 1 ? (
@@ -299,12 +294,13 @@ const Checkout = ({ location, cartItems, currency, user }) => {
                                     : "",
                                   street1: userData.addressDetails.addressLine.concat(
                                     ", P.O.Box : " +
-                                    document.querySelector(
-                                      'input[name="postcode"]'
-                                    )?
                                       document.querySelector(
                                         'input[name="postcode"]'
-                                      ).value:""
+                                      )
+                                      ? document.querySelector(
+                                          'input[name="postcode"]'
+                                        ).value
+                                      : ""
                                   ),
                                   city: userData.addressDetails.region,
                                   state: userData.addressDetails.region,

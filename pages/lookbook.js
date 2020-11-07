@@ -66,8 +66,9 @@ const Lookbook = ({
               title={lb.collectionName + " " + lb.article + " by Sana'a Kayum"}
               src={
                 !isSafari
-                  ? process.env.RAZZLE_PUBLIC_URL + lb.image[0].fields.file.url
-                  : `${process.env.RAZZLE_PUBLIC_URL +
+                  ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                    lb.image[0].fields.file.url
+                  : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                       lb.image[0].fields.file.url}?fm=jpg`
               }
             />
@@ -83,9 +84,9 @@ const Lookbook = ({
                 }
                 src={
                   !isSafari
-                    ? process.env.RAZZLE_PUBLIC_URL +
+                    ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                       lb.image[1].fields.file.url
-                    : `${process.env.RAZZLE_PUBLIC_URL +
+                    : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                         lb.image[1].fields.file.url}?fm=jpg`
                 }
               />
@@ -129,9 +130,9 @@ const Lookbook = ({
                     }
                     src={
                       !isSafari
-                        ? process.env.RAZZLE_PUBLIC_URL +
+                        ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                           lookbook[lkbkChild].image[0].fields.file.url
-                        : `${process.env.RAZZLE_PUBLIC_URL +
+                        : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                             lookbook[lkbkChild].image[0].fields.file
                               .url}?fm=jpg`
                     }
@@ -151,9 +152,9 @@ const Lookbook = ({
                       }
                       src={
                         !isSafari
-                          ? process.env.RAZZLE_PUBLIC_URL +
+                          ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                             lookbook[lkbkChild].image[1].fields.file.url
-                          : `${process.env.RAZZLE_PUBLIC_URL +
+                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                               lookbook[lkbkChild].image[1].fields.file
                                 .url}?fm=jpg`
                       }
@@ -197,7 +198,7 @@ const Lookbook = ({
             <div className="col span-3 text-center">
               <Link
                 to={
-                  process.env.RAZZLE_PUBLIC_URL +
+                  process.env.NEXT_PUBLIC_PUBLIC_URL +
                   "shop?search=" +
                   lookbook[lkbkChild].collectionName.toLowerCase()
                 }

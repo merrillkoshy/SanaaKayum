@@ -103,9 +103,7 @@ const HeaderOne = ({
             <div className="col-2 d-lg-none d-xl-none my-auto text-center px-2 shop-mobile">
               {/* Shop Button for mobile screens */}
               <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
-                  <strong>SHOP</strong>
-                </a>
+                <strong>SHOP</strong>
               </Link>
             </div>
             <div className="col-xl-6 col-lg-7 d-none d-lg-block">

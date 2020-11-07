@@ -7,6 +7,8 @@ import ProductGridSingle from "../../components/product/ProductGridSingle";
 import { addToCart } from "../../redux/actions/cartActions";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
 import { addToCompare } from "../../redux/actions/compareActions";
+import Link from "next/link";
+const slugify = require("@sindresorhus/slugify");
 
 const HomePageProductSlider = ({
   swiperParams,
@@ -28,37 +30,49 @@ const HomePageProductSlider = ({
         {products &&
           products.map(product => {
             return (
-              <ProductGridSingle
-                sliderClassName={sliderClassName}
-                spaceBottomClass={spaceBottomClass}
-                product={product}
-                currency={currency}
-                addToCart={addToCart}
-                uID={userData.user.entryID}
-                addToWishlist={addToWishlist}
-                addToCompare={addToCompare}
-                cartItem={
-                  cartItems
-                    ? cartItems.filter(
-                        cartItem =>
-                          cartItem.serialNumber === product.serialNumber
-                      )[0]
-                    : ""
-                }
-                wishlistItem={
-                  wishlistItems.filter(
-                    wishlistItem =>
-                      wishlistItem.serialNumber === product.serialNumber
-                  )[0]
-                }
-                compareItem={
-                  compareItems.filter(
-                    compareItem =>
-                      compareItem.serialNumber === product.serialNumber
-                  )[0]
-                }
+              <Link
                 key={product.serialNumber}
-              />
+                href={{
+                  pathname: `/product/[pid]/[slug]`,
+                  query: {
+                    pid: product.serialNumber,
+                    slug: slugify(product.description)
+                  }
+                }}
+                passHref
+              >
+                <ProductGridSingle
+                  sliderClassName={sliderClassName}
+                  spaceBottomClass={spaceBottomClass}
+                  product={product}
+                  currency={currency}
+                  addToCart={addToCart}
+                  uID={userData.user.entryID}
+                  addToWishlist={addToWishlist}
+                  addToCompare={addToCompare}
+                  cartItem={
+                    cartItems
+                      ? cartItems.filter(
+                          cartItem =>
+                            cartItem.serialNumber === product.serialNumber
+                        )[0]
+                      : ""
+                  }
+                  wishlistItem={
+                    wishlistItems.filter(
+                      wishlistItem =>
+                        wishlistItem.serialNumber === product.serialNumber
+                    )[0]
+                  }
+                  compareItem={
+                    compareItems.filter(
+                      compareItem =>
+                        compareItem.serialNumber === product.serialNumber
+                    )[0]
+                  }
+                  key={product.serialNumber}
+                />
+              </Link>
             );
           })}
       </Swiper>

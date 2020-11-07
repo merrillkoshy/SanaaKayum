@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-
+import Link from "next/link";
 
 const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
   return (
@@ -14,10 +14,14 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
       <nav>
         <ul>
           <li>
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>{"Home"}</a>
+            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+              <a>{"Home"}</a>
+            </Link>
           </li>
           <li>
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}> {"Shop"}</a>
+            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+              <a> {"Shop"}</a>
+            </Link>
           </li>
           {/* Edit - only must-use comps
           <li>
@@ -26,19 +30,23 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
             </a>
           </li>*/}
           <li>
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/lookbook"}>{"Lookbook"}</a>
+            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/lookbook"}>
+              <a>{"Lookbook"}</a>
+            </Link>
           </li>
           <li>
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
-              {"About Us"}
-              {/* {sidebarMenu ? (
+            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
+              <a>
+                {"About Us"}
+                {/* {sidebarMenu ? (
                 <span>
                   <i className="fa fa-angle-right"></i>
                 </span>
               ) : (
                 <i className="fa fa-angle-down" />
               )} */}
-            </a>
+              </a>
+            </Link>
             {/* <ul className="submenu">
               <li>
                 <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/cart"}>
@@ -122,7 +130,9 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
             </ul>
           </li> */}
           <li>
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>{"Contact Us"}</a>
+            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>
+              <a>{"Contact Us"}</a>
+            </Link>
           </li>
         </ul>
       </nav>
