@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { fetchProducts, startClock } from "../actions";
+
 import HeaderMeta from "../components/header/HeaderMeta";
 import MetaTags from "react-meta-tags";
 import { GA_TRACKING_ID } from "../constants/gtag";
@@ -17,11 +15,6 @@ const Index = props => {
     ReactGA.initialize(GA_TRACKING_ID);
     ReactGA.pageview("/");
   };
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(startClock());
-  }, [dispatch]);
 
   return (
     <>
@@ -70,4 +63,4 @@ const Index = props => {
 function mapStateToProps(state) {
   return { products: state.productData };
 }
-export default connect(mapStateToProps, { fetchProducts })(Index);
+export default connect(mapStateToProps)(Index);

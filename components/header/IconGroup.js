@@ -68,7 +68,14 @@ const IconGroup = ({
           </li>
 
           <li>
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/my-account"}>
+            <a
+              href={{
+                pathname: `/[userAccount]]`,
+                query: {
+                  userAccount: userData.user.firstName
+                }
+              }}
+            >
               {`${userData.user.firstName}'s Account`}
             </a>
           </li>
