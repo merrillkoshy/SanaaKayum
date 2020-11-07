@@ -1,13 +1,110 @@
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-
-import { getProducts } from "../../helpers/product";
-import HomePageProductSlider from "../../components/hero-slider/HomePageProductSlider";
 import { connect } from "react-redux";
+import { useState, useEffect } from "react";
 import { isSafari, isMobile } from "react-device-detect";
+import Link from "next/link";
 import { Row, Col, Button } from "react-bootstrap";
+import HomePageProductSlider from "../../components/hero-slider/HomePageProductSlider";
 
-const ProductSlider = ({ products, sliders }) => {
+const ProductSlider = props => {
+  const { sliders } = props;
+  const { products } = props;
+
+  const [comp, setComp] = useState("");
+  useEffect(
+    () =>
+      setComp(
+        sliders &&
+          sliders.map(slider => {
+            return (
+              <div key={slider.id} className="slider-area px-lg-5 px-xs-1">
+                <div className="slider-active-2 nav-style-3 px-lg-5 px-xs-1">
+                  {slider.featureSlide ? (
+                    <>
+                      <div
+                        className="slider-content-2 slider-animated-1 text-center"
+                        style={
+                          !isMobile
+                            ? {
+                                background:
+                                  "url(" +
+                                  slider.sliderMedia.fields.file.url +
+                                  ") no-repeat center center",
+                                backgroundSize: "contain"
+                              }
+                            : {
+                                background:
+                                  "url(" +
+                                  slider.sliderMedia.fields.file.url +
+                                  ") no-repeat",
+                                backgroundPosition: "50% 2%",
+                                backgroundSize: "cover"
+                              }
+                        }
+                      >
+                        <h1 className="animated mb-xs-0 mb-sm-0 mb-md-0">
+                          {slider.featureSlideData.text}
+                        </h1>
+
+                        <div className="slider-btn-5 btn-hover">
+                          <Link
+                            className="animated p-sm-3"
+                            href={
+                              slider.featureSlideData.action
+                                ? slider.featureSlideData.action
+                                : process.env.RAZZLE_PUBLIC_URL + `/shop`
+                            }
+                          >
+                            {slider.featureSlideData.button}
+                          </Link>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  <Row className="mx-auto">
+                    <Col>
+                      {isMobile ? (
+                        <h4>{slider.sliderHeading}</h4>
+                      ) : (
+                        <h2>{slider.sliderHeading}</h2>
+                      )}{" "}
+                    </Col>
+                    <Col className="text-right">
+                      <Button
+                        style={{
+                          backgroundColor: "transparent",
+                          borderColor: "black"
+                        }}
+                      >
+                        <Link
+                          href={
+                            process.env.RAZZLE_PUBLIC_URL +
+                            `/shop?search=` +
+                            slider.filterValue
+                          }
+                        >
+                          View All
+                        </Link>
+                      </Button>
+                    </Col>
+                  </Row>
+
+                  <HomePageProductSlider
+                    swiperParams={params}
+                    products={getProducts(slider)}
+                    limit={slider.limit}
+                    spaceBottomClass="mb-25"
+                    sliderClassName="swiper-slide"
+                  />
+                </div>
+              </div>
+            );
+          })
+      ),
+    [props.sliders]
+  );
+
   const getProducts = sliders => {
     const key = sliders.filterKey;
     const productList = products.filter((items, i) => {
@@ -20,33 +117,14 @@ const ProductSlider = ({ products, sliders }) => {
     );
   };
   const params = {
-    breakpoints: {
-      1200: {
-        spaceBetween: 10,
-        slidesPerView: 6,
-        direction: "horizontal"
-      },
-      992: {
-        spaceBetween: 10,
-        slidesPerView: 5,
-        direction: "horizontal"
-      },
-      768: {
-        spaceBetween: 8,
-        slidesPerView: 4,
-        direction: "horizontal"
-      },
-      640: {
-        spaceBetween: 6,
-        slidesPerView: 3,
-        direction: "horizontal"
-      },
-      320: {
-        spaceBetween: 3,
-        slidesPerView: 2,
-        direction: "horizontal"
-      }
+    effect: "fade",
+    loop: true,
+    speed: 1000,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
     },
+    watchSlidesVisibility: true,
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev"
@@ -63,97 +141,7 @@ const ProductSlider = ({ products, sliders }) => {
     )
   };
 
-  return "under construction";
-  // return (
-  //   sliders &&
-  //   sliders.map(slider => {
-  //     return (
-  //       <div key={slider.id} className="slider-area px-lg-5 px-xs-1">
-  //         <div className="slider-active-2 nav-style-3 px-lg-5 px-xs-1">
-  //           {slider.featureSlide ? (
-  //             <>
-  //               <div
-  //                 className="slider-content-2 slider-animated-1 text-center"
-  //                 style={
-  //                   !isMobile
-  //                     ? {
-  //                         background:
-  //                           "url(" +
-  //                           slider.sliderMedia.fields.file.url +
-  //                           ") no-repeat center center",
-  //                         backgroundSize: "contain"
-  //                       }
-  //                     : {
-  //                         background:
-  //                           "url(" +
-  //                           slider.sliderMedia.fields.file.url +
-  //                           ") no-repeat",
-  //                         backgroundPosition: "50% 2%",
-  //                         backgroundSize: "cover"
-  //                       }
-  //                 }
-  //               >
-  //                 <h1 className="animated mb-xs-0 mb-sm-0 mb-md-0">
-  //                   {slider.featureSlideData.text}
-  //                 </h1>
-
-  //                 <div className="slider-btn-5 btn-hover">
-  //                   <a
-  //                     className="animated p-sm-3"
-  //                     href={
-  //                       slider.featureSlideData.action
-  //                         ? slider.featureSlideData.action
-  //                         : process.env.NEXT_PUBLIC_PUBLIC_URL + `/shop`
-  //                     }
-  //                   >
-  //                     {slider.featureSlideData.button}
-  //                   </a>
-  //                 </div>
-  //               </div>
-  //             </>
-  //           ) : (
-  //             ""
-  //           )}
-  //           <Row className="mx-auto">
-  //             <Col>
-  //               {isMobile ? (
-  //                 <h4>{slider.sliderHeading}</h4>
-  //               ) : (
-  //                 <h2>{slider.sliderHeading}</h2>
-  //               )}{" "}
-  //             </Col>
-  //             <Col className="text-right">
-  //               <Button
-  //                 style={{
-  //                   backgroundColor: "transparent",
-  //                   borderColor: "black"
-  //                 }}
-  //               >
-  //                 <a
-  //                   href={
-  //                     process.env.NEXT_PUBLIC_PUBLIC_URL +
-  //                     `/shop?search=` +
-  //                     slider.filterValue
-  //                   }
-  //                 >
-  //                   View All
-  //                 </a>
-  //               </Button>
-  //             </Col>
-  //           </Row>
-
-  //           <HomePageProductSlider
-  //             swiperParams={params}
-  //             products={getProducts(slider)}
-  //             limit={slider.limit}
-  //             spaceBottomClass="mb-25"
-  //             sliderClassName="swiper-slide"
-  //           />
-  //         </div>
-  //       </div>
-  //     );
-  //   })
-  // );
+  return comp ? comp : "";
 };
 
 const mapStateToProps = state => {
@@ -162,4 +150,5 @@ const mapStateToProps = state => {
     sliders: state.sliderData.sliders
   };
 };
+
 export default connect(mapStateToProps)(ProductSlider);
