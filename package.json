@@ -1,0 +1,43 @@
+{
+  "name": "with-redux-thunk",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@sindresorhus/slugify": "^1.1.0",
+    "animate.css": "^4.1.1",
+    "bootstrap": "^4.5.3",
+    "contentful": "^7.14.8",
+    "contentful-management": "^6.2.0",
+    "next": "latest",
+    "react": "^16.9.0",
+    "react-bootstrap": "^1.4.0",
+    "react-breadcrumbs-dynamic": "^1.2.1",
+    "react-country-region-selector": "^3.0.1",
+    "react-device-detect": "^1.14.0",
+    "react-document-meta": "^3.0.0-beta.2",
+    "react-dom": "^16.9.0",
+    "react-ga": "^3.2.0",
+    "react-helmet": "^6.1.0",
+    "react-hooks-paginator": "^0.4.4",
+    "react-id-swiper": "^4.0.0",
+    "react-lightgallery": "^0.9.0",
+    "react-meta-tags": "^0.7.4",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.2.0",
+    "react-scroll": "^1.8.1",
+    "react-toast-notifications": "^2.4.0",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
+    "sass": "^1.29.0",
+    "ssr-window": "^2.0.0",
+    "swiper": "^6.3.5",
+    "uuid": "^3.3.3"
+  },
+  "license": "MIT"
+}

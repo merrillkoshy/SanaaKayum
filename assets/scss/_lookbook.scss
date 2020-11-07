@@ -1,0 +1,248 @@
+.lookbook-wrapper {
+  height: 100%;
+  overflow: hidden;
+  background: #333;
+  .product-wrap {
+    border-radius: 10px;
+    background: #333333;
+    box-shadow: 30px 30px 60px #2b2b2b, -30px -30px 60px #3b3b3b;
+    img {
+      border-radius: 10px;
+    }
+  }
+}
+.stlBtn {
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+  padding: 10px;
+}
+.lookbook-header {
+  height: 18vh;
+  width: 100%;
+  box-shadow: inset 0px 2px 20px 1px #0000008a;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  @media #{$md-layout} {
+    height: 15vh;
+  }
+  @media #{$lg-layout} {
+    height: 15vh;
+  }
+  @media #{$xs-layout} {
+    height: 10vh;
+  }
+  .logo.logo-hm5 {
+    @media #{$lg-layout, $md-layout, $xs-layout} {
+      margin-top: 20px;
+      margin-left: 25%;
+    }
+  }
+  .row {
+    opacity: 1;
+    transition: 1s;
+    @media #{$lg-layout, $md-layout, $xs-layout} {
+      flex-direction: row-reverse;
+    }
+    .responsive {
+      @media #{$lg-layout, $md-layout, $xs-layout} {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+}
+.row.fade {
+  opacity: 0;
+  transition: 1s;
+  display: none;
+}
+.lookbook-header.shrink {
+  transition: height 1s ease 0s;
+  height: 14vh;
+  background: #00000021;
+  backdrop-filter: blur(20px);
+  .logo.logo-hm5 {
+    transition: margin-top 0.5s ease 0s;
+    margin-top: 10px;
+    @media #{$xs-layout} {
+      margin-top: 20px;
+      margin-left: 25%;
+    }
+  }
+  .header-right-wrap {
+    transition: margin-top 0.5s ease 0s;
+    margin-top: 20px;
+    @media #{$xs-layout} {
+      margin-top: 0;
+    }
+  }
+  .mobile-off-canvas {
+    @media #{$lg-layout, $md-layout, $xs-layout} {
+      background: #ddbb74;
+      border-radius: 50%;
+      padding: 2% 3%;
+      position: absolute;
+      transition: 1s ease 0s;
+      top: -7.5vmin;
+    }
+    @media #{$xs-layout} {
+      right: 7vmin;
+    }
+  }
+}
+.lookbook-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+  @media #{$xs-layout} {
+    margin-left: -15px;
+  }
+}
+.lookbook-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
+  &:nth-child(odd) {
+    padding-left: 10px;
+    width: 40%;
+    .lookbook-content {
+      margin-top: 18%;
+    }
+  }
+
+  .lookbook-content {
+    /* change div to reference your elements you put in <Masonry> */
+    background: grey;
+    margin-bottom: 30px;
+    max-width: 49vmin;
+    margin-top: 9%;
+    .default-img {
+      width: 100%;
+      cursor: pointer;
+      @media #{$xs-layout} {
+        width: 100%;
+      }
+    }
+    .hover-img-wrapper {
+      width: 49vmin;
+      position: absolute;
+      left: 50%;
+      top: 20vmin;
+      display: inline-flex;
+      transform: translate(-50%, -50%);
+      backdrop-filter: blur(10px);
+      z-index: 1;
+      opacity: 0;
+      visibility: hidden;
+      transition-duration: 0.7s;
+      @media #{$xs-layout} {
+        transform: translate(-50%, -100%);
+      }
+      .hover-img {
+        width: 100%;
+      }
+      .details-wrapper {
+        position: absolute;
+        bottom: 1rem;
+        text-align: left;
+        padding: 0rem 2rem;
+      }
+    }
+    &:hover .hover-img-wrapper {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+    @media #{$xs-layout} {
+      margin-left: 15px;
+      max-width: 100vw;
+    }
+  }
+  @media #{$xs-layout} {
+    margin-left: 15px;
+  }
+}
+
+.grid-layout {
+  margin-top: 26vmin;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-gap: 10px;
+  grid-auto-rows: minmax(180px, auto);
+  grid-auto-flow: dense;
+  padding: 10px;
+}
+
+.grid-item {
+  padding: 1rem;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #929796;
+  background-color: #333;
+  border-radius: 5px;
+  grid-column-end: span 2;
+  grid-row-end: span 3;
+  @media #{$xs-layout} {
+    grid-column-end: span 2;
+    grid-row-end: span 2;
+  }
+  img {
+    width: 100%;
+  }
+}
+
+.span-2 {
+  grid-column-end: span 2;
+  grid-row-end: span 2;
+}
+
+.span-3 {
+  grid-column-end: span 3;
+  grid-row-end: span 3;
+  @media #{$xs-layout} {
+    grid-column-end: span 2;
+    grid-row-end: span 2;
+  }
+}
+
+/* The Modal (background) */
+.lookbook-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.lookbook-modal-content {
+  display: none;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  &:hover,
+  :focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

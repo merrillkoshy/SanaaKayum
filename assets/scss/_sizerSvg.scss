@@ -1,0 +1,90 @@
+.sizeGuide {
+  max-width: 60vmin;
+  @media #{$xs-layout} {
+    min-width: 60vmin;
+  }
+}
+.sizeGuide.btn-primary {
+  background-color: #ddbb74;
+  border-color: #ddbb74;
+}
+#red-dress {
+  filter: drop-shadow(2px 4px 6px #00000080);
+  enable-background: new 0 0 462 800;
+}
+.st0 {
+  fill: #e2cdc7;
+}
+.st1 {
+  opacity: 0.48;
+}
+.st2 {
+  fill: #cebbb5;
+}
+.st3 {
+  fill: #f4e2dd;
+}
+.st4 {
+  opacity: 0.77;
+}
+.st5 {
+  fill: #ffffff;
+}
+.st6 {
+  opacity: 0.68;
+}
+.st7 {
+  fill: #592722;
+}
+.st8 {
+  fill: #ca584d;
+}
+.st9 {
+  opacity: 0.87;
+}
+.st10 {
+  opacity: 0.13;
+}
+.st11 {
+  fill: #142840;
+}
+.st12 {
+  opacity: 4e-2;
+  fill: #ffffff;
+  enable-background: new;
+}
+.st13 {
+  opacity: 7e-2;
+  enable-background: new;
+}
+.st14 {
+  opacity: 8e-2;
+  fill: #344561;
+  enable-background: new;
+}
+.st15 {
+  opacity: 0.11;
+  enable-background: new;
+}
+.st16 {
+  opacity: 0.12;
+  enable-background: new;
+}
+.st17 {
+  opacity: 0.23;
+  enable-background: new;
+}
+.st18 {
+  opacity: 9e-2;
+  enable-background: new;
+}
+.st19 {
+  opacity: 0.13;
+  fill: #ffffff;
+  enable-background: new;
+}
+#dressVar {
+  .st8 {
+    transition: 1s;
+  }
+}

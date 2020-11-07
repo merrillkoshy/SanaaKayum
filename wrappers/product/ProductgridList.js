@@ -1,0 +1,121 @@
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../../redux/actions/cartActions";
+import { addToWishlist } from "../../redux/actions/wishlistActions";
+import { addToCompare } from "../../redux/actions/compareActions";
+import ProductGridListSingle from "../../components/product/ProductGridListSingle";
+import Link from "next/link";
+const slugify = require("@sindresorhus/slugify");
+
+const ProductGrid = ({
+  userData,
+  products,
+  currency,
+  addToCart,
+  addToWishlist,
+  addToCompare,
+  cartItems,
+  wishlistItems,
+  compareItems,
+  sliderClassName,
+  spaceBottomClass
+}) => {
+  return (
+    <Fragment>
+      {products.map(product => {
+        return (
+          <Link
+            href={`/product/${product.serialNumber}/${slugify(
+              product.description
+            )}`}
+            passHref
+          >
+            <ProductGridListSingle
+              sliderClassName={sliderClassName}
+              spaceBottomClass={spaceBottomClass}
+              product={product}
+              currency={currency}
+              addToCart={addToCart}
+              entryID={userData.user.entryID}
+              addToWishlist={addToWishlist}
+              addToCompare={addToCompare}
+              cartItem={
+                cartItems &&
+                cartItems.filter(
+                  cartItem => cartItem.id === product.serialNumber
+                )[0]
+              }
+              wishlistItem={
+                wishlistItems.filter(
+                  wishlistItem => wishlistItem.id === product.serialNumber
+                )[0]
+              }
+              compareItem={
+                compareItems.filter(
+                  compareItem => compareItem.id === product.serialNumber
+                )[0]
+              }
+              key={product.serialNumber}
+            />
+          </Link>
+        );
+      })}
+    </Fragment>
+  );
+};
+
+ProductGrid.propTypes = {
+  addToCart: PropTypes.func,
+  addToCompare: PropTypes.func,
+  addToWishlist: PropTypes.func,
+  cartItems: PropTypes.array,
+  compareItems: PropTypes.array,
+  currency: PropTypes.object,
+  products: PropTypes.array,
+  sliderClassName: PropTypes.string,
+  spaceBottomClass: PropTypes.string,
+  wishlistItems: PropTypes.array
+};
+
+const mapStateToProps = state => {
+  return {
+    currency: state.currencyData,
+    cartItems: state.cartData,
+    wishlistItems: state.wishlistData,
+    compareItems: state.compareData,
+    userData: state.userData
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (
+      item,
+      addToast,
+      uID,
+      quantityCount,
+      selectedProductColor,
+      selectedProductSize
+    ) => {
+      dispatch(
+        addToCart(
+          item,
+          addToast,
+          uID,
+          quantityCount,
+          selectedProductColor,
+          selectedProductSize
+        )
+      );
+    },
+    addToWishlist: (item, addToast, entryID) => {
+      dispatch(addToWishlist(item, addToast, entryID));
+    },
+    addToCompare: (item, addToast, uID) => {
+      dispatch(addToCompare(item, addToast, uID));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductGrid);
