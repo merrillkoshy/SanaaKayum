@@ -7,7 +7,7 @@ import Rating from "./sub-components/ProductRating";
 import ProductModal from "./ProductModal";
 import whatsAppthis from "../../constants/whatsappHelper";
 import { isSafari } from "react-device-detect";
-
+import Image from "next/image";
 const slugify = require("@sindresorhus/slugify");
 
 const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
@@ -220,17 +220,9 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
               <div className="col-xl-4 col-md-5 col-sm-6">
                 <div className="product-list-image-wrap">
                   <div className="product-img">
-                    <img
+                    <Image
                       className="default-img img-fluid"
                       itemProp="image"
-                      alt={product.collectionName}
-                      loading="lazy"
-                      title={
-                        product.collectionName +
-                        " " +
-                        product.article +
-                        " by Sana'a Kayum"
-                      }
                       src={
                         !isSafari
                           ? process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -238,19 +230,21 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                           : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                               product.images[0].fields.file.url}?fm=jpg`
                       }
+                      alt={product.collectionName}
+                      title={
+                        product.collectionName +
+                        " " +
+                        product.article +
+                        " by Sana'a Kayum"
+                      }
+                      width={500}
+                      height={500}
                     />
+
                     {product.images.length > 1 ? (
-                      <img
+                      <Image
                         className="hover-img img-fluid"
                         itemProp="image"
-                        alt={product.collectionName}
-                        loading="lazy"
-                        title={
-                          product.collectionName +
-                          " " +
-                          product.article +
-                          " by Sana'a Kayum"
-                        }
                         src={
                           !isSafari
                             ? process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -258,6 +252,15 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                             : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                                 product.images[1].fields.file.url}?fm=jpg`
                         }
+                        alt={product.collectionName}
+                        title={
+                          product.collectionName +
+                          " " +
+                          product.article +
+                          " by Sana'a Kayum"
+                        }
+                        width={500}
+                        height={500}
                       />
                     ) : (
                       ""

@@ -26,9 +26,14 @@ const ProductGrid = ({
       {products.map(product => {
         return (
           <Link
-            href={`/product/${product.serialNumber}/${slugify(
-              product.description
-            )}`}
+            key={product.serialNumber}
+            href={{
+              pathname: `/product/[pid]/[slug]`,
+              query: {
+                pid: product.serialNumber,
+                slug: slugify(product.description)
+              }
+            }}
             passHref
           >
             <ProductGridListSingle
@@ -56,7 +61,6 @@ const ProductGrid = ({
                   compareItem => compareItem.id === product.serialNumber
                 )[0]
               }
-              key={product.serialNumber}
             />
           </Link>
         );
