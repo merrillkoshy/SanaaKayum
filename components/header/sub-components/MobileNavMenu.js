@@ -9,6 +9,7 @@ import clientMgr from "../../../constants/contentManager";
 import { resetCart } from "../../../redux/actions/cartActions";
 import { resetWishlist } from "../../../redux/actions/wishlistActions";
 import { resetCompare } from "../../../redux/actions/compareActions";
+import Link from "next/link";
 
 const MobileNavMenu = ({
   userData,
@@ -26,9 +27,11 @@ const MobileNavMenu = ({
   const initInteraction = (
     <>
       <li className="menu-item-has-children">
-        <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
+        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
+        <a>
           Register
         </a>
+        </Link>
       </li>
       
     </>
@@ -80,28 +83,38 @@ const MobileNavMenu = ({
 
       <ul>
         <li className="menu-item-has-children">
-          <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>{"Home"}</a>
+          <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+          <a>{"Home"}</a>
+          </Link>
         </li>
 
         <li className="menu-item-has-children">
-          <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>{"Shop"}</a>
+          <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+          <a>{"Shop"}</a>
+          </Link>
         </li>
 
         <li>
-          <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/lookbook"}>
+          <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/lookbook"}>
+          <a>
             {"Lookbook"}
           </a>
+          </Link>
         </li>
         <li>
-          <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
+          <Link  href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
+          <a>
             {"About Us"}
           </a>
+          </Link>
         </li>
 
         <li>
-          <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>
+          <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>
+          <a>
             {"Contact Us"}
           </a>
+          </Link>
         </li>
       </ul>
       <div className="account-dropdown">
