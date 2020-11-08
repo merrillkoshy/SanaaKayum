@@ -276,8 +276,8 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 cart_id: uuid(),
                                 cart_currency: currency.currencySymbol,
                                 cart_amount: cartTotalPrice.toFixed(2),
-                                callback: "http://localhost:3000/cart",
-                                return: "http://localhost:3000/cart",
+                                callback: "https://sanaa-kayum-nxjs.netlify.app/cart",
+                                return: "https://sanaa-kayum-nxjs.netlify.app/cart",
                                 customer_details: {
                                   name:
                                     userData && userData.firstName +
