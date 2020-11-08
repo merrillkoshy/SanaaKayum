@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "next start -p 3000",
     "postbuild": "next-on-netlify"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "next": "latest",
     "next-on-netlify": "^2.6.0",
     "next-redux-wrapper": "^6.0.2",
+    "nprogress": "^0.2.0",
     "react": "^16.9.0",
     "react-bootstrap": "^1.4.0",
     "react-breadcrumbs-dynamic": "^1.2.1",

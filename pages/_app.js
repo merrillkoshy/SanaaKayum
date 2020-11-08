@@ -5,6 +5,8 @@ import ScrollToTop from "../helpers/scroll-top";
 import { ToastProvider } from "react-toast-notifications";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
 import Helmet from "react-helmet";
+import Router from 'next/router';
+import Head from 'next/head'
 import {
   fetchProducts,
   fetchLingerie,
@@ -14,9 +16,28 @@ import {
   fetchSliders
 } from "../redux/actions/productActions";
 import client from "../constants/config";
+import NProgress from 'nprogress';
 
 
 import LoadingScreen from "../helpers/LoadingScreen";
+
+
+
+Router.onRouteChangeStart = () => {
+  // console.log('onRouteChangeStart triggered');
+  NProgress.start();
+};
+
+Router.onRouteChangeComplete = () => {
+  // console.log('onRouteChangeComplete triggered');
+  NProgress.done();
+};
+
+Router.onRouteChangeError = () => {
+  // console.log('onRouteChangeError triggered');
+  NProgress.done();
+};
+
 
 const App = ({ Component, pageProps }) => {
   const store=useStore(pageProps.initialReduxState);
@@ -93,11 +114,16 @@ let preloadedState
         <ToastProvider placement="bottom-left">
           <BreadcrumbsProvider>
             <ScrollToTop>
+            <Head>
+        {/* Import CSS for nprogress */}
+        <link rel="stylesheet" type="text/css" href="../assets/css/nprogress.css" />
+      </Head>
               <Helmet
                 htmlAttributes={{ lang: "en", amp: undefined }} // amp takes no value
                 titleTemplate="%s | Sana'a Kayum"
                 titleAttributes={{ itemprop: "name", lang: "en" }}
               />
+              
               <Component {...pageProps} />
             </ScrollToTop>
           </BreadcrumbsProvider>

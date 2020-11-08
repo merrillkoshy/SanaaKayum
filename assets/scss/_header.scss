@@ -146,6 +146,12 @@
         }
     }
 }
+.shop-mobile{
+    border:1px solid $theme-color;
+    a{
+        color: $theme-color !important;
+    }
+}
 
 .main-menu {
     margin-top: 10px;
@@ -851,7 +857,12 @@
 
 
 /* header 3 */
-
+.interaction-button{
+    color:$theme-color !important;
+    a, button{
+        color:$theme-color !important;
+    }
+}
 .header-padding-2 .container-fluid { 
 	padding: 0 70px;
     @media #{$xl-layout}{
@@ -872,12 +883,7 @@
             color: $theme-color ;
         }
     }
-    .interaction-button{
-        color:$theme-color !important;
-        a, button{
-            color:$theme-color !important;
-        }
-    }
+    
 }
 
 .header-top-area {

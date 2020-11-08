@@ -77,25 +77,21 @@ const HeaderOne = ({
                     className="sticky-block"
                     href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}
                   >
-                    {isMobile && scroll > headerTop ? (
+                    {scroll > headerTop ? (
                       <img
                         alt=""
                         src="/assets/img/logo/logo-black.png"
-                        loading="lazy"
-                      />
-                    ) : isMobile ? (
-                      <img
-                        alt=""
-                        src="/assets/img/logo/logo-gold.png"
+                        
                         loading="lazy"
                       />
                     ) : (
-                      <img
-                        alt=""
-                        src="/assets/img/logo/logo-black.png"
-                        loading="lazy"
-                      />
-                    )}
+                    <img
+                    alt=""
+                    
+                    src="/assets/img/logo/logo-gold.png"
+                    loading="lazy"
+                  />)
+                    }
                   </a>
                 </Link>
               </div>
@@ -103,7 +99,7 @@ const HeaderOne = ({
             <div className="col-2 d-lg-none d-xl-none my-auto text-center px-2 shop-mobile">
               {/* Shop Button for mobile screens */}
               <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
-                <strong>SHOP</strong>
+                <a><strong>SHOP</strong></a>
               </Link>
             </div>
             <div className="col-xl-6 col-lg-7 d-none d-lg-block">

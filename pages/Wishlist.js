@@ -248,7 +248,8 @@ const Wishlist = ({
             ) : (
               <div className="row">
                 <div className="col-lg-12">
-                  <div className="item-empty-area text-center">
+                <div className={wishlistItems?`${"table-content table-responsive cart-table-content"}`:`${"item-empty-area text-center"}`}>
+                  
                     <div className="item-empty-area__icon mb-30">
                       <i className="pe-7s-like"></i>
                     </div>

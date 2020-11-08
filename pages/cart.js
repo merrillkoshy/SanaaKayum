@@ -134,10 +134,10 @@ const Cart = ({
                                     )}`}
                                   >
                                     {cartItem.collectionName}
+                                  </Link>
                                     <div className="cart-item-variation">
                                       {cartItem.description}
                                     </div>
-                                  </Link>
                                   {cartItem.selectedProductColor &&
                                   cartItem.selectedProductSize ? (
                                     <div className="cart-item-variation">
@@ -357,7 +357,7 @@ const Cart = ({
             ) : (
               <div className="row">
                 <div className="col-lg-12">
-                  <div className="item-empty-area text-center">
+                  <div className={cartItems?`${"table-content table-responsive cart-table-content"}`:`${"item-empty-area text-center"}`}>
                     <div className="item-empty-area__icon mb-30">
                       <i className="pe-7s-cart"></i>
                     </div>
