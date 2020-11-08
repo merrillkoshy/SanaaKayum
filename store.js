@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
@@ -6,13 +7,13 @@ import thunkMiddleware from "redux-thunk";
 import rootReducer from "./redux/reducers/rootReducer";
 import promise from "redux-promise";
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 let store;
 const persistConfig = {
   key: "primary",
-  storage,
-  whitelist: ["exampleData"] // place to select which state you want to persist
+  storage: AsyncStorage,
+  whitelist: [""] // place to select which state you want to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -51,3 +52,4 @@ export function useStore(initialState) {
   const store = useMemo(() => initializeStore(initialState), [initialState]);
   return store;
 }
+export const wrapper = createWrapper(makeStore, { debug: true });

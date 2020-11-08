@@ -10,7 +10,7 @@ import lingerieReducer from "./lingerieReducer";
 import userReducer from "./userReducer";
 import lpsReducer from "./landingPageSlidersReducer";
 import { combineReducers } from "redux";
-
+import { HYDRATE } from "next-redux-wrapper";
 const rootReducer = combineReducers({
   currencyData: currencyReducer,
   productData: productReducer,
@@ -25,4 +25,16 @@ const rootReducer = combineReducers({
   sliderData: lpsReducer
 });
 
-export default rootReducer;
+const reducer = (state, action) => {
+  if (action.type === HYDRATE) {
+    const nextState = {
+      ...state, // use previous state
+      ...action.payload // apply delta from hydration
+    };
+    if (state.userData) nextState.userData = state.userData;
+    return nextState;
+  } else {
+    return rootReducer(state, action);
+  }
+};
+export default reducer;

@@ -1,6 +1,6 @@
 import "../assets/scss/style.scss";
 import { Provider } from "react-redux";
-import { useStore } from "../store";
+import { useStore, wrapper } from "../store";
 import ScrollToTop from "../helpers/scroll-top";
 import { ToastProvider } from "react-toast-notifications";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
@@ -18,7 +18,7 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import LoadingScreen from "../helpers/LoadingScreen";
 
-export default function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   const store = useStore(pageProps.initialReduxState);
   const persistor = persistStore(store, {}, function() {
     persistor.persist();
@@ -85,4 +85,6 @@ export default function App({ Component, pageProps }) {
       </PersistGate>
     </Provider>
   );
-}
+};
+
+export default wrapper.withRedux(App);
