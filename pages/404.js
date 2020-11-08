@@ -49,12 +49,13 @@ const NotFound = ({}) => {
                       <i className="fa fa-search" />
                     </button>
                   </form>
+                  <Link href={process.env.RAZZLE_PUBLIC_URL + "/"}>
                   <a
-                    href={process.env.RAZZLE_PUBLIC_URL + "/"}
                     className="error-btn"
                   >
                     Back to home page
                   </a>
+                  </Link>
                 </div>
               </div>
             </div>
