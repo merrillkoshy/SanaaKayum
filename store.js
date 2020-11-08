@@ -6,24 +6,28 @@ import thunkMiddleware from "redux-thunk";
 // import reducers from "./reducers";
 import rootReducer from "./redux/reducers/rootReducer";
 import promise from "redux-promise";
-import { persistReducer } from "redux-persist";
+import { save, load } from "redux-localstorage-simple"
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 let store;
-const persistConfig = {
-  key: "primary",
-  storage: AsyncStorage,
-  whitelist: [""] // place to select which state you want to persist
-};
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 function makeStore(initialState) {
+  if (typeof window === "undefined") {
   return createStore(
-    persistedReducer,
+    rootReducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware, promise))
   );
+}else if (typeof window !== "undefined"){
+  const createStoreWithMiddleware  
+    = composeWithDevTools(applyMiddleware(thunkMiddleware,save(), promise))(createStore)
+    return createStoreWithMiddleware(
+      rootReducer,    
+      load() 
+  )    
+  }
 }
 
 export const initializeStore = preloadedState => {
@@ -45,6 +49,7 @@ export const initializeStore = preloadedState => {
   // Create the store once in the client
   if (!store) store = _store;
 
+  
   return _store;
 };
 
@@ -52,4 +57,4 @@ export function useStore(initialState) {
   const store = useMemo(() => initializeStore(initialState), [initialState]);
   return store;
 }
-export const wrapper = createWrapper(makeStore, { debug: true });
+

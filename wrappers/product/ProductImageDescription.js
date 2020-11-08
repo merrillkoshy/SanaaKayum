@@ -24,15 +24,15 @@ const ProductImageDescription = ({
   compareItems
 }) => {
   const wishlistItem = wishlistItems.filter(
-    wishlistItem => wishlistItem.id === product.serialNumber
+    wishlistItem => wishlistItem.id === product?product.serialNumber:""
   )[0];
   const compareItem = compareItems.filter(
-    compareItem => compareItem.id === product.serialNumber
+    compareItem => compareItem.id === product?product.serialNumber:""
   )[0];
   const { addToast } = useToasts();
 
-  const discountedPrice = getDiscountPrice(product.price, product.discount);
-  const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
+  const discountedPrice = getDiscountPrice(product?product.price:0, product?product.discount:0);
+  const finalProductPrice = +(product?product.price * currency.currencyRate:1).toFixed(2);
   const finalDiscountedPrice = +(
     discountedPrice * currency.currencyRate
   ).toFixed(2);
@@ -43,6 +43,8 @@ const ProductImageDescription = ({
         spaceBottomClass ? spaceBottomClass : ""
       }`}
     >
+      {product?
+      <>
       <HeaderMeta
         article={product.article}
         title={product.description}
@@ -92,6 +94,9 @@ const ProductImageDescription = ({
           </div>
         </div>
       </div>
+      </>
+      :""}
+      
     </div>
   );
 };

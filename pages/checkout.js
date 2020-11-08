@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import  Link  from "next/link";
+
 import MetaTags from "react-meta-tags";
 import { connect } from "react-redux";
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+
 import { getDiscountPrice } from "../helpers/product";
 import LayoutOne from "../layouts/LayoutOne";
-import { useHistory } from "react-router-dom";
+
 
 import uuid from "uuid/v4";
 import {
@@ -21,7 +22,7 @@ const axios = require("axios").default;
 const Checkout = ({ cartItems, currency, user }) => {
   const [country, selectCountry] = useState("");
   const [region, selectRegion] = useState("");
-  const history = useHistory();
+  
   var userData = user.user;
 
   let cartTotalPrice = 0;
@@ -47,7 +48,7 @@ const Checkout = ({ cartItems, currency, user }) => {
     orderData.tran_type = response.data.tran_type;
     orderData.date = response.headers.date;
     clientMgr
-      .then(environment => environment.getEntry(userData.entryID))
+      .then(environment => environment.getEntry(userData && userData.entryID))
       .then(entry => {
         if (entry.fields["orderData"] === undefined)
           entry.fields["orderData"] = { "en-US": [orderData] };
@@ -95,29 +96,29 @@ const Checkout = ({ cartItems, currency, user }) => {
                           <label>First Name</label>
                           <input
                             type="text"
-                            defaultValue={userData.firstName}
+                            defaultValue={userData && userData && userData.firstName}
                           />
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
                           <label>Last Name</label>
-                          <input type="text" defaultValue={userData.lastName} />
+                          <input type="text" defaultValue={userData && userData.lastName} />
                         </div>
                       </div>
 
                       <div className="col-lg-12">
                         <div className="billing-select mb-20">
                           <label>Country</label>
-                          {userData.addressDetails ? (
+                          {userData && userData.addressDetails ? (
                             <>
                               <input
                                 type="text"
-                                defaultValue={userData.addressDetails.country}
+                                defaultValue={userData && userData.addressDetails.country}
                               />
                               <input
                                 type="text"
-                                defaultValue={userData.addressDetails.region}
+                                defaultValue={userData && userData.addressDetails.region}
                               />
                             </>
                           ) : (
@@ -143,7 +144,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                           className="billing-address"
                           placeholder="House number and street name"
                           type="text"
-                          defaultValue={userData.addressDetails.addressLine}
+                          defaultValue={userData && userData.addressDetails.addressLine}
                         />
                       </div>
                     </div>
@@ -160,7 +161,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                         <input
                           name="phone"
                           type="text"
-                          defaultValue={userData.mobile ? userData.mobile : ""}
+                          defaultValue={userData && userData.mobile ? userData && userData.mobile : ""}
                         />
                       </div>
                     </div>
@@ -169,7 +170,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                         <label>Email Address</label>
                         <input
                           type="text"
-                          defaultValue={userData.email ? userData.email : ""}
+                          defaultValue={userData && userData.email ? userData && userData.email : ""}
                         />
                       </div>
                     </div>
@@ -266,9 +267,9 @@ const Checkout = ({ cartItems, currency, user }) => {
                           axios.defaults.xsrfHeaderName = "X-CSRFToken";
                           axios
                             .post(
-                              process.env.RAZZLE_ENDPOINT,
+                              process.env.NEXT_PUBLIC_ENDPOINT,
                               {
-                                profile_id: process.env.RAZZLE_MID,
+                                profile_id: process.env.NEXT_PUBLIC_MID,
                                 tran_type: "sale",
                                 tran_class: "ecom",
                                 cart_description: "Order#" + uuid() + "SKCA",
@@ -279,12 +280,12 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 return: "http://localhost:3000/cart",
                                 customer_details: {
                                   name:
-                                    userData.firstName +
+                                    userData && userData.firstName +
                                     " " +
-                                    userData.lastName,
-                                  email: userData.email,
-                                  phone: userData.mobile
-                                    ? () => userData.mobile
+                                    userData && userData.lastName,
+                                  email: userData && userData.email,
+                                  phone: userData && userData.mobile
+                                    ? () => userData && userData.mobile
                                     : document.querySelector(
                                         "input [name='phone']"
                                       )
@@ -292,7 +293,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                                         "input [name='phone']"
                                       ).value
                                     : "",
-                                  street1: userData.addressDetails.addressLine.concat(
+                                  street1: userData && userData.addressDetails.addressLine.concat(
                                     ", P.O.Box : " +
                                       document.querySelector(
                                         'input[name="postcode"]'
@@ -302,9 +303,9 @@ const Checkout = ({ cartItems, currency, user }) => {
                                         ).value
                                       : ""
                                   ),
-                                  city: userData.addressDetails.region,
-                                  state: userData.addressDetails.region,
-                                  country: userData.addressDetails.country,
+                                  city: userData && userData.addressDetails.region,
+                                  state: userData && userData.addressDetails.region,
+                                  country: userData && userData.addressDetails.country,
                                   ip: ""
                                 },
                                 framed: true,
@@ -314,7 +315,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 headers: {
                                   "content-type": "application/json",
                                   accept: "application/json",
-                                  authorization: process.env.RAZZLE_SVK
+                                  authorization: process.env.NEXT_PUBLIC_SVK
                                 }
                               }
                             )
@@ -344,8 +345,8 @@ const Checkout = ({ cartItems, currency, user }) => {
                     </div>
                     <div className="item-empty-area__text">
                       No items found in cart to checkout <br />{" "}
-                      <Link to={process.env.RAZZLE_PUBLIC_URL + "/shop"}>
-                        Shop Now
+                      <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                        <a>Shop Now</a>
                       </Link>
                     </div>
                   </div>
@@ -362,7 +363,7 @@ const Checkout = ({ cartItems, currency, user }) => {
 Checkout.propTypes = {
   cartItems: PropTypes.array,
   currency: PropTypes.object,
-  location: PropTypes.object
+  
 };
 
 const mapStateToProps = state => {

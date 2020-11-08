@@ -1,20 +1,21 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import  Link  from "next/link";
+
 import { useToasts } from "react-toast-notifications";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-import { getDiscountPrice } from "../../helpers/product";
+import { getDiscountPrice } from "../helpers/product";
 import {
   addToCart,
   decreaseQuantity,
   deleteFromCart,
   cartItemStock,
   deleteAllFromCart
-} from "../../redux/actions/cartActions";
-import LayoutOne from "../../layouts/LayoutOne";
-import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+} from "../redux/actions/cartActions";
+import LayoutOne from "../layouts/LayoutOne";
+import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
 import { isSafari } from "react-device-detect";
 import {
   CountryDropdown,
@@ -23,10 +24,10 @@ import {
 } from "react-country-region-selector";
 const slugify = require("@sindresorhus/slugify");
 import axios from "axios";
-import client from "../../constants/config";
+import client from "../constants/config";
 
 const Cart = ({
-  location,
+  
   cartItems,
   currency,
   decreaseQuantity,
@@ -39,7 +40,7 @@ const Cart = ({
   const [country, selectCountry] = useState("");
   const [region, selectRegion] = useState("");
   const { addToast } = useToasts();
-  const { pathname } = location;
+  
   let cartTotalPrice = 0;
 
   //useEffect code moved to notes
@@ -58,16 +59,10 @@ const Cart = ({
         />
       </MetaTags>
 
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + "/"}>
-        Home
-      </BreadcrumbsItem>
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + pathname}>
-        Cart
-      </BreadcrumbsItem>
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb />
+       
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
             {cartItems && cartItems.length >= 1 ? (
@@ -109,19 +104,19 @@ const Cart = ({
                               <tr key={key}>
                                 <td className="product-thumbnail">
                                   <Link
-                                    to={
-                                      process.env.RAZZLE_PUBLIC_URL +
-                                      "/product/" +
-                                      slugify(cartItem.description)
-                                    }
+                                    href={`${
+                                      process.env.NEXT_PUBLIC_PUBLIC_URL
+                                    }/product/${cartItem.serialNumber}/${slugify(
+                                      cartItem.description
+                                    )}`}
                                   >
                                     <img
                                       className="img-fluid"
                                       src={
                                         !isSafari
-                                          ? process.env.RAZZLE_PUBLIC_URL +
+                                          ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                                             cartItem.images[0].fields.file.url
-                                          : `${process.env.RAZZLE_PUBLIC_URL +
+                                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                                               cartItem.images[0].fields.file
                                                 .url}?fm=jpg`
                                       }
@@ -132,11 +127,11 @@ const Cart = ({
 
                                 <td className="product-name">
                                   <Link
-                                    to={
-                                      process.env.RAZZLE_PUBLIC_URL +
-                                      "/product/" +
-                                      slugify(cartItem.description)
-                                    }
+                                    href={`${
+                                      process.env.NEXT_PUBLIC_PUBLIC_URL
+                                    }/product/${cartItem.serialNumber}/${slugify(
+                                      cartItem.description
+                                    )}`}
                                   >
                                     {cartItem.collectionName}
                                     <div className="cart-item-variation">
@@ -263,8 +258,8 @@ const Cart = ({
                   <div className="col-lg-12">
                     <div className="cart-shiping-update-wrapper">
                       <div className="cart-shiping-update">
-                        <Link to={process.env.RAZZLE_PUBLIC_URL + "/shop"}>
-                          Continue Shopping
+                        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                          <a>{`Continue Shopping`}</a>
                         </Link>
                       </div>
                       <div className="cart-clear">
@@ -351,8 +346,9 @@ const Cart = ({
                         Grand Total{" "}
                         <span>{`AED ` + cartTotalPrice.toFixed(2)}</span>
                       </h4>
-                      <Link to={process.env.RAZZLE_PUBLIC_URL + "/checkout"}>
-                        Proceed to Checkout
+                      <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/checkout"}>
+                      <a>{`Proceed to Checkout`}</a>
+                        
                       </Link>
                     </div>
                   </div>
@@ -367,8 +363,8 @@ const Cart = ({
                     </div>
                     <div className="item-empty-area__text">
                       No items found in cart <br />{" "}
-                      <Link to={process.env.RAZZLE_PUBLIC_URL + "/shop"}>
-                        Shop Now
+                      <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                        <a>Shop Now</a>
                       </Link>
                     </div>
                   </div>

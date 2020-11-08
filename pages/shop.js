@@ -14,7 +14,7 @@ import ShopProducts from "../wrappers/product/ShopProducts";
 import { Helmet } from "react-helmet";
 import { isMobile, isTablet } from "react-device-detect";
 
-const ShopGridFullWidth = ({ location, products, lingerie }) => {
+const ShopGridFullWidth = ({  products, lingerie }) => {
   const [layout, setLayout] = useState("grid three-column");
   const [sortType, setSortType] = useState("");
   const [sortValue, setSortValue] = useState("");
@@ -157,10 +157,7 @@ couture | Sana'a Kayum"
         />
       </Helmet>
 
-      {/* <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + pathname}>
-        Shop
-      </BreadcrumbsItem> */}
+      
 
       <LayoutOne
         headerContainerClass="container-fluid"

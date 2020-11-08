@@ -17,7 +17,7 @@ const Product = products => {
   const product = products["products"].filter(
     single => single.serialNumber === pid
   )[0];
-  console.log(product);
+  
   return (
     <LayoutOne headerTop="visible">
       <ProductImageDescription
@@ -29,13 +29,13 @@ const Product = products => {
       {/* product description tab */}
       <ProductDescriptionTab
         spaceBottomClass="pb-90"
-        productFullDesc={product.description}
+        productFullDesc={product?product.description:""}
       />
 
       {/* related product slider */}
       <RelatedProductSlider
         spaceBottomClass="pb-95"
-        category={product.article}
+        category={product?product.article:""}
       />
     </LayoutOne>
   );

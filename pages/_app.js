@@ -1,6 +1,6 @@
 import "../assets/scss/style.scss";
 import { Provider } from "react-redux";
-import { useStore, wrapper } from "../store";
+import { useStore } from "../store";
 import ScrollToTop from "../helpers/scroll-top";
 import { ToastProvider } from "react-toast-notifications";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
@@ -14,16 +14,13 @@ import {
   fetchSliders
 } from "../redux/actions/productActions";
 import client from "../constants/config";
-import { persistStore } from "redux-persist";
-import { PersistGate } from "redux-persist/integration/react";
+
+
 import LoadingScreen from "../helpers/LoadingScreen";
 
 const App = ({ Component, pageProps }) => {
-  const store = useStore(pageProps.initialReduxState);
-  const persistor = persistStore(store, {}, function() {
-    persistor.persist();
-  });
-
+  const store=useStore(pageProps.initialReduxState);
+let preloadedState
   var productMap = [];
   var lowerCords = [];
   var lingeries = [];
@@ -59,6 +56,18 @@ const App = ({ Component, pageProps }) => {
     .then(fetchEntry("brochures", 100, brochures))
     .then(fetchEntry("lookbook", 100, lookbooks))
     .then(fetchEntry("landingPageSliders", 100, lpSliders))
+    .then(async () => {
+      return Promise.resolve(
+        (preloadedState = {
+          productData: [productMap, lowerCords, lingeries].flat(),
+          lingerieData: lingeries,
+          brochuresData: brochures,
+          lookbookData: lookbooks,
+          pBannersData: promotionBanners,
+          sliderData: lpSliders
+        })
+      );
+    })
     .then(() => {
       store.dispatch(fetchProducts([productMap, lowerCords, lingeries].flat()));
       store.dispatch(fetchLingerie(lingeries));
@@ -66,10 +75,21 @@ const App = ({ Component, pageProps }) => {
       store.dispatch(fetchLookbooks(lookbooks));
       store.dispatch(fetchPbanners(promotionBanners));
       store.dispatch(fetchSliders(lpSliders));
-    });
+    }) .then(async () => {
+      return Promise.resolve(
+        (preloadedState = {
+          productData: [productMap, lowerCords, lingeries].flat(),
+          lingerieData: lingeries,
+          brochuresData: brochures,
+          lookbookData: lookbooks,
+          pBannersData: promotionBanners,
+          sliderData: lpSliders
+        })
+      );
+    })
   return (
     <Provider store={store}>
-      <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+      
         <ToastProvider placement="bottom-left">
           <BreadcrumbsProvider>
             <ScrollToTop>
@@ -82,9 +102,9 @@ const App = ({ Component, pageProps }) => {
             </ScrollToTop>
           </BreadcrumbsProvider>
         </ToastProvider>
-      </PersistGate>
+      
     </Provider>
   );
 };
 
-export default wrapper.withRedux(App);
+export default App;

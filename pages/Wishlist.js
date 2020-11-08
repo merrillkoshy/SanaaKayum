@@ -1,25 +1,26 @@
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import  Link  from "next/link";
+
 import { useToasts } from "react-toast-notifications";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-import { getDiscountPrice } from "../../helpers/product";
+import { getDiscountPrice } from "../helpers/product";
 import {
   addToWishlist,
   deleteFromWishlist,
   deleteAllFromWishlist
-} from "../../redux/actions/wishlistActions";
-import { addToCart } from "../../redux/actions/cartActions";
-import LayoutOne from "../../layouts/LayoutOne";
-import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+} from "../redux/actions/wishlistActions";
+import { addToCart } from "../redux/actions/cartActions";
+import LayoutOne from "../layouts/LayoutOne";
+import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
 import { isSafari } from "react-device-detect";
 const slugify = require("@sindresorhus/slugify");
 
 const Wishlist = ({
   userData,
-  location,
+  
   cartItems,
   currency,
   addToCart,
@@ -28,7 +29,7 @@ const Wishlist = ({
   deleteAllFromWishlist
 }) => {
   const { addToast } = useToasts();
-  const { pathname } = location;
+ 
 
   return (
     <Fragment>
@@ -40,16 +41,11 @@ const Wishlist = ({
         />
       </MetaTags>
 
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + "/"}>
-        Home
-      </BreadcrumbsItem>
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + pathname}>
-        Wishlist
-      </BreadcrumbsItem>
+    
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb />
+
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
             {wishlistItems && wishlistItems.length >= 1 ? (
@@ -88,8 +84,8 @@ const Wishlist = ({
                               <tr key={key}>
                                 <td className="product-thumbnail">
                                   <Link
-                                    to={`${
-                                      process.env.RAZZLE_PUBLIC_URL
+                                    href={`${
+                                      process.env.NEXT_PUBLIC_PUBLIC_URL
                                     }/product/${slugify(
                                       wishlistItem.description
                                     )}`}
@@ -98,10 +94,10 @@ const Wishlist = ({
                                       className="img-fluid"
                                       src={
                                         !isSafari
-                                          ? process.env.RAZZLE_PUBLIC_URL +
+                                          ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                                             wishlistItem.images[0].fields.file
                                               .url
-                                          : `${process.env.RAZZLE_PUBLIC_URL +
+                                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                                               wishlistItem.images[0].fields.file
                                                 .url}?fm=jpg`
                                       }
@@ -112,13 +108,13 @@ const Wishlist = ({
 
                                 <td className="product-name text-center">
                                   <Link
-                                    to={`${
-                                      process.env.RAZZLE_PUBLIC_URL
+                                    href={`${
+                                      process.env.NEXT_PUBLIC_PUBLIC_URL
                                     }/product/${slugify(
                                       wishlistItem.description
                                     )}`}
                                   >
-                                    {wishlistItem.description}
+                                    <a>{wishlistItem.description}</a>
                                   </Link>
                                 </td>
 
@@ -155,13 +151,14 @@ const Wishlist = ({
                                   ) : wishlistItem.variation &&
                                     wishlistItem.variation.length >= 1 ? (
                                     <Link
-                                      to={`${
-                                        process.env.RAZZLE_PUBLIC_URL
+                                      href={`${
+                                        process.env.NEXT_PUBLIC_PUBLIC_URL
                                       }/product/${slugify(
                                         wishlistItem.description
                                       )}`}
                                     >
-                                      Select option
+                                      <a>{`Select option`}</a>
+                                      
                                     </Link>
                                   ) : wishlistItem.stock &&
                                     wishlistItem.stock > 0 ? (
@@ -227,8 +224,9 @@ const Wishlist = ({
                   <div className="col-lg-12">
                     <div className="cart-shiping-update-wrapper">
                       <div className="cart-shiping-update">
-                        <Link to={process.env.RAZZLE_PUBLIC_URL + "/shop"}>
-                          Continue Shopping
+                        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                        <a>{`Continue Shopping`}</a>
+                          
                         </Link>
                       </div>
                       <div className="cart-clear">
@@ -256,8 +254,9 @@ const Wishlist = ({
                     </div>
                     <div className="item-empty-area__text">
                       No items found in wishlist <br />{" "}
-                      <Link to={process.env.RAZZLE_PUBLIC_URL + "/shop"}>
-                        Add Items
+                      <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                        <a>{`Add Items`}</a>
+                        
                       </Link>
                     </div>
                   </div>

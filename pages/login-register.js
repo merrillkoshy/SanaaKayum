@@ -10,7 +10,8 @@ import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import MetaTags from "react-meta-tags";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import  Link  from "next/link";
+
 import { useToasts } from "react-toast-notifications";
 import client from "../constants/config";
 import clientMgr from "../constants/contentManager";
@@ -22,7 +23,7 @@ import { loadWishlist } from "../redux/actions/wishlistActions";
 import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
 
 const LoginRegister = ({
-  location,
+  
   loginUser,
   loadCart,
   loadCompare,

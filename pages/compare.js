@@ -1,31 +1,31 @@
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import  Link  from "next/link";
+
 import { useToasts } from "react-toast-notifications";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-import { addToCart } from "../../redux/actions/cartActions";
-import { deleteFromCompare } from "../../redux/actions/compareActions";
-import { getDiscountPrice } from "../../helpers/product";
-import LayoutOne from "../../layouts/LayoutOne";
-import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
-import Rating from "../../components/product/sub-components/ProductRating";
+import { addToCart } from "../redux/actions/cartActions";
+import { deleteFromCompare } from "../redux/actions/compareActions";
+import { getDiscountPrice } from "../helpers/product";
+import LayoutOne from "../layouts/LayoutOne";
+import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
+import Rating from "../components/product/sub-components/ProductRating";
 import { isSafari } from "react-device-detect";
 const slugify = require("@sindresorhus/slugify");
 
 const Compare = ({
   userData,
-  location,
   cartItems,
   compareItems,
   addToCart,
   deleteFromCompare,
   currency
 }) => {
-  const { pathname } = location;
+  
   const { addToast } = useToasts();
-  const uID = userData.user.entryID;
+  const uID = userData.user.length?userData.user.entryID:""
   return (
     <Fragment>
       <MetaTags>
@@ -35,15 +35,10 @@ const Compare = ({
           content="Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
         />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + "/"}>
-        Home
-      </BreadcrumbsItem>
-      <BreadcrumbsItem to={process.env.RAZZLE_PUBLIC_URL + pathname}>
-        Compare
-      </BreadcrumbsItem>
+      
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb />
+        
         <div className="compare-main-area pt-90 pb-100">
           <div className="container">
             {compareItems && compareItems.length >= 1 ? (
@@ -55,7 +50,7 @@ const Compare = ({
                         <tbody>
                           <tr>
                             <th className="title-column">Product Info</th>
-                            {compareItems.map((compareItem, key) => {
+                            {compareItems && compareItems.map((compareItem, key) => {
                               const cartItem = cartItems.filter(
                                 item =>
                                   item.serialNumber === compareItem.serialNumber
@@ -68,7 +63,7 @@ const Compare = ({
                                         deleteFromCompare(
                                           compareItem,
                                           addToast,
-                                          uID
+                                          uID?uID:""?uID?uID:"":""
                                         );
                                       }}
                                     >
@@ -76,10 +71,9 @@ const Compare = ({
                                     </button>
                                   </div>
                                   <Link
-                                    to={
-                                      process.env.RAZZLE_PUBLIC_URL +
-                                      "/product/" +
-                                      compareItem.description
+                                    href={
+                                      process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                      `/product/${compareItem.serialNumber}/${slugify(compareItem.description)}`
                                     }
                                     className="image"
                                   >
@@ -87,10 +81,10 @@ const Compare = ({
                                       className="img-fluid"
                                       src={
                                         !isSafari
-                                          ? process.env.RAZZLE_PUBLIC_URL +
+                                          ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                                             compareItem.images[0].fields.file
                                               .url
-                                          : `${process.env.RAZZLE_PUBLIC_URL +
+                                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                                               compareItem.images[0].fields.file
                                                 .url}?fm=jpg`
                                       }
@@ -99,14 +93,13 @@ const Compare = ({
                                   </Link>
                                   <div className="product-title">
                                     <Link
-                                      to={
-                                        process.env.RAZZLE_PUBLIC_URL +
-                                        "/product/" +
-                                        slugify(compareItem.description)
+                                      href={
+                                        process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                        `/product/${compareItem.serialNumber}/${slugify(compareItem.description)}`
                                       }
                                     >
-                                      {compareItem.article} {" | "}{" "}
-                                      {compareItem.collectionName}
+                                      <a>{compareItem.article} {" | "}{" "}
+                                      {compareItem.collectionName}</a>
                                     </Link>
                                   </div>
                                   <div className="compare-btn">
@@ -122,19 +115,19 @@ const Compare = ({
                                     ) : compareItem.variation &&
                                       compareItem.variation.length >= 1 ? (
                                       <Link
-                                        to={`${
-                                          process.env.RAZZLE_PUBLIC_URL
-                                        }/product/${slugify(
+                                        href={`${
+                                          process.env.NEXT_PUBLIC_PUBLIC_URL
+                                        }/product/${compareItem.serialNumber}/${slugify(
                                           compareItem.description
                                         )}`}
                                       >
-                                        Select Option
+                                        <a>Select Option</a>
                                       </Link>
                                     ) : compareItem.stock &&
                                       compareItem.stock > 0 ? (
                                       <button
                                         onClick={() =>
-                                          addToCart(compareItem, addToast, uID)
+                                          addToCart(compareItem, addToast, uID?uID:"")
                                         }
                                         className={
                                           cartItem !== undefined &&
@@ -169,7 +162,7 @@ const Compare = ({
                           </tr>
                           <tr>
                             <th className="title-column">Price</th>
-                            {compareItems.map((compareItem, key) => {
+                            {compareItems && compareItems.map((compareItem, key) => {
                               const discountedPrice = getDiscountPrice(
                                 compareItem.price,
                                 compareItem.discount
@@ -206,7 +199,7 @@ const Compare = ({
 
                           <tr>
                             <th className="title-column">Description</th>
-                            {compareItems.map((compareItem, key) => {
+                            {compareItems && compareItems.map((compareItem, key) => {
                               return (
                                 <td className="product-desc" key={key}>
                                   <p>
@@ -221,7 +214,7 @@ const Compare = ({
 
                           <tr>
                             <th className="title-column">Rating</th>
-                            {compareItems.map((compareItem, key) => {
+                            {compareItems && compareItems.map((compareItem, key) => {
                               return (
                                 <td className="product-rating" key={key}>
                                   <Rating ratingValue={compareItem.rating} />
@@ -244,8 +237,8 @@ const Compare = ({
                     </div>
                     <div className="item-empty-area__text">
                       No items found in compare <br />{" "}
-                      <Link to={process.env.RAZZLE_PUBLIC_URL + "/shop"}>
-                        Add Items
+                      <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                        <a>Add Items</a>
                       </Link>
                     </div>
                   </div>
@@ -259,14 +252,7 @@ const Compare = ({
   );
 };
 
-Compare.propTypes = {
-  addToCart: PropTypes.func,
-  cartItems: PropTypes.array,
-  compareItems: PropTypes.array,
-  currency: PropTypes.object,
-  location: PropTypes.object,
-  deleteFromCompare: PropTypes.func
-};
+
 
 const mapStateToProps = state => {
   return {

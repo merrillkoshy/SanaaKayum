@@ -32,7 +32,7 @@ export const uploadToContentful = (toEditField, value, uID, addToast) => {
     );
 };
 
-const MyAccount = ({ location, user }) => {
+const MyAccount = ({  user }) => {
   const [invalid, setInvalid] = useState("d-none");
   const router = useRouter();
   const { userAccount } = router.query;
@@ -56,7 +56,7 @@ const MyAccount = ({ location, user }) => {
     <Fragment>
       <Helmet>
         <title>{`${userData.firstName}'s Account`}</title>
-        <link rel="canonical" href={`https://sanaakayum.com${location}`} />
+        <link rel="canonical" href={`https://sanaakayum.com/${userData.firstName}`} />
         <base target="_blank" href={process.env.RAZZLE_PUBLIC_URL} />
         <link href="https://images.ctfassets.net/" rel="dns-prefetch" />
         <meta
@@ -81,7 +81,7 @@ const MyAccount = ({ location, user }) => {
           content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
         />
         <meta name="og:type" content="website" />
-        <meta name="og:url" content={`https://sanaakayum.com${location}`} />
+        <meta name="og:url" content={`https://sanaakayum.com/${userData.firstName}`} />
         <meta
           name="og:image:secure_url"
           content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
@@ -94,7 +94,7 @@ const MyAccount = ({ location, user }) => {
         <meta name="og:locale" content="en_US" />
         <meta name="og:type" content="website" />
         <meta name="og:type" content="website" />
-        <meta name="og:url" content={`https://sanaakayum.com${location}`} />
+        <meta name="og:url" content={`https://sanaakayum.com/${userData.firstName}`} />
         <meta
           property="og:image:secure_url"
           content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}

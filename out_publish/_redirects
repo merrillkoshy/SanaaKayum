@@ -1,0 +1,4 @@
+# Next-on-Netlify Redirects
+/product/:pid/:slug  /product/[pid]/[slug].html  200
+/:userAccount  /[userAccount].html  200
+/*  /:splat  200
