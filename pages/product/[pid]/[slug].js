@@ -16,7 +16,7 @@ const Product = products => {
   const router = useRouter();
   const { pid } = router.query;
   const product = products["products"].filter(
-    single => single.serialNumber === pid
+    single => single.serialNumber === { pid }
   )[0];
  
   return (
@@ -32,7 +32,7 @@ const Product = products => {
         `${product.article}, ` +
         `${product.description}`
       }
-      url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${slugify(
+      url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${product.serialNumber}/${slugify(
         product.description
       )}`}
       color={product.color}
