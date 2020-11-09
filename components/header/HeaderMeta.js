@@ -36,23 +36,20 @@ const HeaderMeta = ({
         name="og:description"
         content={`${article}s by Sana'a Kayum | ${description}`}
       />
-      <meta name="og:image" content={image} />
+      <meta name="og:image" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
       <meta name="og:type" content="website" />
       <meta name="og:url" content={`https://sanaakayum.com${url}`} />
-      <meta name="og:image:secure_url" content={image} />
+      <meta name="og:image:secure_url" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
       <meta name="og:image:type" content="image/jpg" />
-      <meta name="og:image:width" content="200" />
-      <meta name="og:image:height" content="200" />
+      <meta name="og:image:width" content="1200" />
+      <meta name="og:image:height" content="627" />
       <meta name="og:image:alt" content={description} />
       <meta name="og:site_name" content="Sana'a Kayum" />
       <meta name="og:locale" content="en_US" />
       <meta name="og:type" content="website" />
       <meta name="og:type" content="website" />
       <meta name="og:url" content={`https://sanaakayum.com${url}`} />
-      <meta property="og:image:secure_url" content={image} />
-      <meta property="og:image:type" content="image/jpg" />
-      <meta property="og:image:width" content="200" />
-      <meta property="og:image:height" content="200" />
+      <meta property="og:image:secure_url" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
       <meta property="og:image:alt" content={description} />
       <meta property="og:site_name" content="Sana'a Kayum" />
       <meta property="og:locale" content="en_US" />
@@ -63,7 +60,7 @@ const HeaderMeta = ({
         itemProp="description"
         content={`${article}s by Sana'a Kayum | ${description}`}
       />
-      <meta itemProp="image" content={image} />
+      <meta itemProp="image" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:card" content="app" />
@@ -75,7 +72,7 @@ const HeaderMeta = ({
         content={`${article}s by Sana'a Kayum | ${description}`}
       />
       <meta name="twitter:app:country" content="ae" />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
       </Head>
       </Fragment> 
   );

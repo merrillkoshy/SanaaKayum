@@ -100,8 +100,8 @@ couture | Sana'a Kayum"
           name="og:image"
           content="https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"
         />
-        <meta name="og:image:width" content="200" />
-        <meta name="og:image:height" content="200" />
+        <meta name="og:image:width" content="1200" />
+        <meta name="og:image:width" content="627" />
         {/* Open Graph */}
 
         <meta property="og:type" content="website" />
@@ -111,8 +111,6 @@ couture | Sana'a Kayum"
           content="https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"
         />
         <meta property="og:image:type" content="image/jpg" />
-        <meta property="og:image:width" content="200" />
-        <meta property="og:image:height" content="200" />
         <meta
           property="og:image:alt"
           content="Featuring a wide variety of Arabian, Western, Indo-Arabian, Ethnic 

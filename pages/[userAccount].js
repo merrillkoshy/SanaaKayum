@@ -89,8 +89,8 @@ const MyAccount = ({  user }) => {
           content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
         />
         <meta name="og:image:type" content="image/jpg" />
-        <meta name="og:image:width" content="200" />
-        <meta name="og:image:height" content="200" />
+        <meta name="og:image:width" content="1200" />
+        <meta name="og:image:height" content="627" />
         <meta name="og:image:alt" content={`${userData.firstName}'s Account`} />
         <meta name="og:site_name" content="Sana'a Kayum" />
         <meta name="og:locale" content="en_US" />
@@ -102,8 +102,7 @@ const MyAccount = ({  user }) => {
           content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
         />
         <meta property="og:image:type" content="image/jpg" />
-        <meta property="og:image:width" content="200" />
-        <meta property="og:image:height" content="200" />
+
         <meta
           property="og:image:alt"
           content={`${userData.firstName}'s Account`}

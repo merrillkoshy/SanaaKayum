@@ -49,7 +49,7 @@ const ProductImageDescription = ({
         article={product.article}
         title={product.description}
         description={product.description}
-        image={`https:${product.images[0].fields.file.url}?fm=jpg`}
+        image={`https:${product.images[0].fields.file.url}`}
         keywords={
           `${product.tags}, Sana\'a Kayum, Dubai, Fashion, ` +
           `${product.article}, ` +
