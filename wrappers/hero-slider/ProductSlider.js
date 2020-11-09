@@ -109,10 +109,10 @@ const ProductSlider = props => {
                             href={
                               slider.featureSlideData.action
                                 ? slider.featureSlideData.action
-                                : process.env.RAZZLE_PUBLIC_URL + `/shop`
+                                : process.env.NEXT_PUBLIC_PUBLIC_URL + `/shop`
                             }
                           >
-                            {slider.featureSlideData.button}
+                            <a>{slider.featureSlideData.button}</a>
                           </Link>
                         </div>
                       </div>
@@ -137,12 +137,12 @@ const ProductSlider = props => {
                       >
                         <Link
                           href={
-                            process.env.RAZZLE_PUBLIC_URL +
+                            process.env.NEXT_PUBLIC_PUBLIC_URL +
                             `/shop?search=` +
                             slider.filterValue
                           }
                         >
-                          View All
+                          <a>View All</a>
                         </Link>
                       </Button>
                     </Col>

@@ -13,6 +13,7 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import Link from "next/link";
 
 const CategoriesSliderComponent = ({
   swiperParams,
@@ -21,6 +22,20 @@ const CategoriesSliderComponent = ({
   sliderClassName,
   spaceBottomClass
 }) => {
+
+  const carelessArray=[
+    "Sensual Wear",
+    "Baby Doll",
+    "Lounge Wear",
+    "Sleep Wear",
+    "Shorts",
+    "Camisole",
+    "Slip Dress",
+    "House Gown",
+    "Midi Dress",
+    "Cape Dress",
+    "Pajama",
+    "Maxi Gown"]
   return (
     <Fragment>
       <Swiper {...swiperParams}>
@@ -36,21 +51,37 @@ const CategoriesSliderComponent = ({
                 <Card style={{ width: "130px",border:"none"}}>
                   
                   <Card.Body className="p-3"> 
-                    
-                      
+                    <Link  href={
+                            process.env.NEXT_PUBLIC_PUBLIC_URL +
+                            `/shop?search=` +
+                            product
+                          }>
+                            <a>
+                      {!carelessArray.includes(product)?
                       <Card.Img
                         variant="top"
                         src={
-                          `https://sanaakayum.com/Assets/categories/${product.replace(
+                          `/assets/categories/${product.replace(
                                 /\s/g,
                                 "%20"
                               )}.png`
                         }
+                        onError={(e)=>{e.target.onerror = null; e.target.src=`/assets/categories/placeholder.png`}}
                       />
+                      :
+                      <Card.Img
+                        variant="top"
+                        src={
+                          `/assets/categories/careless.png`
+                        }
+                        onError={(e)=>{e.target.onerror = null; e.target.src=`/assets/categories/placeholder.png`}}
+                      />
+                    }</a>
                       {/* <Card.Text>
                         <strong>sanaa_kayum</strong> Shop {product} #{product}{" "}
                         #sanaakayum
                       </Card.Text> */}
+                      </Link>
                   </Card.Body>
                   
                 </Card>

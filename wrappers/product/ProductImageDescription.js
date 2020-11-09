@@ -10,7 +10,7 @@ import ProductImageFixed from "../../components/product/ProductImageFixed";
 const slugify = require("@sindresorhus/slugify");
 
 import MetaTags from "react-meta-tags";
-import HeaderMeta from "../../components/header/HeaderMeta";
+
 import ProductSchema from "../../components/header/ProductSchema";
 
 const ProductImageDescription = ({
@@ -45,21 +45,7 @@ const ProductImageDescription = ({
     >
       {product?
       <>
-      <HeaderMeta
-        article={product.article}
-        title={product.description}
-        description={product.description}
-        image={`https:${product.images[0].fields.file.url}`}
-        keywords={
-          `${product.tags}, Sana\'a Kayum, Dubai, Fashion, ` +
-          `${product.article}, ` +
-          `${product.description}`
-        }
-        url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${slugify(
-          product.description
-        )}`}
-        color={product.color}
-      />
+      
       <ProductSchema product={product} />
       <div className="container">
         <div className="row">
