@@ -54,7 +54,9 @@ const MyAccount = ({  user }) => {
 
   return (
     <Fragment>
-      <Helmet>
+      
+    <Head>
+      
         <title>{`${userData.firstName}'s Account`}</title>
         <link rel="canonical" href={`https://sanaakayum.com/${userData.firstName}`} />
         <base target="_blank" href={process.env.RAZZLE_PUBLIC_URL} />
@@ -137,7 +139,7 @@ const MyAccount = ({  user }) => {
           name="twitter:image"
           content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
         />
-      </Helmet>
+      </Head>
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}

@@ -1,7 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
-import DocumentMeta from "react-document-meta";
-
+import Head from 'next/head'
 const HeaderMeta = ({
   article,
   title,
@@ -12,7 +11,9 @@ const HeaderMeta = ({
   color
 }) => {
   return (
-    <Helmet>
+    <Fragment>
+    <Head>
+    
       <title>{title}</title>
       <link rel="canonical" href={`https://sanaakayum.com${url}`} />
       <base target="_blank" href={process.env.NEXT_PUBLIC_PUBLIC_URL} />
@@ -75,7 +76,8 @@ const HeaderMeta = ({
       />
       <meta name="twitter:app:country" content="ae" />
       <meta name="twitter:image" content={image} />
-    </Helmet>
+      </Head>
+      </Fragment> 
   );
 };
 

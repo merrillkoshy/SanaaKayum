@@ -13,6 +13,7 @@ import ShopTopbarFilter from "../wrappers/product/ShopTopbarFilter";
 import ShopProducts from "../wrappers/product/ShopProducts";
 import { Helmet } from "react-helmet";
 import { isMobile, isTablet } from "react-device-detect";
+import Head from "next/head";
 
 const ShopGridFullWidth = ({  products, lingerie }) => {
   const [layout, setLayout] = useState("grid three-column");
@@ -60,7 +61,7 @@ const ShopGridFullWidth = ({  products, lingerie }) => {
 
   return (
     <Fragment>
-      <Helmet>
+      <Head>
         <title>
           Featuring a wide variety of Arabian, Western, Indo-Arabian, Ethnic
           couture | Sana'a Kayum{" "}
@@ -155,7 +156,7 @@ couture | Sana'a Kayum"
           name="twitter:image"
           content="https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"
         />
-      </Helmet>
+      </Head>
 
       
 
