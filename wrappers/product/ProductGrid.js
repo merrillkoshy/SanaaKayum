@@ -27,17 +27,7 @@ const ProductGrid = ({
       {products &&
         products.map(product => {
           return (
-            <Link
-              key={product.serialNumber}
-              href={{
-                pathname: `/product/[pid]/[slug]`,
-                query: {
-                  pid: product.serialNumber,
-                  slug: slugify(product.description)
-                }
-              }}
-              passHref
-            >
+            
               <ProductGridSingle
                 sliderClassName={sliderClassName}
                 spaceBottomClass={spaceBottomClass}
@@ -69,7 +59,7 @@ const ProductGrid = ({
                 }
                 key={product.serialNumber}
               />
-            </Link>
+            
           );
         })}
     </Fragment>

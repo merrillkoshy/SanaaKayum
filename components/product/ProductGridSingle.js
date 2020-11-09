@@ -6,9 +6,10 @@ import { getDiscountPrice } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
 import ProductModal from "./ProductModal";
 import { isSafari } from "react-device-detect";
+import Link from "next/link";
 const slugify = require("@sindresorhus/slugify");
 
-const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
+const ProductGridSingle = (props) => {
   const { uID } = props;
   const { product } = props;
   const { currency } = props;
@@ -23,10 +24,10 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
 
-  const discountedPrice = getDiscountPrice(product.price, product.discount);
-  const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
+  const discountedPrice = getDiscountPrice(product?.price, product?.discount);
+  const finalProductPrice = +(product?.price * currency?.currencyRate).toFixed(2);
   const finalDiscountedPrice = +(
-    discountedPrice * currency.currencyRate
+    discountedPrice * currency?.currencyRate
   ).toFixed(2);
 
   return (
@@ -36,49 +37,61 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
           sliderClassName ? sliderClassName : ""
         }`}
       >
-        <a className="next_wrapper" href={href} onClick={onClick} ref={ref}>
+       
           <div
             className={`product-wrap ${
               spaceBottomClass ? spaceBottomClass : ""
             }`}
           >
             <div className="product-img">
+            <Link
+              key={product?.serialNumber}
+              href={{
+                pathname: `/product/[pid]/[slug]`,
+                query: {
+                  pid: product?.serialNumber,
+                  slug: product?slugify(product?.description):""
+                }
+              }}
+              
+            >
               <img
                 className="default-img"
                 src={
                   !isSafari
                     ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                      product.images[0].fields.file.url
+                      product?.images[0].fields.file.url
                     : process.env.NEXT_PUBLIC_PUBLIC_URL +
-                      product.images[0].fields.file.url +
+                      product?.images[0].fields.file.url +
                       `?fm=jpg`
                 }
-                alt={product.collectionName}
+                alt={product?.collectionName}
                 loading="lazy"
                 title={
-                  product.collectionName +
+                  product?.collectionName +
                   " " +
-                  product.article +
+                  product?.article +
                   " by Sana'a Kayum"
                 }
               />
-              {product.images.length > 1 ? (
+              </Link>
+              {product?.images.length > 1 ? (
                 <img
                   className="hover-img"
                   src={
                     !isSafari
                       ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                        product.images[1].fields.file.url
+                        product?.images[1].fields.file.url
                       : process.env.NEXT_PUBLIC_PUBLIC_URL +
-                        product.images[1].fields.file.url +
+                        product?.images[1].fields.file.url +
                         `?fm=jpg`
                   }
-                  alt={product.collectionName}
+                  alt={product?.collectionName}
                   loading="lazy"
                   title={
-                    product.collectionName +
+                    product?.collectionName +
                     " " +
-                    product.article +
+                    product?.article +
                     " by Sana'a Kayum"
                   }
                 />
@@ -105,11 +118,11 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   </button>
                 </div>
                 <div className="pro-same-action pro-cart">
-                  {product.affiliateLink ? (
+                  {product?.affiliateLink ? (
                     "Buy now "
-                  ) : product.variation && product.variation.length >= 1 ? (
+                  ) : product?.variation && product?.variation.length >= 1 ? (
                     "Select Option"
-                  ) : product.stock && product.stock > 0 ? (
+                  ) : product?.stock && product?.stock > 0 ? (
                     <button
                       onClick={() => {
                         addToCart(product, addToast, uID);
@@ -143,28 +156,28 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                 </div>
               </div>
             </div>
-            {product.discount || product.new ? (
+            {product?.discount || product?.new ? (
               <div className="product-img-badges">
-                {product.discount ? (
-                  <span className="pink">-{product.discount}%</span>
+                {product?.discount ? (
+                  <span className="pink">-{product?.discount}%</span>
                 ) : (
                   ""
                 )}
-                {product.new ? <span className="purple">New</span> : ""}
+                {product?.new ? <span className="purple">New</span> : ""}
               </div>
             ) : (
               ""
             )}
             <div className="product-content text-center">
               <h3>
-                <strong>{product.article}</strong>
+                <strong>{product?.article}</strong>
                 {" | "}
 
-                {product.collectionName}
+                {product?.collectionName}
               </h3>
-              {product.rating && product.rating > 0 ? (
+              {product?.rating && product?.rating > 0 ? (
                 <div className="product-rating d-none">
-                  <Rating ratingValue={product.rating} />
+                  <Rating ratingValue={product?.rating} />
                 </div>
               ) : (
                 ""
@@ -190,7 +203,7 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
               </div>
             </div>
           </div>
-        </a>
+        
       </div>
       {/* product modal */}
       <ProductModal
@@ -212,7 +225,7 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
       />
     </Fragment>
   );
-});
+};
 
 ProductGridSingle.propTypes = {
   addToCart: PropTypes.func,

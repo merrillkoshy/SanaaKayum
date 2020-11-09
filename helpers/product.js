@@ -1,7 +1,7 @@
 // get products
 export const getProducts = (products, article, type, limit) => {
   const finalProducts = article
-    ? products.filter(product => product.article)
+    ? products.filter(product => product?.article)
     : products;
 
   if (type && type === "new") {
@@ -35,7 +35,7 @@ export const getProductCartQuantity = (cartItems, product, color, size) => {
     cartItems &&
     cartItems.filter(
       single =>
-        single.id === product.id &&
+        single.serialNumber === product?.serialNumber &&
         (single.selectedProductColor
           ? single.selectedProductColor === color
           : true) &&
@@ -48,15 +48,15 @@ export const getProductCartQuantity = (cartItems, product, color, size) => {
     cartItems.length >= 1 &&
     productInCart
   ) {
-    if (product.variation) {
+    if (product?.variation) {
       return cartItems.filter(
         single =>
-          single.id === product.id &&
+          single.serialNumber === product?.serialNumber &&
           single.selectedProductColor === color &&
           single.selectedProductSize === size
       )[0].quantity;
     } else {
-      return cartItems.filter(single => product.id === single.id)[0].quantity;
+      return cartItems.filter(single => product?.serialNumber === single.serialNumber)[0].quantity;
     }
   } else {
     return 0;
@@ -78,23 +78,23 @@ export const getSortedProducts = (products, sortType, sortValue, lingerie) => {
         searchKey.push(
           products.filter(
             product =>
-              (product.description
+              (product?.description
                 .toLowerCase()
                 .includes(" " + sortValArr[0].toLowerCase() + " ") ||
-                product.color.toLowerCase() === sortValArr[0].toLowerCase() ||
-                product.article.toLowerCase() === sortValArr[0].toLowerCase() ||
-                (product.tags &&
-                  product.tags.filter(
+                product?.color.toLowerCase() === sortValArr[0].toLowerCase() ||
+                product?.article.toLowerCase() === sortValArr[0].toLowerCase() ||
+                (product?.tags &&
+                  product?.tags.filter(
                     single =>
                       single.toLowerCase() === sortValArr[0].toLowerCase()
                   )[0])) &&
-              (product.description
+              (product?.description
                 .toLowerCase()
                 .includes(" " + sortValArr[1].toLowerCase() + " ") ||
-                product.color.toLowerCase() === sortValArr[1].toLowerCase() ||
-                product.article.toLowerCase() === sortValArr[1].toLowerCase() ||
-                (product.tags &&
-                  product.tags.filter(
+                product?.color.toLowerCase() === sortValArr[1].toLowerCase() ||
+                product?.article.toLowerCase() === sortValArr[1].toLowerCase() ||
+                (product?.tags &&
+                  product?.tags.filter(
                     single =>
                       single.toLowerCase() === sortValArr[1].toLowerCase()
                   )[0]))
@@ -105,26 +105,26 @@ export const getSortedProducts = (products, sortType, sortValue, lingerie) => {
           searchKey.push(
             products.filter(
               product =>
-                product.collectionName.toLowerCase() === sv.toLowerCase()
+                product?.collectionName.toLowerCase() === sv.toLowerCase()
             ),
             products.filter(
-              product => product.article.toLowerCase() === sv.toLowerCase()
+              product => product?.article.toLowerCase() === sv.toLowerCase()
             ),
             products.filter(
-              product => product.color.toLowerCase() === sv.toLowerCase()
+              product => product?.color.toLowerCase() === sv.toLowerCase()
             ),
             products.filter(product =>
-              product.description
+              product?.description
                 .toLowerCase()
                 .includes(" " + sv.toLowerCase() + " ")
             ),
             products.filter(product =>
-              product.description.toLowerCase().includes(sv.toLowerCase())
+              product?.description.toLowerCase().includes(sv.toLowerCase())
             ),
             products.filter(
               product =>
-                product.tags &&
-                product.tags.filter(
+                product?.tags &&
+                product?.tags.filter(
                   single => single.toLowerCase() === sortValue.toLowerCase()
                 )[0]
             ),
@@ -140,26 +140,26 @@ export const getSortedProducts = (products, sortType, sortValue, lingerie) => {
         searchKey.push(
           products.filter(
             product =>
-              product.collectionName.toLowerCase() === sortValue.toLowerCase()
+              product?.collectionName.toLowerCase() === sortValue.toLowerCase()
           ),
           products.filter(
-            product => product.article.toLowerCase() === sortValue.toLowerCase()
+            product => product?.article.toLowerCase() === sortValue.toLowerCase()
           ),
           products.filter(
-            product => product.color.toLowerCase() === sortValue.toLowerCase()
+            product => product?.color.toLowerCase() === sortValue.toLowerCase()
           ),
           products.filter(product =>
-            product.description
+            product?.description
               .toLowerCase()
               .includes(" " + sortValue.toLowerCase() + " ")
           ),
           products.filter(product =>
-            product.description.toLowerCase().includes(sortValue.toLowerCase())
+            product?.description.toLowerCase().includes(sortValue.toLowerCase())
           ),
           products.filter(
             product =>
-              product.tags &&
-              product.tags.filter(
+              product?.tags &&
+              product?.tags.filter(
                 single => single.toLowerCase() === sortValue.toLowerCase()
               )[0]
           ),
@@ -177,14 +177,14 @@ export const getSortedProducts = (products, sortType, sortValue, lingerie) => {
     }
     if (sortType === "category") {
       return products.filter(
-        product => product.article === sortValue
-        // product => product.article.filter(single => single === sortValue)[0]
+        product => product?.article === sortValue
+        // product => product?.article.filter(single => single === sortValue)[0]
       );
     }
     if (sortType === "lingerie") {
       return lingerie.filter(
         ln => ln.article === sortValue
-        // product => product.article.filter(single => single === sortValue)[0]
+        // product => product?.article.filter(single => single === sortValue)[0]
       );
     }
 
@@ -202,8 +202,8 @@ export const getSortedProducts = (products, sortType, sortValue, lingerie) => {
         products &&
           products.filter(
             product =>
-              product.tags &&
-              product.tags.filter(single => single === sortValue)[0]
+              product?.tags &&
+              product?.tags.filter(single => single === sortValue)[0]
           ),
         lingerie.filter(
           lgr => lgr.tags.filter(single => single === sortValue)[0]
@@ -214,10 +214,10 @@ export const getSortedProducts = (products, sortType, sortValue, lingerie) => {
       return tagKey;
     }
     if (sortType === "color") {
-      return products.filter(product => product.color === sortValue);
+      return products.filter(product => product?.color === sortValue);
     }
     if (sortType === "size") {
-      return products.filter(product => product.size.name === sortValue);
+      return products.filter(product => product?.size.name === sortValue);
     }
     if (sortType === "filterSort") {
       console.log('fired filterSort')
@@ -253,7 +253,7 @@ export const getIndividualCategories = products => {
   let productCategories = [];
   products &&
     products.map(product => {
-      return productCategories.push(product.article);
+      return productCategories.push(product?.article);
     });
   const individualProductCategories = getIndividualItemArray(productCategories);
   return individualProductCategories;
@@ -274,8 +274,8 @@ export const getIndividualTags = products => {
   products &&
     products.map(product => {
       return (
-        product.tags &&
-        product.tags.map(single => {
+        product?.tags &&
+        product?.tags.map(single => {
           return productTags.push(single);
         })
       );
@@ -289,7 +289,7 @@ export const getIndividualColors = products => {
   let productColors = [];
   products &&
     products.map(product => {
-      return productColors.push(product.color);
+      return productColors.push(product?.color);
     });
   const individualProductColors = getIndividualItemArray(productColors);
   return individualProductColors;
@@ -301,8 +301,8 @@ export const getProductsIndividualSizes = products => {
   products &&
     products.map(product => {
       return (
-        product.size &&
-        product.size.map(single => {
+        product?.size &&
+        product?.size.map(single => {
           return productSizes.push(single.name);
         })
       );
@@ -314,8 +314,8 @@ export const getProductsIndividualSizes = products => {
 // get product individual sizes
 export const getIndividualSizes = product => {
   let productSizes = [];
-  product.variation &&
-    product.variation.map(singleVariation => {
+  product?.variation &&
+    product?.variation.map(singleVariation => {
       return (
         singleVariation.size &&
         singleVariation.size.map(singleSize => {

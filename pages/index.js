@@ -48,14 +48,7 @@ const Index = props => {
         {/* tab product */}
       </LayoutOne>
 
-      <Link
-        href={{
-          pathname: "/[slug]",
-          query: { slug: `some-route` }
-        }}
-      >
-        <a>Test dynamic route</a>
-      </Link>
+      
     </>
   );
 };

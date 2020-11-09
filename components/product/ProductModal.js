@@ -18,13 +18,13 @@ function ProductModal(props) {
   const [gallerySwiper, getGallerySwiper] = useState(null);
   const [thumbnailSwiper, getThumbnailSwiper] = useState(null);
   const [selectedProductColor, setSelectedProductColor] = useState(
-    product.color ? product.color : ""
+    product?.color ? product?.color : ""
   );
   const [selectedProductSize, setSelectedProductSize] = useState(
-    product.variation ? product.variation[0].size[0].name : ""
+    product?.variation ? product?.variation[0].size[0].name : ""
   );
   const [productStock, setProductStock] = useState(
-    product.variation ? product.variation[0].size[0].stock : product.stock
+    product?.variation ? product?.variation[0].size[0].stock : product?.stock
   );
   const [quantityCount, setQuantityCount] = useState(1);
 
@@ -103,8 +103,8 @@ function ProductModal(props) {
             <div className="col-md-5 col-sm-12 col-xs-12">
               <div className="product-large-image-wrapper">
                 <Swiper {...gallerySwiperParams}>
-                  {product.images &&
-                    product.images.map((single, key) => {
+                  {product?.images &&
+                    product?.images.map((single, key) => {
                       return (
                         <div key={key}>
                           <div className="single-image">
@@ -113,12 +113,12 @@ function ProductModal(props) {
                                 type="image/webp"
                                 className="img-fluid"
                                 itemProp="image"
-                                alt={product.collectionName}
+                                alt={product?.collectionName}
                                 loading="lazy"
                                 title={
-                                  product.collectionName +
+                                  product?.collectionName +
                                   " " +
-                                  product.article +
+                                  product?.article +
                                   " by Sana'a Kayum"
                                 }
                                 srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -127,12 +127,12 @@ function ProductModal(props) {
                               <source
                                 className="img-fluid"
                                 itemProp="image"
-                                alt={product.collectionName}
+                                alt={product?.collectionName}
                                 loading="lazy"
                                 title={
-                                  product.collectionName +
+                                  product?.collectionName +
                                   " " +
-                                  product.article +
+                                  product?.article +
                                   " by Sana'a Kayum"
                                 }
                                 type="image/jpeg"
@@ -142,12 +142,12 @@ function ProductModal(props) {
                               <img
                                 className="img-fluid"
                                 itemProp="image"
-                                alt={product.collectionName}
+                                alt={product?.collectionName}
                                 loading="lazy"
                                 title={
-                                  product.collectionName +
+                                  product?.collectionName +
                                   " " +
-                                  product.article +
+                                  product?.article +
                                   " by Sana'a Kayum"
                                 }
                                 src={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -162,8 +162,8 @@ function ProductModal(props) {
               </div>
               <div className="product-small-image-wrapper mt-15">
                 <Swiper {...thumbnailSwiperParams}>
-                  {product.images &&
-                    product.images.map((single, key) => {
+                  {product?.images &&
+                    product?.images.map((single, key) => {
                       return (
                         <div key={key}>
                           <div className="single-image">
@@ -172,12 +172,12 @@ function ProductModal(props) {
                                 type="image/webp"
                                 className="img-fluid"
                                 itemProp="image"
-                                alt={product.collectionName}
+                                alt={product?.collectionName}
                                 loading="lazy"
                                 title={
-                                  product.collectionName +
+                                  product?.collectionName +
                                   " " +
-                                  product.article +
+                                  product?.article +
                                   " by Sana'a Kayum"
                                 }
                                 srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -186,12 +186,12 @@ function ProductModal(props) {
                               <source
                                 className="img-fluid"
                                 itemProp="image"
-                                alt={product.collectionName}
+                                alt={product?.collectionName}
                                 loading="lazy"
                                 title={
-                                  product.collectionName +
+                                  product?.collectionName +
                                   " " +
-                                  product.article +
+                                  product?.article +
                                   " by Sana'a Kayum"
                                 }
                                 type="image/jpeg"
@@ -201,12 +201,12 @@ function ProductModal(props) {
                               <img
                                 className="img-fluid"
                                 itemProp="image"
-                                alt={product.collectionName}
+                                alt={product?.collectionName}
                                 loading="lazy"
                                 title={
-                                  product.collectionName +
+                                  product?.collectionName +
                                   " " +
-                                  product.article +
+                                  product?.article +
                                   " by Sana'a Kayum"
                                 }
                                 src={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -222,58 +222,58 @@ function ProductModal(props) {
             </div>
             <div className="col-md-7 col-sm-12 col-xs-12">
               <div className="product-details-content quickview-content">
-                <h2>{product.collectionName}</h2>
-                <h5>{product.article}</h5>
+                <h2>{product?.collectionName}</h2>
+                <h5>{product?.article}</h5>
                 <div className="product-details-price">
                   {discountedprice !== null ? (
                     <Fragment>
                       <span>
-                        {/* {currency.currencySymbol + finaldiscountedprice} */}
+                        {/* {currency?.currencySymbol + finaldiscountedprice} */}
                         {`AED ` + finaldiscountedprice}
                       </span>{" "}
                       <span className="old">
-                        {/* {currency.currencySymbol + finalproductprice} */}
+                        {/* {currency?.currencySymbol + finalproductprice} */}
                         {`AED ` + finalproductprice}
                       </span>
                     </Fragment>
                   ) : (
-                    <span>{currency.currencySymbol + finalproductprice} </span>
+                    <span>{currency?.currencySymbol + finalproductprice} </span>
                   )}
                 </div>
-                {product.rating && product.rating > 0 ? (
+                {product?.rating && product?.rating > 0 ? (
                   <div className="pro-details-rating-wrap">
                     <div className="pro-details-rating">
-                      <Rating ratingValue={product.rating} />
+                      <Rating ratingValue={product?.rating} />
                     </div>
                   </div>
                 ) : (
                   ""
                 )}
                 <div className="pro-details-list">
-                  <p>{product.description}</p>
+                  <p>{product?.description}</p>
                 </div>
 
-                {product.color ? (
+                {product?.color ? (
                   <div className="pro-details-size-color">
                     <div className="pro-details-color-wrap">
                       <span>Color</span>
                       <div className="pro-details-color-content">
                         <label
-                          className={`pro-details-color-content--single ${product.color}`}
+                          className={`pro-details-color-content--single ${product?.color}`}
                         >
                           <input
                             type="radio"
-                            value={product.color}
+                            value={product?.color}
                             name="product-color"
                             checked={
-                              product.color === selectedProductColor
+                              product?.color === selectedProductColor
                                 ? "checked"
                                 : ""
                             }
                             onChange={() => {
-                              setSelectedProductColor(product.color);
-                              setSelectedProductSize(product.size[0].name);
-                              setProductStock(product.size[0].stock);
+                              setSelectedProductColor(product?.color);
+                              setSelectedProductSize(product?.size[0].name);
+                              setProductStock(product?.size[0].stock);
                               setQuantityCount(1);
                             }}
                           />
@@ -284,7 +284,7 @@ function ProductModal(props) {
                     <div className="pro-details-size">
                       <span>Size</span>
                       <div className="pro-details-size-content">
-                        {product.size.map((sz, key) => {
+                        {product?.size.map((sz, key) => {
                           return (
                             <label
                               className={`pro-details-size-content--single`}
@@ -300,7 +300,7 @@ function ProductModal(props) {
                                     : ""
                                 }
                                 onChange={() => {
-                                  setSelectedProductColor(product.color);
+                                  setSelectedProductColor(product?.color);
                                   setSelectedProductSize(sz.name);
                                   setProductStock(sz.stock);
                                   setQuantityCount(1);
@@ -317,11 +317,11 @@ function ProductModal(props) {
                 ) : (
                   ""
                 )}
-                {product.affiliateLink ? (
+                {product?.affiliateLink ? (
                   <div className="pro-details-quality">
                     <div className="pro-details-cart btn-hover">
                       <a
-                        href={product.affiliateLink}
+                        href={product?.affiliateLink}
                         rel="noopener noreferrer"
                         target="_blank"
                       >
