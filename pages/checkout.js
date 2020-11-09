@@ -96,7 +96,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                           <label>First Name</label>
                           <input
                             type="text"
-                            defaultValue={userData && userData && userData.firstName}
+                            defaultValue={ userData && userData.firstName}
                           />
                         </div>
                       </div>

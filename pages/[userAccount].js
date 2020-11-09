@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
@@ -57,8 +57,8 @@ const MyAccount = ({  user }) => {
       
     <Head>
       
-        <title>{`${userData.firstName}'s Account`}</title>
-        <link rel="canonical" href={`https://sanaakayum.com/${userData.firstName}`} />
+        <title>{`${userAccount}'s Account`}</title>
+        <link rel="canonical" href={`https://sanaakayum.com/${userAccount}`} />
         <base target="_blank" href={process.env.RAZZLE_PUBLIC_URL} />
         <link href="https://images.ctfassets.net/" rel="dns-prefetch" />
         <meta
