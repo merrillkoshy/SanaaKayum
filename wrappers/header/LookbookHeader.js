@@ -5,6 +5,7 @@ import NavMenu from "../../components/header/NavMenu";
 import IconGroup from "../../components/header/IconGroup";
 import MobileMenu from "../../components/header/MobileMenu";
 import HeaderTop from "../../components/header/HeaderTop";
+import Link from "next/link";
 
 const LookbookHeader = ({
   layout,
@@ -36,18 +37,22 @@ const LookbookHeader = ({
           <div className="col-xl-3 col-lg-8 d-lg-block">
             {/* header logo */}
             <div className="logo text-center logo-hm5">
+              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
               <a
                 className="sticky-none"
-                href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}
+                
               >
                 <img alt="" src="/assets/img/logo/logo-gold.png" />
               </a>
+              </Link>
+              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
               <a
                 className="sticky-block"
                 href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}
               >
                 <img alt="" src="/assets/img/logo/logo-gold.png" />
               </a>
+              </Link>
             </div>
           </div>
           <div className="col-xl-6 col-lg-8 d-none d-lg-block">

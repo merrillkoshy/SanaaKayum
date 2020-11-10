@@ -8,6 +8,7 @@ import { addToWishlist } from "../../redux/actions/wishlistActions";
 import { addToCompare } from "../../redux/actions/compareActions";
 import Rating from "./sub-components/ProductRating";
 import whatsAppthis from "../../constants/whatsappHelper";
+import Link from "next/link";
 
 const ProductDescriptionInfo = ({
   product,
@@ -229,26 +230,30 @@ const ProductDescriptionInfo = ({
           <span>Categories :</span>
           <ul>
             <li key={product.serialNumber}>
-              <a
-                href={
+              <Link href={
                   process.env.NEXT_PUBLIC_PUBLIC_URL +
                   "/shop?search=" +
                   product.article.toLowerCase()
-                }
+                }>
+              <a
+                
               >
                 {product.article}
               </a>
+              </Link>
             </li>
             {product.category.map((single, key) => {
               return (
                 <li key={key}>
+                  <Link href={
+                      process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"
+                    }>
                   <a
-                    href={
-                      process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop-grid-standard"
-                    }
+                    
                   >
                     {single}
                   </a>
+                  </Link>
                 </li>
               );
             })}
@@ -264,13 +269,15 @@ const ProductDescriptionInfo = ({
             {product.tags.map((single, key) => {
               return (
                 <li key={key}>
+                  <Link href={
+                      process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"
+                    }>
                   <a
-                    href={
-                      process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop-grid-standard"
-                    }
+                    
                   >
                     {single}
                   </a>
+                  </Link>
                 </li>
               );
             })}

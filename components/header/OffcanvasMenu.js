@@ -3,6 +3,7 @@ import React from "react";
 
 import HeaderSocial from "./sub-components/HeaderSocial";
 import NavMenu from "./NavMenu";
+import Link from "next/link";
 
 const OffcanvasMenu = ({ activeState, getActiveState }) => {
   return (
@@ -17,7 +18,8 @@ const OffcanvasMenu = ({ activeState, getActiveState }) => {
         </button>
       </div>
       <div className="side-logo">
-        <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+        <a>
           <img
             alt=""
             src={
@@ -26,6 +28,7 @@ const OffcanvasMenu = ({ activeState, getActiveState }) => {
             loading="lazy"
           />
         </a>
+        </Link>
       </div>
       {/* nav menu*/}
       <NavMenu sidebarMenu={true} />

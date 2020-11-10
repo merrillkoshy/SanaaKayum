@@ -135,10 +135,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                       // onClick={() => whatsAppthis(product)}
                       onClick={() =>
                         global.window &&
-                        (global.window.location.href =
-                          process.env.NEXT_PUBLIC_PUBLIC_URL +
-                          "/product/" +
-                          slugify(product.description))
+                        (global.window.location.href =` ${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${product.serialNumber}/${slugify(product.description)}`)
                       }
                       className={
                         cartItem !== undefined && cartItem.quantity > 0

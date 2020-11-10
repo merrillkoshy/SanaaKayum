@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import { animateScroll } from "react-scroll";
 import FooterCopyright from "../../components/footer/FooterCopyright";
+import Link from "next/link";
 
 // import SKChatbot from "../../components/chatbot/SKChatbot";
 
@@ -72,24 +73,32 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
-                    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+                    <a>
                       Haute Couture
                     </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/sk"}>
+                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/sk"}>
+                    <a>
                       Corporate Clothing
                     </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                    <a>
                       Shop
                     </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/lookbook"}>
+                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/lookbook"}>
+                    <a>
                       Lookbook
                     </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -107,19 +116,25 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
-                    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
+                    <Link  href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
+                    <a>
                       About us
                     </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "#/"}>
+                    <Link href="https://maps.google.com/maps?cid=15901352452706984030">
+                    <a >
                       Store location
                     </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>
+                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>
+                    <a>
                       Contact
                     </a>
+                    </Link>
                   </li>
                   <li>
                     <a href="tel:+971523331757">+971 52 333 1757</a>
@@ -146,45 +161,55 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
+                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/size-guide"}>
                     <a
-                      href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/size-guide"}
+                      
                     >
                       Size guide
                     </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/delivery"}>
+                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/delivery"}>
+                    <a >
                       Delivery
                     </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href={
+                    <Link href={
                         process.env.NEXT_PUBLIC_PUBLIC_URL +
                         "/returns-and-exchanges"
-                      }
+                      }>
+                    <a
+                      
                     >
                       Returns, Replacements & Exchanges
                     </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href={
+                    <Link href={
                         process.env.NEXT_PUBLIC_PUBLIC_URL +
                         "/terms-and-conditions"
-                      }
+                      }>
+                    <a
+                      
                     >
                       Terms and Conditions
                     </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href={
+                    <Link  href={
                         process.env.NEXT_PUBLIC_PUBLIC_URL + "/privacy-policy"
-                      }
+                      }>
+                    <a
+                     
                     >
                       Privacy Policy
                     </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

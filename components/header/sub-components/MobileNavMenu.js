@@ -22,7 +22,9 @@ const MobileNavMenu = ({
   logoutUser
 }) => {
   const initUname = (
-    <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>Login</a>
+    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
+    <a>Login</a>
+    </Link>
   );
   const initInteraction = (
     <>
@@ -65,12 +67,14 @@ const MobileNavMenu = ({
               resetWishlist();
             }}
           >
+            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
             <a 
               className="text-danger"
-              href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}
+              
             >
               Logout
             </a>
+            </Link>
           </li>
         </Fragment>
       );

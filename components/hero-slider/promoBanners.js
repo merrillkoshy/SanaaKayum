@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 
 import { isSafari } from "react-device-detect";
+import Link from "next/link";
 
 const PBanners = ({ pBanners, sliderClassName }) => {
   const BannersSlider = () =>
@@ -28,16 +29,18 @@ const PBanners = ({ pBanners, sliderClassName }) => {
                   <h1 className="animated">{pb.promotionName}</h1>
                   <p className="animated">{pb.about}</p>
                   <div className="slider-btn-5 btn-hover">
-                    <a
-                      className="animated"
-                      href={
+                    <Link href={
                         pb.redirect
                           ? pb.redirect
                           : process.env.NEXT_PUBLIC_PUBLIC_URL + `/shop`
-                      }
+                      }>
+                    <a
+                      className="animated"
+                      
                     >
                       {pb.buttonText}
                     </a>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -5,6 +5,7 @@ import IconGroup from "../../components/header/IconGroup";
 import MobileMenu from "../../components/header/MobileMenu";
 import OffcanvasMenu from "../../components/header/OffcanvasMenu";
 import { connect } from "react-redux";
+import Link from "next/link";
 
 const HeaderSix = ({ user, layout, headerPaddingClass, headerBgClass }) => {
   const [scroll, setScroll] = useState(0);
@@ -52,9 +53,10 @@ const HeaderSix = ({ user, layout, headerPaddingClass, headerBgClass }) => {
           <div className="col-xl-2 col-lg-2 col-md-6 col-4">
             {/* header logo */}
             <div className="logo text-center logo-hm5">
+              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
               <a
                 className="sticky-none"
-                href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}
+                
               >
                 <img
                   alt=""
@@ -62,9 +64,11 @@ const HeaderSix = ({ user, layout, headerPaddingClass, headerBgClass }) => {
                   loading="lazy"
                 />
               </a>
+                </Link>
+                <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
               <a
                 className="sticky-block"
-                href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}
+                
               >
                 <img
                   alt=""
@@ -72,6 +76,7 @@ const HeaderSix = ({ user, layout, headerPaddingClass, headerBgClass }) => {
                   loading="lazy"
                 />
               </a>
+              </Link>
             </div>
           </div>
           <div className="col-xl-2 col-lg-6 d-none d-lg-block"></div>

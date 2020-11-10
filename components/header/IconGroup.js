@@ -67,20 +67,22 @@ const IconGroup = ({
               resetWishlist();
             }}
           >
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>Logout</a>
+            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+            <a>Logout</a>
+            </Link>
           </li>
 
           <li>
-            <a
-              href={{
+            <Link href={{
                 pathname: `/[userAccount]]`,
                 query: {
                   userAccount: userData.user.firstName
                 }
-              }}
-            >
+              }}>
+            <a>
               {`${userData.user.firstName}'s Account`}
             </a>
+            </Link>
           </li>
         </ul>
       );
@@ -147,7 +149,8 @@ const IconGroup = ({
 
           <Fragment>
             <div className="same-style header-wishlist">
-              <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/wishlist"}>
+              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/wishlist"}>
+              <a>
                 <i className="pe-7s-like" />
                 <span className="count-style">
                   {wishlistData &&
@@ -157,6 +160,7 @@ const IconGroup = ({
                     : 0}
                 </span>
               </a>
+              </Link>
             </div>
             <div className="same-style cart-wrap d-none d-lg-block">
               <button className="icon-cart" onClick={e => handleClick(e)}>
@@ -177,9 +181,10 @@ const IconGroup = ({
               />
             </div>
             <div className="same-style cart-wrap d-block d-lg-none">
+              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/cart"}>
               <a
                 className="icon-cart"
-                href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/cart"}
+                
               >
                 <i className="pe-7s-shopbag" />
                 <span className="count-style">
@@ -190,6 +195,7 @@ const IconGroup = ({
                     : 0}
                 </span>
               </a>
+              </Link>
             </div>
             <div
               className="same-style mobile-off-canvas d-block d-lg-none"
