@@ -120,7 +120,7 @@ const ProductSlider = props => {
                   ) : (
                     ""
                   )}
-                  <Row className="mx-auto">
+                  <Row className="mx-auto my-2 row">
                     <Col>
                       {isMobile ? (
                         <h4>{slider.sliderHeading}</h4>

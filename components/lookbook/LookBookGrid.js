@@ -7,7 +7,7 @@ const LookBookGrid=props=>{
     const [show, setShow] = useState(false);
     const [flatterWord, setFlatter] = useState("Beautiful");
     const [verb, setVerb] = useState("donning");
-    const [lkbkChild, setLbVal] = useState(0);
+    const [lkbkChild, setLbVal] = useState(false);
     var vowels = ["A", "E", "I", "O", "U"];
     const getRandomIndex = max => {
       return (Math.random() * max) | 0;
@@ -105,7 +105,7 @@ return comp ?
 <div className="grid-layout">{comp}</div>
 <Modal show={show} onHide={handleClose}>
 <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>
+          {lkbkChild?<Modal.Body>
           <div className="row mx-5">
             <div className="col-md-5 col-sm-12 col-xs-12">
               <div className={"product-wrap"}>
@@ -113,17 +113,16 @@ return comp ?
                   <img
                     className="default-img"
                     itemProp="image"
-                    alt={lkbkChild?lkbkChild.collectionName:""}
+                    alt={lkbkChild.collectionName}
                     loading="lazy"
-                    title={`${lkbkChild?lkbkChild.collectionName:""}${lkbkChild?lkbkChild.article:""} by Sana'a Kayum`}
+                    title={`${lkbkChild.collectionName}${lkbkChild.article} by Sana'a Kayum`}
                     src={
-                        lkbkChild.images?
                       !isSafari
-                        ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                          lkbkChild.images[0].fields.file.url
-                        : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            lkbkChild.images[0].fields.file
-                              .url}?fm=jpg`:""
+                      ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        lkbkChild.image[1].fields.file.url
+                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          lkbkChild.image[1].fields.file
+                            .url}?fm=jpg`
                     }
                   />
 
@@ -140,13 +139,12 @@ return comp ?
                         " by Sana'a Kayum"
                       }
                       src={
-                        lkbkChild.images?
                         !isSafari
                           ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            lkbkChild.images[1].fields.file.url
+                            lkbkChild.image[1].fields.file.url
                           : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              lkbkChild.images[1].fields.file
-                                .url}?fm=jpg`:""
+                              lkbkChild.image[1].fields.file
+                                .url}?fm=jpg`
                       }
                     />
                   ) : (
@@ -185,21 +183,21 @@ return comp ?
           </div>
           <div className="row mt-3">
             <div className="col "></div>
-            <div className="col span-3 text-center">
+            <div className="col-6 span-3 text-center">
               <Link
                 href={
-                    lkbkChild.collectionName?
                   process.env.NEXT_PUBLIC_PUBLIC_URL +
                   "shop?search=" +
-                  lkbkChild.collectionName.toLowerCase():"'"
+                  lkbkChild.collectionName.toLowerCase()
                 }
               >
-                <button className="stlBtn">Shop The Look</button>
+                <button onClick={()=>handleClose} className="stlBtn">Shop The Look</button>
               </Link>
             </div>
             <div className="col"></div>
           </div>
-        </Modal.Body>
+        </Modal.Body>:null}
+        
       </Modal>
 </div> 
 

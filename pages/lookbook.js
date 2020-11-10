@@ -2,9 +2,14 @@ import {connect} from "react-redux";
 import HeaderMeta from "../components/header/HeaderMeta";
 import LookbookHeader from "../wrappers/header/LookbookHeader";
 import LookBookGrid from "../components/lookbook/LookBookGrid"
+import LayoutOne from "../layouts/LayoutOne";
 const LookBook=(lookbooks)=>{
   return (
-    <>
+    <LayoutOne
+    headerContainerClass="container-fluid"
+        headerPaddingClass="header-padding-2"
+        headerTop="visible"
+        >
     <HeaderMeta
         article={"Exquisite Wardrobe"}
         title={"Haute Couture & High-Street Fashion"}
@@ -16,13 +21,10 @@ const LookBook=(lookbooks)=>{
         url={"https://sanaakayum.com"}
         color={"#000000"}
       />
-<LookbookHeader
-        layout={"container-fluid"}
-        top={"visible"}
-        headerPaddingClass={"header-padding-2"}
-      />
+
 <LookBookGrid items={lookbooks.lookbooks}/>
- </>
+ 
+ </LayoutOne>
   )
 }
 

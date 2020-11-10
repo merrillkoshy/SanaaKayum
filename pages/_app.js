@@ -118,7 +118,7 @@ let preloadedState
               <Fragment>
             <Head>
         {/* Import CSS for nprogress */}
-        <link rel="stylesheet" type="text/css" href="../assets/css/nprogress.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/nprogress.css" />
       </Head>
               
               
