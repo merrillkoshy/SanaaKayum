@@ -90,51 +90,36 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps)(Product);
 
 
-// export async function getStaticProps() {
-// const res = await getProducts
-// const products=await res.json()
-//   return {
-//     props: {products}, // will be passed to the page component as props
-//     revalidate: 1, 
-//   },
-// }
 
 // export async function getStaticPaths() {
-//   const allProducts = await getProducts()
+//   const paths = await getSlugs()
 //   return {
-//     paths: allProducts?.map(({ serialNumber,description }) => `/product/${serialNumber}/${slugify(description)}`) ?? [],
+//     paths,
 //     fallback: true,
 //   }
 // }
-export async function getStaticPaths() {
-  const paths = await getSlugs()
-  return {
-    paths,
-    fallback: true,
-  }
-}
-// : allProducts?.map(stage=> `products/${stage.serialNumber}/${slugify(stage.description)}`) ?? [],
-export async function getStaticProps({params}) {
+// // : allProducts?.map(stage=> `products/${stage.serialNumber}/${slugify(stage.description)}`) ?? [],
+// export async function getStaticProps({params}) {
   
-  const product=await getProducts().filter(
-    single => single.serialNumber ===  params.pid 
-  )[0]?? [];
-  // const res = await fetch(`http://localhost:3000/product/${params.pid}/${params.slug}`)
-  // const product = await res.json()
-  return {
-    props: {
-      product   
-    },
-    revalidate: 1, 
-  }
-}
-
-
-
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const products = await getProducts()
-  
-//   // Pass data to the page via props
-//   return { props: { products } }
+//   const product=await getProducts().filter(
+//     single => single.serialNumber ===  params.pid 
+//   )[0]?? [];
+//   // const res = await fetch(`http://localhost:3000/product/${params.pid}/${params.slug}`)
+//   // const product = await res.json()
+//   return {
+//     props: {
+//       product   
+//     },
+//     revalidate: 1, 
+//   }
 // }
+
+
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const products = await getProducts()
+  
+  // Pass data to the page via props
+  return { props: { products } }
+}
