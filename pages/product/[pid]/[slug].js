@@ -12,7 +12,7 @@ import { isMobile } from "react-device-detect";
 import HeaderMeta from "../../../components/header/HeaderMeta";
 import NotFound from "../../404"
 import LoadingScreen from "../../../helpers/LoadingScreen"
-import {getProducts} from "../../../api/exports"
+import {getProducts, getSlugs} from "../../../api/exports"
 const slugify = require("@sindresorhus/slugify");
 
 const Product = products => {
@@ -75,7 +75,7 @@ const Product = products => {
           category={product?product.article:""}
         />
         </>
-        :null)})
+        :null)}
         
     
     </LayoutOne>
@@ -106,11 +106,35 @@ export default connect(mapStateToProps)(Product);
 //     fallback: true,
 //   }
 // }
-
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const products = await getProducts()
-  
-  // Pass data to the page via props
-  return { props: { products } }
+export async function getStaticPaths() {
+  const paths = await getSlugs()
+  return {
+    paths,
+    fallback: true,
+  }
 }
+// : allProducts?.map(stage=> `products/${stage.serialNumber}/${slugify(stage.description)}`) ?? [],
+export async function getStaticProps({params}) {
+  
+  const product=await getProducts().filter(
+    single => single.serialNumber ===  params.pid 
+  )[0]?? [];
+  // const res = await fetch(`http://localhost:3000/product/${params.pid}/${params.slug}`)
+  // const product = await res.json()
+  return {
+    props: {
+      product   
+    },
+    revalidate: 1, 
+  }
+}
+
+
+
+// export async function getServerSideProps() {
+//   // Fetch data from external API
+//   const products = await getProducts()
+  
+//   // Pass data to the page via props
+//   return { props: { products } }
+// }
