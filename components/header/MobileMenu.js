@@ -3,6 +3,7 @@ import MobileMenuSearch from "./sub-components/MobileSearch";
 import MobileNavMenu from "./sub-components/MobileNavMenu";
 import MobileWidgets from "./sub-components/MobileWidgets";
 import { Card } from "react-bootstrap";
+import Link from "next/link";
 
 const MobileMenu = () => {
   useEffect(() => {
@@ -71,11 +72,13 @@ const MobileMenu = () => {
   <a href="/sk">
       <Card.Title className="h6">Corporate Clothing | SK</Card.Title>
   </a>
-  <a href="/sk">
+  <Link href="/sk">
+  <a >
       <Card.Text>
       Represent YOUR brand identity in style and comfort
       </Card.Text>
       </a>
+      </Link>
     </Card.Body>
 </Card>
 </>
