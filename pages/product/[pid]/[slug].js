@@ -15,14 +15,24 @@ const slugify = require("@sindresorhus/slugify");
 const Product = products => {
   const router = useRouter();
   const { pid } = router.query;
-  const product = products["products"].filter(
-    single => single.serialNumber === { pid }
-  )[0];
+  
+
+  const [product,setProd]=useState()
+  useEffect(()=>{
+    async function getPid(){
+      const acquiredPid=await products["products"].filter(
+        single => single.serialNumber ===  pid 
+      )[0];
+      setProd(acquiredPid)
+    }
+    getPid()
+  },[])
  
   return (
     <LayoutOne headerTop="visible">
-        
-    <HeaderMeta
+        {product?
+        <>
+        <HeaderMeta
       article={product.article}
       title={product.description}
       description={product.description}
@@ -44,17 +54,20 @@ const Product = products => {
         product={product}
       />
 
-      {/* product description tab */}
+      
       <ProductDescriptionTab
         spaceBottomClass="pb-90"
         productFullDesc={product?product.description:""}
       />
 
-      {/* related product slider */}
+     
       <RelatedProductSlider
         spaceBottomClass="pb-95"
         category={product?product.article:""}
       />
+      </>
+      :null}
+    
     </LayoutOne>
   );
 };
