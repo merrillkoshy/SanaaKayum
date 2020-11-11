@@ -31,8 +31,8 @@ const makeaPromotion=()=>{
           .then(space => space.getEntries({ content_type: "lowerCoordinate" }))
           .then(entries => {
             entries.items.forEach(entry => {
-              console.log(entry.fields.discount["en-US"]);
-              console.log(entry.fields.offerEnd["en-US"]);
+              ;
+              ;
               //   entry.fields.discount["en-US"] = discountPerc;
               //   entry.fields.offerEnd["en-US"] = offerEndsOn;
               //   return entry.update();

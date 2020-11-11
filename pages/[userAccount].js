@@ -18,7 +18,7 @@ export const uploadToContentful = (toEditField, value, uID, addToast) => {
 
     .then(entry => {
       entry.fields[toEditField] = { "en-US": value };
-      console.log(toEditField + " : " + value);
+      ;
       return entry.update();
     })
     .then(entry => {
@@ -43,7 +43,7 @@ const MyAccount = ({  user }) => {
   const userData = user.user;
   const uID = userData.entryID;
   const changePassword = newPassword => {
-    console.log(newPassword);
+    ;
     userData.password !== newPassword
       ? uploadToContentful("password", newPassword, uID, addToast)
       : addToast("Still the old password? Its a keeper !", {

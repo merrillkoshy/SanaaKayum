@@ -13,11 +13,13 @@ import HeaderMeta from "../../../components/header/HeaderMeta";
 import NotFound from "../../404"
 import LoadingScreen from "../../../helpers/LoadingScreen"
 import {getProducts, getSlugs} from "../../../api/exports"
+
 const slugify = require("@sindresorhus/slugify");
 
-const Product = products => {
+const Product = ({staticProducts}) => {
+  
   const router = useRouter();
-  if (!router.isFallback && !products) {
+  if (!router.isFallback && !staticProducts) {
     return <NotFound />
   }
 
@@ -27,9 +29,10 @@ const Product = products => {
   const [product,setProd]=useState()
   useEffect(()=>{
     async function getPid(){
-      const acquiredPid=await products["products"].filter(
+      
+      const acquiredPid=staticProducts?.filter(
         single => single.serialNumber ===  pid 
-      )[0];
+      )[0]
       setProd(acquiredPid)
     }
     getPid()
@@ -41,6 +44,7 @@ const Product = products => {
          <LoadingScreen />
         ):(product?
           <>
+          
           <HeaderMeta
         article={product.article}
         title={product.description}
@@ -81,45 +85,52 @@ const Product = products => {
     </LayoutOne>
   );
 };
-
-const mapStateToProps = state => {
-  return {
-    products: state.productData.products
-  };
-};
-export default connect(mapStateToProps)(Product);
-
-
-
-// export async function getStaticPaths() {
-//   const paths = await getSlugs()
-//   return {
-//     paths,
-//     fallback: true,
-//   }
-// }
-// // : allProducts?.map(stage=> `products/${stage.serialNumber}/${slugify(stage.description)}`) ?? [],
-// export async function getStaticProps({params}) {
-  
-//   const product=await getProducts().filter(
-//     single => single.serialNumber ===  params.pid 
-//   )[0]?? [];
-//   // const res = await fetch(`http://localhost:3000/product/${params.pid}/${params.slug}`)
-//   // const product = await res.json()
-//   return {
-//     props: {
-//       product   
-//     },
-//     revalidate: 1, 
-//   }
-// }
-
-
-
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const products = await getProducts()
-  
-  // Pass data to the page via props
-  return { props: { products } }
+const mapStateToProps=state=>{
+  return{
+    products:state.productData.products
+  }
 }
+
+
+
+
+
+export async function getStaticPaths() {
+  const res = await getProducts()
+  const products = await res.map((p) => {
+    return p.fields
+  })
+  
+  const paths = products.map((product) => ({
+    params: { pid: product.serialNumber,slug:slugify(product.description) },
+  }))
+  
+  return {
+    paths,
+    fallback: true,
+  }
+}
+// : allProducts?.map(stage=> `products/${stage.serialNumber}/${slugify(stage.description)}`) ?? [],
+export async function getStaticProps({params}) {
+
+const res = await getProducts()
+const staticProducts = await res.map((p) => {
+  return p.fields
+})
+
+return {
+  props: {
+    staticProducts,
+  },
+}
+}
+
+// export async function getServerSideProps() {
+//   // Fetch data from external API
+//   const products = await getProducts()
+  
+//   // Pass data to the page via props
+//   return { props: { products } }
+// }
+
+export default connect(mapStateToProps)(Product);

@@ -40,7 +40,7 @@ const compareReducer = (state = initState, action) => {
       compareItems.filter(
         compareItem => compareItem.serialNumber !== product.serialNumber
       );
-    console.log(compareItems);
+    ;
     return remainingItems(compareItems, product);
   };
 
@@ -52,8 +52,8 @@ const compareReducer = (state = initState, action) => {
 
   if (action.type === DELETE_FROM_COMPARE) {
     var remCompare = dfcOps();
-    console.log(product.serialNumber);
-    console.log(remCompare);
+    ;
+    ;
     remCompare.length
       ? atc(product.uID, remCompare)
       : atc(product.uID, [

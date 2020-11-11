@@ -21,7 +21,7 @@ export const setCurrency = currencyName => {
         });
       })
       .catch(err => {
-        console.log("Error: ", err);
+        ;
       });
   };
 };

@@ -24,15 +24,15 @@ const [changedValue, setChangedValue]=useState("")
       return entry.update();
     })
     .then(entry => ()=>{
-      console.log(`${entry} succesfully updated`)
+      
       return entry.publish()
     });
     
     
   }
 const performChangeKey=val=>{
-    console.log(toChange)
-    console.log(val)
+    
+    
     clientMgr
     .then(environment => environment.getEntries({
         content_type: "products"
@@ -91,7 +91,7 @@ const computeValue=val=>{
         
       });
       resultArray=[...new Set(resultArray)]
-      console.log(resultArray)
+      
       setTotalEntries(resultArray.length);
 
       setSubCat(

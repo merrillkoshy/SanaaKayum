@@ -14,6 +14,7 @@ import ShopProducts from "../wrappers/product/ShopProducts";
 import { Helmet } from "react-helmet";
 import { isMobile, isTablet } from "react-device-detect";
 import Head from "next/head";
+import { Button } from "react-bootstrap";
 
 const ShopGridFullWidth = ({  products, lingerie }) => {
   const [layout, setLayout] = useState("grid three-column");
@@ -40,6 +41,7 @@ const ShopGridFullWidth = ({  products, lingerie }) => {
   const getFilterSortParams = (sortType, sortValue) => {
     setFilterSortType(sortType);
     setFilterSortValue(sortValue);
+    
   };
 
   useEffect(() => {
@@ -205,6 +207,9 @@ couture | Sana'a Kayum"
 
                 {/* shop product pagination */}
                 <div className="pro-pagination-style text-center mt-30">
+                  <Button className="scrollToTop" onClick={()=>{
+                     window.scrollTo(0, 0);
+                    }}>
                   <Paginator
                     totalRecords={sortedProducts.length}
                     pageLimit={pageLimit}
@@ -216,6 +221,7 @@ couture | Sana'a Kayum"
                     pagePrevText="«"
                     pageNextText="»"
                   />
+                  </Button>
                 </div>
               </div>
             </div>

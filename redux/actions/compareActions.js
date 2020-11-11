@@ -18,7 +18,7 @@ export const addToCompare = (item, addToast, uID) => {
 
 // delete from compare
 export const deleteFromCompare = (item, addToast, uID) => {
-  console.log(item);
+  ;
   return dispatch => {
     if (addToast) {
       addToast("Removed From Compare", {

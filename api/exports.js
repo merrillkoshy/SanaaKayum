@@ -1,7 +1,8 @@
 import client from "../constants/config"
+const slugify = require("@sindresorhus/slugify");
 
   const fetchEntry = (contentType, limit, container) => {
-    return Promise.resolve(
+    
       client
         .getEntries({
           content_type: contentType,
@@ -17,41 +18,43 @@ import client from "../constants/config"
           });
           container = [...new Set(container)];
         })
-    );
+    
   };
 
 
   export async function getProducts(){
-    let data
+    // let data
     var productMap = [];
-    var lowerCords = [];
-    var lingeries = [];
-    fetchEntry("products", 600, productMap)
-        .then(fetchEntry("lowerCoordinate", 100, lowerCords))
-        .then(fetchEntry("lingerie", 100, lingeries))
-        .then(async()=>{
-          data=await [productMap, lowerCords, lingeries].flat()
-        })
-        
-        console.log(data)
-    return await data
+    
+    // fetchEntry("products", 600, productMap)
+    // fetchEntry("lowerCoordinate", 100, lowerCords)
+    // fetchEntry("lingerie", 100, lingeries)
+    // data=await [productMap, lowerCords, lingeries].flat()
+    // return await data
+
+    const productEntries = await client.getEntries({content_type: "products",
+      limit: 600})
+  if (productEntries.items) productMap.push(productEntries.items)
+  const lowerCords = await client.getEntries({content_type: "lowerCoordinate"})
+  if (lowerCords.items) productMap.push(lowerCords.items)
+  const lingeries = await client.getEntries({content_type: "lingerie"})
+  if (lingeries.items) productMap.push(lingeries.items)
+  return productMap.flat()
+  
 
     }
-    export async function getSlugs(){
-      var productMap = [];
-      var lowerCords = [];
-      var lingeries = [];
-      fetchEntry("products", 600, productMap)
-          .then(fetchEntry("lowerCoordinate", 100, lowerCords))
-          .then(fetchEntry("lingerie", 100, lingeries))
+    export default { getProducts }
+    // export async function getSlugs(){  
+    //    const slugStager=await getProducts();
+       
+    //     return p.fields
+    //   const slugs = slugStager.map((stage) => ({
+    //     params: { pid: stage.serialNumber,
+    //     slug:slugify(stage.description) },
+    //   }))
+      
+    //    return slugs
   
-       const slugStager=await [productMap, lowerCords, lingeries].flat();
-      const slugs =await slugStager.map((stage) => ({
-        params: { pid: stage.serialNumber,
-        slug:slugify(stage.description) },
-      }))
-       return slugs
-  
-      }
+    //   }
 
          

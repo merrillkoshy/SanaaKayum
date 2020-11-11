@@ -24,7 +24,7 @@ const cartReducer = (state = initState, action) => {
     product = action.payload;
   const atcOps = () => {
     if (product.variation === undefined) {
-      // console.log(cartItems[0].serialNumber);
+      // ;
       // const cartItem=
       const cartItem = cartItems.filter(
         item => item.serialNumber === product.serialNumber
@@ -139,7 +139,7 @@ const cartReducer = (state = initState, action) => {
     // } else {
     //   finalCart = atcOps();
     // }
-    console.log(finalCart);
+    ;
     atc(product.uID, finalCart);
 
     return finalCart;
@@ -163,7 +163,7 @@ const cartReducer = (state = initState, action) => {
 
   if (action.type === DELETE_FROM_CART) {
     const deleteFCart = rfcOps();
-    console.log(deleteFCart);
+    ;
     deleteFCart.length
       ? atc(product.uID, deleteFCart)
       : atc(product.uID, [

@@ -48,7 +48,7 @@ const Checkout = ({ cartItems, currency, user }) => {
     orderData.tran_type = response.data.tran_type;
     orderData.date = response.headers.date;
     clientMgr
-      .then(environment => environment.getEntry(userData && userData.entryID))
+      .then(environment => environment.getEntry(userData?.entryID))
       .then(entry => {
         if (entry.fields["orderData"] === undefined)
           entry.fields["orderData"] = { "en-US": [orderData] };
@@ -58,7 +58,7 @@ const Checkout = ({ cartItems, currency, user }) => {
       })
       .then(entry => entry.publish())
       .then(entry => {
-        console.log(entry);
+        ;
         return entry;
       })
       .finally(entry => {
@@ -96,29 +96,29 @@ const Checkout = ({ cartItems, currency, user }) => {
                           <label>First Name</label>
                           <input
                             type="text"
-                            defaultValue={ userData && userData.firstName}
+                            defaultValue={ userData?.firstName}
                           />
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
                           <label>Last Name</label>
-                          <input type="text" defaultValue={userData && userData.lastName} />
+                          <input type="text" defaultValue={userData?.lastName} />
                         </div>
                       </div>
 
                       <div className="col-lg-12">
                         <div className="billing-select mb-20">
                           <label>Country</label>
-                          {userData && userData.addressDetails ? (
+                          {userData?.addressDetails ? (
                             <>
                               <input
                                 type="text"
-                                defaultValue={userData && userData.addressDetails.country}
+                                defaultValue={userData?.addressDetails.country}
                               />
                               <input
                                 type="text"
-                                defaultValue={userData && userData.addressDetails.region}
+                                defaultValue={userData?.addressDetails.region}
                               />
                             </>
                           ) : (
@@ -144,7 +144,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                           className="billing-address"
                           placeholder="House number and street name"
                           type="text"
-                          defaultValue={userData && userData.addressDetails.addressLine}
+                          defaultValue={userData && userData?.addressDetails?.addressLine}
                         />
                       </div>
                     </div>
@@ -161,7 +161,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                         <input
                           name="phone"
                           type="text"
-                          defaultValue={userData && userData.mobile ? userData && userData.mobile : ""}
+                          defaultValue={userData?.mobile ? userData?.mobile : ""}
                         />
                       </div>
                     </div>
@@ -170,7 +170,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                         <label>Email Address</label>
                         <input
                           type="text"
-                          defaultValue={userData && userData.email ? userData && userData.email : ""}
+                          defaultValue={userData?.email ? userData?.email : ""}
                         />
                       </div>
                     </div>
@@ -280,12 +280,12 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 return: "https://sanaa-kayum-nxjs.netlify.app/cart",
                                 customer_details: {
                                   name:
-                                    userData && userData.firstName +
+                                    userData?.firstName +
                                     " " +
-                                    userData && userData.lastName,
-                                  email: userData && userData.email,
-                                  phone: userData && userData.mobile
-                                    ? () => userData && userData.mobile
+                                    userData?.lastName,
+                                  email: userData?.email,
+                                  phone: userData?.mobile
+                                    ? () => userData?.mobile
                                     : document.querySelector(
                                         "input [name='phone']"
                                       )
@@ -293,7 +293,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                                         "input [name='phone']"
                                       ).value
                                     : "",
-                                  street1: userData && userData.addressDetails.addressLine.concat(
+                                  street1: userData && userData?.addressDetails?.addressLine.concat(
                                     ", P.O.Box : " +
                                       document.querySelector(
                                         'input[name="postcode"]'
@@ -303,9 +303,9 @@ const Checkout = ({ cartItems, currency, user }) => {
                                         ).value
                                       : ""
                                   ),
-                                  city: userData && userData.addressDetails.region,
-                                  state: userData && userData.addressDetails.region,
-                                  country: userData && userData.addressDetails.country,
+                                  city: userData?.addressDetails.region,
+                                  state: userData?.addressDetails.region,
+                                  country: userData?.addressDetails.country,
                                   ip: ""
                                 },
                                 framed: true,
@@ -322,10 +322,10 @@ const Checkout = ({ cartItems, currency, user }) => {
                             .then(
                               response => {
                                 order(response);
-                                console.log(response);
+                                ;
                               },
                               error => {
-                                console.log(error);
+                                ;
                               }
                             );
                         }}

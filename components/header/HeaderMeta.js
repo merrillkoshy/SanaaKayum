@@ -12,7 +12,7 @@ const HeaderMeta = ({
 }) => {
   return (
     <Fragment>
-    <Head>
+    <Helmet>
     
       <title>{title}</title>
       <link rel="canonical" href={`https://sanaakayum.com${url}`} />
@@ -73,7 +73,7 @@ const HeaderMeta = ({
       />
       <meta name="twitter:app:country" content="ae" />
       <meta name="twitter:image" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
-      </Head>
+      </Helmet>
       </Fragment> 
   );
 };

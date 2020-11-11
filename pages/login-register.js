@@ -46,7 +46,7 @@ const LoginRegister = ({
       .then(entries => {
         setNextIndex(entries.items.length);
       });
-    console.log(getNextIndex);
+    ;
   }, [validated]);
 
   const createEntry = () => {

@@ -34,7 +34,7 @@ const updateStock=()=>{
         entries.items.forEach(ent => {
           if (ent.fields.serialNumber == query) {
             setEntryID(ent.sys.id);
-            console.log(ent.fields.discount, ent.fields.offerEnd);
+            ;
             createTable(ent.fields.size.length, ent.fields.size);
             setStock(ent.fields.stock);
           }

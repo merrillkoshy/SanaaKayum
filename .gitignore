@@ -11,6 +11,7 @@
 # next.js
 /.next/
 /out_publish/
+/out_functions/
 
 # production
 /build

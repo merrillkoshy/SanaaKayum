@@ -46,7 +46,7 @@ const LookBookGrid=props=>{
           <div
           className={"product-wrap"}
           onClick={() => {
-              console.log('click recorded')
+              
             verbBank();
             flatter();
             handleShow();
