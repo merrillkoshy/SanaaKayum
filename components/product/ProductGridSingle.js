@@ -61,11 +61,10 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                 className="default-img"
                 src={
                   !isSafari
-                    ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                      product.images[0].fields.file.url
-                    : process.env.NEXT_PUBLIC_PUBLIC_URL +
-                      product.images[0].fields.file.url +
-                      `?fm=jpg`
+                    ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      product.images[0].fields.file.url}?w=220&h=300&f=center&fit=pad`
+                    : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        product.images[0].fields.file.url}?fm=jpg&w=220&h=300&f=center&fit=pad`
                 }
                 alt={product.collectionName}
                 loading="lazy"
@@ -82,11 +81,10 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   className="hover-img"
                   src={
                     !isSafari
-                      ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                        product.images[1].fields.file.url
-                      : process.env.NEXT_PUBLIC_PUBLIC_URL +
-                        product.images[1].fields.file.url +
-                        `?fm=jpg`
+                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        product.images[1].fields.file.url}?w=220&h=300&f=center&fit=pad`
+                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[1].fields.file.url}?fm=jpg&w=220&h=300&f=center&fit=pad`
                   }
                   alt={product.collectionName}
                   loading="lazy"

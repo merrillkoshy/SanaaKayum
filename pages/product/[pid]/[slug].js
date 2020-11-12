@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import LayoutOne from "../../../layouts/LayoutOne";
 import Breadcrumb from "../../../wrappers/breadcrumb/Breadcrumb";
 import RelatedProductSlider from "../../../wrappers/product/RelatedProductSlider";
-import ProductDescriptionTab from "../../../wrappers/product/ProductDescriptionTab";
+
 import ProductImageDescription from "../../../wrappers/product/ProductImageDescription";
 import { isMobile } from "react-device-detect";
 import HeaderMeta from "../../../components/header/HeaderMeta";
@@ -68,15 +68,12 @@ const Product = ({staticProducts}) => {
         />
   
         
-        <ProductDescriptionTab
-          spaceBottomClass="pb-90"
-          productFullDesc={product?product.description:""}
-        />
+        
   
        
         <RelatedProductSlider
-          spaceBottomClass="pb-95"
-          category={product?product.article:""}
+          spaceBottomClass={isMobile ? "pt-10" : "pt-90"}
+          category={product.article}
         />
         </>
         :null)}

@@ -1,7 +1,8 @@
 // get products
 export const getProducts = (products, article, type, limit) => {
+  
   const finalProducts = article
-    ? products.filter(product => product.article)
+    ? products.filter(product => product.article==article)
     : products;
 
   if (type && type === "new") {
@@ -21,6 +22,7 @@ export const getProducts = (products, article, type, limit) => {
     );
     return saleItems.slice(0, limit ? limit : saleItems.length);
   }
+  
   return finalProducts.slice(0, limit ? limit : finalProducts.length);
 };
 

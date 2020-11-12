@@ -12,9 +12,13 @@ const HeaderMeta = ({
 }) => {
   return (
     <Fragment>
-    <Helmet>
-    
-      <title>{title}</title>
+    <Helmet
+     title={title}
+     meta={[{ property: 'og:title', content: title },
+     { property: 'og:description', content: description},
+     { property: 'og:image', content: `${image}?fm=png&w=1200&h=627&f=center&fit=pad` }
+    ]}>
+      
       <link rel="canonical" href={`https://sanaakayum.com${url}`} />
       <base target="_blank" href={process.env.NEXT_PUBLIC_PUBLIC_URL} />
       <link href="https://images.ctfassets.net/" rel="dns-prefetch" />

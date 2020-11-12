@@ -433,7 +433,7 @@
     .product-details-price {
         display: flex;
         align-items: center;
-        margin: 15px 0 26px;
+        
         span {
             font-size: 24px;
             color: #fe5252;
@@ -451,7 +451,7 @@
         margin: 0 0 17px;
         .pro-details-rating {
             position: relative;
-            margin-right: 39px;
+            
             &:before {
                 position: absolute;
                 right: -19px;

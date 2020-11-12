@@ -55,10 +55,10 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                 }
                 src={
                   !isSafari
-                    ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                      product.images[0].fields.file.url
+                    ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      product.images[0].fields.file.url}?w=220&h=300&f=center&fit=pad`
                     : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                        product.images[0].fields.file.url}?fm=jpg`
+                        product.images[0].fields.file.url}?fm=jpg&w=220&h=300&f=center&fit=pad`
                 }
               />
 
@@ -76,10 +76,10 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   }
                   src={
                     !isSafari
-                      ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                        product.images[1].fields.file.url
+                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        product.images[1].fields.file.url}?w=220&h=300&f=center&fit=pad`
                       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                          product.images[1].fields.file.url}?fm=jpg`
+                          product.images[1].fields.file.url}?fm=jpg&w=220&h=300&f=center&fit=pad`
                   }
                 />
               ) : (
@@ -222,10 +222,10 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                       itemProp="image"
                       src={
                         !isSafari
-                          ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            product.images[0].fields.file.url
+                          ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                            product.images[0].fields.file.url}?w=220&h=300&f=center&fit=pad`
                           : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              product.images[0].fields.file.url}?fm=jpg`
+                              product.images[0].fields.file.url}?fm=jpg&w=220&h=300&f=center&fit=pad`
                       }
                       alt={product.collectionName}
                       title={
@@ -244,10 +244,10 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                         itemProp="image"
                         src={
                           !isSafari
-                            ? process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              product.images[1].fields.file.url
+                            ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                              product.images[1].fields.file.url}?w=220px&h=300&f=center&fit=pad`
                             : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                                product.images[1].fields.file.url}?fm=jpg`
+                                product.images[1].fields.file.url}?fm=jpg&w=220px&h=300&f=center&fit=pad`
                         }
                         alt={product.collectionName}
                         title={

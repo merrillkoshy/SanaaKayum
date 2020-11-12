@@ -11,6 +11,7 @@ const slugify = require("@sindresorhus/slugify");
 
 const ProductGrid = ({
   products,
+  article,
   currency,
   addToCart,
   userData,
@@ -22,6 +23,7 @@ const ProductGrid = ({
   sliderClassName,
   spaceBottomClass
 }) => {
+  console.log(products)
   return (
     <Fragment>
       {products &&

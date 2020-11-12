@@ -11,7 +11,7 @@ import Rating from "./sub-components/ProductRating";
 import whatsAppthis from "../../constants/whatsappHelper";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import SizeChartModal from "./SizeChartModal";
-
+import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
 const ProductDescriptionInfo = ({
   product,
   userData,
@@ -49,7 +49,7 @@ const ProductDescriptionInfo = ({
     <div className="product-details-content ml-70">
       <Container>
 <Row>
-<Col>
+<Col className={"col-7"}>
 <h1 className="product-page-header">{product.collectionName}</h1>
       <h2>{product.article}</h2>
       
@@ -74,15 +74,19 @@ const ProductDescriptionInfo = ({
       </Container>
      
       
-      <div className="product-details-price">
+      <div className="product-details-price ml-10 my-3">
         {discountedPrice !== null ? (
-          <Fragment>
+          <Container fluid >
+            <Row>
+              <Col>
             {/* currency.currencySymbol */}
             <span>{`AED ` + finalDiscountedPrice}</span>{" "}
             <span itemProp="price" className="old">
               {`AED ` + finalProductPrice}
             </span>
-          </Fragment>
+            </Col>
+            </Row>
+          </Container>
         ) : (
           <span itemProp="price">{`AED ` + finalProductPrice} </span>
         )}
@@ -119,10 +123,10 @@ const ProductDescriptionInfo = ({
               </label>
             </div>
           </div> */}
+            <Container fluid>
           <div className="pro-details-size">
             <span>Size</span>
             <div className="pro-details-size-content">
-            <Container>
 <Row>
 <Col>
 {product.size.map((sz, key) => {
@@ -163,10 +167,10 @@ const ProductDescriptionInfo = ({
 <SizeChartModal show={modalShow} onHide={()=>setModalShow(false)} article={product.article}/>
 </Row>
 
-      </Container>
               
             </div>
           </div>
+      </Container>
         </div>
       ) : (
         ""
@@ -244,22 +248,6 @@ const ProductDescriptionInfo = ({
               <i className="pe-7s-like" />
             </button>
           </div>
-          <div className="pro-details-compare">
-            <button
-              className={compareItem !== undefined ? "active" : ""}
-              disabled={compareItem !== undefined}
-              title={
-                compareItem !== undefined
-                  ? "Added to compare"
-                  : "Add to compare"
-              }
-              onClick={() => addToCompare(product, addToast)}
-            >
-              <i className="pe-7s-shuffle" />
-            </button>
-          </div>
-        </div>
-        <div className="pro-details-quality">
           <div className="pro-details-cart wapp">
             {productStock && productStock > 0 ? (
               <button
@@ -274,7 +262,12 @@ const ProductDescriptionInfo = ({
             )}
           </div>
         </div>
+        
       </Fragment>
+      <ProductDescriptionTab
+          spaceBottomClass="pb-90"
+          product={product}
+        />
 
       {/* {product.article ? (
         <div className="pro-details-meta">
