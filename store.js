@@ -8,7 +8,6 @@ import rootReducer from "./redux/reducers/rootReducer";
 import promise from "redux-promise";
 import { save, load } from "redux-localstorage-simple"
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 let store;
 

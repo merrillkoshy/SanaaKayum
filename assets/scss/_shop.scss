@@ -8,6 +8,10 @@
 .scrollToTop{
   background: none;
   border: none;
+  &:hover{
+    background: none;
+  border: none;
+  }
 }
 
 .shop-top-bar {

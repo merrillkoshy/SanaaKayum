@@ -395,6 +395,10 @@
     a, button{
         color:$black !important;
     }
+    &:hover ,&:active ,&:visited &:focus{
+        background:$theme-color;
+        color: $black;
+    }
 }
     .same-style {
         &.header-search {
@@ -858,9 +862,15 @@
 
 /* header 3 */
 .interaction-button{
-    color:$theme-color !important;
+    color:$theme-color;
+    background:none;
+    border:none;
     a, button{
-        color:$theme-color !important;
+        color:$theme-color;
+    }
+    &:hover ,&:active ,&:visited &:focus{
+        background:$theme-color;
+        color: $black;
     }
 }
 .header-padding-2 .container-fluid { 

@@ -6,6 +6,8 @@ import { Modal } from "react-bootstrap";
 import Rating from "./sub-components/ProductRating";
 import { connect } from "react-redux";
 import whatsAppthis from "../../constants/whatsappHelper";
+import LoginModal from "./LoginModal";
+
 
 function ProductModal(props) {
   const { uID } = props;
@@ -14,9 +16,15 @@ function ProductModal(props) {
   const { discountedprice } = props;
   const { finalproductprice } = props;
   const { finaldiscountedprice } = props;
+  
+  const { loadCart } = props;
+  const { loadCompare } = props;
+  const { loadWishlist } = props;
+  const { loginUser } = props;
 
   const [gallerySwiper, getGallerySwiper] = useState(null);
   const [thumbnailSwiper, getThumbnailSwiper] = useState(null);
+  const [loginModal, setloginModal] = useState(false);
   const [selectedProductColor, setSelectedProductColor] = useState(
     product?.color ? product?.color : ""
   );
@@ -367,14 +375,17 @@ function ProductModal(props) {
                         {productStock && productStock > 0 ? (
                           <button
                             onClick={() =>
-                              addToCart(
-                                product,
-                                addToast,
-                                uID,
-                                quantityCount,
-                                selectedProductColor,
-                                selectedProductSize
-                              )
+                              uID !== undefined
+                        ? addToCart(
+                          product,
+                          addToast,
+                          uID,
+                          quantityCount,
+                          selectedProductColor,
+                          selectedProductSize
+                        )
+                        : setloginModal("true")
+                              
                             }
                             disabled={productCartQty >= productStock}
                           >
@@ -395,7 +406,11 @@ function ProductModal(props) {
                               ? "Added to wishlist"
                               : "Add to wishlist"
                           }
-                          onClick={() => addToWishlist(product, addToast, uID)}
+                          onClick={() => {
+                            uID !== undefined?
+                            addToWishlist(product, addToast, uID):
+                            setloginModal("true")
+                          }}
                         >
                           <i className="pe-7s-like" />
                         </button>
@@ -422,7 +437,17 @@ function ProductModal(props) {
             </div>
           </div>
         </div>
+        
       </Modal>
+      <LoginModal
+                show={loginModal}
+                onHide={() => setloginModal(false)}
+                loadCart={loadCart}
+                loadCompare={loadCompare}
+                loadWishlist={loadWishlist}
+                loginUser={loginUser}
+                addtoast={addToast}
+              />
     </Fragment>
   );
 }

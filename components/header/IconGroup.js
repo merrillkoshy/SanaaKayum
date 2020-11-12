@@ -5,15 +5,20 @@ import { useToasts } from "react-toast-notifications";
 import { connect } from "react-redux";
 import MenuCart from "./sub-components/MenuCart";
 
-import { deleteFromCart, resetCart } from "../../redux/actions/cartActions";
 import { useHistory } from "react-router-dom";
-import { logoutUser } from "../../redux/actions/userActions";
+import { logoutUser,loginUser } from "../../redux/actions/userActions";
+import { deleteFromCart, resetCart,loadCart } from "../../redux/actions/cartActions";
+import { resetWishlist,loadWishlist } from "../../redux/actions/wishlistActions";
+import { resetCompare,loadCompare } from "../../redux/actions/compareActions";
 
-import { resetWishlist } from "../../redux/actions/wishlistActions";
-import { resetCompare } from "../../redux/actions/compareActions";
 import Link from "next/link";
-
+import { Button } from "react-bootstrap";
+import LoginModal from "../product/LoginModal";
 const IconGroup = ({
+  loadCart,
+  loadCompare,
+  loadWishlist,
+  loginUser,
   userData,
   cartData,
   wishlistData,
@@ -25,35 +30,45 @@ const IconGroup = ({
   iconWhiteClass,
   logoutUser
 }) => {
+  const [loginModal, setloginModal] = useState(false);
   const initUname = (
-    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
+    <Button className="interaction-button" onClick={() => setloginModal("true")}>
       <a>Login</a>
-    </Link>
+    </Button>
   );
   const initInteraction = (
     <ul>
       <li>
-        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
+        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/register"}>
           <a>Register</a>
         </Link>
       </li>
-      <li>
-        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
-          <a>Login</a>
-        </Link>
-      </li>
+      <li></li>
     </ul>
   );
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [uName, setUname] = useState(initUname);
   const [interaction, setInteraction] = useState(initInteraction);
   const { addToast } = useToasts();
+  
 
   useEffect(() => {
     if (userData.user.firstName !== undefined) {
       setLoggedIn(true);
 
-      setUname("Hello, " + userData.user.firstName);
+      setUname(
+        <Link
+              href={{
+                pathname: `/[userAccount]]`,
+                query: {
+                  userAccount: userData.user.firstName
+                }
+              }}
+            >
+              <a className="interaction-button">{`Hello, ${userData.user.firstName}`}</a>
+            </Link>
+        
+        );
       setInteraction(
         <ul>
           <li
@@ -68,26 +83,26 @@ const IconGroup = ({
             }}
           >
             <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
-            <a>Logout</a>
+              <a>Logout</a>
             </Link>
           </li>
 
           <li>
-            <Link href={{
+            <Link
+              href={{
                 pathname: `/[userAccount]]`,
                 query: {
                   userAccount: userData.user.firstName
                 }
-              }}>
-            <a>
-              {`${userData.user.firstName}'s Account`}
-            </a>
+              }}
+            >
+              <a>{`${userData.user.firstName}'s Account`}</a>
             </Link>
           </li>
         </ul>
       );
     }
-  }, [userData.user, isLoggedIn]);
+  }, [userData.user]);
 
   const history = useHistory();
   const handleClick = e => {
@@ -150,16 +165,16 @@ const IconGroup = ({
           <Fragment>
             <div className="same-style header-wishlist">
               <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/wishlist"}>
-              <a>
-                <i className="pe-7s-like" />
-                <span className="count-style">
-                  {wishlistData &&
-                  wishlistData.length >= 1 &&
-                  !wishlistData.some(item => item.unNull === "unNull")
-                    ? wishlistData.length
-                    : 0}
-                </span>
-              </a>
+                <a>
+                  <i className="pe-7s-like" />
+                  <span className="count-style">
+                    {wishlistData &&
+                    wishlistData.length >= 1 &&
+                    !wishlistData.some(item => item.unNull === "unNull")
+                      ? wishlistData.length
+                      : 0}
+                  </span>
+                </a>
               </Link>
             </div>
             <div className="same-style cart-wrap d-none d-lg-block">
@@ -182,19 +197,16 @@ const IconGroup = ({
             </div>
             <div className="same-style cart-wrap d-block d-lg-none">
               <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/cart"}>
-              <a
-                className="icon-cart"
-                
-              >
-                <i className="pe-7s-shopbag" />
-                <span className="count-style">
-                  {cartData &&
-                  cartData.length &&
-                  !cartData.some(item => item.unNull === "unNull")
-                    ? cartData.length
-                    : 0}
-                </span>
-              </a>
+                <a className="icon-cart">
+                  <i className="pe-7s-shopbag" />
+                  <span className="count-style">
+                    {cartData &&
+                    cartData.length &&
+                    !cartData.some(item => item.unNull === "unNull")
+                      ? cartData.length
+                      : 0}
+                  </span>
+                </a>
               </Link>
             </div>
             <div
@@ -213,8 +225,16 @@ const IconGroup = ({
         </div>
       </div>
       <div className="row">
-        <div className="col text-right interaction-button">{uName}</div>
+        <div className="col text-right ">{uName}</div>
       </div>
+      <LoginModal 
+      show={loginModal} 
+      onHide={() => setloginModal(false)} 
+      loadCart={loadCart}
+      loadCompare={loadCompare}
+      loadWishlist={loadWishlist}
+      loginUser={loginUser}
+      addtoast={addToast}/>
     </>
   );
 };
@@ -240,6 +260,18 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    loginUser: (userDetails, addToast, entryID) => {
+      dispatch(loginUser(userDetails, addToast, entryID));
+    },
+    loadCart: item => {
+      dispatch(loadCart(item));
+    },
+    loadCompare: item => {
+      dispatch(loadCompare(item));
+    },
+    loadWishlist: item => {
+      dispatch(loadWishlist(item));
+    },
     logoutUser: addToast => {
       dispatch(logoutUser(addToast));
     },

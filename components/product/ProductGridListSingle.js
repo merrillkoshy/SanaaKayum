@@ -23,7 +23,12 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
   const { sliderClassName } = props;
   const { spaceBottomClass } = props;
   const [modalShow, setModalShow] = useState(false);
-  const { addToast } = useToasts();
+  const { addToast } = props;
+  const { loadCart } = props;
+  const { loadCompare } = props;
+  const { loadWishlist } = props;
+  const { loginUser } = props;
+  
   const discountedPrice = getDiscountPrice(product.price, product.discount);
   const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
   const finalDiscountedPrice = +(
@@ -35,13 +40,26 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
       <div
         className={`col-xl-3 col-6 ${sliderClassName ? sliderClassName : ""}`}
       >
-        <a className="next_wrapper" href={href} onClick={onClick} ref={ref}>
+        
+        
           <div
             className={`product-wrap ${
               spaceBottomClass ? spaceBottomClass : ""
             }`}
           >
+            
             <div className="product-img">
+            <Link
+              key={product.serialNumber}
+              href={{
+                pathname: `/product/[pid]/[slug]`,
+                query: {
+                  pid: product.serialNumber,
+                  slug: slugify(product.description)
+                }
+              }}
+            >
+              <a className="next-link" >
               <img
                 className="default-img"
                 itemProp="image"
@@ -85,7 +103,8 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
               ) : (
                 ""
               )}
-
+              </a>
+</Link>
               {product.discount || product.new ? (
                 <div className="product-img-badges">
                   {product.discount ? (
@@ -95,6 +114,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   )}
                   {product.new ? <span className="purple">New</span> : ""}
                 </div>
+                  
               ) : (
                 ""
               )}
@@ -379,7 +399,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
               </div>
             </div>
           </div>
-        </a>
+        
       </div>
       {/* product modal */}
       <ProductModal
@@ -397,6 +417,10 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
         addtowishlist={addToWishlist}
         addtocompare={addToCompare}
         addtoast={addToast}
+        loadCart={loadCart}
+        loadCompare={loadCompare}
+        loadWishlist={loadWishlist}
+        loginUser={loginUser}
       />
     </Fragment>
   );

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
 import { connect } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
@@ -10,9 +10,16 @@ import { addToCompare } from "../../redux/actions/compareActions";
 import Rating from "./sub-components/ProductRating";
 import whatsAppthis from "../../constants/whatsappHelper";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import { useToasts } from "react-toast-notifications";
+
 import SizeChartModal from "./SizeChartModal";
+import LoginModal from "./LoginModal";
 import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
 const ProductDescriptionInfo = ({
+  loadCart,
+  loadCompare,
+  loadWishlist,
+  loginUser,
   product,
   userData,
   discountedPrice,
@@ -37,7 +44,7 @@ const ProductDescriptionInfo = ({
     product.stock ? product.stock : product.stock
   );
   const [quantityCount, setQuantityCount] = useState(1);
-  const [uID, setUid] = useState(userData.user.entryID);
+  const [uID, setUid] = useState("");
   const productCartQty = getProductCartQuantity(
     cartItems,
     product,
@@ -45,6 +52,11 @@ const ProductDescriptionInfo = ({
     selectedProductSize
   );
   const [modalShow, setModalShow] = useState(false);
+  const [loginModal, setloginModal] = useState(false);
+  
+  useEffect(()=>{
+    setUid(userData.user.entryID)
+  },[userData.user?.entryID])
   return (
     <div className="product-details-content ml-70">
       <Container>
@@ -167,7 +179,6 @@ const ProductDescriptionInfo = ({
 <SizeChartModal show={modalShow} onHide={()=>setModalShow(false)} article={product.article}/>
 </Row>
 
-              
             </div>
           </div>
       </Container>
@@ -211,6 +222,8 @@ const ProductDescriptionInfo = ({
             {productStock && productStock > 0 ? (
               <button
                 onClick={() =>
+                  {
+                  uID!==undefined?
                   addToCart(
                     product,
                     addToast,
@@ -218,7 +231,7 @@ const ProductDescriptionInfo = ({
                     quantityCount,
                     selectedProductColor,
                     selectedProductSize
-                  )
+                  ):setloginModal("true")}
                 }
                 disabled={productCartQty >= productStock}
               >
@@ -229,7 +242,14 @@ const ProductDescriptionInfo = ({
               <button disabled>Out of Stock</button>
             )}
           </div>
-
+          <LoginModal 
+      show={loginModal} 
+      onHide={() => setloginModal(false)} 
+      loadCart={loadCart}
+      loadCompare={loadCompare}
+      loadWishlist={loadWishlist}
+      loginUser={loginUser}
+      addtoast={addToast}/>
           <div className="pro-details-wishlist">
             <button
               className={wishlistItem !== undefined ? "active" : ""}
@@ -240,9 +260,10 @@ const ProductDescriptionInfo = ({
                   : "Add to wishlist"
               }
               onClick={() => {
-                if (userData.user.firstName !== undefined)
-                  addToWishlist(product, addToast);
-                else loginPrompt(addToast);
+                uID !== undefined
+                ? addToWishlist(product, addToast)
+                : setloginModal("true");
+                
               }}
             >
               <i className="pe-7s-like" />
@@ -370,6 +391,18 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
+    loginUser: (userDetails, addToast, entryID) => {
+      dispatch(loginUser(userDetails, addToast, entryID));
+    },
+    loadCart: item => {
+      dispatch(loadCart(item));
+    },
+    loadCompare: item => {
+      dispatch(loadCompare(item));
+    },
+    loadWishlist: item => {
+      dispatch(loadWishlist(item));
+    },
     addToCart: (
       item,
       addToast,

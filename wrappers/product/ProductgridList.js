@@ -1,11 +1,14 @@
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { addToCart } from "../../redux/actions/cartActions";
-import { addToWishlist } from "../../redux/actions/wishlistActions";
-import { addToCompare } from "../../redux/actions/compareActions";
+import { loginUser } from "../../redux/actions/userActions";
+import { addToCart,loadCart } from "../../redux/actions/cartActions";
+import { addToWishlist,loadWishlist } from "../../redux/actions/wishlistActions";
+import { addToCompare,loadCompare } from "../../redux/actions/compareActions";
 import ProductGridListSingle from "../../components/product/ProductGridListSingle";
 import Link from "next/link";
+
+
 const slugify = require("@sindresorhus/slugify");
 
 const ProductGrid = ({
@@ -61,6 +64,10 @@ const ProductGrid = ({
                   compareItem => compareItem.id === product.serialNumber
                 )[0]
               }
+              loadCart={loadCart}
+                loadCompare={loadCompare}
+                loadWishlist={loadWishlist}
+                loginUser={loginUser}
             />
           </Link>
         );
@@ -94,6 +101,19 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    
+    loginUser: (userDetails, addToast, entryID) => {
+      dispatch(loginUser(userDetails, addToast, entryID));
+    },
+    loadCart: item => {
+      dispatch(loadCart(item));
+    },
+    loadCompare: item => {
+      dispatch(loadCompare(item));
+    },
+    loadWishlist: item => {
+      dispatch(loadWishlist(item));
+    },
     addToCart: (
       item,
       addToast,

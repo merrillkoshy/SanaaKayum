@@ -3,18 +3,25 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { getProducts } from "../../helpers/product";
 import ProductGridSingle from "../../components/product/ProductGridSingle";
-import { addToCart } from "../../redux/actions/cartActions";
-import { addToWishlist } from "../../redux/actions/wishlistActions";
-import { addToCompare } from "../../redux/actions/compareActions";
+
+import { loginUser } from "../../redux/actions/userActions";
+import { addToCart,loadCart } from "../../redux/actions/cartActions";
+import { addToWishlist,loadWishlist } from "../../redux/actions/wishlistActions";
+import { addToCompare,loadCompare } from "../../redux/actions/compareActions";
 import Link from "next/link";
 const slugify = require("@sindresorhus/slugify");
 
 const ProductGrid = ({
+  loadCart,
+  loadCompare,
+  loadWishlist,
+  loginUser,
+  userData,
   products,
   article,
   currency,
   addToCart,
-  userData,
+  
   addToWishlist,
   addToCompare,
   cartItems,
@@ -23,7 +30,7 @@ const ProductGrid = ({
   sliderClassName,
   spaceBottomClass
 }) => {
-  console.log(products)
+  
   return (
     <Fragment>
       {products &&
@@ -70,6 +77,11 @@ const ProductGrid = ({
                   )[0]
                 }
                 key={product.serialNumber}
+                loadCart={loadCart}
+                loadCompare={loadCompare}
+                loadWishlist={loadWishlist}
+                loginUser={loginUser}
+                
               />
             </Link>
           );
@@ -110,6 +122,18 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    loginUser: (userDetails, addToast, entryID) => {
+      dispatch(loginUser(userDetails, addToast, entryID));
+    },
+    loadCart: item => {
+      dispatch(loadCart(item));
+    },
+    loadCompare: item => {
+      dispatch(loadCompare(item));
+    },
+    loadWishlist: item => {
+      dispatch(loadWishlist(item));
+    },
     addToCart: (
       item,
       addToast,
