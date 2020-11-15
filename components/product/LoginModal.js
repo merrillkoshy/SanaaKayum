@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Container, Row, Col, Button, Form } from "react-bootstrap";
 import client from "../../constants/config";
+import Link from "next/link";
 
 const LoginModal = ({
   loadCart,
@@ -70,6 +71,8 @@ const LoginModal = ({
               />
             </Form.Group>
             {loginError}
+            <Form.Group controlId="signupLogin" className="ml-3">
+            <Row>
             <Button
               onClick={e => {
                 e.preventDefault();
@@ -89,10 +92,17 @@ const LoginModal = ({
                     props.onHide()
                   }
               }}
-              className="interaction-button"
+              className="loginButton"
             >
               Login
             </Button>
+            </Row>
+            <Row className="mt-3">
+              {`Lets revamp your wardrobe. `}
+              <Link href={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/register`}>
+             <a style={{textDecoration:"underline", fontWeight : "bold"}}> Sign up here!</a>
+            </Link></Row>
+            </Form.Group>
           </Form>
         </Container>
       </Modal.Body>

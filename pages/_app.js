@@ -116,15 +116,7 @@ let preloadedState
           <BreadcrumbsProvider>
             <ScrollToTop>
               <Fragment>
-            <Head>
-        {/* Import CSS for nprogress */}
-        <link rel="stylesheet" type="text/css" href="/assets/css/nprogress.css" />
-      </Head>
-      <Helmet
-              htmlAttributes={{ lang: "en", amp: undefined }} // amp takes no value
-              titleTemplate="%s | Sana'a Kayum"
-              titleAttributes={{ itemprop: "name", lang: "en" }}
-            />
+            
               
               <Component {...pageProps} />
               </Fragment>

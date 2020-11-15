@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { isSafari, isMobile } from "react-device-detect";
+import { isSafari, isIE, isFirefox, isMobile } from "react-device-detect";
 import Link from "next/link";
 import { Row, Col, Button } from "react-bootstrap";
 import HomePageProductSlider from "../../components/hero-slider/HomePageProductSlider";

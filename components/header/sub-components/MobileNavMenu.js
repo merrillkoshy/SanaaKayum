@@ -28,7 +28,7 @@ const MobileNavMenu = ({
 }) => {
   const [loginModal, setloginModal] = useState(false);
   const initUname = (
-    <Button className="skButton" onClick={() => setloginModal("true")}>
+    <Button className="loginButton" onClick={() => setloginModal("true")}>
       <a>Login</a>
     </Button>
   );

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Link from "next/link";
 
 const PBanners = ({ pBanners, sliderClassName }) => {
@@ -15,7 +15,7 @@ const PBanners = ({ pBanners, sliderClassName }) => {
             sliderClassName ? sliderClassName : ""
           }`}
           style={{
-            backgroundImage: !isSafari
+            backgroundImage: !(isSafari || isIE || isFirefox)
               ? `url(${process.env.NEXT_PUBLIC_PUBLIC_URL +
                   pb.image.fields.file.url})`
               : `url(${process.env.NEXT_PUBLIC_PUBLIC_URL +

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import HeaderMeta from "../components/header/HeaderMeta";
 import MetaTags from "react-meta-tags";
-import { GA_TRACKING_ID } from "../constants/gtag";
+
 import ReactGA from "react-ga";
 import LayoutOne from "../layouts/LayoutOne";
 import ProductSlider from "../wrappers/hero-slider/ProductSlider";
@@ -11,10 +11,7 @@ import PromotionsSlider from "../wrappers/hero-slider/PromotionsSlider";
 import { connect } from "react-redux";
 
 const Index = props => {
-  const initializeReactGA = () => {
-    ReactGA.initialize(GA_TRACKING_ID);
-    ReactGA.pageview("/");
-  };
+  
 
   return (
     <>
@@ -26,10 +23,11 @@ const Index = props => {
         }
         image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
         keywords={`Sana\'a Kayum, Dubai, Fashion `}
-        url={"https://sanaakayum.com"}
+        url={""}
         color={"#000000"}
+        
       />
-      <MetaTags>{initializeReactGA}</MetaTags>
+      
 
       {/* <Examples /> */}
       <LayoutOne

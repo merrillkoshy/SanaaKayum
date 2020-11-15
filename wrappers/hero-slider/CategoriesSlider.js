@@ -1,7 +1,7 @@
 import React from "react";
 import CategoriesSliderComponent from "../../components/hero-slider/CategoriesSliderComponent";
 import { connect } from "react-redux";
-import { isSafari, isMobile } from "react-device-detect";
+
 
 const ProductSlider = ({ products, sliders }) => {
   const getProductCategories = () => {

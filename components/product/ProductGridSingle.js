@@ -4,7 +4,7 @@ import React, { Fragment, useState, forwardRef } from "react";
 import { getDiscountPrice } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
 import ProductModal from "./ProductModal";
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Link from "next/link";
 import Image from "next/image";
 import LoginModal from "./LoginModal";
@@ -63,7 +63,7 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                 <img
                   className="default-img"
                   src={
-                    !isSafari
+                    !(isSafari || isIE || isFirefox)
                       ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                           product.images[0].fields.file
                             .url}?w=220&h=300&f=center&fit=pad`
@@ -85,7 +85,7 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   <img
                     className="hover-img"
                     src={
-                      !isSafari
+                      !(isSafari || isIE || isFirefox)
                         ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                             product.images[1].fields.file
                               .url}?w=220&h=300&f=center&fit=pad`

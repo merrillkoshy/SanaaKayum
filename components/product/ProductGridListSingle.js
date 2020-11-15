@@ -6,7 +6,7 @@ import { getDiscountPrice } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
 import ProductModal from "./ProductModal";
 import whatsAppthis from "../../constants/whatsappHelper";
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Image from "next/image";
 const slugify = require("@sindresorhus/slugify");
 
@@ -72,7 +72,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   " by Sana'a Kayum"
                 }
                 src={
-                  !isSafari
+                  !(isSafari || isIE || isFirefox)
                     ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                       product.images[0].fields.file.url}?w=220&h=300&f=center&fit=pad`
                     : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -93,7 +93,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                     " by Sana'a Kayum"
                   }
                   src={
-                    !isSafari
+                    !(isSafari || isIE || isFirefox)
                       ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                         product.images[1].fields.file.url}?w=220&h=300&f=center&fit=pad`
                       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -241,7 +241,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                       className="default-img img-fluid"
                       itemProp="image"
                       src={
-                        !isSafari
+                        !(isSafari || isIE || isFirefox)
                           ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                             product.images[0].fields.file.url}?w=220&h=300&f=center&fit=pad`
                           : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -263,7 +263,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                         className="hover-img img-fluid"
                         itemProp="image"
                         src={
-                          !isSafari
+                          !(isSafari || isIE || isFirefox)
                             ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                               product.images[1].fields.file.url}?w=220px&h=300&f=center&fit=pad`
                             : `${process.env.NEXT_PUBLIC_PUBLIC_URL +

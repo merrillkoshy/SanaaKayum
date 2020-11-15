@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment, useEffect, useState } from "react";
 import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
 import Swiper from "react-id-swiper";
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 
 const ProductImageGallery = ({ product }) => {
   const [gallerySwiper, getGallerySwiper] = useState(null);
@@ -79,7 +79,7 @@ const ProductImageGallery = ({ product }) => {
                     <LightgalleryItem
                       group="any"
                       src={
-                        !isSafari
+                        !(isSafari || isIE || isFirefox)
                           ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                             single.fields.file.url
                           : `${process.env.NEXT_PUBLIC_PUBLIC_URL +

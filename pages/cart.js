@@ -16,7 +16,7 @@ import {
 } from "../redux/actions/cartActions";
 import LayoutOne from "../layouts/LayoutOne";
 import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 import {
   CountryDropdown,
   RegionDropdown,
@@ -121,7 +121,7 @@ const Cart = ({
                                     <img
                                       className="img-fluid"
                                       src={
-                                        !isSafari
+                                        !(isSafari || isIE || isFirefox)
                                           ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                                             cartItem.images[0].fields.file.url
                                           : `${process.env.NEXT_PUBLIC_PUBLIC_URL +

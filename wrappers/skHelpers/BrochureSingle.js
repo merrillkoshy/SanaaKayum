@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import SkPage from "../../components/section-title/SkPage";
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Link from "next/link";
 
 const BrochureSingle = ({ brochure }) => {
@@ -26,7 +26,7 @@ const BrochureSingle = ({ brochure }) => {
                     loading="lazy"
                     title={br.name + " by SK Corporate Clothing"}
                     src={
-                      !isSafari
+                      !(isSafari || isIE || isFirefox)
                         ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                           br.brochureImage.fields.file.url
                         : `${process.env.NEXT_PUBLIC_PUBLIC_URL +

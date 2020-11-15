@@ -325,7 +325,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 ;
                               },
                               error => {
-                                ;
+                                console.error(error);
                               }
                             );
                         }}

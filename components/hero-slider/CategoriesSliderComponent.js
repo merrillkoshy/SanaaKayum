@@ -7,7 +7,7 @@ import ProductGridSingle from "../../components/product/ProductGridSingle";
 import { addToCart } from "../../redux/actions/cartActions";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
 
-import { isSafari } from "react-device-detect";
+
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 
 import { useToasts } from "react-toast-notifications";
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Link from "next/link";
 const slugify = require("@sindresorhus/slugify");
 const MenuCart = ({ cartData, uID, deleteFromCart }) => {
@@ -41,7 +41,7 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
                           <img
                             alt=""
                             src={
-                              isSafari
+                              (isSafari || isIE || isFirefox)
                                 ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                                   single.images[0].fields.file.url
                                 : `${process.env.NEXT_PUBLIC_PUBLIC_URL +

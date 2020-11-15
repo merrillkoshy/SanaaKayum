@@ -1,5 +1,5 @@
 import React,{ Fragment,useState,useEffect } from "react";
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Modal from "react-bootstrap/Modal";
 import Link from "next/link"
 const LookBookGrid=props=>{
@@ -62,7 +62,7 @@ const LookBookGrid=props=>{
               loading="lazy"
               title={item.collectionName + " " + item.article + " by Sana'a Kayum"}
               src={
-                !isSafari
+                !(isSafari || isIE || isFirefox)
                   ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                     item.image[0].fields.file.url
                   : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -80,7 +80,7 @@ const LookBookGrid=props=>{
                   item.collectionName + " " + item.article + " by Sana'a Kayum"
                 }
                 src={
-                  !isSafari
+                  !(isSafari || isIE || isFirefox)
                     ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                       item.image[1].fields.file.url
                     : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -117,7 +117,7 @@ return comp ?
                     loading="lazy"
                     title={`${lkbkChild.collectionName}${lkbkChild.article} by Sana'a Kayum`}
                     src={
-                      !isSafari
+                      !(isSafari || isIE || isFirefox)
                       ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                         lkbkChild.image[1].fields.file.url
                       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -139,7 +139,7 @@ return comp ?
                         " by Sana'a Kayum"
                       }
                       src={
-                        !isSafari
+                        !(isSafari || isIE || isFirefox)
                           ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                             lkbkChild.image[1].fields.file.url
                           : `${process.env.NEXT_PUBLIC_PUBLIC_URL +

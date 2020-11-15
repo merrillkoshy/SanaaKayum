@@ -1,4 +1,4 @@
-export const COMPANY_JSONLD = `{
+export const COMPANY_JSONLD = {
   "@context": "https://schema.org",
   "@type": "ClothingStore",
   "name": "Sana'a Kayum Clothing Art",
@@ -39,17 +39,15 @@ export const COMPANY_JSONLD = `{
     "longitude": "55.203445"
   },
   "priceRange":"$$"
-
-}`;
-export const ORG_DET = `{
+};
+export const ORG_DET = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "url": "https://sanaakayum.com",
   "logo": "https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"
-}`;
+};
 
-export const googleHead = `<meta name="robots" content="index,follow" />
-    <script type="application/ld+json">
+export const googleHead = 
     {
       "@context": "https://schema.org",
       "@type": "ClothingStore",
@@ -96,8 +94,8 @@ export const googleHead = `<meta name="robots" content="index,follow" />
       },
       "priceRange": "$$"
     }
-    </script>
-    <script type="application/ld+json">
+    
+    export const socialMedia=
     {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -129,8 +127,8 @@ export const googleHead = `<meta name="robots" content="index,follow" />
         "https://www.pinterest.com/sanaakayumhc"
       ]
     }
-    </script>
-    <script type="application/ld+json">
+    
+   export const localBusiness=
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
@@ -148,7 +146,7 @@ export const googleHead = `<meta name="robots" content="index,follow" />
       "priceRange": "$$",
       "telephone": "+971523331757"
     }
-    </script>`;
+    
 
 export const analytics = `<script>
     (function(i, s, o, g, r, a, m) {

@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
-import Head from "next/head"
+
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import LayoutOne from "../layouts/LayoutOne";
-import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
+import HeaderMeta from "../components/header/HeaderMeta";
 import { connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import clientMgr from "../constants/contentManager";
@@ -54,91 +54,19 @@ const MyAccount = ({  user }) => {
 
   return (
     <Fragment>
-      
-    <Head>
-      
-        <title>{`${userAccount}'s Account`}</title>
-        <link rel="canonical" href={`https://sanaakayum.com/${userAccount}`} />
-        <base target="_blank" href={process.env.RAZZLE_PUBLIC_URL} />
-        <link href="https://images.ctfassets.net/" rel="dns-prefetch" />
-        <meta
-          property="Description"
-          content={`${userData.firstName}'s Account`}
-        />
-
-        <meta name="theme-color" content={"#ddbb74"} />
-        {/* Open Graph */}
-        <meta property="og:title" content={`${userData.firstName}'s Account`} />
-        <meta
-          property="og:description"
-          ccontent={`${userData.firstName}'s Account`}
-        />
-        <meta name="og:title" content={`${userData.firstName}'s Account`} />
-        <meta
-          name="og:description"
-          content={`${userData.firstName}'s Account`}
-        />
-        <meta
-          name="og:image"
-          content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
-        />
-        <meta name="og:type" content="website" />
-        <meta name="og:url" content={`https://sanaakayum.com/${userData.firstName}`} />
-        <meta
-          name="og:image:secure_url"
-          content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
-        />
-        <meta name="og:image:type" content="image/jpg" />
-        <meta name="og:image:width" content="1200" />
-        <meta name="og:image:height" content="627" />
-        <meta name="og:image:alt" content={`${userData.firstName}'s Account`} />
-        <meta name="og:site_name" content="Sana'a Kayum" />
-        <meta name="og:locale" content="en_US" />
-        <meta name="og:type" content="website" />
-        <meta name="og:type" content="website" />
-        <meta name="og:url" content={`https://sanaakayum.com/${userData.firstName}`} />
-        <meta
-          property="og:image:secure_url"
-          content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
-        />
-        <meta property="og:image:type" content="image/jpg" />
-
-        <meta
-          property="og:image:alt"
-          content={`${userData.firstName}'s Account`}
-        />
-        <meta property="og:site_name" content="Sana'a Kayum" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="website" />
-
-        <meta itemProp="name" content={`${userData.firstName}'s Account`} />
-        <meta
-          itemProp="description"
-          content={`${userData.firstName}'s Account`}
-        />
-        <meta
-          itemProp="image"
-          content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
-        />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:card" content="app" />
-        <meta name="twitter:site" content="@SKClothingart" />
-        <meta name="twitter:creator" content="@SKClothingart" />
-        <meta
-          name="twitter:title"
-          content={`${userData.firstName}'s Account`}
-        />
-        <meta
-          name="twitter:description"
-          content={`${userData.firstName}'s Account`}
-        />
-        <meta name="twitter:app:country" content="ae" />
-        <meta
-          name="twitter:image"
-          content={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
-        />
-      </Head>
+      <HeaderMeta
+        article={"Exquisite Wardrobe"}
+        title={`${userAccount}'s Account`}
+        description={
+          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+        }
+        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={`/${userAccount}`}
+        color={"#000000"}
+        
+      />
+    
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}

@@ -1,5 +1,5 @@
 import React from "react";
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 const slugify = require("@sindresorhus/slugify");
 
 const ProductSchema = ({ product }) => {
@@ -12,7 +12,7 @@ const ProductSchema = ({ product }) => {
         <link
           itemProp="image"
           href={
-            !isSafari
+            !(isSafari || isIE || isFirefox)
               ? `https:${product.images[0].fields.file.url}`
               : `https:${product.images[0].fields.file.url}?fm=jpg`
           }
@@ -20,7 +20,7 @@ const ProductSchema = ({ product }) => {
         <link
           itemProp="image"
           href={
-            !isSafari
+            !(isSafari || isIE || isFirefox)
               ? `https:${product.images[1].fields.file.url}`
               : `https:${product.images[1].fields.file.url}?fm=jpg`
           }

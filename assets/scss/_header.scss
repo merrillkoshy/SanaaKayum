@@ -392,12 +392,26 @@
 }
 .interaction-button{
     color:$black !important;
+    box-shadow: none;
     a, button{
         color:$black !important;
+        
     }
+    .btn-primary:focus {
+        background:$theme-color !important;
+        color: $black !important;
+        box-shadow: none !important;
+      }
+      
+      .btn-primary {
+        color:$black !important;
+        background-color:$theme-color;
+        box-shadow: none !important;
+        width: 100%;
+      }
     &:hover ,&:active ,&:visited &:focus{
-        background:$theme-color;
-        color: $black;
+        background:$theme-color !important;
+        color: $black !important;
     }
 }
     .same-style {
@@ -862,16 +876,30 @@
 
 /* header 3 */
 .interaction-button{
-    color:$theme-color;
-    background:none;
-    border:none;
+    color:$theme-color !important;
+    background:none !important;
+    border:none !important;
+    transition: 1s;
+    box-shadow: none !important;
     a, button{
-        color:$theme-color;
+        color:$theme-color !important;
     }
     &:hover ,&:active ,&:visited &:focus{
-        background:$theme-color;
-        color: $black;
+        background:$theme-color !important;
+        color: $black !important;
     }
+    .btn-primary:focus {
+        background:$theme-color !important;
+        color: $black !important;
+        box-shadow: none !important;
+      }
+      
+      .btn-primary {
+        color:$theme-color !important;
+        background-color:$black !important;
+        width: 100%;
+        box-shadow: none !important;
+      }
 }
 .header-padding-2 .container-fluid { 
 	padding: 0 70px;
@@ -1441,12 +1469,14 @@
 header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.transparent-bar.header-hm-7.stick{
     position: fixed;
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     background: linear-gradient(0deg, rgba(0,0,0,0) 15%, rgba(0,0,0,0.25) 100%);
 }
 .sticky-bar.header-res-padding.clearfix.stick{
     position: fixed;
     width: 100%;
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     background: linear-gradient(0deg, rgba(0,0,0,0) 15%, rgba(0,0,0,0.25) 100%);
     z-index: 999;
 }
@@ -2000,12 +2030,12 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
     left: 0;
     top: 0;
     border-radius: 10px 0px 0px 10px;
-    background: #343538;
+    background: $black;
     box-shadow: 20px 20px 60px #2c2d305e, -20px -20px 60px #3c3d406b;
     z-index: 9;
     width: 60px;
     height: 65px;
-    color: #fff;
+    color:$theme-color;
     line-height: 70px;
     text-align: center;
     font-size: 30px;
@@ -2227,11 +2257,11 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
         &:first-child{
             margin-left: 0;
         }
-        margin: 0 10px;
+        margin: 0 3px;
         font-size: 14px;
   
         @media #{$sm-layout}{
-            margin: 0 10px;
+            margin: 0 3px;
         }
   
         &:hover{

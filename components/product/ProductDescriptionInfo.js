@@ -269,7 +269,7 @@ const ProductDescriptionInfo = ({
               <i className="pe-7s-like" />
             </button>
           </div>
-          <div className="pro-details-cart wapp">
+          <div className="wapp">
             {productStock && productStock > 0 ? (
               <button
                 onClick={() => whatsAppthis(product)}

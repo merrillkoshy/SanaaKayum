@@ -15,7 +15,7 @@ import {
 import { addToCart } from "../redux/actions/cartActions";
 import LayoutOne from "../layouts/LayoutOne";
 import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
-import { isSafari } from "react-device-detect";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 const slugify = require("@sindresorhus/slugify");
 
 const Wishlist = ({
@@ -93,7 +93,7 @@ const Wishlist = ({
                                     <img
                                       className="img-fluid"
                                       src={
-                                        !isSafari
+                                        !(isSafari || isIE || isFirefox)
                                           ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                                             wishlistItem.images[0].fields.file
                                               .url
