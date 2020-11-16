@@ -2,8 +2,9 @@ import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
 import  Link  from "next/link";
 
-import MetaTags from "react-meta-tags";
+import HeaderMeta from "../components/header/HeaderMeta";
 import { connect } from "react-redux";
+
 
 import { getDiscountPrice } from "../helpers/product";
 import LayoutOne from "../layouts/LayoutOne";
@@ -17,68 +18,39 @@ import {
 } from "react-country-region-selector";
 import clientMgr from "../constants/contentManager";
 import { document } from "ssr-window";
+import { useRouter } from "next/router";
 
 const axios = require("axios").default;
 const Checkout = ({ cartItems, currency, user }) => {
   const [country, selectCountry] = useState("");
   const [region, selectRegion] = useState("");
-  
+  const router=useRouter()
   var userData = user.user;
 
   let cartTotalPrice = 0;
-  const order = response => {
-    var orderData = {
-      cart_amount: 0,
-      cart_currency: "",
-      cart_description: "",
-      cart_id: "",
-      customer_details: "",
-      tran_ref: "",
-      tran_type: "",
-      date: ""
-    };
-    orderData.redirect_url = response.data.redirect_url;
-    orderData.cart_amount = response.data.cart_amount;
-    orderData.cart_currency = response.data.cart_currency;
-    orderData.cart_description = response.data.cart_description;
-    orderData.cartItems = cartItems;
-    orderData.cart_id = response.data.cart_id;
-    orderData.customer_details = response.data.customer_details;
-    orderData.tran_ref = response.data.tran_ref;
-    orderData.tran_type = response.data.tran_type;
-    orderData.date = response.headers.date;
-    clientMgr
-      .then(environment => environment.getEntry(userData?.entryID))
-      .then(entry => {
-        if (entry.fields["orderData"] === undefined)
-          entry.fields["orderData"] = { "en-US": [orderData] };
-        else entry.fields["orderData"]["en-US"].push(orderData);
+  
+  
 
-        return entry.update();
-      })
-      .then(entry => entry.publish())
-      .then(entry => {
-        ;
-        return entry;
-      })
-      .finally(entry => {
-        if (entry) window.location.replace(response.data.redirect_url);
-        else
-          setTimeout(() => {
-            window.location.replace(response.data.redirect_url);
-          }, 1000);
-      });
-  };
 
+
+
+  
   return (
     <Fragment>
-      <MetaTags>
-        <title>Haute Couture & High-Street Fashion - Sana'a Kayum</title>
-        <meta
-          name="description"
-          content="Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-        />
-      </MetaTags>
+       <HeaderMeta
+        article={"Exquisite Wardrobe"}
+        title={"Haute Couture & High-Street Fashion"}
+        description={
+          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+        }
+        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={""}
+        color={"#000000"}
+        
+      />
+
+      
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
@@ -87,11 +59,11 @@ const Checkout = ({ cartItems, currency, user }) => {
           <div className="container">
             {cartItems && cartItems.length >= 1 ? (
               <div className="row">
-                <div className="col-lg-7">
+                <div className="col-lg-6">
                   <div className="billing-info-wrap">
                     <h3>Billing Details</h3>
                     <div className="row">
-                      <div className="col-lg-6 col-md-6">
+                      <div className="col">
                         <div className="billing-info mb-20">
                           <label>First Name</label>
                           <input
@@ -100,7 +72,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                           />
                         </div>
                       </div>
-                      <div className="col-lg-6 col-md-6">
+                      <div className="col">
                         <div className="billing-info mb-20">
                           <label>Last Name</label>
                           <input type="text" defaultValue={userData?.lastName} />
@@ -149,13 +121,13 @@ const Checkout = ({ cartItems, currency, user }) => {
                       </div>
                     </div>
 
-                    <div className="col-lg-6 col-md-6">
+                    <div className="col">
                       <div className="billing-info mb-20">
                         <label>Postcode / ZIP</label>
                         <input type="text" name="postcode" />
                       </div>
                     </div>
-                    <div className="col-lg-6 col-md-6">
+                    <div className="col">
                       <div className="billing-info mb-20">
                         <label>Phone</label>
                         <input
@@ -165,7 +137,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                         />
                       </div>
                     </div>
-                    <div className="col-lg-6 col-md-6">
+                    <div className="col">
                       <div className="billing-info mb-20">
                         <label>Email Address</label>
                         <input
@@ -263,11 +235,55 @@ const Checkout = ({ cartItems, currency, user }) => {
                       <button
                         className="btn-hover"
                         onClick={() => {
-                          axios.defaults.xsrfCookieName = "csrftoken";
-                          axios.defaults.xsrfHeaderName = "X-CSRFToken";
+                          // var raw  = "{\n    \"profile_id\": "+process.env.NEXT_PUBLIC_MID+",\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\",\n    \"cart_id\": "+uuid()+",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": "+cartTotalPrice.toFixed(2)+",\n    \"cart_description\": Order#"+uuid()+"SKCA\",\n    \"paypage_lang\": \"en\",\n    \"customer_details\": {\n        \"name\": "+userData?.firstName +" "+ userData?.lastName+",\n        \"email\": "+userData?.email+",\n        \"phone\": "+userData?.mobile?()=>userData?.mobile:document.querySelector("input[name='phone']")?document.querySelector("input[name='phone']").value:""+",\n        \"street1\": "+userData&&userData?.addressDetails?.addressLine.concat(",P.O.Box:"+document.querySelector('input[name="postcode"]')?document.querySelector('input[name="postcode"]').value:""+",\n        \"city\": "+userData?.addressDetails.region+",\n        \"state\": "+userData?.addressDetails.region+",\n        \"country\": "+userData?.addressDetails.country+",\n        \"zip\": "+document.querySelector('input[name="postcode"]')?document.querySelector('input[name="postcode"]').value:""+",\n        \"ip\": \"\"\n    },\n    \"shipping_details\": {\n        \"name\": "+userData?.firstName +" "+ userData?.lastName+",\n        \"email\": "+userData?.email+",\n        \"phone\": "+userData?.mobile?()=>userData?.mobile:document.querySelector("input[name='phone']")?document.querySelector("input[name='phone']").value:""+",\n        \"street1\": "+userData&&userData?.addressDetails?.addressLine.concat(",P.O.Box:"+document.querySelector('input[name="postcode"]')?document.querySelector('input[name="postcode"]').value:""+",\n        \"city\": "+userData?.addressDetails.region+",\n        \"state\": "+userData?.addressDetails.region+",\n        \"country\": "+userData?.addressDetails.country+",\n        \"zip\": "+document.querySelector('input[name="postcode"]')?document.querySelector('input[name="postcode"]').value:""+",\n        \"ip\": \"\"\n    },\n    \"callback\": "+process.env.NEXT_PUBLIC_CALLBACK_URL+",\n    \"return\": "+process.env.NEXT_PUBLIC_CALLBACK_URL+",\n    \"framed\": true,\n    \"hide_shipping\": true\n}";
+
+                          // var requestOptions = {
+                          //   method: 'POST',
+                          //   headers: myHeaders,
+                          //   body: raw,
+                          //   redirect: 'follow'
+                          // };
+
+                          // fetch("https://secure.paytabs.com/payment/request", requestOptions)
+                          //   .then(response => response.text())
+                          //   .then(result => console.log(result))
+                          //   .catch(error => console.log('error', error));
+                          // axios.defaults.xsrfCookieName = "csrftoken";
+                          // axios.defaults.xsrfHeaderName = "X-CSRFToken";
+                          // axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
+                          
+                          // postData( process.env.NEXT_PUBLIC_ENDPOINT, {
+                          //   profile_id: process.env.NEXT_PUBLIC_MID,
+                          //   tran_type: "sale",
+                          //   tran_class: "ecom",
+                          //   cart_description: "Order#" + uuid() + "SKCA",
+                          //   cart_id: uuid(),
+                          //   cart_currency: currency.currencySymbol,
+                          //   cart_amount: cartTotalPrice.toFixed(2),
+                          //   callback: process.env.NEXT_PUBLIC_CALLBACK_URL,
+                          //   return: process.env.NEXT_PUBLIC_CALLBACK_URL,
+                            
+                          // })
+                          // .then(
+                          //   response => {
+                          //     order(response);
+                          //     ;
+                          //   },
+                          //   error => {
+                          //     console.error(error);
+                          //   }
+                          // );
+                          const headers={
+                            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                            "Authorization": process.env.NEXT_PUBLIC_SVK,
+                            'Access-Control-Allow-Origin': "*",
+                            'Content-Type': "application/json",
+                            'Token':userData?.entryID
+                          }
+                          
                           axios
                             .post(
-                              process.env.NEXT_PUBLIC_ENDPOINT,
+                             "/api/cors",
                               {
                                 profile_id: process.env.NEXT_PUBLIC_MID,
                                 tran_type: "sale",
@@ -276,8 +292,8 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 cart_id: uuid(),
                                 cart_currency: currency.currencySymbol,
                                 cart_amount: cartTotalPrice.toFixed(2),
-                                callback: process.env.NEXT_PUBLIC_CALLBACK_URL,
-                                return: process.env.NEXT_PUBLIC_CALLBACK_URL,
+                                callback: "https://sanaa-kayum.netlify.app/api/callback",
+                                return: "https://sanaa-kayum.netlify.app/api/callback",
                                 customer_details: {
                                   name:
                                     userData?.firstName +
@@ -312,24 +328,21 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 hide_shipping: true
                               },
                               {
-                                headers: {
-                                  "content-type": "application/json",
-                                  accept: "application/json",
-                                  authorization: process.env.NEXT_PUBLIC_SVK
-                                }
+                                headers: headers
                               }
-                            )
-                            .then(
-                              response => {
-                                order(response);
-                                ;
-                              },
-                              error => {
-                                console.error(error);
-                              }
-                            );
-                        }}
-                      >
+                            ).then((response) => {
+                              console.log(response)
+                              
+                              router.push(response.data)
+                              // window.location.replace(process.env.NEXT_PUBLIC_ENDPOINT)
+                          })
+                          .catch((error) => {
+                            console.log(error)
+                          })
+                            
+                        
+                      }
+                    }>
                         Place Order
                       </button>
                     </div>

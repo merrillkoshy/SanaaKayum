@@ -19,10 +19,6 @@ const slugify = require("@sindresorhus/slugify");
 const Product = ({staticProducts}) => {
   
   const router = useRouter();
-  if (!router.isFallback && !staticProducts) {
-    return <NotFound />
-  }
-
   const { pid } = router.query;
   
 
@@ -40,9 +36,7 @@ const Product = ({staticProducts}) => {
  
   return (
     <LayoutOne headerTop="visible">
-        {router.isFallback ? (
-         <LoadingScreen />
-        ):(product?
+        {product?
           <>
           
           <HeaderMeta
@@ -76,7 +70,7 @@ const Product = ({staticProducts}) => {
           category={product.article}
         />
         </>
-        :null)}
+        :null}
         
     
     </LayoutOne>

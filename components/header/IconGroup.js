@@ -59,7 +59,7 @@ const IconGroup = ({
       setUname(
         <Link
               href={{
-                pathname: `/[userAccount]]`,
+                pathname: `/my-account]`,
                 query: {
                   userAccount: userData.user.firstName
                 }
@@ -90,7 +90,7 @@ const IconGroup = ({
           <li>
             <Link
               href={{
-                pathname: `/[userAccount]]`,
+                pathname: `/my-account]`,
                 query: {
                   userAccount: userData.user.firstName
                 }

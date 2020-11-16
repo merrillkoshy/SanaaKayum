@@ -3,7 +3,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { useToasts } from "react-toast-notifications";
-import { uploadToContentful } from "../pages/[userAccount]";
+import { uploadToContentful } from "../pages/my-account";
 
 function ChangeAddressModal(props) {
   const { userdata } = props;

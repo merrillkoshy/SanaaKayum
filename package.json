@@ -7,6 +7,7 @@
     "start": "next start -p 3000",
     "postbuild": "next-on-netlify"
   },
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.13.2",
     "@sindresorhus/slugify": "^1.1.0",
@@ -14,10 +15,13 @@
     "bootstrap": "^4.5.3",
     "contentful": "^7.14.8",
     "contentful-management": "^6.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "jdown": "^1.0.4",
     "next": "latest",
     "next-on-netlify": "^2.6.0",
     "next-redux-wrapper": "^6.0.2",
+    "nextjs-cors": "^1.0.1",
     "nprogress": "^0.2.0",
     "react": "^16.9.0",
     "react-bootstrap": "^1.4.0",
