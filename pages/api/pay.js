@@ -1,7 +1,7 @@
 import Cors from 'cors'
 import initMiddleware from '../../lib/init-middleware'
 import clientMgr from "../../constants/contentManager";
-import {useRouter} from "next/router"
+
 const axios = require("axios").default;
 
 // Initialize the cors middleware

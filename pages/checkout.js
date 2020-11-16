@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import  Link  from "next/link";
 
 import HeaderMeta from "../components/header/HeaderMeta";
@@ -28,7 +28,6 @@ const Checkout = ({ cartItems, currency, user }) => {
   var userData = user.user;
 
   let cartTotalPrice = 0;
-  
   
 
 
@@ -283,7 +282,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                           
                           axios
                             .post(
-                             "/api/cors",
+                             "/api/pay",
                               {
                                 profile_id: process.env.NEXT_PUBLIC_MID,
                                 tran_type: "sale",
@@ -292,8 +291,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 cart_id: uuid(),
                                 cart_currency: currency.currencySymbol,
                                 cart_amount: cartTotalPrice.toFixed(2),
-                                callback: "https://sanaa-kayum.netlify.app/api/callback",
-                                return: "https://sanaa-kayum.netlify.app/api/callback",
+                                return: "https://sanaa-kayum.netlify.app/api/response",
                                 customer_details: {
                                   name:
                                     userData?.firstName +

@@ -13,10 +13,12 @@ const cors = initMiddleware(
 export default async function handler(req, res) {
   // Run cors
   await cors(req, res)
-
-  if (req.method === 'POST') {
-    console.log(req.body)
-  } else {
-    // Handle any other HTTP method
+  if (req.method === 'POST') { 
+    req.body
+    //send this to browser somehow
   }
+  
 }
+
+
+
