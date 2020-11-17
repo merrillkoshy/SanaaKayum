@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
 import  Link  from "next/link";
-
+import HeaderMeta from "../components/header/HeaderMeta";
 import { useToasts } from "react-toast-notifications";
-import MetaTags from "react-meta-tags";
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+
 import { connect } from "react-redux";
 import { getDiscountPrice } from "../helpers/product";
 import {
@@ -46,26 +45,27 @@ const Cart = ({
   //useEffect code moved to notes
 
   useEffect(()=>{
-    axios.interceptors.response.use(function (response) {
-      // Any status code that lie within the range of 2xx cause this function to trigger
-      // Do something with response data
-      return response;
-    }, function (error) {
-      // Any status codes that falls outside the range of 2xx cause this function to trigger
-      // Do something with response error
-      return Promise.reject(error);
-    });
+    axios.get('/api/response')
+  .then(function (response) {
+    console.log(response);
+    
+  });
   })
 
   return (
     <Fragment>
-      <MetaTags>
-        <title>Haute Couture & High-Street Fashion - Sana'a Kayum</title>
-        <meta
-          name="description"
-          content="Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-        />
-      </MetaTags>
+      <HeaderMeta
+        article={"Exquisite Wardrobe"}
+        title={"Haute Couture & High-Street Fashion"}
+        description={
+          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+        }
+        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={""}
+        color={"#000000"}
+        
+      />
 
 
       <LayoutOne headerTop="visible">

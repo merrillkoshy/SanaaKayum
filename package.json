@@ -23,6 +23,7 @@
     "next-redux-wrapper": "^6.0.2",
     "nextjs-cors": "^1.0.1",
     "nprogress": "^0.2.0",
+    "qs": "^6.9.4",
     "react": "^16.9.0",
     "react-bootstrap": "^1.4.0",
     "react-breadcrumbs-dynamic": "^1.2.1",

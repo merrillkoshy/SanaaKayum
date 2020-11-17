@@ -291,6 +291,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 cart_id: uuid(),
                                 cart_currency: currency.currencySymbol,
                                 cart_amount: cartTotalPrice.toFixed(2),
+                                callback:"https://sanaa-kayum.netlify.app/api/response",
                                 return: "https://sanaa-kayum.netlify.app/api/response",
                                 customer_details: {
                                   name:
@@ -329,7 +330,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 headers: headers
                               }
                             ).then((response) => {
-                              console.log(response)
+                              
                               
                               router.push(response.data)
                               // window.location.replace(process.env.NEXT_PUBLIC_ENDPOINT)

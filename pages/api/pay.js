@@ -31,19 +31,7 @@ export default async function handler(req, res) {
   await cors(req, res)
 
   if (req.method === 'POST') {  
-    //   res.writeHead(200, {'Content-Type': 'application/json',
-    //   Authorization: process.env.NEXT_PUBLIC_SVK,
-    //   Location: process.env.NEXT_PUBLIC_ENDPOINT,
-    // })
-    
-    // console.log(req)
-    // res.writeHead(200, {
-    //   Location: process.env.NEXT_PUBLIC_ENDPOINT,
-    //   'Content-Type': 'application/json',
-    //   Authorization: process.env.NEXT_PUBLIC_SVK
-    // })
-    
-    // res.end(JSON.stringify(orderData));  
+  
     
     
     const headers={
@@ -62,43 +50,16 @@ export default async function handler(req, res) {
         }
       )
       .then((response) => {
-        
-        
         res.send(response.data.redirect_url)
-        
-        
-        
     })
     .catch((error) => {
       console.log(error)
     })
 
     
-  
-
-    
   } else {
     // Handle any other HTTP method
 
-     // var orderData = {
-      //   cart_amount: 0,
-      //   cart_currency: "",
-      //   cart_description: "",
-      //   cart_id: "",
-      //   customer_details: "",
-      //   tran_ref: "",
-      //   tran_type: "",
-      //   // date: ""
-      // };
-      // orderData.redirect_url = response.redirect_url;
-      // orderData.cart_amount = response.cart_amount;
-      // orderData.cart_currency = response.cart_currency;
-      // orderData.cart_description = response.cart_description;
-      // orderData.cartItems = cartItems;
-      // orderData.cart_id = response.cart_id;
-      // orderData.customer_details = response.customer_details;
-      // orderData.tran_ref = response.tran_ref;
-      // orderData.tran_type = response.tran_type;
-      // orderData.date = response.headers.date;
+     
   }
 }
