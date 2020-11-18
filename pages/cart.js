@@ -22,8 +22,7 @@ import {
   CountryRegionData
 } from "react-country-region-selector";
 const slugify = require("@sindresorhus/slugify");
-import axios from "axios";
-import client from "../constants/config";
+
 
 const Cart = ({
   
@@ -42,15 +41,9 @@ const Cart = ({
   
   let cartTotalPrice = 0;
 
-  //useEffect code moved to notes
 
-  useEffect(()=>{
-    axios.get('/api/response')
-  .then(function (response) {
-    console.log(response);
-    
-  });
-  })
+  
+  
 
   return (
     <Fragment>

@@ -148,7 +148,7 @@ export const googleHead =
     }
     
 
-export const analytics = `<script>
+export const analytics = `
     (function(i, s, o, g, r, a, m) {
       i["GoogleAnalyticsObject"] = r;
       (i[r] =
@@ -172,4 +172,4 @@ export const analytics = `<script>
     ga("create", "UA-158075339-1", "auto");
     ga("send", "pageview");
     </script>
-    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-W6DG8FT"></script>`;
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-W6DG8FT">`;

@@ -2,6 +2,9 @@ import Cors from 'cors'
 import initMiddleware from '../../lib/init-middleware'
 
 
+
+const axios = require("axios").default;
+
 // Initialize the cors middleware
 const cors = initMiddleware(
   // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -11,10 +14,21 @@ const cors = initMiddleware(
   })
 )
 
+
 export default async function handler(req, res) {
   // Run cors
-  await cors(req, res)
-    res.writeHead(302, { "Content-Type":"application/json","Location": "/cart"});
-    res.write(JSON.stringify(req.body));
+  
+     await cors(req, res)
+    // Redirect back after setting cookie
+    res.statusCode = 302;
+      res.writeHead(302, 
+      { 
+      "Content-Type":"application/json",
+      "Location": "/paymentInterface",
+      "data": JSON.stringify(req.body)
+    });
+    res.write(JSON.stringify(req.body))
+    
     return res.end();
+
 }

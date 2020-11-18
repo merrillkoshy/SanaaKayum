@@ -50,7 +50,8 @@ export default async function handler(req, res) {
         }
       )
       .then((response) => {
-        res.send(response.data.redirect_url)
+        
+        res.send(response.data)
     })
     .catch((error) => {
       console.log(error)

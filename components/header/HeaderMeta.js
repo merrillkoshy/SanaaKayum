@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import Head from 'next/head'
+import siteIcons from "../../constants/siteIcons";
 const HeaderMeta = ({
   article,
   title,
@@ -13,6 +14,8 @@ const HeaderMeta = ({
   return (
     <Fragment>
     <Head>
+    <meta name="robots" content="index,follow" />
+      {siteIcons}
       <title>{title}</title>
       <link rel="canonical" href={`https://sanaakayum.com${url}`} />
       <base target="_blank" />

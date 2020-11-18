@@ -31,8 +31,6 @@ const Checkout = ({ cartItems, currency, user }) => {
   
 
 
-
-
   
   return (
     <Fragment>
@@ -234,44 +232,6 @@ const Checkout = ({ cartItems, currency, user }) => {
                       <button
                         className="btn-hover"
                         onClick={() => {
-                          // var raw  = "{\n    \"profile_id\": "+process.env.NEXT_PUBLIC_MID+",\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\",\n    \"cart_id\": "+uuid()+",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": "+cartTotalPrice.toFixed(2)+",\n    \"cart_description\": Order#"+uuid()+"SKCA\",\n    \"paypage_lang\": \"en\",\n    \"customer_details\": {\n        \"name\": "+userData?.firstName +" "+ userData?.lastName+",\n        \"email\": "+userData?.email+",\n        \"phone\": "+userData?.mobile?()=>userData?.mobile:document.querySelector("input[name='phone']")?document.querySelector("input[name='phone']").value:""+",\n        \"street1\": "+userData&&userData?.addressDetails?.addressLine.concat(",P.O.Box:"+document.querySelector('input[name="postcode"]')?document.querySelector('input[name="postcode"]').value:""+",\n        \"city\": "+userData?.addressDetails.region+",\n        \"state\": "+userData?.addressDetails.region+",\n        \"country\": "+userData?.addressDetails.country+",\n        \"zip\": "+document.querySelector('input[name="postcode"]')?document.querySelector('input[name="postcode"]').value:""+",\n        \"ip\": \"\"\n    },\n    \"shipping_details\": {\n        \"name\": "+userData?.firstName +" "+ userData?.lastName+",\n        \"email\": "+userData?.email+",\n        \"phone\": "+userData?.mobile?()=>userData?.mobile:document.querySelector("input[name='phone']")?document.querySelector("input[name='phone']").value:""+",\n        \"street1\": "+userData&&userData?.addressDetails?.addressLine.concat(",P.O.Box:"+document.querySelector('input[name="postcode"]')?document.querySelector('input[name="postcode"]').value:""+",\n        \"city\": "+userData?.addressDetails.region+",\n        \"state\": "+userData?.addressDetails.region+",\n        \"country\": "+userData?.addressDetails.country+",\n        \"zip\": "+document.querySelector('input[name="postcode"]')?document.querySelector('input[name="postcode"]').value:""+",\n        \"ip\": \"\"\n    },\n    \"callback\": "+process.env.NEXT_PUBLIC_CALLBACK_URL+",\n    \"return\": "+process.env.NEXT_PUBLIC_CALLBACK_URL+",\n    \"framed\": true,\n    \"hide_shipping\": true\n}";
-
-                          // var requestOptions = {
-                          //   method: 'POST',
-                          //   headers: myHeaders,
-                          //   body: raw,
-                          //   redirect: 'follow'
-                          // };
-
-                          // fetch("https://secure.paytabs.com/payment/request", requestOptions)
-                          //   .then(response => response.text())
-                          //   .then(result => console.log(result))
-                          //   .catch(error => console.log('error', error));
-                          // axios.defaults.xsrfCookieName = "csrftoken";
-                          // axios.defaults.xsrfHeaderName = "X-CSRFToken";
-                          // axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
-                          
-                          // postData( process.env.NEXT_PUBLIC_ENDPOINT, {
-                          //   profile_id: process.env.NEXT_PUBLIC_MID,
-                          //   tran_type: "sale",
-                          //   tran_class: "ecom",
-                          //   cart_description: "Order#" + uuid() + "SKCA",
-                          //   cart_id: uuid(),
-                          //   cart_currency: currency.currencySymbol,
-                          //   cart_amount: cartTotalPrice.toFixed(2),
-                          //   callback: process.env.NEXT_PUBLIC_CALLBACK_URL,
-                          //   return: process.env.NEXT_PUBLIC_CALLBACK_URL,
-                            
-                          // })
-                          // .then(
-                          //   response => {
-                          //     order(response);
-                          //     ;
-                          //   },
-                          //   error => {
-                          //     console.error(error);
-                          //   }
-                          // );
                           const headers={
                             'Access-Control-Allow-Headers': 'Content-Type, Authorization',
                             "Authorization": process.env.NEXT_PUBLIC_SVK,
@@ -291,8 +251,8 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 cart_id: uuid(),
                                 cart_currency: currency.currencySymbol,
                                 cart_amount: cartTotalPrice.toFixed(2),
-                                callback:"https://sanaa-kayum.netlify.app/api/response",
-                                return: "https://sanaa-kayum.netlify.app/api/response",
+                                callback:`${process.env.NEXT_PUBLIC_DOMAIN}/api/response`,
+                                return: `${process.env.NEXT_PUBLIC_DOMAIN}/api/response`,
                                 customer_details: {
                                   name:
                                     userData?.firstName +
@@ -330,10 +290,9 @@ const Checkout = ({ cartItems, currency, user }) => {
                                 headers: headers
                               }
                             ).then((response) => {
+                              Promise.resolve(localStorage.setItem('Initiate',JSON.stringify(response.data)))
+                              .then(()=>{router.push(response.data.redirect_url)})
                               
-                              
-                              router.push(response.data)
-                              // window.location.replace(process.env.NEXT_PUBLIC_ENDPOINT)
                           })
                           .catch((error) => {
                             console.log(error)

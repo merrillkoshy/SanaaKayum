@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import { Helmet } from "react-helmet";
+
 import { GA_TRACKING_ID } from "../constants/gtag";
-import siteIcons from "../constants/siteIcons";
+
 import {
   COMPANY_JSONLD,
   ORG_DET,
@@ -11,35 +11,20 @@ import {
   localBusiness
 } from "../constants/googleJsonLD";
 export default class MyDocument extends Document {
-  static async getInitialProps(...args) {
-    const documentProps = await super.getInitialProps(...args);
-    // see https://github.com/nfl/react-helmet#server-usage for more information
-    // 'head' was occupied by 'renderPage().head', we cannot use it
-    return { ...documentProps, helmet: Helmet.renderStatic() };
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
   }
 
-  // should render on <html>
-  get helmetHtmlAttrComponents() {
-    return this.props.helmet.htmlAttributes.toComponent();
-  }
-
-  // should render on <body>
-  get helmetBodyAttrComponents() {
-    return this.props.helmet.bodyAttributes.toComponent();
-  }
-
-  // should render on <head>
-  get helmetHeadComponents() {
-    return Object.keys(this.props.helmet)
-      .filter(el => el !== "htmlAttributes" && el !== "bodyAttributes")
-      .map(el => this.props.helmet[el].toComponent());
-  }
+  
 
   render() {
     return (
-      <Html {...this.helmetHtmlAttrComponents}>
-        <Head>
-          <meta name="robots" content="index,follow" />
+      <Html lang="en" amp="undefined" >
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async
@@ -57,10 +42,10 @@ export default class MyDocument extends Document {
           `
             }}
           />
+          
           <script
-            dangerouslySetInnerHTML={{
-              __html: analytics
-            }}
+            
+            dangerouslySetInnerHTML={{ __html: analytics }}
           />
           <script
             type="application/ld+json"
@@ -82,11 +67,6 @@ export default class MyDocument extends Document {
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
           />
-          {siteIcons}
-        </Head>
-        <body {...this.helmetBodyAttrComponents}>
-          <Main />
-          <NextScript />
         </body>
       </Html>
     );
