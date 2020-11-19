@@ -5,8 +5,8 @@ import ScrollToTop from "../helpers/scroll-top";
 import { ToastProvider } from "react-toast-notifications";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
 import Helmet from "react-helmet";
-import Router from 'next/router';
-import Head from 'next/head'
+import Router from "next/router";
+import Head from "next/head";
 import {
   fetchProducts,
   fetchLingerie,
@@ -16,13 +16,13 @@ import {
   fetchSliders
 } from "../redux/actions/productActions";
 import client from "../constants/config";
-import NProgress from 'nprogress';
+import NProgress from "nprogress";
+
+import { firebaseCloudMessaging } from '../utils/webPush'
 
 
 import LoadingScreen from "../helpers/LoadingScreen";
-import { Fragment } from "react";
-
-
+import { Fragment, useEffect } from "react";
 
 Router.onRouteChangeStart = () => {
   // ;
@@ -39,10 +39,13 @@ Router.onRouteChangeError = () => {
   NProgress.done();
 };
 
-
 const App = ({ Component, pageProps }) => {
-  const store=useStore(pageProps.initialReduxState);
-let preloadedState
+  useEffect(() => {
+    firebaseCloudMessaging.init()
+
+  }, []);
+  const store = useStore(pageProps.initialReduxState);
+  let preloadedState;
   var productMap = [];
   var lowerCords = [];
   var lingeries = [];
@@ -97,7 +100,8 @@ let preloadedState
       store.dispatch(fetchLookbooks(lookbooks));
       store.dispatch(fetchPbanners(promotionBanners));
       store.dispatch(fetchSliders(lpSliders));
-    }) .then(async () => {
+    })
+    .then(async () => {
       return Promise.resolve(
         (preloadedState = {
           productData: [productMap, lowerCords, lingeries].flat(),
@@ -108,22 +112,18 @@ let preloadedState
           sliderData: lpSliders
         })
       );
-    })
+    });
   return (
     <Provider store={store}>
-      
-        <ToastProvider placement="bottom-left">
-          <BreadcrumbsProvider>
-            <ScrollToTop>
-              <Fragment>
-            
-              
+      <ToastProvider placement="bottom-left">
+        <BreadcrumbsProvider>
+          <ScrollToTop>
+            <Fragment>
               <Component {...pageProps} />
-              </Fragment>
-            </ScrollToTop>
-          </BreadcrumbsProvider>
-        </ToastProvider>
-      
+            </Fragment>
+          </ScrollToTop>
+        </BreadcrumbsProvider>
+      </ToastProvider>
     </Provider>
   );
 };

@@ -80,9 +80,9 @@ export const loadCart = item => {
 };
 
 //reset on logout
-export const resetCart = addToast => {
+export const resetCart = uID => {
   return dispatch => {
-    dispatch({ type: RESET_CART });
+    dispatch({ type: RESET_CART,payload:uID });
   };
 };
 

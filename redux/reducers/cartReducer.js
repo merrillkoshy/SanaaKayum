@@ -4,7 +4,8 @@ import {
   DECREASE_QUANTITY,
   DELETE_FROM_CART,
   DELETE_ALL_FROM_CART,
-  LOAD_CART_FROM_PROFILE
+  LOAD_CART_FROM_PROFILE,
+  RESET_CART
 } from "../actions/cartActions";
 import clientMgr from "../../constants/contentManager";
 const atc = (uID, finalCart) => {
@@ -130,16 +131,14 @@ const cartReducer = (state = initState, action) => {
       return false;
     });
   };
+
+  const resetAfterBuy =()=>{
+
+  }
   if (action.type === ADD_TO_CART) {
     // for non variant
     const finalCart = atcOps();
-    // if (cartItems.some(item => item.unNull === "unNull")) {
-    //   cartItems.length = 0;
-    //   finalCart = atcOps();
-    // } else {
-    //   finalCart = atcOps();
-    // }
-    ;
+   
     atc(product.uID, finalCart);
 
     return finalCart;
@@ -160,10 +159,19 @@ const cartReducer = (state = initState, action) => {
   if (action.type === LOAD_CART_FROM_PROFILE) {
     return product;
   }
+  if (action.type === RESET_CART) {
+    const deleteFCart = dAfc();
+    atc(product, [
+      {
+        unNull: "unNull"
+      }
+    ]);
+    return deleteFCart;
+  }
 
   if (action.type === DELETE_FROM_CART) {
     const deleteFCart = rfcOps();
-    ;
+    
     deleteFCart.length
       ? atc(product.uID, deleteFCart)
       : atc(product.uID, [

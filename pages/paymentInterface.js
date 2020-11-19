@@ -1,15 +1,20 @@
 import { useEffect, useState, Fragment } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import client from "../constants/config";
+import clientMgr from "../constants/contentManager";
+import {  resetCart } from "../redux/actions/cartActions";
 import Link from "next/link";
 import { Button, Container, Row } from "react-bootstrap";
-import LayoutOne from "../layouts/LayoutOne";
+import PaymentResponseLayout from "../layouts/PaymentResponseLayout";
 import { useRouter } from "next/router";
+import PurchasedProductGrid from "../wrappers/product/PurchasedProductGrid";
 
-const paymentInterface=({user})=>{
+const paymentInterface=({user,resetCart})=>{
     const[paymentResult,setPaymentResult]=useState('')
+    const[paymentResponseCode,setPaymentResponseCode]=useState('')
     const router=useRouter()
+    const userData=user.user;
+    const recentPurchase=userData.cartData;
     useEffect(()=>{
         if(localStorage.getItem('Initiate')){
             const checkTrans=JSON.parse(localStorage.getItem('Initiate'))
@@ -18,7 +23,7 @@ const paymentInterface=({user})=>{
               "Authorization": process.env.NEXT_PUBLIC_SVK,
               'Access-Control-Allow-Origin': "*",
               'Content-Type': "application/json",
-              'Token':user.user.entryID
+              'Token':userData?.entryID
             }
             axios
               .post(
@@ -32,8 +37,22 @@ const paymentInterface=({user})=>{
                 }
               ).then((response) => {
                 setPaymentResult(response.data.payment_result)
+                setPaymentResponseCode(response.data.payment_result.response_code)
+                const transactionResponse={...response,...checkTrans}
+                clientMgr
+                .then(environment => environment.getEntry(userData.entryID))
+                .then(entry => {
+                  if (entry.fields["transactionsData"] === undefined)
+                  entry.fields["transactionsData"] = { "en-US": [transactionResponse] };
+                  else entry.fields["transactionsData"]["en-US"].push(transactionResponse);
+                  return entry.update();
+                })
+                .then(entry => entry.publish())
+                .then(()=>{
+                  
+                  localStorage.removeItem('Initiate')
+                })
                 
-                localStorage.removeItem('Initiate')
             })
             .catch((error) => {
               console.log(error)
@@ -46,26 +65,57 @@ const paymentInterface=({user})=>{
 
     return (
         <Fragment>
-            <LayoutOne
+            <PaymentResponseLayout
         headerContainerClass="container-fluid"
         headerPaddingClass="header-padding-2"
         headerTop="visible"
       >
           <Container>
-              <Row className="justify-content-md-center" style={{display:"block"}}>
-                <Row >
-                    {paymentResult?.response_status}
-                </Row>
-                <Row>
-                    {paymentResult?.response_code}
-                </Row>
-                <Row>
-                    {paymentResult?.response_message}
-                </Row>
-                <Row>
-                    {paymentResult?.transaction_time}
-                </Row>
-              </Row>
+                {paymentResponseCode==="200"? 
+              
+                (<>
+                  <PurchasedProductGrid
+                  products={recentPurchase} spaceBottomClass="mb-25"
+                  />
+                  <Row className="justify-content-md-center" style={{display:"block"}}>
+
+                  
+                  <Row >
+                      {paymentResult?.response_status}
+                  </Row>
+                  <Row>
+                      {paymentResult?.response_code}
+                  </Row>
+                  <Row>
+                      {paymentResult?.response_message}
+                  </Row>
+                  <Row>
+                      {paymentResult?.transaction_time}
+                  </Row>
+                  </Row>
+                  </>
+                )
+              // ()=>{resetCart(userData.entryID);} 
+
+              
+                :
+                <Row className="justify-content-md-center" style={{display:"block"}}>
+               <Row >
+               {paymentResult?.response_status}
+           </Row>
+           <Row>
+               {paymentResult?.response_code}
+           </Row>
+           <Row>
+               {paymentResult?.response_message}
+           </Row>
+           <Row>
+               {paymentResult?.transaction_time}
+           </Row>
+           </Row>
+          }
+               
+              
               <Row>
                 <Link href="/shop">
                     <Button className="justify-content-md-center">
@@ -74,10 +124,17 @@ const paymentInterface=({user})=>{
                 </Link>
               </Row>
           </Container>
-        </LayoutOne>
+        </PaymentResponseLayout>
         </Fragment>
     )
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    resetCart: (uID) => {
+      dispatch(resetCart(uID));
+    }
+  };
+};
 const mapStateToProps = state => {
     return {
       user: state.userData,
@@ -85,4 +142,4 @@ const mapStateToProps = state => {
       currency: state.currencyData
     };
   };
-export default connect(mapStateToProps, null)(paymentInterface);
+export default connect(mapStateToProps, mapDispatchToProps)(paymentInterface);
