@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useRouter } from "next/router";
+import client from "../../constants/config";
 
 const clientOrders = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,6 +13,7 @@ const clientOrders = () => {
   const { cr,ci } = router.query
 const customer_id=ci
 const cart_id=cr
+
 
 
 
@@ -70,7 +72,7 @@ const cart_id=cr
   return (
       <>
       <LoginModal show={modalShow} onHide={() => setModalShow(false)} />
-      {isLoggedIn?router}
+      {/* {isLoggedIn?router:""} */}
       </>
   );
 };
