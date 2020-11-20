@@ -16,35 +16,45 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 firebase.messaging();
+// // const messaging =
+// // Get registration token. Initially this makes a network call, once retrieved
+// // subsequent calls to getToken will return from cache.
+// // messaging
+// //   .getToken({
+// //     vapidKey:
+// //       "BJLqmhAST4h-mAkft88skiu_7kXyS1QpjhEErrxrbQBgd66NfZk9YYgxdvpMPRzIxfXq-C0nDlnFFsnf3Rq2MSw"
+// //   })
+// //   .then(currentToken => {
+// //     if (currentToken) {
+// //       sendTokenToServer(currentToken);
+// //       updateUIForPushEnabled(currentToken);
+// //     } else {
+// //       // Show permission request.
+// //       console.log(
+// //         "No registration token available. Request permission to generate one."
+// //       );
+// //       // Show permission UI.
+// //       updateUIForPushPermissionRequired();
+// //       setTokenSentToServer(false);
+// //     }
+// //   })
+// //   .catch(err => {
+// //     console.log("An error occurred while retrieving token. ", err);
+// //     showToken("Error retrieving registration token. ", err);
+// //     setTokenSentToServer(false);
+// //   });
 
-// Get registration token. Initially this makes a network call, once retrieved
-// subsequent calls to getToken will return from cache.
-messaging.getToken({vapidKey: 'BJLqmhAST4h-mAkft88skiu_7kXyS1QpjhEErrxrbQBgd66NfZk9YYgxdvpMPRzIxfXq-C0nDlnFFsnf3Rq2MSw'}).then((currentToken) => {
-  if (currentToken) {
-    sendTokenToServer(currentToken);
-    updateUIForPushEnabled(currentToken);
-  } else {
-    // Show permission request.
-    console.log('No registration token available. Request permission to generate one.');
-    // Show permission UI.
-    updateUIForPushPermissionRequired();
-    setTokenSentToServer(false);
-  }
-}).catch((err) => {
-  console.log('An error occurred while retrieving token. ', err);
-  showToken('Error retrieving registration token. ', err);
-  setTokenSentToServer(false);
-});
+// messaging.onBackgroundMessage(function(payload) {
+//   console.log(
+//     "[firebase-messaging-sw.js] Received background message ",
+//     payload
+//   );
+//   // Customize notification here
+//   const notificationTitle = "Background Message Title";
+//   const notificationOptions = {
+//     body: "Background Message body.",
+//     icon: "/firebase-logo.png"
+//   };
 
-messaging.onBackgroundMessage(function(payload) {
-  console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  // Customize notification here
-  const notificationTitle = 'Background Message Title';
-  const notificationOptions = {
-    body: 'Background Message body.',
-    icon: '/firebase-logo.png'
-  };
-
-  self.registration.showNotification(notificationTitle,
-    notificationOptions);
-});
+//   self.registration.showNotification(notificationTitle, notificationOptions);
+// });

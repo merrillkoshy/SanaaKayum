@@ -4,9 +4,8 @@ import { useStore } from "../store";
 import ScrollToTop from "../helpers/scroll-top";
 import { ToastProvider } from "react-toast-notifications";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
-import Helmet from "react-helmet";
 import Router from "next/router";
-import Head from "next/head";
+
 import {
   fetchProducts,
   fetchLingerie,
@@ -18,8 +17,7 @@ import {
 import client from "../constants/config";
 import NProgress from "nprogress";
 
-import { firebaseCloudMessaging } from '../utils/webPush'
-
+import { firebaseCloudMessaging } from "../utils/webPush";
 
 import LoadingScreen from "../helpers/LoadingScreen";
 import { Fragment, useEffect } from "react";
@@ -41,8 +39,22 @@ Router.onRouteChangeError = () => {
 
 const App = ({ Component, pageProps }) => {
   useEffect(() => {
-    firebaseCloudMessaging.init()
-
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function() {
+        navigator.serviceWorker.register("/firebase-messaging-sw.js").then(
+          function(registration) {
+            console.log(
+              "Service Worker registration successful with scope: ",
+              registration.scope
+            );
+            firebaseCloudMessaging.init();
+          },
+          function(err) {
+            console.log("Service Worker registration failed: ", err);
+          }
+        );
+      });
+    }
   }, []);
   const store = useStore(pageProps.initialReduxState);
   let preloadedState;
