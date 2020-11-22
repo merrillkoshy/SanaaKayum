@@ -43,7 +43,7 @@ export async function getStaticProps({ params }) {
     props: {
       staticProducts
     },
-    revalidate: 3
+    revalidate: 1
   };
 }
 
