@@ -2,17 +2,26 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import  Link  from "next/link";
 
-import MetaTags from "react-meta-tags";
+
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../layouts/LayoutOne";
-
+import HeaderMeta from "../components/header/HeaderMeta";
 const NotFound = ({}) => {
   return (
     <Fragment>
-      <MetaTags>
-        <title>404: Thats unstitched</title>
-        <meta name="description" content="404 Not found" />
-      </MetaTags>
+          <HeaderMeta
+        article={"404: Thats unstitched"}
+        title={"404: Thats unstitched"}
+        description={
+          "404: Thats unstitched"
+        }
+        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={""}
+        color={"#000000"}
+        
+      />
+
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}

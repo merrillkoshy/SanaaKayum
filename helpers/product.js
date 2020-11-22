@@ -46,7 +46,7 @@ export const getProductCartQuantity = (cartItems, product, color, size) => {
           : true)
     )[0];
   if (
-    !cartItems.some(item => item.unNull === "unNull") &&
+    cartItems&&
     cartItems.length >= 1 &&
     productInCart
   ) {

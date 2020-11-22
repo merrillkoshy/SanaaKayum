@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import  Link  from "next/link";
 
 import { useToasts } from "react-toast-notifications";
-import MetaTags from "react-meta-tags";
+
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
 import { getDiscountPrice } from "../helpers/product";
@@ -17,7 +17,7 @@ import LayoutOne from "../layouts/LayoutOne";
 import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
 const slugify = require("@sindresorhus/slugify");
-
+import HeaderMeta from "../components/header/HeaderMeta";
 const Wishlist = ({
   userData,
   
@@ -33,15 +33,16 @@ const Wishlist = ({
 
   return (
     <Fragment>
-      <MetaTags>
-        <title>Haute Couture & High-Street Fashion - Sana'a Kayum</title>
-        <meta
-          name="description"
-          content="Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-        />
-      </MetaTags>
+      <HeaderMeta
+        article={`Wishlist | ${userData.user.firstName}`}
+        title={`Wishlist | ${userData.user.firstName}`}
+        description={`Wishlist | ${userData.user.firstName}`}
+        image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={"https://sanaakayum.com/contact"}
+        color={"#000000"}
+      />
 
-    
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}

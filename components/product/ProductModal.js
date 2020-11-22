@@ -18,7 +18,7 @@ function ProductModal(props) {
   const { finaldiscountedprice } = props;
   
   const { loadCart } = props;
-  const { loadCompare } = props;
+  
   const { loadWishlist } = props;
   const { loginUser } = props;
 
@@ -37,11 +37,11 @@ function ProductModal(props) {
   const [quantityCount, setQuantityCount] = useState(1);
 
   const wishlistItem = props.wishlistitem;
-  const compareItem = props.compareitem;
+  
 
   const addToCart = props.addtocart;
   const addToWishlist = props.addtowishlist;
-  const addToCompare = props.addtocompare;
+  
 
   const addToast = props.addtoast;
   const cartItems = props.cartitems;
@@ -374,17 +374,19 @@ function ProductModal(props) {
                       <div className="pro-details-cart btn-hover">
                         {productStock && productStock > 0 ? (
                           <button
-                            onClick={() =>
+                            onClick={() =>{ 
+                              
                               uID !== undefined
-                        ? addToCart(
-                          product,
-                          addToast,
-                          uID,
-                          quantityCount,
-                          selectedProductColor,
-                          selectedProductSize
-                        )
-                        : setloginModal("true")
+                              ? addToCart(
+                                product,
+                                addToast,
+                                uID,
+                                quantityCount,
+                                selectedProductColor,
+                                selectedProductSize
+                              )
+                              : setloginModal("true")}
+                             
                               
                             }
                             disabled={productCartQty >= productStock}
@@ -443,7 +445,7 @@ function ProductModal(props) {
                 show={loginModal}
                 onHide={() => setloginModal(false)}
                 loadCart={loadCart}
-                loadCompare={loadCompare}
+                
                 loadWishlist={loadWishlist}
                 loginUser={loginUser}
                 addtoast={addToast}
@@ -455,10 +457,10 @@ function ProductModal(props) {
 ProductModal.propTypes = {
   addtoast: PropTypes.func,
   addtocart: PropTypes.func,
-  addtocompare: PropTypes.func,
+  
   addtowishlist: PropTypes.func,
   cartitems: PropTypes.array,
-  compareitem: PropTypes.object,
+  
   currency: PropTypes.object,
   discountedprice: PropTypes.number,
   finaldiscountedprice: PropTypes.number,

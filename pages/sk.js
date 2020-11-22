@@ -1,23 +1,31 @@
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
-import MetaTags from "react-meta-tags";
+
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../layouts/LayoutOne";
 import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
 import BrochureSingle from "../wrappers/skHelpers/BrochureSingle";
+import HeaderMeta from "../components/header/HeaderMeta";
 
 const Sk = () => {
   
 
   return (
     <Fragment>
-      <MetaTags>
-        <title>SK™ by Sana'a Kayum® | Sana'a Kayum</title>
-        <meta
-          name="description"
-          content="Bespoke solutions for Corporate Clothing, Work-wear and Uniforms to represent YOUR brand identity in style and comfort."
-        />
-      </MetaTags>
+      
+      <HeaderMeta
+        article={"SK™ by Sana'a Kayum® | Sana'a Kayum"}
+        title={"SK™ by Sana'a Kayum® | Sana'a Kayum"}
+        description={
+          "Bespoke solutions for Corporate Clothing, Work-wear and Uniforms to represent YOUR brand identity in style and comfort."
+        }
+        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={""}
+        color={"#000000"}
+        
+      />
+     
       
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}

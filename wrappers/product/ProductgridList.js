@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import { loginUser } from "../../redux/actions/userActions";
 import { addToCart,loadCart } from "../../redux/actions/cartActions";
 import { addToWishlist,loadWishlist } from "../../redux/actions/wishlistActions";
-import { addToCompare,loadCompare } from "../../redux/actions/compareActions";
 import ProductGridListSingle from "../../components/product/ProductGridListSingle";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import Skeleton from 'react-loading-skeleton';
 
 
 const slugify = require("@sindresorhus/slugify");
@@ -17,16 +18,17 @@ const ProductGrid = ({
   currency,
   addToCart,
   addToWishlist,
-  addToCompare,
+  
   cartItems,
   wishlistItems,
-  compareItems,
+  
   sliderClassName,
   spaceBottomClass
 }) => {
+  const {isFallback} =useRouter()
   return (
     <Fragment>
-      {products.map(product => {
+      {isFallback ? <Skeleton count={5}/>:products.map(product => {
         return (
           <Link
             key={product.serialNumber}
@@ -47,7 +49,7 @@ const ProductGrid = ({
               addToCart={addToCart}
               entryID={userData.user.entryID}
               addToWishlist={addToWishlist}
-              addToCompare={addToCompare}
+              
               cartItem={
                 cartItems &&
                 cartItems.filter(
@@ -59,29 +61,26 @@ const ProductGrid = ({
                   wishlistItem => wishlistItem.id === product.serialNumber
                 )[0]
               }
-              compareItem={
-                compareItems.filter(
-                  compareItem => compareItem.id === product.serialNumber
-                )[0]
-              }
+
               loadCart={loadCart}
-                loadCompare={loadCompare}
+                
                 loadWishlist={loadWishlist}
                 loginUser={loginUser}
             />
           </Link>
         );
       })}
+      
     </Fragment>
   );
 };
 
 ProductGrid.propTypes = {
   addToCart: PropTypes.func,
-  addToCompare: PropTypes.func,
+  
   addToWishlist: PropTypes.func,
   cartItems: PropTypes.array,
-  compareItems: PropTypes.array,
+  
   currency: PropTypes.object,
   products: PropTypes.array,
   sliderClassName: PropTypes.string,
@@ -94,7 +93,7 @@ const mapStateToProps = state => {
     currency: state.currencyData,
     cartItems: state.cartData,
     wishlistItems: state.wishlistData,
-    compareItems: state.compareData,
+    
     userData: state.userData
   };
 };
@@ -108,9 +107,7 @@ const mapDispatchToProps = dispatch => {
     loadCart: item => {
       dispatch(loadCart(item));
     },
-    loadCompare: item => {
-      dispatch(loadCompare(item));
-    },
+
     loadWishlist: item => {
       dispatch(loadWishlist(item));
     },
@@ -136,9 +133,7 @@ const mapDispatchToProps = dispatch => {
     addToWishlist: (item, addToast, entryID) => {
       dispatch(addToWishlist(item, addToast, entryID));
     },
-    addToCompare: (item, addToast, uID) => {
-      dispatch(addToCompare(item, addToast, uID));
-    }
+
   };
 };
 

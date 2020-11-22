@@ -1,23 +1,32 @@
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
-import MetaTags from "react-meta-tags";
+
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../layouts/LayoutOne";
 import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
 import TnCCtn from "../components/section-title/TnC";
+import HeaderMeta from "../components/header/HeaderMeta";
 
 const TermsAndConditions = ({  }) => {
   
 
   return (
     <Fragment>
-      <MetaTags>
-        <title>Terms And Conditions - Sana'a Kayum</title>
-        <meta
-          name="description"
-          content="These terms and conditions outline the rules and regulations for the use of SANAA KAYUM CLOTHING ART LLC's Website, located at https://sanaakayum.com"
-        />
-      </MetaTags>
+      
+      <HeaderMeta
+        article={"Terms And Conditions - Sana'a Kayum"}
+        title={"Terms And Conditions - Sana'a Kayum"}
+        description={
+          "These terms and conditions outline the rules and regulations for the use of SANAA KAYUM CLOTHING ART LLC's Website, located at https://sanaakayum.com"
+        }
+        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={""}
+        color={"#000000"}
+        
+      />
+
+
       
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}

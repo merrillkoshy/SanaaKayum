@@ -9,23 +9,23 @@ import { useHistory } from "react-router-dom";
 import { logoutUser,loginUser } from "../../redux/actions/userActions";
 import { deleteFromCart, resetCart,loadCart } from "../../redux/actions/cartActions";
 import { resetWishlist,loadWishlist } from "../../redux/actions/wishlistActions";
-import { resetCompare,loadCompare } from "../../redux/actions/compareActions";
+
 
 import Link from "next/link";
 import { Button } from "react-bootstrap";
 import LoginModal from "../product/LoginModal";
 const IconGroup = ({
   loadCart,
-  loadCompare,
+  
   loadWishlist,
   loginUser,
   userData,
   cartData,
   wishlistData,
-  compareData,
+  
   deleteFromCart,
   resetCart,
-  resetCompare,
+  
   resetWishlist,
   iconWhiteClass,
   logoutUser
@@ -77,7 +77,7 @@ const IconGroup = ({
               setLoggedIn(false);
               setUname(initUname);
               setInteraction(initInteraction);
-              resetCompare();
+              
               resetCart();
               resetWishlist();
             }}
@@ -169,8 +169,7 @@ const IconGroup = ({
                   <i className="pe-7s-like" />
                   <span className="count-style">
                     {wishlistData &&
-                    wishlistData.length >= 1 &&
-                    !wishlistData.some(item => item.unNull === "unNull")
+                    wishlistData.length >= 1 
                       ? wishlistData.length
                       : 0}
                   </span>
@@ -182,8 +181,7 @@ const IconGroup = ({
                 <i className="pe-7s-shopbag" />
                 <span className="count-style">
                   {cartData &&
-                  cartData.length &&
-                  !cartData.some(item => item.unNull === "unNull")
+                  cartData.length 
                     ? cartData.length
                     : 0}
                 </span>
@@ -201,8 +199,7 @@ const IconGroup = ({
                   <i className="pe-7s-shopbag" />
                   <span className="count-style">
                     {cartData &&
-                    cartData.length &&
-                    !cartData.some(item => item.unNull === "unNull")
+                    cartData.length 
                       ? cartData.length
                       : 0}
                   </span>
@@ -231,7 +228,7 @@ const IconGroup = ({
       show={loginModal} 
       onHide={() => setloginModal(false)} 
       loadCart={loadCart}
-      loadCompare={loadCompare}
+      
       loadWishlist={loadWishlist}
       loginUser={loginUser}
       addtoast={addToast}/>
@@ -241,7 +238,7 @@ const IconGroup = ({
 
 IconGroup.propTypes = {
   cartData: PropTypes.array,
-  compareData: PropTypes.array,
+  
   iconWhiteClass: PropTypes.string,
   deleteFromCart: PropTypes.func,
   logoutUser: PropTypes.func,
@@ -253,7 +250,7 @@ const mapStateToProps = state => {
     currency: state.currencyData,
     cartData: state.cartData,
     wishlistData: state.wishlistData,
-    compareData: state.compareData,
+    
     userData: state.userData
   };
 };
@@ -266,9 +263,6 @@ const mapDispatchToProps = dispatch => {
     loadCart: item => {
       dispatch(loadCart(item));
     },
-    loadCompare: item => {
-      dispatch(loadCompare(item));
-    },
     loadWishlist: item => {
       dispatch(loadWishlist(item));
     },
@@ -280,9 +274,6 @@ const mapDispatchToProps = dispatch => {
     },
     resetCart: () => {
       dispatch(resetCart());
-    },
-    resetCompare: () => {
-      dispatch(resetCompare());
     },
     resetWishlist: () => {
       dispatch(resetWishlist());

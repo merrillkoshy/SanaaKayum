@@ -6,7 +6,7 @@ import { getProducts } from "../../helpers/product";
 import ProductGridSingle from "../../components/product/ProductGridSingle";
 import { addToCart } from "../../redux/actions/cartActions";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
-import { addToCompare } from "../../redux/actions/compareActions";
+
 import Link from "next/link";
 const slugify = require("@sindresorhus/slugify");
 
@@ -17,10 +17,10 @@ const HomePageProductSlider = ({
   addToCart,
   userData,
   addToWishlist,
-  addToCompare,
+  
   cartItems,
   wishlistItems,
-  compareItems,
+  
   sliderClassName,
   spaceBottomClass
 }) => {
@@ -49,7 +49,7 @@ const HomePageProductSlider = ({
                   addToCart={addToCart}
                   uID={userData.user.entryID}
                   addToWishlist={addToWishlist}
-                  addToCompare={addToCompare}
+                  
                   cartItem={
                     cartItems
                       ? cartItems.filter(
@@ -64,12 +64,6 @@ const HomePageProductSlider = ({
                         wishlistItem.serialNumber === product.serialNumber
                     )[0]
                   }
-                  compareItem={
-                    compareItems.filter(
-                      compareItem =>
-                        compareItem.serialNumber === product.serialNumber
-                    )[0]
-                  }
                   key={product.serialNumber}
                 />
               </Link>
@@ -82,10 +76,10 @@ const HomePageProductSlider = ({
 
 HomePageProductSlider.propTypes = {
   addToCart: PropTypes.func,
-  addToCompare: PropTypes.func,
+  
   addToWishlist: PropTypes.func,
   cartItems: PropTypes.array,
-  compareItems: PropTypes.array,
+  
   currency: PropTypes.object,
   products: PropTypes.array,
   sliderClassName: PropTypes.string,
@@ -98,7 +92,7 @@ const mapStateToProps = (state, ownProps) => {
     currency: state.currencyData,
     cartItems: state.cartData,
     wishlistItems: state.wishlistData,
-    compareItems: state.compareData,
+    
     userData: state.userData
   };
 };
@@ -127,9 +121,7 @@ const mapDispatchToProps = dispatch => {
     addToWishlist: (item, addToast, uID) => {
       dispatch(addToWishlist(item, addToast, uID));
     },
-    addToCompare: (item, addToast) => {
-      dispatch(addToCompare(item, addToast));
-    }
+    
   };
 };
 

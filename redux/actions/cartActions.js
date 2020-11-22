@@ -4,7 +4,7 @@ export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const DELETE_ALL_FROM_CART = "DELETE_ALL_FROM_CART";
 export const RESET_CART = "RESET_CART";
 export const LOAD_CART_FROM_PROFILE = "LOAD_CART_FROM_PROFILE";
-
+export const POST_PURCHASE="POST_PURCHASE";
 //add to cart
 export const addToCart = (
   item,
@@ -80,9 +80,15 @@ export const loadCart = item => {
 };
 
 //reset on logout
-export const resetCart = uID => {
+export const resetCart = () => {
   return dispatch => {
-    dispatch({ type: RESET_CART,payload:uID });
+    dispatch({ type: RESET_CART });
+  };
+};
+export const postPurchase = uID => {
+  
+  return dispatch => {
+    dispatch({ type: POST_PURCHASE,payload:uID });
   };
 };
 

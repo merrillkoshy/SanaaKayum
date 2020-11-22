@@ -2,7 +2,6 @@ import currencyReducer from "./currencyReducer";
 import productReducer from "./productReducer";
 import cartReducer from "./cartReducer";
 import wishlistReducer from "./wishlistReducer";
-import compareReducer from "./compareReducer";
 import brochuresReducer from "./brochuresReducer";
 import lookbooksReducer from "./lookbooksReducer";
 import pBannersReducer from "./pBannersReducer";
@@ -20,7 +19,7 @@ const rootReducer = combineReducers({
   pBannersData: pBannersReducer,
   cartData: cartReducer,
   wishlistData: wishlistReducer,
-  compareData: compareReducer,
+  
   userData: userReducer,
   sliderData: lpsReducer
 });

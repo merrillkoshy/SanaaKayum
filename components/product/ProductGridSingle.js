@@ -12,7 +12,7 @@ const slugify = require("@sindresorhus/slugify");
 
 const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
   const { loadCart } = props;
-  const { loadCompare } = props;
+  
   const { loadWishlist } = props;
   const { loginUser } = props;
   const { userData } = props;
@@ -21,10 +21,10 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
   const { currency } = props;
   const { addToCart } = props;
   const { addToWishlist } = props;
-  const { addToCompare } = props;
+  
   const { cartItem } = props;
   const { wishlistItem } = props;
-  const { compareItem } = props;
+  
   const { sliderClassName } = props;
   const { spaceBottomClass } = props;
   const { addToast } = props;
@@ -166,7 +166,7 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                 show={loginModal}
                 onHide={() => setloginModal(false)}
                 loadCart={loadCart}
-                loadCompare={loadCompare}
+                
                 loadWishlist={loadWishlist}
                 loginUser={loginUser}
                 addtoast={addToast}
@@ -237,11 +237,11 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
         finaldiscountedprice={finalDiscountedPrice}
         cartitem={cartItem}
         wishlistitem={wishlistItem}
-        compareitem={compareItem}
+        
         uID={uID}
         addtocart={addToCart}
         addtowishlist={addToWishlist}
-        addtocompare={addToCompare}
+        
         addtoast={addToast}
        
       />
@@ -251,10 +251,10 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
 
 ProductGridSingle.propTypes = {
   addToCart: PropTypes.func,
-  addToCompare: PropTypes.func,
+  
   addToWishlist: PropTypes.func,
   cartItem: PropTypes.object,
-  compareItem: PropTypes.object,
+  
   currency: PropTypes.object,
   product: PropTypes.object,
   sliderClassName: PropTypes.string,

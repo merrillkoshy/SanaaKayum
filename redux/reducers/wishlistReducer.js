@@ -15,8 +15,9 @@ const atw = (uID, finalWish) => {
     .then(environment => environment.getEntry(uID))
 
     .then(entry => {
-      entry.fields.wishlistData["en-US"] = finalWish;
-
+      if (entry.fields["wishlistData"] === undefined)
+      entry.fields["wishlistData"] = { "en-US": [finalWish] };
+      else entry.fields["wishlistData"]["en-US"].push(finalWish);
       return entry.update();
     })
     .then(entry => entry.publish());
@@ -61,21 +62,13 @@ const wishlistReducer = (state = initState, action) => {
 
     dfWish.length
       ? atw(product.uID, dfWish)
-      : atw(product.uID, [
-          {
-            unNull: "unNull"
-          }
-        ]);
+      : atw(product.uID, null);
     return dfWish;
   }
 
   if (action.type === DELETE_ALL_FROM_WISHLIST) {
     const deleteAllFromWishList = dafwOps();
-    atw(product.uID, [
-      {
-        unNull: "unNull"
-      }
-    ]);
+    atw(product.uID, null);
     return deleteAllFromWishList;
   }
   if (action.type === LOAD_WISHLIST_FROM_PROFILE) {

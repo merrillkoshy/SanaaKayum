@@ -9,7 +9,7 @@ import ProductImageGallerySideThumb from "../../components/product/ProductImageG
 import ProductImageFixed from "../../components/product/ProductImageFixed";
 const slugify = require("@sindresorhus/slugify");
 
-import MetaTags from "react-meta-tags";
+
 
 import ProductSchema from "../../components/header/ProductSchema";
 
@@ -21,14 +21,12 @@ const ProductImageDescription = ({
   currency,
   cartItems,
   wishlistItems,
-  compareItems
+  
 }) => {
   const wishlistItem = wishlistItems.filter(
     wishlistItem => wishlistItem.id === product?product.serialNumber:""
   )[0];
-  const compareItem = compareItems.filter(
-    compareItem => compareItem.id === product?product.serialNumber:""
-  )[0];
+
   const { addToast } = useToasts();
 
   const discountedPrice = getDiscountPrice(product?product.price:0, product?product.discount:0);
@@ -74,7 +72,7 @@ const ProductImageDescription = ({
               finalProductPrice={finalProductPrice}
               cartItems={cartItems}
               wishlistItem={wishlistItem}
-              compareItem={compareItem}
+              
               addToast={addToast}
             />
           </div>
@@ -89,7 +87,7 @@ const ProductImageDescription = ({
 
 ProductImageDescription.propTypes = {
   cartItems: PropTypes.array,
-  compareItems: PropTypes.array,
+  
   currency: PropTypes.object,
   galleryType: PropTypes.string,
   product: PropTypes.object,
@@ -103,7 +101,7 @@ const mapStateToProps = state => {
     currency: state.currencyData,
     cartItems: state.cartData,
     wishlistItems: state.wishlistData,
-    compareItems: state.compareData
+    
   };
 };
 

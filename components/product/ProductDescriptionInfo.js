@@ -6,7 +6,7 @@ import { getProductCartQuantity } from "../../helpers/product";
 import { addToCart } from "../../redux/actions/cartActions";
 import { loginPrompt } from "../../redux/actions/userActions";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
-import { addToCompare } from "../../redux/actions/compareActions";
+
 import Rating from "./sub-components/ProductRating";
 import whatsAppthis from "../../constants/whatsappHelper";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -17,7 +17,7 @@ import LoginModal from "./LoginModal";
 import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
 const ProductDescriptionInfo = ({
   loadCart,
-  loadCompare,
+  
   loadWishlist,
   loginUser,
   product,
@@ -28,11 +28,11 @@ const ProductDescriptionInfo = ({
   finalProductPrice,
   cartItems,
   wishlistItem,
-  compareItem,
+  
   addToast,
   addToCart,
   addToWishlist,
-  addToCompare
+  
 }) => {
   const [selectedProductColor, setSelectedProductColor] = useState(
     product.color ? product.color : ""
@@ -246,7 +246,7 @@ const ProductDescriptionInfo = ({
       show={loginModal} 
       onHide={() => setloginModal(false)} 
       loadCart={loadCart}
-      loadCompare={loadCompare}
+      
       loadWishlist={loadWishlist}
       loginUser={loginUser}
       addtoast={addToast}/>
@@ -371,11 +371,11 @@ const ProductDescriptionInfo = ({
 
 ProductDescriptionInfo.propTypes = {
   addToCart: PropTypes.func,
-  addToCompare: PropTypes.func,
+  
   addToWishlist: PropTypes.func,
   addToast: PropTypes.func,
   cartItems: PropTypes.array,
-  compareItem: PropTypes.array,
+  
   currency: PropTypes.object,
   discountedPrice: PropTypes.number,
   finalDiscountedPrice: PropTypes.number,
@@ -397,9 +397,7 @@ const mapDispatchToProps = dispatch => {
     loadCart: item => {
       dispatch(loadCart(item));
     },
-    loadCompare: item => {
-      dispatch(loadCompare(item));
-    },
+    
     loadWishlist: item => {
       dispatch(loadWishlist(item));
     },
@@ -428,9 +426,7 @@ const mapDispatchToProps = dispatch => {
     loginPrompt: addToast => {
       dispatch(loginPrompt(addToast));
     },
-    addToCompare: (item, addToast) => {
-      dispatch(addToCompare(item, addToast));
-    }
+
   };
 };
 

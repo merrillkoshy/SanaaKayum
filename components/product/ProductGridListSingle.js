@@ -8,6 +8,7 @@ import ProductModal from "./ProductModal";
 import whatsAppthis from "../../constants/whatsappHelper";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Image from "next/image";
+import Skeleton from "react-loading-skeleton";
 const slugify = require("@sindresorhus/slugify");
 
 const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
@@ -16,16 +17,16 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
   const { currency } = props;
   const { addToCart } = props;
   const { addToWishlist } = props;
-  const { addToCompare } = props;
+  
   const { cartItem } = props;
   const { wishlistItem } = props;
-  const { compareItem } = props;
+  
   const { sliderClassName } = props;
   const { spaceBottomClass } = props;
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = props;
   const { loadCart } = props;
-  const { loadCompare } = props;
+  
   const { loadWishlist } = props;
   const { loginUser } = props;
   
@@ -77,7 +78,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                       product.images[0].fields.file.url}?w=220&h=300&f=center&fit=pad`
                     : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                         product.images[0].fields.file.url}?fm=jpg&w=220&h=300&f=center&fit=pad`
-                }
+                || <Skeleton count={5}/>}
               />
 
               {product.images.length > 1 ? (
@@ -98,6 +99,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                         product.images[1].fields.file.url}?w=220&h=300&f=center&fit=pad`
                       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                           product.images[1].fields.file.url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                          || <Skeleton count={5}/>
                   }
                 />
               ) : (
@@ -192,10 +194,10 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
             </div>
             <div className="product-content text-center">
               <h3>
-                <strong>{product.article}</strong>
+                <strong>{product.article|| <Skeleton count={5}/>}</strong>
                 {" | "}
 
-                {product.collectionName}
+                {product.collectionName|| <Skeleton count={5}/>}
               </h3>
               {product.rating && product.rating > 0 ? (
                 <div className="product-rating d-none">
@@ -215,7 +217,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                 {discountedPrice !== null ? (
                   <Fragment>
                     {/* {/* <span>{currency.currencySymbol + finalDiscountedPrice}</span>{" "} */}
-                    <span>{`AED ` + finalDiscountedPrice}</span>{" "}
+                    <span>{`AED ` + finalDiscountedPrice|| <Skeleton count={5}/>}</span>{" "}
                     <span className="old">
                       {/* {currency.currencySymbol + finalProductPrice} */}
                       {`AED `}
@@ -246,6 +248,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                             product.images[0].fields.file.url}?w=220&h=300&f=center&fit=pad`
                           : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                               product.images[0].fields.file.url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                              || <Skeleton count={5}/>
                       }
                       alt={product.collectionName}
                       title={
@@ -268,7 +271,8 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                               product.images[1].fields.file.url}?w=220px&h=300&f=center&fit=pad`
                             : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                                 product.images[1].fields.file.url}?fm=jpg&w=220px&h=300&f=center&fit=pad`
-                        }
+                                || <Skeleton count={5}/>
+                              }
                         alt={product.collectionName}
                         title={
                           product.collectionName +
@@ -327,7 +331,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   ) : (
                     ""
                   )}
-                  {product.description ? <p>{product.description}</p> : ""}
+                  {product.description ? <p>{product.description|| <Skeleton count={5}/>}</p> : ""}
 
                   <div className="shop-list-actions d-flex align-items-center">
                     <div className="shop-list-btn btn-hover">
@@ -412,13 +416,13 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
         finaldiscountedprice={finalDiscountedPrice}
         cartitem={cartItem}
         wishlistitem={wishlistItem}
-        compareitem={compareItem}
+        uID={entryID}
         addtocart={addToCart}
         addtowishlist={addToWishlist}
-        addtocompare={addToCompare}
+        
         addtoast={addToast}
         loadCart={loadCart}
-        loadCompare={loadCompare}
+        
         loadWishlist={loadWishlist}
         loginUser={loginUser}
       />
@@ -428,10 +432,10 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
 
 ProductGridListSingle.propTypes = {
   addToCart: PropTypes.func,
-  addToCompare: PropTypes.func,
+  
   addToWishlist: PropTypes.func,
   cartItem: PropTypes.object,
-  compareItem: PropTypes.object,
+  
   currency: PropTypes.object,
   product: PropTypes.object,
   sliderClassName: PropTypes.string,

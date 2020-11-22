@@ -7,13 +7,13 @@ import ProductGridSingle from "../../components/product/ProductGridSingle";
 import { loginUser } from "../../redux/actions/userActions";
 import { addToCart,loadCart } from "../../redux/actions/cartActions";
 import { addToWishlist,loadWishlist } from "../../redux/actions/wishlistActions";
-import { addToCompare,loadCompare } from "../../redux/actions/compareActions";
+
 import Link from "next/link";
 const slugify = require("@sindresorhus/slugify");
 
 const ProductGrid = ({
   loadCart,
-  loadCompare,
+  
   loadWishlist,
   loginUser,
   userData,
@@ -23,10 +23,10 @@ const ProductGrid = ({
   addToCart,
   
   addToWishlist,
-  addToCompare,
+  
   cartItems,
   wishlistItems,
-  compareItems,
+  
   sliderClassName,
   spaceBottomClass
 }) => {
@@ -55,7 +55,7 @@ const ProductGrid = ({
                 addToCart={addToCart}
                 uID={userData.user.entryID}
                 addToWishlist={addToWishlist}
-                addToCompare={addToCompare}
+                
                 cartItem={
                   cartItems
                     ? cartItems.filter(
@@ -70,15 +70,10 @@ const ProductGrid = ({
                       wishlistItem.serialNumber === product.serialNumber
                   )[0]
                 }
-                compareItem={
-                  compareItems.filter(
-                    compareItem =>
-                      compareItem.serialNumber === product.serialNumber
-                  )[0]
-                }
+
                 key={product.serialNumber}
                 loadCart={loadCart}
-                loadCompare={loadCompare}
+                
                 loadWishlist={loadWishlist}
                 loginUser={loginUser}
                 
@@ -93,10 +88,10 @@ const ProductGrid = ({
 
 ProductGrid.propTypes = {
   addToCart: PropTypes.func,
-  addToCompare: PropTypes.func,
+  
   addToWishlist: PropTypes.func,
   cartItems: PropTypes.array,
-  compareItems: PropTypes.array,
+  
   currency: PropTypes.object,
   products: PropTypes.array,
   sliderClassName: PropTypes.string,
@@ -115,7 +110,7 @@ const mapStateToProps = (state, ownProps) => {
     currency: state.currencyData,
     cartItems: state.cartData,
     wishlistItems: state.wishlistData,
-    compareItems: state.compareData,
+    
     userData: state.userData
   };
 };
@@ -128,9 +123,7 @@ const mapDispatchToProps = dispatch => {
     loadCart: item => {
       dispatch(loadCart(item));
     },
-    loadCompare: item => {
-      dispatch(loadCompare(item));
-    },
+
     loadWishlist: item => {
       dispatch(loadWishlist(item));
     },
@@ -156,9 +149,7 @@ const mapDispatchToProps = dispatch => {
     addToWishlist: (item, addToast, uID) => {
       dispatch(addToWishlist(item, addToast, uID));
     },
-    addToCompare: (item, addToast) => {
-      dispatch(addToCompare(item, addToast));
-    }
+
   };
 };
 

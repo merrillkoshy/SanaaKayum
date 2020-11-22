@@ -8,7 +8,7 @@ import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
-import MetaTags from "react-meta-tags";
+
 import { connect } from "react-redux";
 import Link from "next/link";
 
@@ -18,11 +18,12 @@ import clientMgr from "../constants/contentManager";
 import LayoutOne from "../layouts/LayoutOne";
 
 import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
+import HeaderMeta from "../components/header/HeaderMeta";
 
 const LoginRegister = ({
   loginUser,
   loadCart,
-  loadCompare,
+  
   loadWishlist,
   userData
 }) => {
@@ -111,13 +112,19 @@ const LoginRegister = ({
 
   return (
     <Fragment>
-      <MetaTags>
-        <title>Haute Couture & High-Street Fashion - Sana'a Kayum</title>
-        <meta
-          name="description"
-          content="Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-        />
-      </MetaTags>
+      
+      <HeaderMeta
+        article={"Exquisite Wardrobe"}
+        title={"Haute Couture & High-Street Fashion"}
+        description={
+          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+        }
+        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={""}
+        color={"#000000"}
+        
+      />
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
@@ -402,7 +409,7 @@ const mapStateToProps = state => {
   return {
     cartData: state.cartData,
     wishlistData: state.wishlistData,
-    compareData: state.compareData,
+    
     userData: state.userData
   };
 };
@@ -415,9 +422,7 @@ const mapDispatchToProps = dispatch => {
     loadCart: item => {
       dispatch(loadCart(item));
     },
-    loadCompare: item => {
-      dispatch(loadCompare(item));
-    },
+
     loadWishlist: item => {
       dispatch(loadWishlist(item));
     }

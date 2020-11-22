@@ -5,7 +5,8 @@ import {
   DELETE_FROM_CART,
   DELETE_ALL_FROM_CART,
   LOAD_CART_FROM_PROFILE,
-  RESET_CART
+  RESET_CART,
+  POST_PURCHASE
 } from "../actions/cartActions";
 import clientMgr from "../../constants/contentManager";
 const atc = (uID, finalCart) => {
@@ -13,7 +14,12 @@ const atc = (uID, finalCart) => {
     .then(environment => environment.getEntry(uID))
 
     .then(entry => {
-      entry.fields.cartData["en-US"] = finalCart;
+      if (entry.fields["cartData"]["en-US"] == null) {
+        entry.fields["cartData"] = { "en-US": [finalCart] };
+      } else {
+        entry.fields["cartData"]["en-US"].push(finalCart);
+      }
+
       return entry.update();
     })
     .then(entry => entry.publish());
@@ -132,13 +138,11 @@ const cartReducer = (state = initState, action) => {
     });
   };
 
-  const resetAfterBuy =()=>{
-
-  }
+  const resetAfterBuy = () => {};
   if (action.type === ADD_TO_CART) {
     // for non variant
     const finalCart = atcOps();
-   
+
     atc(product.uID, finalCart);
 
     return finalCart;
@@ -146,13 +150,7 @@ const cartReducer = (state = initState, action) => {
 
   if (action.type === DECREASE_QUANTITY) {
     const remCart = dfcOps();
-    remCart.length
-      ? atc(product.uID, remCart)
-      : atc(product.uID, [
-          {
-            unNull: "unNull"
-          }
-        ]);
+    remCart.length ? atc(product.uID, remCart) : atc(product.uID, null);
     return remCart;
   }
 
@@ -161,34 +159,23 @@ const cartReducer = (state = initState, action) => {
   }
   if (action.type === RESET_CART) {
     const deleteFCart = dAfc();
-    atc(product, [
-      {
-        unNull: "unNull"
-      }
-    ]);
     return deleteFCart;
   }
+  if (action.type === POST_PURCHASE) {
+    const deleteFCart = dAfc();
 
+    return deleteFCart;
+  }
   if (action.type === DELETE_FROM_CART) {
     const deleteFCart = rfcOps();
-    
-    deleteFCart.length
-      ? atc(product.uID, deleteFCart)
-      : atc(product.uID, [
-          {
-            unNull: "unNull"
-          }
-        ]);
+
+    deleteFCart.length ? atc(product.uID, deleteFCart) : atc(product.uID, null);
     return deleteFCart;
   }
 
   if (action.type === DELETE_ALL_FROM_CART) {
     const deleteFCart = dAfc();
-    atc(product.uID, [
-      {
-        unNull: "unNull"
-      }
-    ]);
+    atc(product.uID, null);
     return deleteFCart;
   }
 

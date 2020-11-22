@@ -3,26 +3,22 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useToasts } from "react-toast-notifications";
 import { connect } from "react-redux";
 
-import { useHistory } from "react-router-dom";
 import clientMgr from "../../../constants/contentManager";
 import { logoutUser,loginUser } from "../../../redux/actions/userActions";
 import {  resetCart,loadCart } from "../../../redux/actions/cartActions";
 import { resetWishlist,loadWishlist } from "../../../redux/actions/wishlistActions";
-import { resetCompare,loadCompare } from "../../../redux/actions/compareActions";
+
 import Link from "next/link";
 import { Button } from "react-bootstrap";
 import LoginModal from "../../product/LoginModal";
 const MobileNavMenu = ({
   loadCart,
-  loadCompare,
+  
   loadWishlist,
   loginUser,
   userData,
-  cartData,
-  wishlistData,
-  compareData,
   resetCart,
-  resetCompare,
+  
   resetWishlist,
   logoutUser
 }) => {
@@ -69,7 +65,7 @@ const MobileNavMenu = ({
               setLoggedIn(false);
               setUname(initUname);
               setInteraction(initInteraction);
-              resetCompare();
+              
               resetCart();
               resetWishlist();
             }}
@@ -135,7 +131,7 @@ const MobileNavMenu = ({
       show={loginModal} 
       onHide={() => setloginModal(false)} 
       loadCart={loadCart}
-      loadCompare={loadCompare}
+ 
       loadWishlist={loadWishlist}
       loginUser={loginUser}
       addtoast={addToast}/>
@@ -145,7 +141,7 @@ const MobileNavMenu = ({
 
 MobileNavMenu.propTypes = {
   cartData: PropTypes.array,
-  compareData: PropTypes.array,
+  
   logoutUser: PropTypes.func,
   wishlistData: PropTypes.array
 };
@@ -154,7 +150,7 @@ const mapStateToProps = state => {
   return {
     cartData: state.cartData,
     wishlistData: state.wishlistData,
-    compareData: state.compareData,
+
     userData: state.userData
   };
 };
@@ -167,9 +163,7 @@ const mapDispatchToProps = dispatch => {
     loadCart: item => {
       dispatch(loadCart(item));
     },
-    loadCompare: item => {
-      dispatch(loadCompare(item));
-    },
+
     loadWishlist: item => {
       dispatch(loadWishlist(item));
     },
@@ -179,9 +173,7 @@ const mapDispatchToProps = dispatch => {
     resetCart: () => {
       dispatch(resetCart());
     },
-    resetCompare: () => {
-      dispatch(resetCompare());
-    },
+
     resetWishlist: () => {
       dispatch(resetWishlist());
     }

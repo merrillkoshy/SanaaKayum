@@ -260,14 +260,10 @@ const Checkout = ({ cartItems, currency, user }) => {
                                     userData?.lastName,
                                   email: userData?.email,
                                   phone: userData?.mobile
-                                    ? () => userData?.mobile
+                                    ? userData?.mobile
                                     : document.querySelector(
                                         "input [name='phone']"
-                                      )
-                                    ? document.querySelector(
-                                        "input [name='phone']"
-                                      ).value
-                                    : "",
+                                      ).value,
                                   street1: userData && userData?.addressDetails?.addressLine.concat(
                                     ", P.O.Box : " +
                                       document.querySelector(

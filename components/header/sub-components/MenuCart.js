@@ -41,7 +41,7 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
                           <img
                             alt=""
                             src={
-                              (isSafari || isIE || isFirefox)
+                              !(isSafari || isIE || isFirefox)
                                 ? process.env.NEXT_PUBLIC_PUBLIC_URL +
                                   single.images[0].fields.file.url
                                 : `${process.env.NEXT_PUBLIC_PUBLIC_URL +

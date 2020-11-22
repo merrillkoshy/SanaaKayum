@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import HeaderMeta from "../components/header/HeaderMeta";
-import MetaTags from "react-meta-tags";
+
 
 import ReactGA from "react-ga";
 import LayoutOne from "../layouts/LayoutOne";
