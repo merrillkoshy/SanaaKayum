@@ -87,12 +87,15 @@ const HeaderSix = ({ user, layout, headerPaddingClass, headerBgClass }) => {
         </div>
       </div>
       {/* offcanvas menu */}
-      <OffcanvasMenu
+      {/* <OffcanvasMenu
         activeState={offcanvasActive}
         getActiveState={getActiveState}
-      />
+      /> */}
       {/* mobile menu */}
-      <MobileMenu user={user} />
+      <MobileMenu 
+      activeState={offcanvasActive}
+      getActiveState={getActiveState}
+      user={user} />
     </header>
   );
 };

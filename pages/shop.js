@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
 
-import Paginator from "react-hooks-paginator";
+// import Paginator from "react-hooks-paginator";
+import { Pagination } from "antd";
+
 import HeaderMeta from "../components/header/HeaderMeta";
 import { connect } from "react-redux";
 import { getSortedProducts } from "../helpers/product";
@@ -11,12 +13,12 @@ import ShopSidebar from "../wrappers/product/ShopSidebar";
 import ShopTopbar from "../wrappers/product/ShopTopbar";
 import ShopTopbarFilter from "../wrappers/product/ShopTopbarFilter";
 import ShopProducts from "../wrappers/product/ShopProducts";
-import { Helmet } from "react-helmet";
-import { isMobile, isTablet } from "react-device-detect";
-import Head from "next/head";
-import { Button } from "react-bootstrap";
 
-const ShopGridFullWidth = ({  products, lingerie }) => {
+import { isMobile, isTablet } from "react-device-detect";
+import { animateScroll } from "react-scroll";
+
+
+const ShopGridFullWidth = ({ products, lingerie }) => {
   const [layout, setLayout] = useState("grid three-column");
   const [sortType, setSortType] = useState("");
   const [sortValue, setSortValue] = useState("");
@@ -27,12 +29,14 @@ const ShopGridFullWidth = ({  products, lingerie }) => {
   const [currentData, setCurrentData] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
 
-  const pageLimit = 15;
+  const pageLimit = 16;
 
   const getLayout = layout => {
     isMobile || isTablet ? setLayout("grid two-column") : setLayout(layout);
   };
-
+  const scrollToTop = () => {
+    animateScroll.scrollToTop();
+  };
   const getSortParams = (sortType, sortValue) => {
     setSortType(sortType);
     setSortValue(sortValue);
@@ -41,7 +45,6 @@ const ShopGridFullWidth = ({  products, lingerie }) => {
   const getFilterSortParams = (sortType, sortValue) => {
     setFilterSortType(sortType);
     setFilterSortValue(sortValue);
-    
   };
 
   useEffect(() => {
@@ -65,17 +68,17 @@ const ShopGridFullWidth = ({  products, lingerie }) => {
     <Fragment>
       <HeaderMeta
         article={"Exquisite Wardrobe"}
-        title={"Featuring a wide variety of Arabian, Western, Indo-Arabian, Ethnic couture | Sana\'a Kayum"}
+        title={
+          "Featuring a wide variety of Arabian, Western, Indo-Arabian, Ethnic couture | Sana'a Kayum"
+        }
         description={
-          "Featuring a wide variety of Arabian, Western, Indo-Arabian, Ethnic couture | Sana\'a Kayum"
+          "Featuring a wide variety of Arabian, Western, Indo-Arabian, Ethnic couture | Sana'a Kayum"
         }
         image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
         keywords={`Sana\'a Kayum, Dubai, Fashion `}
         url={`/shop`}
         color={"#000000"}
-        
       />
-      
 
       <LayoutOne
         headerContainerClass="container-fluid"
@@ -124,10 +127,22 @@ const ShopGridFullWidth = ({  products, lingerie }) => {
 
                 {/* shop product pagination */}
                 <div className="pro-pagination-style text-center mt-30">
-                  <Button className="scrollToTop" onClick={()=>{
+                  {/* <Button className="scrollToTop" onClick={()=>{
                      window.scrollTo(0, 0);
-                    }}>
-                  <Paginator
+                    }}> */}
+                  
+                  <Pagination
+                    defaultCurrent={1}
+                    defaultPageSize={pageLimit}
+                    onChange={() => {
+                      scrollToTop();
+                      setOffset;
+                    }}
+                    showSizeChanger={true}
+                    size="small"
+                    total={sortedProducts.length}
+                  />
+                  {/* <Paginator
                     totalRecords={sortedProducts.length}
                     pageLimit={pageLimit}
                     pageNeighbours={2}
@@ -137,8 +152,8 @@ const ShopGridFullWidth = ({  products, lingerie }) => {
                     pageContainerClass="mb-0 mt-0"
                     pagePrevText="«"
                     pageNextText="»"
-                  />
-                  </Button>
+                  /> */}
+                  {/* </Button> */}
                 </div>
               </div>
             </div>

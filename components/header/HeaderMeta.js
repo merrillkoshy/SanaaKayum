@@ -12,12 +12,13 @@ const HeaderMeta = ({
   color
 }) => {
   return (
-    <Fragment>
+    
     <Head>
+    
     <meta name="robots" content="index,follow" />
       {siteIcons}
       <title>{title}</title>
-      <link rel="canonical" href={`https://sanaakayum.com${url}`} />
+      <link rel="canonical" href={`${process.env.NEXT_PUBLIC_DOMAIN}${url}`} />
       <base target="_blank" />
       <link href="https://images.ctfassets.net/" rel="dns-prefetch" />
       <meta
@@ -40,10 +41,10 @@ const HeaderMeta = ({
       />
       
        {/* Import CSS for nprogress */}
-       <link rel="stylesheet" type="text/css" href="/assets/css/nprogress.css" />
+       {/* <link rel="stylesheet" type="text/css" href="/assets/css/nprogress.css" /> */}
       <meta name="og:image"  property="og:image" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} itemProp="image" />
       <meta name="og:type" content="website" />
-      <meta name="og:url" property="og:url" content={`https://sanaakayum.com/${url}`} />
+      <meta name="og:url" property="og:url" content={`${process.env.NEXT_PUBLIC_DOMAIN}/${url}`} />
       <meta property="og:image:secure_url" name="og:image:secure_url" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
       <meta property="og:image:type"name="og:image:type" content="image/jpg" />
       <meta property="og:image:width"name="og:image:width" content="1200" />
@@ -67,7 +68,7 @@ const HeaderMeta = ({
       <meta name="twitter:app:country" content="ae" />
       <meta name="twitter:image" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
       </Head>
-      </Fragment> 
+      
   );
 };
 

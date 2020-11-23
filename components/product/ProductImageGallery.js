@@ -3,6 +3,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
 import Swiper from "react-id-swiper";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
+import Skeleton from "react-loading-skeleton";
+import { Image } from "antd";
 
 const ProductImageGallery = ({ product }) => {
   const [gallerySwiper, getGallerySwiper] = useState(null);
@@ -91,52 +93,27 @@ const ProductImageGallery = ({ product }) => {
                       </button>
                     </LightgalleryItem>
                     <div className="single-image">
-                      <picture>
-                        <source
-                          type="image/webp"
-                          className="img-fluid"
-                          itemProp="image"
-                          alt={product.collectionName}
-                          loading="lazy"
-                          title={
-                            product.collectionName +
-                            " " +
-                            product.article +
-                            " by Sana'a Kayum"
-                          }
-                          srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            single.fields.file.url}`}
-                        />
-                        <source
-                          className="img-fluid"
-                          itemProp="image"
-                          alt={product.collectionName}
-                          loading="lazy"
-                          title={
-                            product.collectionName +
-                            " " +
-                            product.article +
-                            " by Sana'a Kayum"
-                          }
-                          type="image/jpeg"
-                          srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            single.fields.file.url}?fm=jpg`}
-                        />
-                        <img
-                          className="img-fluid"
-                          itemProp="image"
-                          alt={product.collectionName}
-                          loading="lazy"
-                          title={
-                            product.collectionName +
-                            " " +
-                            product.article +
-                            " by Sana'a Kayum"
-                          }
-                          src={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            single.fields.file.url}?fm=jpg`}
-                        />
-                      </picture>
+                      <Image
+                        width={"100%"}
+                        className="img-fluid"
+                        itemProp="image"
+                        alt={product.collectionName}
+                        title={
+                          product.collectionName +
+                          " " +
+                          product.article +
+                          " by Sana'a Kayum"
+                        }
+                        src={
+                          !(isSafari || isIE || isFirefox)
+                            ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                single.fields.file
+                                  .url}?w=220&h=300&f=center&fit=pad`
+                            : `${single.fields.file
+                              .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                        }
+                        placeholder={<Skeleton height={150} />}
+                      />
                     </div>
                   </div>
                 );
@@ -151,52 +128,27 @@ const ProductImageGallery = ({ product }) => {
               return (
                 <div key={key}>
                   <div className="single-image">
-                    <picture>
-                      <source
-                        type="image/webp"
-                        className="img-fluid"
-                        itemProp="image"
-                        alt={single.collectionName}
-                        loading="lazy"
-                        title={
-                          single.collectionName +
-                          " " +
-                          single.article +
-                          " by Sana'a Kayum"
-                        }
-                        srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                          single.fields.file.url}`}
-                      />
-                      <source
+                  <Image
+                        width={"100%"}
                         className="img-fluid"
                         itemProp="image"
                         alt={product.collectionName}
-                        loading="lazy"
                         title={
-                          single.collectionName +
+                          product.collectionName +
                           " " +
-                          single.article +
+                          product.article +
                           " by Sana'a Kayum"
                         }
-                        type="image/jpeg"
-                        srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                          single.fields.file.url}?fm=jpg`}
-                      />
-                      <img
-                        className="img-fluid"
-                        itemProp="image"
-                        alt={single.collectionName}
-                        loading="lazy"
-                        title={
-                          single.collectionName +
-                          " " +
-                          single.article +
-                          " by Sana'a Kayum"
+                        src={
+                          !(isSafari || isIE || isFirefox)
+                            ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                single.fields.file
+                                  .url}?w=220&h=300&f=center&fit=pad`
+                            : `${single.fields.file
+                              .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
                         }
-                        src={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                          single.fields.file.url}?fm=jpg`}
+                        placeholder={<Skeleton height={50} />}
                       />
-                    </picture>
                   </div>
                 </div>
               );

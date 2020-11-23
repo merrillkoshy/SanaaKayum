@@ -20,7 +20,7 @@ const RelatedProductSlider = ({ spaceBottomClass, category }) => {
         slidesPerView: 2
       },
       320: {
-        slidesPerView: 1
+        slidesPerView: 2
       }
     }
   };

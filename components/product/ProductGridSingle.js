@@ -6,8 +6,11 @@ import Rating from "./sub-components/ProductRating";
 import ProductModal from "./ProductModal";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Link from "next/link";
-import Image from "next/image";
+
 import LoginModal from "./LoginModal";
+import Skeleton from "react-loading-skeleton";
+
+import { Image } from "antd";
 const slugify = require("@sindresorhus/slugify");
 
 const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
@@ -60,8 +63,17 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
               }}
             >
               <a className="next-link">
-                <img
+              <Image
+                width={"100%"}
                   className="default-img"
+                  itemProp="image"
+                  alt={product.collectionName}
+                  title={
+                    product.collectionName +
+                    " " +
+                    product.article +
+                    " by Sana'a Kayum"
+                  }
                   src={
                     !(isSafari || isIE || isFirefox)
                       ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
@@ -71,6 +83,12 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                           product.images[0].fields.file
                             .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
                   }
+                  placeholder={<Skeleton height={150} />}
+                />
+
+                {/* <img
+                  className="default-img"
+                  itemProp="image"
                   alt={product.collectionName}
                   loading="lazy"
                   title={
@@ -79,29 +97,71 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                     product.article +
                     " by Sana'a Kayum"
                   }
-                />
+                  
+                  src={
+                    !(isSafari || isIE || isFirefox)
+                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[0].fields.file
+                            .url}?w=220&h=300&f=center&fit=pad` || (
+                          <Skeleton count={5} />
+                        )
+                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[0].fields.file
+                            .url}?fm=jpg&w=220&h=300&f=center&fit=pad` || (
+                          <Skeleton count={5} />
+                        )
+                  }
+                  
+                /> */}
 
                 {product.images.length > 1 ? (
-                  <img
-                    className="hover-img"
-                    src={
-                      !(isSafari || isIE || isFirefox)
-                        ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            product.images[1].fields.file
-                              .url}?w=220&h=300&f=center&fit=pad`
-                        : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            product.images[1].fields.file
-                              .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
-                    }
-                    alt={product.collectionName}
-                    loading="lazy"
-                    title={
-                      product.collectionName +
-                      " " +
-                      product.article +
-                      " by Sana'a Kayum"
-                    }
-                  />
+                  // <img
+                  //   className="hover-img"
+                  //   itemProp="image"
+                  //   alt={product.collectionName}
+                  //   loading="lazy"
+                  //   title={
+                  //     product.collectionName +
+                  //     " " +
+                  //     product.article +
+                  //     " by Sana'a Kayum"
+                  //   }
+                  //   src={
+                  //     !(isSafari || isIE || isFirefox)
+                  //       ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //           product.images[1].fields.file
+                  //             .url}?w=220&h=300&f=center&fit=pad` || (
+                  //           <Skeleton count={5} />
+                  //         )
+                  //       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //           product.images[1].fields.file
+                  //             .url}?fm=jpg&w=220&h=300&f=center&fit=pad` || (
+                  //           <Skeleton count={5} />
+                  //         )
+                  //   }
+                  // />
+                  <Image
+                  width={"100%"}
+                  className="hover-img"
+                  itemProp="image"
+                  alt={product.collectionName}
+                  title={
+                    product.collectionName +
+                    " " +
+                    product.article +
+                    " by Sana'a Kayum"
+                  }
+                  src={
+                    !(isSafari || isIE || isFirefox)
+                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[1].fields.file
+                            .url}?w=220&h=300&f=center&fit=pad`
+                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[1].fields.file
+                            .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                  }
+                  placeholder={<Skeleton height={150} />}
+                />
                 ) : (
                   ""
                 )}

@@ -6,7 +6,7 @@ const LoadingScreen=()=> {
     alt="sanaa-kayum-splash"
     className="preloader"
     loading="eager"
-    src={"/assets/img/splash.gif"}
+    src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/img/splash.gif`}
   />
 </div>)
 }

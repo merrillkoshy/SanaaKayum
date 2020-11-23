@@ -1,11 +1,12 @@
 import "../assets/scss/style.scss";
+
 import { Provider } from "react-redux";
 import { useStore } from "../store";
 import ScrollToTop from "../helpers/scroll-top";
 import { ToastProvider } from "react-toast-notifications";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
-import Router from "next/router";
 
+import Head from "next/head"
 import {
   fetchProducts,
   fetchLingerie,
@@ -15,30 +16,23 @@ import {
   fetchSliders
 } from "../redux/actions/productActions";
 import client from "../constants/config";
-import NProgress from "nprogress";
+import { useRouter } from 'next/router'
+
 
 import { firebaseCloudMessaging } from "../utils/webPush";
 
 import LoadingScreen from "../helpers/LoadingScreen";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect,useState } from "react";
 
-Router.onRouteChangeStart = () => {
-  // ;
-  NProgress.start();
-};
 
-Router.onRouteChangeComplete = () => {
-  // ;
-  NProgress.done();
-};
 
-Router.onRouteChangeError = () => {
-  // ;
-  NProgress.done();
-};
 
 const App = ({ Component, pageProps }) => {
+  const router = useRouter()
+
+  const [isLoading, setIsLoading]=useState(null)
   useEffect(() => {
+    
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function() {
         navigator.serviceWorker.register("/firebase-messaging-sw.js").then(
@@ -55,7 +49,16 @@ const App = ({ Component, pageProps }) => {
         );
       });
     }
-  }, []);
+    const handleRouteChange = (url) => {
+      setIsLoading(true)
+    }
+    const completion = (url) => {
+      setIsLoading(false)
+    }
+    router.events.on('routeChangeStart', handleRouteChange)
+    router.events.on('routeChangeComplete', completion)
+    
+  }, [isLoading]);
   const store = useStore(pageProps.initialReduxState);
   let preloadedState;
   var productMap = [];
@@ -126,17 +129,20 @@ const App = ({ Component, pageProps }) => {
       );
     });
   return (
+    
     <Provider store={store}>
       <ToastProvider placement="bottom-left">
         <BreadcrumbsProvider>
           <ScrollToTop>
             <Fragment>
-              <Component {...pageProps} />
+            {/* <Component {...pageProps} /> */}
+              {isLoading?<LoadingScreen/>:<Component {...pageProps} />}
             </Fragment>
           </ScrollToTop>
         </BreadcrumbsProvider>
       </ToastProvider>
     </Provider>
+    
   );
 };
 

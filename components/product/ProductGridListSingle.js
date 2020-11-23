@@ -7,8 +7,11 @@ import Rating from "./sub-components/ProductRating";
 import ProductModal from "./ProductModal";
 import whatsAppthis from "../../constants/whatsappHelper";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
-import Image from "next/image";
+
 import Skeleton from "react-loading-skeleton";
+
+import { Image, Button, Space } from "antd";
+
 const slugify = require("@sindresorhus/slugify");
 
 const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
@@ -56,7 +59,30 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
               }}
             >
               <a className="next-link">
-                <img
+                <Image
+                width={"100%"}
+                  className="default-img"
+                  itemProp="image"
+                  alt={product.collectionName}
+                  title={
+                    product.collectionName +
+                    " " +
+                    product.article +
+                    " by Sana'a Kayum"
+                  }
+                  src={
+                    !(isSafari || isIE || isFirefox)
+                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[0].fields.file
+                            .url}?w=220&h=300&f=center&fit=pad`
+                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[0].fields.file
+                            .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                  }
+                  placeholder={<Skeleton height={150} />}
+                />
+
+                {/* <img
                   className="default-img"
                   itemProp="image"
                   alt={product.collectionName}
@@ -82,34 +108,56 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                         )
                   }
                   
-                />
+                /> */}
 
                 {product.images.length > 1 ? (
-                  <img
-                    className="hover-img"
-                    itemProp="image"
-                    alt={product.collectionName}
-                    loading="lazy"
-                    title={
-                      product.collectionName +
-                      " " +
-                      product.article +
-                      " by Sana'a Kayum"
-                    }
-                    src={
-                      !(isSafari || isIE || isFirefox)
-                        ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            product.images[1].fields.file
-                              .url}?w=220&h=300&f=center&fit=pad` || (
-                            <Skeleton count={5} />
-                          )
-                        : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            product.images[1].fields.file
-                              .url}?fm=jpg&w=220&h=300&f=center&fit=pad` || (
-                            <Skeleton count={5} />
-                          )
-                    }
-                  />
+                  // <img
+                  //   className="hover-img"
+                  //   itemProp="image"
+                  //   alt={product.collectionName}
+                  //   loading="lazy"
+                  //   title={
+                  //     product.collectionName +
+                  //     " " +
+                  //     product.article +
+                  //     " by Sana'a Kayum"
+                  //   }
+                  //   src={
+                  //     !(isSafari || isIE || isFirefox)
+                  //       ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //           product.images[1].fields.file
+                  //             .url}?w=220&h=300&f=center&fit=pad` || (
+                  //           <Skeleton count={5} />
+                  //         )
+                  //       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //           product.images[1].fields.file
+                  //             .url}?fm=jpg&w=220&h=300&f=center&fit=pad` || (
+                  //           <Skeleton count={5} />
+                  //         )
+                  //   }
+                  // />
+                  <Image
+                  width={"100%"}
+                  className="hover-img"
+                  itemProp="image"
+                  alt={product.collectionName}
+                  title={
+                    product.collectionName +
+                    " " +
+                    product.article +
+                    " by Sana'a Kayum"
+                  }
+                  src={
+                    !(isSafari || isIE || isFirefox)
+                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[1].fields.file
+                            .url}?w=220&h=300&f=center&fit=pad`
+                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[1].fields.file
+                            .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                  }
+                  placeholder={<Skeleton height={150} />}
+                />
                 ) : (
                   ""
                 )}
@@ -250,59 +298,108 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
             <div className="col-xl-4 col-md-5 col-sm-6">
               <div className="product-list-image-wrap">
                 <div className="product-img">
-                  <Image
-                    className="default-img img-fluid"
-                    itemProp="image"
-                    src={
-                      !(isSafari || isIE || isFirefox)
-                        ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            product.images[0].fields.file
-                              .url}?w=220&h=300&f=center&fit=pad`
-                        : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            product.images[0].fields.file
-                              .url}?fm=jpg&w=220&h=300&f=center&fit=pad` || (
-                            <Skeleton count={5} />
-                          )
-                    }
-                    alt={product.collectionName}
-                    title={
-                      product.collectionName +
-                      " " +
-                      product.article +
-                      " by Sana'a Kayum"
-                    }
-                    width={500}
-                    height={500}
-                  />
+                <Image
+                width={"100%"}
+                  className="default-img img-fluid"
+                  itemProp="image"
+                  alt={product.collectionName}
+                  title={
+                    product.collectionName +
+                    " " +
+                    product.article +
+                    " by Sana'a Kayum"
+                  }
+                  src={
+                    !(isSafari || isIE || isFirefox)
+                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[0].fields.file
+                            .url}?w=220&h=300&f=center&fit=pad`
+                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[0].fields.file
+                            .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                  }
+                  placeholder={<Skeleton height={150} />}
+                />
 
-                  {product.images.length > 1 ? (
-                    <Image
-                      className="hover-img img-fluid"
-                      itemProp="image"
-                      src={
-                        !(isSafari || isIE || isFirefox)
-                          ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              product.images[1].fields.file
-                                .url}?w=220px&h=300&f=center&fit=pad`
-                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              product.images[1].fields.file
-                                .url}?fm=jpg&w=220px&h=300&f=center&fit=pad` || (
-                              <Skeleton count={5} />
-                            )
-                      }
-                      alt={product.collectionName}
-                      title={
-                        product.collectionName +
-                        " " +
-                        product.article +
-                        " by Sana'a Kayum"
-                      }
-                      width={500}
-                      height={500}
-                    />
-                  ) : (
-                    ""
-                  )}
+                {/* <img
+                  className="default-img"
+                  itemProp="image"
+                  alt={product.collectionName}
+                  loading="lazy"
+                  title={
+                    product.collectionName +
+                    " " +
+                    product.article +
+                    " by Sana'a Kayum"
+                  }
+                  
+                  src={
+                    !(isSafari || isIE || isFirefox)
+                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[0].fields.file
+                            .url}?w=220&h=300&f=center&fit=pad` || (
+                          <Skeleton count={5} />
+                        )
+                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[0].fields.file
+                            .url}?fm=jpg&w=220&h=300&f=center&fit=pad` || (
+                          <Skeleton count={5} />
+                        )
+                  }
+                  
+                /> */}
+
+                {product.images.length > 1 ? (
+                  // <img
+                  //   className="hover-img"
+                  //   itemProp="image"
+                  //   alt={product.collectionName}
+                  //   loading="lazy"
+                  //   title={
+                  //     product.collectionName +
+                  //     " " +
+                  //     product.article +
+                  //     " by Sana'a Kayum"
+                  //   }
+                  //   src={
+                  //     !(isSafari || isIE || isFirefox)
+                  //       ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //           product.images[1].fields.file
+                  //             .url}?w=220&h=300&f=center&fit=pad` || (
+                  //           <Skeleton count={5} />
+                  //         )
+                  //       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //           product.images[1].fields.file
+                  //             .url}?fm=jpg&w=220&h=300&f=center&fit=pad` || (
+                  //           <Skeleton count={5} />
+                  //         )
+                  //   }
+                  // />
+                  <Image
+                  width={"100%"}
+                  className="hover-img img-fluid"
+                  itemProp="image"
+                  alt={product.collectionName}
+                  title={
+                    product.collectionName +
+                    " " +
+                    product.article +
+                    " by Sana'a Kayum"
+                  }
+                  src={
+                    !(isSafari || isIE || isFirefox)
+                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[1].fields.file
+                            .url}?w=220&h=300&f=center&fit=pad`
+                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          product.images[1].fields.file
+                            .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                  }
+                  placeholder={<Skeleton height={150} />}
+                />
+                ) : (
+                  ""
+                )}
 
                   {product.discount || product.new ? (
                     <div className="product-img-badges">

@@ -21,7 +21,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en" amp="undefined" >
-        <Head />
+        <Head /> 
         <body>
           <Main />
           <NextScript />
