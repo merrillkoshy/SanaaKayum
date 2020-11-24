@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import Head from 'next/head'
 import siteIcons from "../../constants/siteIcons";
+
 const HeaderMeta = ({
   article,
   title,
@@ -11,6 +12,7 @@ const HeaderMeta = ({
   url,
   color
 }) => {
+  
   return (
     
     <Head>

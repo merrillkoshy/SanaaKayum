@@ -91,10 +91,11 @@ const Product = ({ staticProducts }) => {
             spaceTopClass={isMobile ? "pt-10" : "pt-100"}
             spaceBottomClass={isMobile ? "pb-10" : "pb-100"}
             product={product}
+            galleryType ={ "leftThumb" }
           />
 
           <RelatedProductSlider
-            spaceBottomClass={isMobile ? "pt-10" : "pt-90"}
+            spaceBottomClass={isMobile ? "pt-10" : ""}
             category={product.article}
           />
         </>

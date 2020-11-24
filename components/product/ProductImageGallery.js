@@ -5,6 +5,7 @@ import Swiper from "react-id-swiper";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Skeleton from "react-loading-skeleton";
 import { Image } from "antd";
+import SkeletonImage from "antd/lib/skeleton/Image";
 
 const ProductImageGallery = ({ product }) => {
   const [gallerySwiper, getGallerySwiper] = useState(null);
@@ -108,9 +109,9 @@ const ProductImageGallery = ({ product }) => {
                           !(isSafari || isIE || isFirefox)
                             ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                                 single.fields.file
-                                  .url}?w=220&h=300&f=center&fit=pad`
+                                  .url}`
                             : `${single.fields.file
-                              .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                              .url}?fm=jpg`
                         }
                         placeholder={<Skeleton height={150} />}
                       />
@@ -147,7 +148,7 @@ const ProductImageGallery = ({ product }) => {
                             : `${single.fields.file
                               .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
                         }
-                        placeholder={<Skeleton height={50} />}
+                        
                       />
                   </div>
                 </div>

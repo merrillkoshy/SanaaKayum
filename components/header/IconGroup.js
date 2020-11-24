@@ -14,6 +14,7 @@ import { resetWishlist,loadWishlist } from "../../redux/actions/wishlistActions"
 import Link from "next/link";
 import { Button } from "react-bootstrap";
 import LoginModal from "../product/LoginModal";
+import { useRouter } from "next/router";
 const IconGroup = ({
   loadCart,
   
@@ -104,7 +105,7 @@ const IconGroup = ({
     }
   }, [userData.user]);
 
-  const history = useHistory();
+  const router = useRouter();
   const handleClick = e => {
     e.currentTarget.nextSibling.classList.toggle("active");
   };
@@ -135,7 +136,7 @@ const IconGroup = ({
               <form
                 onSubmit={e => {
                   e.preventDefault();
-                  history.push(
+                  router.push(
                     "/shop?search=" +
                       document.querySelector("#searchHome").value
                   );

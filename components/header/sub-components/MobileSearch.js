@@ -1,14 +1,15 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 
 const MobileSearch = () => {
-  const history = useHistory();
+  const router = useRouter();
   return (
     <div className="offcanvas-mobile-search-area">
       <form
         onSubmit={e => {
           e.preventDefault();
-          history.push(
+          router.push(
             "/shop?search=" + document.querySelector("#searchHomeMobile").value
           );
         }}

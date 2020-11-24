@@ -20,9 +20,7 @@ const ShopSearch = ({ categories, getSortParams }) => {
               document.querySelector("#searchSideBar").value
             );
             setActiveSort(e);
-            // history.push(
-            //   "/shop?search=" + document.querySelector("#searchSideBar").value
-            // );
+
           }}
           className="pro-sidebar-search-form"
         >

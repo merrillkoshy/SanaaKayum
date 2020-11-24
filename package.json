@@ -25,6 +25,7 @@
     "next-offline": "^5.0.3",
     "next-on-netlify": "^2.6.0",
     "next-redux-wrapper": "^6.0.2",
+    "next-seo": "^4.17.0",
     "nextjs-cors": "^1.0.1",
     "nodemailer": "^6.4.16",
     "nprogress": "^0.2.0",

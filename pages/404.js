@@ -6,8 +6,11 @@ import  Link  from "next/link";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../layouts/LayoutOne";
 import HeaderMeta from "../components/header/HeaderMeta";
+import { useRouter } from "next/router";
 const NotFound = ({}) => {
+  const router=useRouter()
   return (
+
     <Fragment>
           <HeaderMeta
         article={"404: Thats unstitched"}
@@ -40,7 +43,7 @@ const NotFound = ({}) => {
                   <form
                     onSubmit={e => {
                       e.preventDefault();
-                      history.push(
+                      router.push(
                         "/shop?search=" +
                           document.querySelector("#error_search").value
                       );

@@ -1,28 +1,42 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState,useRef } from "react";
 import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
-import Swiper from "react-id-swiper";
+import ReactIdSwiper from "react-id-swiper/lib/ReactIdSwiper.custom";
+import {Swiper,Controller} from "swiper";
 
 const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
-  const [gallerySwiper, getGallerySwiper] = useState(null);
-  const [thumbnailSwiper, getThumbnailSwiper] = useState(null);
+  // const [gallerySwiper, getGallerySwiper] = useState(null);
+  // const [thumbnailSwiper, getThumbnailSwiper] = useState(null);
+  const gallerySwiperRef = useRef(null);
+  const thumbnailSwiperRef = useRef(null);
 
   // effect for swiper slider synchronize
   useEffect(() => {
-    if (
-      gallerySwiper !== null &&
-      gallerySwiper.controller &&
-      thumbnailSwiper !== null &&
-      thumbnailSwiper.controller
-    ) {
-      gallerySwiper.controller.control = thumbnailSwiper;
-      thumbnailSwiper.controller.control = gallerySwiper;
-    }
-  }, [gallerySwiper, thumbnailSwiper]);
+    // if (
+    //   gallerySwiper !== null &&
+    //   gallerySwiper.controller &&
+    //   thumbnailSwiper !== null &&
+    //   thumbnailSwiper.controller
+    // ) {
+    //   gallerySwiper.controller.control = thumbnailSwiper;
+    //   thumbnailSwiper.controller.control = gallerySwiper;
+    // }
+    const gallerySwiper = gallerySwiperRef.current.swiper;
+    const thumbnailSwiper = thumbnailSwiperRef.current.swiper;
+    
+    if (gallerySwiper.controller && thumbnailSwiper.controller
+      ) {
+        gallerySwiper.controller.control = thumbnailSwiper;
+        thumbnailSwiper.controller.control = gallerySwiper;
+        
+      }
+
+  }, []);
 
   // swiper slider settings
   const gallerySwiperParams = {
-    getSwiper: getGallerySwiper,
+    Swiper,
+    modules: ['controller'],
     spaceBetween: 10,
     loopedSlides: 4,
     loop: true,
@@ -30,7 +44,8 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
   };
 
   const thumbnailSwiperParams = {
-    getSwiper: getThumbnailSwiper,
+    Swiper,
+    modules: [Controller],
     spaceBetween: 10,
     slidesPerView: 4,
     loopedSlides: 4,
@@ -86,7 +101,7 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
               ""
             )}
             <LightgalleryProvider>
-              <Swiper {...gallerySwiperParams}>
+              <ReactIdSwiper {...gallerySwiperParams} ref={gallerySwiperRef}>
                 {product.images &&
                   product.images.map((single, key) => {
                     return (
@@ -151,7 +166,7 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                       </div>
                     );
                   })}
-              </Swiper>
+              </ReactIdSwiper>
             </LightgalleryProvider>
           </div>
         </div>
@@ -163,7 +178,7 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
           }`}
         >
           <div className="product-small-image-wrapper product-small-image-wrapper--side-thumb">
-            <Swiper {...thumbnailSwiperParams}>
+            <ReactIdSwiper {...thumbnailSwiperParams} ref={thumbnailSwiperRef}>
               {product.images &&
                 product.images.map((single, key) => {
                   return (
@@ -218,7 +233,7 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                     </div>
                   );
                 })}
-            </Swiper>
+            </ReactIdSwiper>
           </div>
         </div>
       </div>

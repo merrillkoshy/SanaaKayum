@@ -13,6 +13,7 @@ const slugify = require("@sindresorhus/slugify");
 
 import ProductSchema from "../../components/header/ProductSchema";
 
+
 const ProductImageDescription = ({
   spaceTopClass,
   spaceBottomClass,
@@ -43,6 +44,7 @@ const ProductImageDescription = ({
     >
       {product?
       <>
+      
       
       <ProductSchema product={product} />
       <div className="container">
