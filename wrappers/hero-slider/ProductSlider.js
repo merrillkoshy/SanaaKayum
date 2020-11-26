@@ -13,15 +13,37 @@ const ProductSlider = props => {
 
   const getProducts = sliders => {
     const key = sliders.filterKey;
-    const productList = products.filter((items, i) => {
-      if (items[key] === sliders.filterValue) return items;
-    });
+    const tagList=[]
+    switch (key) {
+      case "tags":
+          products.forEach(item => {
+            item[key]?.forEach((tag,i)=>{
+              if(tag === sliders.filterValue) {
+                tagList.push(item)
+              }
+              
+            })
+        });
 
-    return [...new Set(productList)].slice(
-      0,
-      sliders.limit ? sliders.limit : productList.length
-    );
+        return [...new Set(tagList)].slice(
+          0,
+          sliders.limit ? sliders.limit : tagList.length
+        );
+
+        break;
+
+      default:
+        const productList = products.filter((items, i) => {
+          if (items[key] === sliders.filterValue) return items;
+        });
+        return [...new Set(productList)].slice(
+          0,
+          sliders.limit ? sliders.limit : productList.length
+        );
+        break;
+    }
   };
+
   const params = {
     effect: "fade",
     loop: false,

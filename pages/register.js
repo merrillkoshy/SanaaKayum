@@ -4,9 +4,9 @@ import { Col, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
-import Nav from "react-bootstrap/Nav";
-import Tab from "react-bootstrap/Tab";
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+import { loginUser } from "../redux/actions/userActions";
+import { loadCart } from "../redux/actions/cartActions";
+import { loadWishlist } from "../redux/actions/wishlistActions";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 import { connect } from "react-redux";
@@ -19,22 +19,22 @@ import LayoutOne from "../layouts/LayoutOne";
 
 import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
 import HeaderMeta from "../components/header/HeaderMeta";
+import { useRouter } from "next/router";
 
 const LoginRegister = ({
   loginUser,
   loadCart,
-  
   loadWishlist,
   userData
 }) => {
   const { addToast } = useToasts();
-  
+const router=useRouter()
   const [getNextIndex, setNextIndex] = useState(0);
   const [country, selectCountry] = useState("");
   const [region, selectRegion] = useState("");
   const [addressLine, setAddressLine] = useState("");
   const [validated, setValidated] = useState(false);
-
+  const [contentfulErrorHit, setContentfulErrorHit] = useState(false);
   useEffect(() => {
     client
       .getEntries({
@@ -45,6 +45,36 @@ const LoginRegister = ({
       });
   }, [validated]);
 
+  const loginAfterSuccess = (username, password) => {
+    let error;
+    client
+      .getEntries({
+        content_type: "users"
+      })
+      .then(entries => {
+        entries.items.forEach(ent => {
+          if (
+            ent.fields.username === username &&
+            ent.fields.password === password
+          ) {
+            error = false;
+            loginUser(ent.fields, addToast, ent.sys.id, ent.fields.loginInfo);
+            ent.fields["cartData"] === undefined ||
+            ent.fields["cartData"]["en-US"] == null
+              ? loadCart([])
+              : loadCart(ent.fields.cartData);
+            ent.fields["wishlistData"] === undefined ||
+            ent.fields["wishlistData"]["en-US"] == null
+              ? loadWishlist([])
+              : loadWishlist(ent.fields.wishlistData);
+          }
+        });
+      })
+      .then(() => {
+        router.push('/')
+      })
+      .catch(err => console.error(err));
+  };
   const createEntry = () => {
     clientMgr
       .then(environment =>
@@ -88,45 +118,53 @@ const LoginRegister = ({
           }
         })
       )
+
       .then(entry => {
         return entry.publish();
       })
-      .finally(
-        addToast(
-          " Welcome " +
-            document.querySelector("input[name='username']").value +
-            " !",
-          {
-            appearance: "success",
-            autoDismiss: true
-          }
-        )
-      )
       .catch(err => {
+        setContentfulErrorHit(true);
+        console.error(err);
         addToast(" Username already taken! Please choose another username", {
           appearance: "error",
           autoDismiss: true
         });
+      })
+      .finally(() => {
+        if (!contentfulErrorHit) {
+          addToast(
+            " Welcome " +
+              document.querySelector("input[name='username']").value +
+              " !",
+            {
+              appearance: "success",
+              autoDismiss: true
+            }
+          );
+          loginAfterSuccess(
+            document.querySelector("input[name='username']").value,
+            document.querySelector("input[name='user-password']").value
+          );
+        }
       });
   };
 
   return (
     <Fragment>
-      
-      <HeaderMeta
-        article={"Exquisite Wardrobe"}
-        title={"Haute Couture & High-Street Fashion"}
-        description={
-          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-        }
-        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
-        keywords={`Sana\'a Kayum, Dubai, Fashion `}
-        url={""}
-        color={"#000000"}
-        
-      />
-
-      <LayoutOne headerTop="visible">
+      <LayoutOne
+      article={"Exquisite Wardrobe"}
+      title={"Haute Couture & High-Street Fashion"}
+      description={
+        "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+      }
+      image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
+      keywords={`Sana\'a Kayum, Dubai, Fashion `}
+      url={"https://sanaakayum.com/contact"}
+      color={"#000000"}
+      headerTop="visible"
+      headerContainerClass="container-fluid"
+      headerPaddingClass="header-padding-2"
+    >
         {/* breadcrumb */}
 
         <div className="login-register-area pt-100 pb-100">
@@ -249,6 +287,7 @@ const LoginRegister = ({
                           <Form.Group
                             as={Col}
                             md="4"
+                            lg="10"
                             controlId="validationCustomAddr"
                           >
                             <Form.Label>Street Address</Form.Label>
@@ -271,6 +310,7 @@ const LoginRegister = ({
                           <Form.Group
                             as={Col}
                             md="4"
+                            lg="5"
                             controlId="validationCustomCn"
                           >
                             <Form.Label>Country</Form.Label>
@@ -284,6 +324,7 @@ const LoginRegister = ({
                           <Form.Group
                             as={Col}
                             md="4"
+                            lg="5"
                             controlId="validationCustomRg"
                           >
                             <Form.Label>State/Region</Form.Label>
@@ -409,7 +450,7 @@ const mapStateToProps = state => {
   return {
     cartData: state.cartData,
     wishlistData: state.wishlistData,
-    
+
     userData: state.userData
   };
 };

@@ -1,4 +1,14 @@
 /*------ 25. My account Page  ------*/
+.userarea-pill {
+  color: #ddbb74;
+  background: linear-gradient(80deg, #221e1c, #040303);
+  -webkit-linear-gradient: (80deg, #221e1c, #040303);
+}
+a.userarea-pill.nav-link.active {
+  color: #040303;
+  background: linear-gradient(80deg, #7e6a45, #ddbb74);
+  -webkit-linear-gradient: (80deg, #7e6a45, #ddbb74);
+}
 
 .single-my-account {
   margin-bottom: 20px;
@@ -17,13 +27,13 @@
     border-bottom: 1px solid #ebebeb;
   }
   h3.panel-title {
-    background-color: #f9f9f9;
+    background: linear-gradient(80deg, #221e1c, #040303);
+    color: #ddbb74;
     border-bottom: 1px solid #ebebeb;
     font-size: 15px;
     font-weight: 500;
     margin: 0;
     text-transform: uppercase;
-    color: #242424;
     display: block;
     padding: 16px 55px;
     position: relative;
@@ -178,7 +188,7 @@
           &:hover {
             background-color: $theme-color;
           }
-          &.edit {
+          &.delete {
             background-color: #df5c39;
             &:hover {
               background-color: $theme-color;

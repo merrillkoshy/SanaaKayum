@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
 
-// import Paginator from "react-hooks-paginator";
-import { Pagination } from "antd";
+import Paginator from "react-hooks-paginator";
+// import { Pagination } from "antd";
 
 import HeaderMeta from "../components/header/HeaderMeta";
 import { connect } from "react-redux";
@@ -62,29 +62,25 @@ const ShopGridFullWidth = ({ products, lingerie }) => {
     sortedProducts = filterSortedProducts;
     setSortedProducts(sortedProducts);
     setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
+    
   }, [offset, products, sortType, sortValue, filterSortType, filterSortValue]);
 
   return (
     <Fragment>
-      <HeaderMeta
-        article={"Exquisite Wardrobe"}
-        title={
-          "Featuring a wide variety of Arabian, Western, Indo-Arabian, Ethnic couture | Sana'a Kayum"
-        }
-        description={
-          "Featuring a wide variety of Arabian, Western, Indo-Arabian, Ethnic couture | Sana'a Kayum"
-        }
-        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
-        keywords={`Sana\'a Kayum, Dubai, Fashion `}
-        url={`/shop`}
-        color={"#000000"}
-      />
-
       <LayoutOne
-        headerContainerClass="container-fluid"
-        headerPaddingClass="header-padding-2"
-        headerTop="visible"
-      >
+      article={"Exquisite Wardrobe"}
+      title={"Haute Couture & High-Street Fashion"}
+      description={
+        "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+      }
+      image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
+      keywords={`Sana\'a Kayum, Dubai, Fashion `}
+      url={"https://sanaakayum.com/contact"}
+      color={"#000000"}
+      headerTop="visible"
+      headerContainerClass="container-fluid"
+      headerPaddingClass="header-padding-2"
+    >
         {/* breadcrumb */}
         {/* <Breadcrumb /> */}
 
@@ -131,18 +127,21 @@ const ShopGridFullWidth = ({ products, lingerie }) => {
                      window.scrollTo(0, 0);
                     }}> */}
                   
-                  <Pagination
+                  {/* <Pagination
+                  showQuickJumper
                     defaultCurrent={1}
                     defaultPageSize={pageLimit}
-                    onChange={() => {
-                      scrollToTop();
-                      setOffset;
+                    pageSize={pageLimit}
+                    onChange={(page, pageSize)=>{
+                      setOffset(page*pageSize-pageSize)
                     }}
-                    showSizeChanger={true}
+                    
                     size="small"
                     total={sortedProducts.length}
-                  />
-                  {/* <Paginator
+                    showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
+
+                  /> */}
+                  <Paginator
                     totalRecords={sortedProducts.length}
                     pageLimit={pageLimit}
                     pageNeighbours={2}
@@ -152,7 +151,7 @@ const ShopGridFullWidth = ({ products, lingerie }) => {
                     pageContainerClass="mb-0 mt-0"
                     pagePrevText="«"
                     pageNextText="»"
-                  /> */}
+                  />
                   {/* </Button> */}
                 </div>
               </div>

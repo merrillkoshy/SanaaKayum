@@ -12,21 +12,16 @@ const NotFound = ({}) => {
   return (
 
     <Fragment>
-          <HeaderMeta
-        article={"404: Thats unstitched"}
-        title={"404: Thats unstitched"}
-        description={
-          "404: Thats unstitched"
-        }
-        image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
-        keywords={`Sana\'a Kayum, Dubai, Fashion `}
-        url={""}
-        color={"#000000"}
-        
-      />
-
-
-      <LayoutOne headerTop="visible">
+          <LayoutOne
+      article={"Exquisite Wardrobe"}
+      title={"404? That's unstitched.."}
+      description={"404? That's unstitched.."}
+      image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
+      keywords={`Sana\'a Kayum, Dubai, Fashion `}
+      url={"https://sanaakayum.com/contact"}
+      color={"#000000"}
+      headerTop="visible"
+    >
         {/* breadcrumb */}
 
         <div className="error-area pt-40 pb-100">

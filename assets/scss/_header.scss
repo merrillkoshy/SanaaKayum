@@ -882,7 +882,7 @@
     transition: 1s;
     box-shadow: none !important;
     a, button{
-        color:$theme-color !important;
+        color:$theme-color;
     }
     &:hover ,&:active ,&:visited &:focus{
         background:$theme-color !important;

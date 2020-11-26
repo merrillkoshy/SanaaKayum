@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import LayoutOne from "../../../layouts/LayoutOne";
 import Breadcrumb from "../../../wrappers/breadcrumb/Breadcrumb";
 import RelatedProductSlider from "../../../wrappers/product/RelatedProductSlider";
-import Skeleton from 'react-loading-skeleton';
+import Skeleton from "react-loading-skeleton";
 
 import ProductImageDescription from "../../../wrappers/product/ProductImageDescription";
 import { isMobile } from "react-device-detect";
@@ -14,6 +14,8 @@ import HeaderMeta from "../../../components/header/HeaderMeta";
 import NotFound from "../../404";
 import LoadingScreen from "../../../helpers/LoadingScreen";
 import { getProducts, getSlugs } from "../../../api/exports";
+
+import { getMinimumRangeTransitionRange } from "rc-tree/lib/NodeList";
 
 const slugify = require("@sindresorhus/slugify");
 
@@ -53,14 +55,17 @@ const Product = ({ staticProducts }) => {
   const { pid } = router.query;
 
   const [product, setProd] = useState();
+  let head
   useEffect(() => {
     async function getPid() {
       const acquiredPid = staticProducts?.filter(
         single => single.serialNumber === pid
       )[0];
+
       setProd(acquiredPid);
     }
     getPid();
+
   }, []);
 
   if (!isFallback && !staticProducts) {
@@ -68,40 +73,44 @@ const Product = ({ staticProducts }) => {
   }
 
   return (
-    <LayoutOne headerTop="visible">
-       {isFallback ? <Skeleton count={5}/> : product ? (
-        <>
-          <HeaderMeta
-            article={product.article}
-            title={product.description}
-            description={product.description}
-            image={`https:${product.images[0].fields.file.url}`}
-            keywords={
-              `${product.tags}, Sana\'a Kayum, Dubai, Fashion, ` +
-              `${product.article}, ` +
-              `${product.description}`
-            }
-            url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${
-              product.serialNumber
-            }/${slugify(product.description)}`}
-            color={product.color}
-          />
-
-          <ProductImageDescription
-            spaceTopClass={isMobile ? "pt-10" : "pt-100"}
-            spaceBottomClass={isMobile ? "pb-10" : "pb-100"}
-            product={product}
-            galleryType ={ "leftThumb" }
-          />
-
-          <RelatedProductSlider
-            spaceBottomClass={isMobile ? "pt-10" : ""}
-            category={product.article}
-          />
-        </>
-      ) : null}
+    <>
+    
       
-    </LayoutOne>
+        {isFallback ? (
+          <Skeleton count={5} />
+        ) : product ? (
+          <LayoutOne 
+          article={product.article}
+          title={product.description}
+          description={product.description}
+          image={`https:${product.images[0].fields.file.url}`}
+          keywords={
+            `${product.tags}, Sana\'a Kayum, Dubai, Fashion, ` +
+            `${product.article}, ` +
+            `${product.description}`
+          }
+          url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${
+            product.serialNumber
+          }/${slugify(product.description)}`}
+          color={product.color}
+      headerTop="visible">
+            
+
+            <ProductImageDescription
+              spaceTopClass={isMobile ? "pt-10" : "pt-100"}
+              spaceBottomClass={isMobile ? "pb-10" : "pb-100"}
+              product={product}
+              galleryType={"leftThumb"}
+            />
+
+            <RelatedProductSlider
+              spaceBottomClass={isMobile ? "pt-10" : ""}
+              category={product.article}
+            />
+          </LayoutOne>
+        ) : null}
+      
+    </>
   );
 };
 const mapStateToProps = state => {
@@ -109,8 +118,6 @@ const mapStateToProps = state => {
     products: state.productData.products
   };
 };
-
-
 
 // export async function getServerSideProps() {
 //   // Fetch data from external API

@@ -1,5 +1,5 @@
 # Next-on-Netlify Redirects
-/_next/data/-O1BM8VqKqOiKjX6J9SZ3/product/:pid/:slug.json  /.netlify/functions/next_product_pid_slug  200
+/_next/data/7Zk0yBim2UkmNTnODkTZ6/product/:pid/:slug.json  /.netlify/functions/next_product_pid_slug  200
 /api/pay  /.netlify/functions/next_api_pay  200
 /api/queryTrans  /.netlify/functions/next_api_queryTrans  200
 /api/response  /.netlify/functions/next_api_response  200
