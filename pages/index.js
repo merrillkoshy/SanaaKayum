@@ -38,7 +38,7 @@ const Index = props => {
         {/* infinite cats slider  */}
         <ProductSlider />
 
-        {/* <PromoBanner spaceTopClass="pt-100" spaceBottomClass="pb-100" /> */}
+        
         
       </LayoutOne>
 

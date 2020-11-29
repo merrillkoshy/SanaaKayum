@@ -48,10 +48,10 @@ const LayoutOne = ({
       
        {/* Import CSS for nprogress */}
        {/* <link rel="stylesheet" type="text/css" href="/assets/css/nprogress.css" /> */}
-      <meta name="og:image"  property="og:image" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} itemProp="image" />
+      <meta name="og:image"  property="og:image" content={`${image}`} itemProp="image" />
       <meta name="og:type" content="website" />
       <meta name="og:url" property="og:url" content={`${process.env.NEXT_PUBLIC_DOMAIN}/${url}`} />
-      <meta property="og:image:secure_url" name="og:image:secure_url" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
+      <meta property="og:image:secure_url" name="og:image:secure_url" content={`${image}`} />
       <meta property="og:image:type"name="og:image:type" content="image/jpg" />
       <meta property="og:image:width"name="og:image:width" content="1200" />
       <meta property="og:image:height"name="og:image:height" content="627" />
@@ -72,7 +72,7 @@ const LayoutOne = ({
         content={`${article}s by Sana'a Kayum | ${description}`}
       />
       <meta name="twitter:app:country" content="ae" />
-      <meta name="twitter:image" content={`${image}?fm=png&w=1200&h=627&f=center&fit=pad`} />
+      <meta name="twitter:image" content={`${image}`} />
       </Head>
 
       <HeaderOne

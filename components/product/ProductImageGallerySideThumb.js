@@ -177,9 +177,9 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                           !(isSafari || isIE || isFirefox)
                             ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                                 single.fields.file
-                                  .url}?w=220&h=300&f=center&fit=pad`
+                                  .url}`
                             : `${single.fields.file
-                              .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                              .url}?fm=jpg`
                         }
                         
                       />

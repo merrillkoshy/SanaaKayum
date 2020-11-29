@@ -6,7 +6,7 @@ import LayoutOne from "../../../layouts/LayoutOne";
 
 import RelatedProductSlider from "../../../wrappers/product/RelatedProductSlider";
 import Skeleton from "react-loading-skeleton";
-
+import namedColors from "color-name-list";
 import ProductImageDescription from "../../../wrappers/product/ProductImageDescription";
 import { isMobile } from "react-device-detect";
 
@@ -56,34 +56,42 @@ const Product = ({ staticProduct }) => {
   return (
     <>
       {staticProduct ? (
-        <LayoutOne
-          article={staticProduct.article}
-          title={staticProduct.description}
-          description={staticProduct.description}
-          image={`https:${staticProduct.images[0].fields.file.url}`}
-          keywords={
-            `${staticProduct.tags}, Sana\'a Kayum, Dubai, Fashion, ` +
-            `${staticProduct.article}, ` +
-            `${staticProduct.description}`
-          }
-          url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${
-            staticProduct.serialNumber
-          }/${slugify(staticProduct.description)}`}
-          color={staticProduct.color}
-          headerTop="visible"
-        >
-          <ProductImageDescription
-            spaceTopClass={isMobile ? "pt-10" : "pt-100"}
-            spaceBottomClass={isMobile ? "pb-10" : "pb-100"}
-            product={staticProduct}
-            galleryType={"leftThumb"}
-          />
+        <>
+          <LayoutOne
+            article={staticProduct.article}
+            title={staticProduct.description}
+            description={staticProduct.description}
+            image={`https:${staticProduct.images[0].fields.file.url}`}
+            keywords={
+              `${staticProduct.tags}, Sana\'a Kayum, Dubai, Fashion, ` +
+              `${staticProduct.article}, ` +
+              `${staticProduct.description}`
+            }
+            url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${
+              staticProduct.serialNumber
+            }/${slugify(staticProduct.description)}`}
+            color={
+              namedColors.find(
+                color =>
+                  color.name.toLowerCase().trim() ===
+                  staticProduct.color.toLowerCase().trim()
+              ).hex
+            }
+            headerTop="visible"
+          >
+            <ProductImageDescription
+              spaceTopClass={isMobile ? "pt-10" : "pt-100"}
+              spaceBottomClass={isMobile ? "pb-10" : "pb-100"}
+              product={staticProduct}
+              galleryType={"leftThumb"}
+            />
 
-          <RelatedProductSlider
-            spaceBottomClass={isMobile ? "pt-10" : ""}
-            category={staticProduct.article}
-          />
-        </LayoutOne>
+            <RelatedProductSlider
+              spaceBottomClass={isMobile ? "pt-10" : ""}
+              category={staticProduct.article}
+            />
+          </LayoutOne>
+        </>
       ) : (
         <Skeleton count={5} />
       )}

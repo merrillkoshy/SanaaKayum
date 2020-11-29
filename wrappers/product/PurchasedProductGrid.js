@@ -72,10 +72,10 @@ const PurchasedProductGrid = ({
                       !(isSafari || isIE || isFirefox)
                         ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                             product.data[0].images[0].fields.file
-                              .url}?w=220&h=300&f=center&fit=pad`
+                              .url}`
                         : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
                             product.data[0].images[0].fields.file
-                              .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                              .url}?fm=jpg`
                     }
                     placeholder={<Skeleton height={150} />}
                   />
