@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import React, { Fragment, useEffect, useState } from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import LayoutOne from "../../../layouts/LayoutOne";
 import Breadcrumb from "../../../wrappers/breadcrumb/Breadcrumb";
 import RelatedProductSlider from "../../../wrappers/product/RelatedProductSlider";
@@ -26,7 +26,10 @@ export async function getStaticPaths() {
   });
 
   const paths = products.map(product => ({
-    params: { pid: product.serialNumber, slug: slugify(product.description) }
+    params: {
+      pid: product.serialNumber,
+      slug: slugify(product.description)
+    }
   }));
 
   return {
@@ -40,84 +43,83 @@ export async function getStaticProps({ params }) {
   const staticProducts = await res.map(p => {
     return p.fields;
   });
+  const staticProduct = await staticProducts.filter(field => {
+    if (field.serialNumber === params.pid) return field;
+  });
 
   return {
     props: {
-      staticProducts
+      staticProduct
     },
     revalidate: 1
   };
 }
 
-const Product = ({ staticProducts }) => {
+const Product = ({ staticProduct }) => {
   const { isFallback } = useRouter();
   const router = useRouter();
   const { pid } = router.query;
 
   const [product, setProd] = useState();
-  let head
-  useEffect(() => {
-    async function getPid() {
-      const acquiredPid = staticProducts?.filter(
-        single => single.serialNumber === pid
-      )[0];
+  let head;
+  // useEffect(() => {
+  //   async function getPid() {
+  //     const acquiredPid = staticProducts?.filter(
+  //       single => single.serialNumber === pid
+  //     )[0];
 
-      setProd(acquiredPid);
-    }
-    getPid();
+  //     setProd(acquiredPid);
+  //   }
+  //   getPid();
+  // }, []);
 
-  }, []);
-
-  if (!isFallback && !staticProducts) {
+  if (!isFallback && !staticProduct) {
     return router.push("/404");
   }
-
+  console.log(staticProduct);
   return (
     <>
-    
-      
-        {isFallback ? (
-          <Skeleton count={5} />
-        ) : product ? (
-          <LayoutOne 
-          article={product.article}
-          title={product.description}
-          description={product.description}
-          image={`https:${product.images[0].fields.file.url}`}
-          keywords={
-            `${product.tags}, Sana\'a Kayum, Dubai, Fashion, ` +
-            `${product.article}, ` +
-            `${product.description}`
-          }
-          url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${
-            product.serialNumber
-          }/${slugify(product.description)}`}
-          color={product.color}
-      headerTop="visible">
-            
+      {isFallback ? (
+        <Skeleton count={5} />
+      ) : staticProduct ? (
+        console.log(staticProduct)
+      ) : // <LayoutOne
+      //   article={staticProduct.article}
+      //   title={staticProduct.description}
+      //   description={staticProduct.description}
+      //   image={`https:${staticProduct.images[0].fields.file.url}`}
+      //   keywords={
+      //     `${staticProduct.tags}, Sana\'a Kayum, Dubai, Fashion, ` +
+      //     `${staticProduct.article}, ` +
+      //     `${staticProduct.description}`
+      //   }
+      //   url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${
+      //     staticProduct.serialNumber
+      //   }/${slugify(staticProduct.description)}`}
+      //   color={staticProduct.color}
+      //   headerTop="visible"
+      // >
+      //   <ProductImageDescription
+      //     spaceTopClass={isMobile ? "pt-10" : "pt-100"}
+      //     spaceBottomClass={isMobile ? "pb-10" : "pb-100"}
+      //     product={product}
+      //     galleryType={"leftThumb"}
+      //   />
 
-            <ProductImageDescription
-              spaceTopClass={isMobile ? "pt-10" : "pt-100"}
-              spaceBottomClass={isMobile ? "pb-10" : "pb-100"}
-              product={product}
-              galleryType={"leftThumb"}
-            />
-
-            <RelatedProductSlider
-              spaceBottomClass={isMobile ? "pt-10" : ""}
-              category={product.article}
-            />
-          </LayoutOne>
-        ) : null}
-      
+      //   <RelatedProductSlider
+      //     spaceBottomClass={isMobile ? "pt-10" : ""}
+      //     category={staticProduct.article}
+      //   />
+      // </LayoutOne>
+      null}
     </>
   );
 };
-const mapStateToProps = state => {
-  return {
-    products: state.productData.products
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     products: state.productData.products
+//   };
+// };
 
 // export async function getServerSideProps() {
 //   // Fetch data from external API
@@ -127,4 +129,4 @@ const mapStateToProps = state => {
 //   return { props: { products } }
 // }
 
-export default connect(mapStateToProps)(Product);
+export default Product;
