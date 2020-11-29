@@ -4,7 +4,7 @@ import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
 import Swiper from "react-id-swiper";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Skeleton from "react-loading-skeleton";
-import { Image } from "antd";
+import Image from "antd/lib/image";
 import SkeletonImage from "antd/lib/skeleton/Image";
 
 const ProductImageGallery = ({ product }) => {

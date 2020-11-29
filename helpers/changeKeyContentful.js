@@ -62,11 +62,12 @@ const computeValue=val=>{
     .then(entries => {
         
       entries.items.forEach(ent => {
-          
+        
         resultArray.push(ent.fields[val])
         
       });
       resultArray=[...new Set(resultArray)]
+      
       client
     .getEntries({
       content_type: "lowerCoordinate"

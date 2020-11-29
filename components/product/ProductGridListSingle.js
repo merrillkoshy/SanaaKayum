@@ -10,7 +10,7 @@ import { isSafari, isIE, isFirefox } from "react-device-detect";
 
 import Skeleton from "react-loading-skeleton";
 
-import { Image, Button, Space } from "antd";
+import Image from "antd/lib/image";
 
 const slugify = require("@sindresorhus/slugify");
 

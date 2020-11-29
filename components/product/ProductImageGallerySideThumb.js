@@ -3,6 +3,9 @@ import React, { Fragment, useEffect, useState,useRef } from "react";
 import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
 import ReactIdSwiper from "react-id-swiper/lib/ReactIdSwiper.custom";
 import {Swiper,Controller} from "swiper";
+import  Image  from "antd/lib/image";
+import Skeleton from "react-loading-skeleton";
+import { isSafari, isFirefox, isIE } from "react-device-detect";
 
 const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
   // const [gallerySwiper, getGallerySwiper] = useState(null);
@@ -109,59 +112,34 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                         <LightgalleryItem
                           group="any"
                           src={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                            single.fields.file.url}fm=jpg`}
+                            single.fields.file.url}?fm=jpg`}
                         >
                           <button>
                             <i className="pe-7s-expand1"></i>
                           </button>
                         </LightgalleryItem>
                         <div className="single-image">
-                          <picture>
-                            <source
-                              type="image/webp"
-                              className="img-fluid"
-                              itemProp="image"
-                              alt={product.collectionName}
-                              loading="lazy"
-                              title={
-                                product.collectionName +
-                                " " +
-                                product.article +
-                                " by Sana'a Kayum"
-                              }
-                              srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                                single.fields.file.url}`}
-                            />
-                            <source
-                              className="img-fluid"
-                              itemProp="image"
-                              alt={product.collectionName}
-                              loading="lazy"
-                              title={
-                                product.collectionName +
-                                " " +
-                                product.article +
-                                " by Sana'a Kayum"
-                              }
-                              type="image/jpeg"
-                              srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                                single.fields.file.url}?fm=jpg`}
-                            />
-                            <img
-                              className="img-fluid"
-                              itemProp="image"
-                              alt={product.collectionName}
-                              loading="lazy"
-                              title={
-                                product.collectionName +
-                                " " +
-                                product.article +
-                                " by Sana'a Kayum"
-                              }
-                              src={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                                single.fields.file.url}?fm=jpg`}
-                            />
-                          </picture>
+                        <Image
+                        width={"100%"}
+                        className="img-fluid"
+                        itemProp="image"
+                        alt={product.collectionName}
+                        title={
+                          product.collectionName +
+                          " " +
+                          product.article +
+                          " by Sana'a Kayum"
+                        }
+                        src={
+                          !(isSafari || isIE || isFirefox)
+                            ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                single.fields.file
+                                  .url}`
+                            : `${single.fields.file
+                              .url}?fm=jpg`
+                        }
+                        
+                      />
                         </div>
                       </div>
                     );
@@ -184,51 +162,27 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                   return (
                     <div key={key}>
                       <div className="single-image">
-                        <picture>
-                          <source
-                            type="image/webp"
-                            className="img-fluid"
-                            itemProp="image"
-                            alt={product.collectionName}
-                            loading="lazy"
-                            title={
-                              product.collectionName +
-                              " " +
-                              product.article +
-                              " by Sana'a Kayum"
-                            }
-                            srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              single.fields.file.url}`}
-                          />
-                          <source
-                            className="img-fluid"
-                            itemProp="image"
-                            alt={product.collectionName}
-                            loading="lazy"
-                            title={
-                              product.collectionName +
-                              " " +
-                              product.article +
-                              " by Sana'a Kayum"
-                            }
-                            srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              single.fields.file.url}?fm=jpg`}
-                          />
-                          <img
-                            className="img-fluid"
-                            itemProp="image"
-                            alt={product.collectionName}
-                            loading="lazy"
-                            title={
-                              product.collectionName +
-                              " " +
-                              product.article +
-                              " by Sana'a Kayum"
-                            }
-                            src={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              single.fields.file.url}?fm=jpg`}
-                          />
-                        </picture>
+                      <Image
+                        width={"100%"}
+                        className="img-fluid"
+                        itemProp="image"
+                        alt={product.collectionName}
+                        title={
+                          product.collectionName +
+                          " " +
+                          product.article +
+                          " by Sana'a Kayum"
+                        }
+                        src={
+                          !(isSafari || isIE || isFirefox)
+                            ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                single.fields.file
+                                  .url}?w=220&h=300&f=center&fit=pad`
+                            : `${single.fields.file
+                              .url}?fm=jpg&w=220&h=300&f=center&fit=pad`
+                        }
+                        
+                      />
                       </div>
                     </div>
                   );

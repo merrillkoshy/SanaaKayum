@@ -10,7 +10,7 @@ import Link from "next/link";
 import LoginModal from "./LoginModal";
 import Skeleton from "react-loading-skeleton";
 
-import { Image } from "antd";
+import Image from "antd/lib/image";
 const slugify = require("@sindresorhus/slugify");
 
 const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {

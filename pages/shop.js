@@ -2,9 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
 
 import Paginator from "react-hooks-paginator";
-// import { Pagination } from "antd";
 
-import HeaderMeta from "../components/header/HeaderMeta";
 import { connect } from "react-redux";
 import { getSortedProducts } from "../helpers/product";
 import LayoutOne from "../layouts/LayoutOne";
@@ -16,7 +14,6 @@ import ShopProducts from "../wrappers/product/ShopProducts";
 
 import { isMobile, isTablet } from "react-device-detect";
 import { animateScroll } from "react-scroll";
-
 
 const ShopGridFullWidth = ({ products, lingerie }) => {
   const [layout, setLayout] = useState("grid three-column");
@@ -62,25 +59,24 @@ const ShopGridFullWidth = ({ products, lingerie }) => {
     sortedProducts = filterSortedProducts;
     setSortedProducts(sortedProducts);
     setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
-    
   }, [offset, products, sortType, sortValue, filterSortType, filterSortValue]);
 
   return (
     <Fragment>
       <LayoutOne
-      article={"Exquisite Wardrobe"}
-      title={"Haute Couture & High-Street Fashion"}
-      description={
-        "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-      }
-      image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
-      keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com/contact"}
-      color={"#000000"}
-      headerTop="visible"
-      headerContainerClass="container-fluid"
-      headerPaddingClass="header-padding-2"
-    >
+        article={"Exquisite Wardrobe"}
+        title={"Haute Couture & High-Street Fashion"}
+        description={
+          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+        }
+        image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={"https://sanaakayum.com/contact"}
+        color={"#000000"}
+        headerTop="visible"
+        headerContainerClass="container-fluid"
+        headerPaddingClass="header-padding-2"
+      >
         {/* breadcrumb */}
         {/* <Breadcrumb /> */}
 
@@ -126,7 +122,7 @@ const ShopGridFullWidth = ({ products, lingerie }) => {
                   {/* <Button className="scrollToTop" onClick={()=>{
                      window.scrollTo(0, 0);
                     }}> */}
-                  
+
                   {/* <Pagination
                   showQuickJumper
                     defaultCurrent={1}

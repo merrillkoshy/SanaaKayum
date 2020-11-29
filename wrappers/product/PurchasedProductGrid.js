@@ -5,7 +5,10 @@ import { loginUser } from "../../redux/actions/userActions";
 
 import PurchasedProductGridListSingle from "../../components/product/PurchasedProductGridListSingle";
 import Link from "next/link";
-import { Row, Col, List, Image } from "antd";
+import Row from "antd/lib/row";
+import Col from "antd/lib/col";
+import List from "antd/lib/list";
+import Image from "antd/lib/image";
 import Text from "antd/lib/typography/Text";
 import Skeleton from "react-loading-skeleton";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
