@@ -48,13 +48,16 @@ const MyAccount = ({ user }) => {
   const uID = userData.entryID;
   const transactionsBlob = userData.transactionsData?.map(
     tr => {
+      
       return{
         data:tr.purchaseItems,
-        result:[tr.data.payment_result.response_status,new Date(tr.data.payment_result.transaction_time)]
+        result:[tr.data.payment_result.response_status,new Date(tr.data.payment_result.transaction_time)],
+        ref:tr.data.tran_ref
       }
       
     }
   )
+  
   const settings = {
     loop: false,
     slidesPerView: 4,
@@ -86,6 +89,7 @@ const MyAccount = ({ user }) => {
 
   useEffect(() => {
     setRecentPurchases(transactionsBlob)
+    
     // setRecentPurchases(
     //   ...userData.transactionsData.map(tr => tr.purchaseItems)
     // );
@@ -114,9 +118,9 @@ const MyAccount = ({ user }) => {
       description={
         "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
       }
-      image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
+      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
       keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com/contact"}
+      url={"https://sanaakayum.com/"}
       color={"#000000"}
       headerTop="visible"
       headerContainerClass="container-fluid"
@@ -124,7 +128,7 @@ const MyAccount = ({ user }) => {
     >
         {/* breadcrumb */}
         <Tab.Container defaultActiveKey="first">
-          <Row>
+          <Row className="account-page">
             <Col sm={3} className="mt-lg-200 ml-lg-5 ml-1 mt-5">
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
@@ -412,18 +416,20 @@ const MyAccount = ({ user }) => {
                   <div className="myaccount-area pb-80">
                     <div className="container">
                       <div className="row">
-                        <div className="ml-auto mr-auto col-lg-9">
+                        <div className="ml-auto mr-auto col-lg-9 py-5 ">
                           <div className="myaccount-wrapper">
+                          <div className="row">
                             {recentPurchases.length ? (
-                              <Swiper {...settings}>
+                              // <Swiper {...settings}>
                               <PurchasedProductGrid
                                 products={recentPurchases}
                                 spaceBottomClass="mb-25"
                               />
-                              </Swiper>
+                              // </Swiper>
                             ) : (
                               <Skeleton />
                             )}
+                            </div>
                           </div>
                         </div>
                       </div>

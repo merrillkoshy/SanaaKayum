@@ -16,9 +16,9 @@ const About = ({}) => {
       description={
         "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
       }
-      image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
+      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
       keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com/contact"}
+      url={"https://sanaakayum.com/about"}
       color={"#000000"}
       headerTop="visible"
     >

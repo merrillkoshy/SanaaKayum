@@ -12,6 +12,8 @@ import Image from "antd/lib/image";
 import Text from "antd/lib/typography/Text";
 import Skeleton from "react-loading-skeleton";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
+import Button from "antd/lib/button";
+import { useRouter } from "next/router";
 
 const slugify = require("@sindresorhus/slugify");
 
@@ -38,29 +40,32 @@ const PurchasedProductGrid = ({
     "November",
     "December"
   ];
+  const router=useRouter()
+  const calculateSevenDays=date=>{
+    const finalDate=new Date().setDate(date + 7)
+    return new Date(finalDate)
+  }
+  const ifEligible=(date1,date2)=>{
+    
+    if(date1-date2>0) return false
+    return true
+  }
   return (
     <Fragment>
+      
       {products.map(product => {
         return product.data ? (
-          <>
-            <Link
-              key={product.data[0].serialNumber}
-              href={{
-                pathname: `/product/[pid]/[slug]`,
-                query: {
-                  pid: product.data[0].serialNumber,
-                  slug: slugify(product.data[0].description)
-                }
-              }}
-              passHref
-            >
+          <div className="col">
               <List.Item
+              className="purchased-product-card p-4 mx-auto"
                 key={product.data[0].description +" | "+product.data[0].collectionName}
-                extra={
+               
+              >
+                <Row>
                   <Image
-                    width={"100%"}
-                    className="default-img"
+                    
                     itemProp="image"
+                    className="puchased-image"
                     alt={product.data[0].collectionName}
                     title={
                       product.data[0].collectionName +
@@ -79,12 +84,24 @@ const PurchasedProductGrid = ({
                     }
                     placeholder={<Skeleton height={150} />}
                   />
+                </Row>
+                <Link
+              key={product.data[0].serialNumber}
+              href={{
+                pathname: `/product/[pid]/[slug]`,
+                query: {
+                  pid: product.data[0].serialNumber,
+                  slug: slugify(product.data[0].description)
                 }
-              >
+              }}
+              
+            >
                 <List.Item.Meta
+                className="pt-2"
                   title={product.data[0].article}
                   description={product.data[0].description}
                 />
+                </Link>
                 <Row>
                   {product.result[0] === "A" ? (
                     <>
@@ -98,6 +115,30 @@ const PurchasedProductGrid = ({
                           " " +
                           product.result[1].getFullYear()}
                       </Col>
+                      <Col>
+                        <Text strong> Free Cancellation/ Return till </Text>
+                      </Col>
+                      <Col>
+                        {calculateSevenDays(product.result[1].getDate()).getDate()+
+                         " " +
+                         monthNames[calculateSevenDays(product.result[1].getDate()).getMonth()] +
+                         " " +
+                         calculateSevenDays(product.result[1].getDate()).getFullYear()}
+                        
+                      </Col>
+                      {
+                        ifEligible(new Date(),calculateSevenDays(product.result[1].getDate()))?<Button onClick={e=>{
+e.preventDefault();
+
+router.push(`/customer-care/refund?t=${cryptr.encrypt(product.ref)}`)
+
+                        }}>Cancel</Button>:<Button onClick={e=>{
+                          e.preventDefault();
+                          
+                          // console.log(cryptr.encrypt(product.ref))
+                          router.push(`/customer-care/refund?t=${window.btoa(product.ref)}&s=${window.btoa(product.data[0].serialNumber)}`)
+                                                  }}>Cancel</Button>
+                      }
                     </>
                   ) : (
                     <>
@@ -124,12 +165,12 @@ const PurchasedProductGrid = ({
                 entryID={userData.user.entryID}
                 loginUser={loginUser}
               /> */}
-            </Link>
+            
            
-          </>
+          </div>
         ) : (
           <Link
-            key={product.serialNumber}
+            
             href={{
               pathname: `/product/[pid]/[slug]`,
               query: {
@@ -150,6 +191,7 @@ const PurchasedProductGrid = ({
           </Link>
         );
       })}
+      
     </Fragment>
   );
 };

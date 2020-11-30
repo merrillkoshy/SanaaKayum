@@ -1,5 +1,5 @@
 module.exports = {
-    siteUrl: process.env.NEXT_PUBLIC_DOMAIN,
+    siteUrl: "https://sanaa-kayum.netlify.app",
     changefreq: 'daily',
     priority: 0.7,
     sitemapSize: 5000,

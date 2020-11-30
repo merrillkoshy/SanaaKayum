@@ -1,2 +1,4 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
+Allow: /
+Host: https://sanaa-kayum.netlify.app
+Sitemap: https://sanaa-kayum.netlify.app/sitemap.xml

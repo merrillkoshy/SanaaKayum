@@ -9,6 +9,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "@babel/core": "^7.12.9",
     "@react-native-async-storage/async-storage": "^1.13.2",
     "@sindresorhus/slugify": "^1.1.0",
     "animate.css": "^4.1.1",
@@ -19,6 +20,7 @@
     "contentful-management": "^6.2.0",
     "cookie": "^0.4.1",
     "cors": "^2.8.5",
+    "cryptr": "^6.0.2",
     "express": "^4.17.1",
     "firebase": "^8.0.2",
     "jdown": "^1.0.4",

@@ -75,7 +75,7 @@ const Product = ({ staticProduct }) => {
                 color =>
                   color.name.toLowerCase().trim() ===
                   staticProduct.color.toLowerCase().trim()
-              ).hex
+              )?.hex
             }
             headerTop="visible"
           >

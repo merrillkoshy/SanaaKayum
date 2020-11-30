@@ -12,7 +12,7 @@ const Contact = ({}) => {
       article={"Exquisite Wardrobe"}
       title={"Contact us | +971 52 333 1757 | Hello@SanaaKayum.com "}
       description={"Contact us | +971 52 333 1757 | Hello@SanaaKayum.com "}
-      image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
+      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
       keywords={`Sana\'a Kayum, Dubai, Fashion `}
       url={"https://sanaakayum.com/contact"}
       color={"#000000"}

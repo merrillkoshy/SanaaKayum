@@ -134,7 +134,7 @@ export const googleHead =
       "@type": "LocalBusiness",
       "name": "Sana'a Kayum",
       "hasMap": "https://maps.google.com/maps?cid=15901352452706984030",
-      "image": "https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg",
+      "image": `${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "209, Al Asmawi Building, Umm Al Sheif, Sheikh Zayed Road",

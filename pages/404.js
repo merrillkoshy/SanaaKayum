@@ -16,9 +16,9 @@ const NotFound = ({}) => {
       article={"Exquisite Wardrobe"}
       title={"404? That's unstitched.."}
       description={"404? That's unstitched.."}
-      image={"https://sanaakayum.com/Assets/Sana'a_Kayum_inside_view_3.jpg"}
+      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
       keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com/contact"}
+      url={"https://sanaakayum.com"}
       color={"#000000"}
       headerTop="visible"
     >
