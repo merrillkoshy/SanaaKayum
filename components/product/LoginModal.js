@@ -27,13 +27,15 @@ const LoginModal = ({
           ) {
             error = false;
             loginUser(ent.fields, addToast, ent.sys.id, ent.fields.loginInfo);
-            (ent.fields["cartData"]=== undefined||ent.fields["cartData"] ["en-US"] == null )
+            
+            (ent.fields["cartData"]=== undefined || ent.fields["cartData"][0]===null)
               ? loadCart([])
-              : loadCart(ent.fields.cartData);
-              (ent.fields["wishlistData"]=== undefined ||ent.fields["wishlistData"] ["en-US"] == null)
+              : loadCart(ent.fields.cartData.flat())
+              
+              (ent.fields["wishlistData"]=== undefined ||ent.fields["wishlistData"] [0]===null)
             
               ? loadWishlist([])
-              : loadWishlist(ent.fields.wishlistData);
+              : loadWishlist(ent.fields.wishlistData.flat())
           }
         });
       })

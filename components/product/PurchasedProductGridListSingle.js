@@ -1,4 +1,4 @@
-import React, { Fragment, useState, forwardRef } from "react";
+import React, { Fragment, useState, forwardRef, useEffect } from "react";
 import Link from "next/link";
 import { getDiscountPrice } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
@@ -20,16 +20,20 @@ const PurchasedProductGridListSingle = forwardRef(
     const finalDiscountedPrice = +(
       discountedPrice * currency.currencyRate
     ).toFixed(2);
-
+    const [stamp, setStamp] = useState("");
+    useEffect(()=>{
+      setTimeout(() => {
+        setStamp("loaded")
+    }, 2000);
+    })
     return (
       <Fragment>
         <div
-          className={`col-6 ${sliderClassName ? sliderClassName : ""}`}
+          className={`col-3 ${sliderClassName ? sliderClassName : ""} ${stamp}`}
         >
+          <div class='stamp'>
           <div
-            className={`product-wrap mt-90 ${
-              spaceBottomClass ? spaceBottomClass : ""
-            }`}
+            className={`product-wrap my-2`}
           >
             <div className="product-img">
               <Link
@@ -171,6 +175,7 @@ const PurchasedProductGridListSingle = forwardRef(
                 ""
               )}
             </div>
+          </div>
           </div>
         </div>
       </Fragment>

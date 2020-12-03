@@ -1,4 +1,15 @@
 /*----- 2. Header style ----*/
+.btn-primary {
+    color:$theme-color ;
+    background-color:$black ;
+    border-color: #ddbb74 ;
+    box-shadow: none ;
+    &:hover{
+        color: #000;
+    background-color: #ddbb74;
+    border-color: #3c3c3c;
+    }
+  }
 
 .header-area {
     position: relative;

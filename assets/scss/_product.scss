@@ -1,4 +1,13 @@
 /*------- 6. Product style  --------*/
+.landing-product-button{
+  background-color: transparent;
+  border-color: black;
+  &:hover{
+    
+    background-color: black;
+    border-color: $theme-color;
+  }
+}
 .next-link {
   width: 100%;
   height: auto;

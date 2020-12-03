@@ -152,10 +152,8 @@ const ProductSlider = props => {
                     </Col>
                     <Col className="text-right">
                       <Button
-                        style={{
-                          backgroundColor: "transparent",
-                          borderColor: "black"
-                        }}
+                      className="landing-product-button"
+                        
                       >
                         <Link
                           href={

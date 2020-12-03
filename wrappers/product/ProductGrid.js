@@ -53,6 +53,7 @@ const ProductGrid = ({
                 product={product}
                 currency={currency}
                 addToCart={addToCart}
+                
                 uID={userData.user.entryID}
                 addToWishlist={addToWishlist}
                 

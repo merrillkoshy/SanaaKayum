@@ -15,9 +15,7 @@ const atw = (uID, finalWish) => {
     .then(environment => environment.getEntry(uID))
 
     .then(entry => {
-      if (entry.fields["wishlistData"] === undefined)
       entry.fields["wishlistData"] = { "en-US": [finalWish] };
-      else entry.fields["wishlistData"]["en-US"].push(finalWish);
       return entry.update();
     })
     .then(entry => entry.publish());

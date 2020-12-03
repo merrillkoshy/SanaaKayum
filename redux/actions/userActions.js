@@ -5,6 +5,7 @@ export const LOGOUT_USER = "LOGOUT_USER_SUCCESS";
 export const loginUser = (userDetails, addToast, entryID, loginInfo) => {
   
   userDetails.entryID = entryID;
+  console.log(userDetails)
   return dispatch => {
     if (addToast) {
       addToast("Logged in as " + userDetails.username, {

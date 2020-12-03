@@ -14,11 +14,7 @@ const atc = (uID, finalCart) => {
     .then(environment => environment.getEntry(uID))
 
     .then(entry => {
-      if (entry.fields["cartData"]["en-US"] == null) {
-        entry.fields["cartData"] = { "en-US": [finalCart] };
-      } else {
-        entry.fields["cartData"]["en-US"].push(finalCart);
-      }
+      entry.fields["cartData"] = { "en-US": [finalCart] }
 
       return entry.update();
     })
@@ -155,6 +151,7 @@ const cartReducer = (state = initState, action) => {
   }
 
   if (action.type === LOAD_CART_FROM_PROFILE) {
+    
     return product;
   }
   if (action.type === RESET_CART) {

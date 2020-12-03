@@ -11,6 +11,7 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
     return discount && discount > 0 ? price - price * (discount / 100) : null;
   };
   const { addToast } = useToasts();
+  
   return (
     <div className="shopping-cart-content">
       {cartData && cartData.length ? (

@@ -9,15 +9,16 @@ import { addToWishlist } from "../../redux/actions/wishlistActions";
 
 import Rating from "./sub-components/ProductRating";
 import whatsAppthis from "../../constants/whatsappHelper";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Card, ListGroup } from "react-bootstrap";
 import { useToasts } from "react-toast-notifications";
 
 import SizeChartModal from "./SizeChartModal";
 import LoginModal from "./LoginModal";
 import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
+import Link from "next/link";
 const ProductDescriptionInfo = ({
   loadCart,
-  
+
   loadWishlist,
   loginUser,
   product,
@@ -28,11 +29,10 @@ const ProductDescriptionInfo = ({
   finalProductPrice,
   cartItems,
   wishlistItem,
-  
+
   addToast,
   addToCart,
-  addToWishlist,
-  
+  addToWishlist
 }) => {
   const [selectedProductColor, setSelectedProductColor] = useState(
     product.color ? product.color : ""
@@ -53,58 +53,73 @@ const ProductDescriptionInfo = ({
   );
   const [modalShow, setModalShow] = useState(false);
   const [loginModal, setloginModal] = useState(false);
-  
-  useEffect(()=>{
-    setUid(userData.user.entryID)
-  },[userData.user?.entryID])
+  const date = new Date();
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+  const todaysDate =
+    date.getDate() +
+    " " +
+    monthNames[date.getMonth()] +
+    " " +
+    date.getFullYear();
+
+  useEffect(() => {
+    setUid(userData.user.entryID);
+  }, [userData.user?.entryID]);
   return (
     <div className="product-details-content ml-70">
       <Container>
-<Row>
-<Col className={"col-7"}>
-<h1 className="product-page-header">{product.collectionName}</h1>
-      <h2>{product.article}</h2>
-      
-</Col>
-<Col>
-{product.rating && product.rating > 0 ? (
-  <div className="pro-details-rating-wrap">
-    <div className="pro-details-rating" itemProp="aggregateRating">
-      <span style={{ display: "none" }} itemProp="ratingValue">
-        {product.rating}
-      </span>
-      <Rating ratingValue={product.rating} />
-    </div>
-  </div>
-) : (
-  ""
-)}
-</Col>
-
-</Row>
-
+        <Row>
+          <Col className={"col-7"}>
+            <h1 className="product-page-header">{product.collectionName}</h1>
+            <h2>{product.article}</h2>
+          </Col>
+          <Col>
+            {product.rating && product.rating > 0 ? (
+              <div className="pro-details-rating-wrap">
+                <div className="pro-details-rating" itemProp="aggregateRating">
+                  <span style={{ display: "none" }} itemProp="ratingValue">
+                    {product.rating}
+                  </span>
+                  <Rating ratingValue={product.rating} />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </Col>
+        </Row>
       </Container>
-     
-      
+
       <div className="product-details-price ml-10 my-3">
         {discountedPrice !== null ? (
-          <Container fluid >
+          <Container fluid>
             <Row>
               <Col>
-            {/* currency.currencySymbol */}
-            <span>{`AED ` + finalDiscountedPrice}</span>{" "}
-            <span itemProp="price" className="old">
-              {`AED ` + finalProductPrice}
-            </span>
-            </Col>
+                {/* currency.currencySymbol */}
+                <span>{`AED ` + finalDiscountedPrice}</span>{" "}
+                <span itemProp="price" className="old">
+                  {`AED ` + finalProductPrice}
+                </span>
+              </Col>
             </Row>
           </Container>
         ) : (
           <span itemProp="price">{`AED ` + finalProductPrice} </span>
         )}
       </div>
-      
-      
 
       {product.color ? (
         <div className="pro-details-size-color">
@@ -135,58 +150,91 @@ const ProductDescriptionInfo = ({
               </label>
             </div>
           </div> */}
-            <Container fluid>
-          <div className="pro-details-size">
-            <span>Size</span>
-            <div className="pro-details-size-content">
-<Row>
-<Col>
-{product.size.map((sz, key) => {
-  return (
-    <label
-      className={`pro-details-size-content--single`}
-      key={key}
-    >
-      {sz.gtin ? (
-        <span style={{ display: "none" }} itemProp="gtin">
-          {sz.gtin}
-        </span>
-      ) : (
-        ""
-      )}
+          <Container fluid>
+            <div className="pro-details-size">
+              <span>Size</span>
+              <div className="pro-details-size-content">
+                <Row>
+                  <Col>
+                    {product.size.map((sz, key) => {
+                      return (
+                        <label
+                          className={`pro-details-size-content--single`}
+                          key={key}
+                        >
+                          {sz.gtin ? (
+                            <span style={{ display: "none" }} itemProp="gtin">
+                              {sz.gtin}
+                            </span>
+                          ) : (
+                            ""
+                          )}
 
-      <input
-        type="radio"
-        value={sz.name}
-        name="product-size"
-        checked={sz.name === selectedProductSize ? "checked" : ""}
-        onChange={() => {
-          setSelectedProductColor(product.color);
-          setSelectedProductSize(sz.name);
-          setProductStock(sz.stock);
-          setQuantityCount(1);
-        }}
-      />
+                          <input
+                            type="radio"
+                            value={sz.name}
+                            name="product-size"
+                            checked={
+                              sz.name === selectedProductSize ? "checked" : ""
+                            }
+                            onChange={() => {
+                              setSelectedProductColor(product.color);
+                              setSelectedProductSize(sz.name);
+                              setProductStock(sz.stock);
+                              setQuantityCount(1);
+                            }}
+                          />
 
-      <span className="size-name">{sz.name}</span>
-    </label>
-  );
-})}
-</Col>
-<Col>
-<Button className="sk-button" onClick={() => setModalShow(true)}>Size Chart</Button>
-</Col>
-<SizeChartModal show={modalShow} onHide={()=>setModalShow(false)} article={product.article}/>
-</Row>
-
+                          <span className="size-name">{sz.name}</span>
+                        </label>
+                      );
+                    })}
+                  </Col>
+                  <Col>
+                    <Button
+                      className="sk-button"
+                      onClick={() => setModalShow(true)}
+                    >
+                      Size Chart
+                    </Button>
+                  </Col>
+                  <SizeChartModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    article={product.article}
+                  />
+                </Row>
+              </div>
             </div>
-          </div>
-      </Container>
+          </Container>
         </div>
       ) : (
         ""
       )}
-
+      <Card className="mt-5">
+        <ListGroup variant="flush">
+          {userData.user ? (
+            <>
+              <ListGroup.Item>
+                {`Deliver to `}
+                <strong>{`${userData.user?.addressDetails?.region}`}</strong>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {`Delivery within `}
+                <strong>{`${`4 working days`}`}</strong>
+              </ListGroup.Item>
+            </>
+          ) : (
+            <>
+              <ListGroup.Item>
+                {`Delivery within `}
+                <strong>{`${`4 working days`} in Dubai`}</strong>
+              </ListGroup.Item>
+            </>
+          )}
+          
+        </ListGroup>
+      </Card>
       <Fragment>
         <div className="pro-details-quality">
           <div className="cart-plus-minus">
@@ -221,18 +269,18 @@ const ProductDescriptionInfo = ({
           <div className="pro-details-cart btn-hover">
             {productStock && productStock > 0 ? (
               <button
-                onClick={() =>
-                  {
-                  uID!==undefined?
-                  addToCart(
-                    product,
-                    addToast,
-                    uID,
-                    quantityCount,
-                    selectedProductColor,
-                    selectedProductSize
-                  ):setloginModal("true")}
-                }
+                onClick={() => {
+                  uID !== undefined
+                    ? addToCart(
+                        product,
+                        addToast,
+                        uID,
+                        quantityCount,
+                        selectedProductColor,
+                        selectedProductSize
+                      )
+                    : setloginModal("true");
+                }}
                 disabled={productCartQty >= productStock}
               >
                 {" "}
@@ -242,14 +290,14 @@ const ProductDescriptionInfo = ({
               <button disabled>Out of Stock</button>
             )}
           </div>
-          <LoginModal 
-      show={loginModal} 
-      onHide={() => setloginModal(false)} 
-      loadCart={loadCart}
-      
-      loadWishlist={loadWishlist}
-      loginUser={loginUser}
-      addtoast={addToast}/>
+          <LoginModal
+            show={loginModal}
+            onHide={() => setloginModal(false)}
+            loadCart={loadCart}
+            loadWishlist={loadWishlist}
+            loginUser={loginUser}
+            addtoast={addToast}
+          />
           <div className="pro-details-wishlist">
             <button
               className={wishlistItem !== undefined ? "active" : ""}
@@ -261,9 +309,8 @@ const ProductDescriptionInfo = ({
               }
               onClick={() => {
                 uID !== undefined
-                ? addToWishlist(product, addToast)
-                : setloginModal("true");
-                
+                  ? addToWishlist(product, addToast)
+                  : setloginModal("true");
               }}
             >
               <i className="pe-7s-like" />
@@ -283,12 +330,8 @@ const ProductDescriptionInfo = ({
             )}
           </div>
         </div>
-        
       </Fragment>
-      <ProductDescriptionTab
-          spaceBottomClass="pb-90"
-          product={product}
-        />
+      <ProductDescriptionTab spaceBottomClass="pb-90" product={product} />
 
       {/* {product.article ? (
         <div className="pro-details-meta">
@@ -371,11 +414,11 @@ const ProductDescriptionInfo = ({
 
 ProductDescriptionInfo.propTypes = {
   addToCart: PropTypes.func,
-  
+
   addToWishlist: PropTypes.func,
   addToast: PropTypes.func,
   cartItems: PropTypes.array,
-  
+
   currency: PropTypes.object,
   discountedPrice: PropTypes.number,
   finalDiscountedPrice: PropTypes.number,
@@ -397,7 +440,7 @@ const mapDispatchToProps = dispatch => {
     loadCart: item => {
       dispatch(loadCart(item));
     },
-    
+
     loadWishlist: item => {
       dispatch(loadWishlist(item));
     },
@@ -425,8 +468,7 @@ const mapDispatchToProps = dispatch => {
     },
     loginPrompt: addToast => {
       dispatch(loginPrompt(addToast));
-    },
-
+    }
   };
 };
 

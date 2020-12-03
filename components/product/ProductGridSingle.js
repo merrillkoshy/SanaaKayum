@@ -196,9 +196,15 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                 ) : product.stock && product.stock > 0 ? (
                   <button
                     onClick={() => {
-                      uID !== undefined
-                        ? addToCart(product, addToast, uID)
-                        : setloginModal("true");
+                      if(uID !== undefined)
+                      {
+                        addToCart(product, addToast, uID)
+                        
+                      }
+                      else{
+                        setloginModal("true")
+                      }
+
                     }}
                     className={
                       cartItem !== undefined && cartItem.quantity > 0
