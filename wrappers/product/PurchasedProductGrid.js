@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux/actions/userActions";
-
+import uuid from "uuid/v4";
 import PurchasedProductGridListSingle from "../../components/product/PurchasedProductGridListSingle";
 import Link from "next/link";
 import Row from "antd/lib/row";
@@ -15,6 +15,7 @@ import { isSafari, isIE, isFirefox } from "react-device-detect";
 
 import { useRouter } from "next/router";
 import { Button } from "react-bootstrap";
+import ListPurchasedProductGLSingle from "../../components/product/ListPurchasedProductGLSingle";
 
 const slugify = require("@sindresorhus/slugify");
 
@@ -22,7 +23,7 @@ const PurchasedProductGrid = ({
   userData,
   products,
   currency,
-
+  columnClass,
   sliderClassName,
   spaceBottomClass
 }) => {
@@ -54,134 +55,12 @@ const PurchasedProductGrid = ({
   return (
     <Fragment>
       {products.map(product => {
-        return product.data ? (
-          <div className="col mx-auto">
-            <List.Item
-              className="purchased-product-card p-4 mx-auto"
-              key={
-                product.data[0].description +
-                " | " +
-                product.data[0].collectionName
-              }
-            >
-              <Row>
-                <Image
-                  itemProp="image"
-                  className="puchased-image"
-                  alt={product.data[0].collectionName}
-                  title={
-                    product.data[0].collectionName +
-                    " " +
-                    product.data[0].article +
-                    " by Sana'a Kayum"
-                  }
-                  src={
-                    !(isSafari || isIE || isFirefox)
-                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                          product.data[0].images[0].fields.file.url}`
-                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                          product.data[0].images[0].fields.file.url}?fm=jpg`
-                  }
-                  placeholder={<Skeleton height={150} />}
-                />
-              </Row>
-              <Link
-                key={product.data[0].serialNumber}
-                href={{
-                  pathname: `/product/[pid]/[slug]`,
-                  query: {
-                    pid: product.data[0].serialNumber,
-                    slug: slugify(product.data[0].description)
-                  }
-                }}
-              >
-                <List.Item.Meta
-                  className="pt-2"
-                  title={product.data[0].article}
-                  description={product.data[0].description}
-                />
-              </Link>
-              <Row>
-                {product.result[0] === "A" ? (
-                  <>
-                    <Col>
-                      <Text strong> Ordered on:</Text>
-                    </Col>
-                    <Col>
-                      {product.result[1].getDate() +
-                        " " +
-                        monthNames[product.result[1].getMonth()] +
-                        " " +
-                        product.result[1].getFullYear()}
-                    </Col>
-                    <Col>
-                      <Text strong> Free Cancellation/ Return till </Text>
-                    </Col>
-                    <Col>
-                    {calculateSevenDays(
-                        product.result[1]
-                      ).getDate()}
-                      {
-                        " " +
-                        monthNames[
-                          calculateSevenDays(
-                            product.result[1]
-                          ).getMonth()
-                        ] +
-                        " " +
-                        calculateSevenDays(
-                          product.result[1]
-                        ).getFullYear()}
-                    </Col>
-                    {ifEligible(
-                      new Date(),
-                      calculateSevenDays(product.result[1].getDate())
-                    ) ? (
-                      
-                      <Button
-                        onClick={e => {
-                          e.preventDefault();
-                          router.push(
-                            `/customer-care/refund?t=${window.btoa(
-                              product.ref
-                            )}&s=${window.btoa(product.data[0].serialNumber)}`
-                          );
-                        }}
-                        variant="danger"
-                      >
-                        Refund
-                      </Button>
-                    ) : (
-                      <Button style={{cursor:"not-allowed"}}disabled>Expired</Button>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <Col>
-                      <Text type="danger"> Attempted on:</Text>
-                    </Col>
-                    <Col>
-                      {product.result[1].getDate() +
-                        " " +
-                        monthNames[product.result[1].getMonth()] +
-                        " " +
-                        product.result[1].getFullYear()}
-                    </Col>
-                  </>
-                )}
-              </Row>
-            </List.Item>
-
-            {/* <PurchasedProductGridListSingle
-                sliderClassName={sliderClassName}
-                spaceBottomClass={spaceBottomClass}
-                product={product.data[0]}
-                currency={currency}
-                entryID={userData.user.entryID}
-                loginUser={loginUser}
-              /> */}
-          </div>
-        ) : (
+        return product.data ? 
+        <ListPurchasedProductGLSingle
+        product={product}
+        />
+ 
+          :
           <>
           
           <Link
@@ -197,6 +76,7 @@ const PurchasedProductGrid = ({
             
             <PurchasedProductGridListSingle
               sliderClassName={sliderClassName}
+              columnClass={columnClass}
               spaceBottomClass={spaceBottomClass}
               product={product}
               currency={currency}
@@ -207,7 +87,6 @@ const PurchasedProductGrid = ({
           </Link>
           
           </>
-        );
       })}
     </Fragment>
   );

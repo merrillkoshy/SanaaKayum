@@ -271,7 +271,8 @@ const ProductDescriptionInfo = ({
               <button
                 onClick={() => {
                   uID !== undefined
-                    ? addToCart(
+                    ? setTimeout(() => {
+                      addToCart(
                         product,
                         addToast,
                         uID,
@@ -279,6 +280,7 @@ const ProductDescriptionInfo = ({
                         selectedProductColor,
                         selectedProductSize
                       )
+                    }, 1000)
                     : setloginModal("true");
                 }}
                 disabled={productCartQty >= productStock}

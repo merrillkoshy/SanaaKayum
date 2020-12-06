@@ -103,7 +103,7 @@ const LoginModal = ({
               </Row>
               <Row className="mt-3">
                 {`Lets revamp your wardrobe. `}
-                <Link href={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/register`}>
+                <Link href={`${process.env.NEXT_PUBLIC_DOMAIN}/register`}>
                   <a
                     style={{ textDecoration: "underline", fontWeight: "bold" }}
                   >

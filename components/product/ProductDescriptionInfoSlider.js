@@ -175,14 +175,17 @@ const ProductDescriptionInfo = ({
               <button
                 aria-label="order-now"
                 onClick={() =>
-                  addToCart(
-                    product,
-                    addToast,
-                    uID,
-                    quantityCount,
-                    selectedProductColor,
-                    selectedProductSize
-                  )
+                  setTimeout(() => {
+                    
+                    addToCart(
+                      product,
+                      addToast,
+                      uID,
+                      quantityCount,
+                      selectedProductColor,
+                      selectedProductSize
+                    )
+                  }, 1000)
                 }
                 disabled={productCartQty >= productStock}
               >

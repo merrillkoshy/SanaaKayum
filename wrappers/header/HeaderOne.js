@@ -60,10 +60,10 @@ const HeaderOne = ({
             <div className="col-xl-3 col-lg-2 col-4">
               {/* header logo */}
               <div className="logo text-center logo-hm5 my-2">
-                <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+                <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
                   <a
                     className="sticky-none"
-                    href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}
+                    href={process.env.NEXT_PUBLIC_DOMAIN + "/"}
                   >
                     <img
                       alt=""
@@ -72,10 +72,10 @@ const HeaderOne = ({
                     />
                   </a>
                 </Link>
-                <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+                <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
                   <a
                     className="sticky-block"
-                    href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}
+                    href={process.env.NEXT_PUBLIC_DOMAIN + "/"}
                   >
                     {scroll > headerTop ? (
                       <img
@@ -98,7 +98,7 @@ const HeaderOne = ({
             </div>
             <div className="col-2 d-lg-none d-xl-none my-auto text-center px-2 shop-mobile">
               {/* Shop Button for mobile screens */}
-              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+              <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
                 <a><strong>SHOP</strong></a>
               </Link>
             </div>

@@ -461,8 +461,10 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                       <button
                         aria-label="order-now"
                         onClick={() => {
-                          whatsAppthis(product);
-                          addToCart(product, addToast, entryID);
+                          // whatsAppthis(product);
+                          setTimeout(() => {
+                            addToCart(product, addToast, entryID);
+                          }, 1000);
                         }}
                         className={
                           cartItem !== undefined && cartItem.quantity > 0

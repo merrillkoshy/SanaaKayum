@@ -53,7 +53,7 @@ const HeaderSix = ({ user, layout, headerPaddingClass, headerBgClass }) => {
           <div className="col-xl-2 col-lg-2 col-md-6 col-4">
             {/* header logo */}
             <div className="logo text-center logo-hm5">
-              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+              <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
               <a
                 className="sticky-none"
                 
@@ -65,7 +65,7 @@ const HeaderSix = ({ user, layout, headerPaddingClass, headerBgClass }) => {
                 />
               </a>
                 </Link>
-                <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+                <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
               <a
                 className="sticky-block"
                 

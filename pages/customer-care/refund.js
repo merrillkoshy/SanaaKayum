@@ -24,7 +24,7 @@ const Refund = ({ products, user }) => {
   const [flag, setFlag] = useState(false);
  
   const email=userData.email
-  const address=userData.addressDetails.addressLine+","+userData.addressDetails.region+","+userData.addressDetails.country
+  const address=userData.addressDetails?.addressLine+","+userData.addressDetails?.region+","+userData.addressDetails?.country
   const phone=userData.mobile
   const name=userData.firstName + " " +userData.lastName
   const reasonsArray = [

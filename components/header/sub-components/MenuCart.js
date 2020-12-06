@@ -34,7 +34,7 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
                   <li className="single-shopping-cart" key={key}>
                     <div className="shopping-cart-img">
                       <Link
-                        href={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${
+                        href={`${process.env.NEXT_PUBLIC_DOMAIN}/product/${
                           single.serialNumber
                         }/${slugify(single.description)}`}
                       >
@@ -103,10 +103,10 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
             </h4>
           </div>
           <div className="shopping-cart-btn btn-hover text-center">
-            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/cart"}>
+            <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/cart"}>
               <a className="default-btn">view cart</a>
             </Link>
-            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/checkout"}>
+            <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/checkout"}>
               <a className="default-btn">checkout</a>
             </Link>
           </div>

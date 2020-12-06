@@ -32,7 +32,7 @@ const MobileNavMenu = ({
   const initInteraction = (
     <>
       <li className="menu-item-has-children">
-        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/register"}>
+        <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/register"}>
         <a>
           Register
         </a>
@@ -70,7 +70,7 @@ const MobileNavMenu = ({
               resetWishlist();
             }}
           >
-            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+            <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
             <a 
               className="text-danger"
               
@@ -90,26 +90,26 @@ const MobileNavMenu = ({
 
       <ul>
         <li className="menu-item-has-children">
-          <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+          <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
           <a>{"Home"}</a>
           </Link>
         </li>
 
         <li className="menu-item-has-children">
-          <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+          <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
           <a>{"Shop"}</a>
           </Link>
         </li>
 
         <li>
-          <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/lookbook"}>
+          <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/lookbook"}>
           <a>
             {"Lookbook"}
           </a>
           </Link>
         </li>
         <li>
-          <Link  href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
+          <Link  href={process.env.NEXT_PUBLIC_DOMAIN + "/about"}>
           <a>
             {"About Us"}
           </a>
@@ -117,7 +117,7 @@ const MobileNavMenu = ({
         </li>
 
         <li>
-          <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>
+          <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/contact"}>
           <a>
             {"Contact Us"}
           </a>

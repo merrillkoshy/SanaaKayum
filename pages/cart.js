@@ -197,12 +197,15 @@ const Cart = ({
                                     <button
                                       className="inc qtybutton"
                                       onClick={() =>
-                                        addToCart(
-                                          cartItem,
-                                          addToast,
-                                          user.user.entryID,
-                                          quantityCount
-                                        )
+                                        setTimeout(() => {
+                                          
+                                          addToCart(
+                                            cartItem,
+                                            addToast,
+                                            user.user.entryID,
+                                            quantityCount
+                                          )
+                                        }, 1000)
                                       }
                                       disabled={
                                         cartItem !== undefined &&
@@ -256,7 +259,7 @@ const Cart = ({
                   <div className="col-lg-12">
                     <div className="cart-shiping-update-wrapper">
                       <div className="cart-shiping-update">
-                        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                        <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
                           <a>{`Continue Shopping`}</a>
                         </Link>
                       </div>
@@ -344,7 +347,7 @@ const Cart = ({
                         Grand Total{" "}
                         <span>{`AED ` + cartTotalPrice.toFixed(2)}</span>
                       </h4>
-                      <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/checkout"}>
+                      <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/checkout"}>
                       <a>{`Proceed to Checkout`}</a>
                         
                       </Link>
@@ -361,7 +364,7 @@ const Cart = ({
                     </div>
                     <div className="item-empty-area__text">
                       No items found in cart <br />{" "}
-                      <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                      <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
                         <a>Shop Now</a>
                       </Link>
                     </div>

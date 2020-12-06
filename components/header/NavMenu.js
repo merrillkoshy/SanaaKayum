@@ -14,28 +14,28 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
       <nav>
         <ul>
           <li>
-            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+            <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
               <a>{"Home"}</a>
             </Link>
           </li>
           <li>
-            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+            <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
               <a> {"Shop"}</a>
             </Link>
           </li>
           {/* Edit - only must-use comps
           <li>
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop-grid-standard"}>
+            <a href={process.env.NEXT_PUBLIC_DOMAIN + "/shop-grid-standard"}>
               {strings["collection"]}
             </a>
           </li>*/}
           <li>
-            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/lookbook"}>
+            <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/lookbook"}>
               <a>{"Lookbook"}</a>
             </Link>
           </li>
           <li>
-            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
+            <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/about"}>
               <a>
                 {"About Us"}
                 {/* {sidebarMenu ? (
@@ -49,54 +49,54 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
             </Link>
             {/* <ul className="submenu">
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/cart"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/cart"}>
                   {strings["cart"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/checkout"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/checkout"}>
                   {strings["checkout"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/wishlist"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/wishlist"}>
                   {strings["wishlist"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/compare"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/compare"}>
                   {strings["compare"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/my-account"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/my-account"}>
                   {strings["my_account"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/login-register"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/login-register"}>
                   {strings["login_register"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/about"}>
                   {strings["about_us"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/contact"}>
                   {strings["contact_us"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/not-found"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/not-found"}>
                   {strings["404_page"]}
                 </a>
               </li>
             </ul> */}
           </li>
           {/* <li>
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/blog-standard"}>
+            <a href={process.env.NEXT_PUBLIC_DOMAIN + "/blog-standard"}>
               {strings["blog"]}
               {sidebarMenu ? (
                 <span>
@@ -108,29 +108,29 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
             </a>
             <ul className="submenu">
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/blog-standard"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/blog-standard"}>
                   {strings["blog_standard"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/sk"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/sk"}>
                   {strings["blog_no_sidebar"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/blog-right-sidebar"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/blog-right-sidebar"}>
                   {strings["blog_right_sidebar"]}
                 </a>
               </li>
               <li>
-                <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/blog-details-standard"}>
+                <a href={process.env.NEXT_PUBLIC_DOMAIN + "/blog-details-standard"}>
                   {strings["blog_details_standard"]}
                 </a>
               </li>
             </ul>
           </li> */}
           <li>
-            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>
+            <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/contact"}>
               <a>{"Contact Us"}</a>
             </Link>
           </li>

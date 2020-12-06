@@ -18,7 +18,7 @@ const OffcanvasMenu = ({ activeState, getActiveState }) => {
         </button>
       </div>
       <div className="side-logo">
-        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+        <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
         <a>
           <img
             alt=""

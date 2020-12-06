@@ -18,43 +18,19 @@ const PayBySk = ({postPurchase}) => {
 
   const [recentPurchases, setRecentPurchases] = useState([]);
   const [cartDescription, setCartDescription] = useState("");
-  const [entryID,setEntryId]=useState("")
   useEffect(() => {
-    setDate( window.atob(pa));
-    setEntryId( window.atob(ui));
+    setDate( window.atob(pa));    
     const orderData = JSON.parse(localStorage.getItem("Initiate"));
     if(orderData){
-        setRecentPurchases(orderData.cartData);
-        setCartDescription(orderData.cart_description);
-        const transactionResponse = {
-          ...orderData,
-          ...{ purchaseItems: recentPurchases }
-        };
-        
-        clientMgr
-            .then(environment => environment.getEntry(window.atob(ui)))
-            .then(entry => {
-              console.log(entry.fields)
-              if (entry.fields["transactionsData"] === undefined) {
-                entry.fields["transactionsData"] = {
-                  "en-US": [transactionResponse]
-                };
-              } else {
-                entry.fields["transactionsData"]["en-US"].push(
-                  transactionResponse
-                );
-              }
-              entry.fields.cartData["en-US"] = null;
-              return entry.update();
-            })
-            .then(entry => {
-              postPurchase(window.atob(ui));
-              entry.publish();
-            });
-        if(orderData) localStorage.removeItem("Initiate");
+      setRecentPurchases(orderData.cartData),
+      setCartDescription(orderData.cart_description),
+      postPurchase(window.atob(ui))
     }
     if(!orderData) router.push("/shop")
     
+    return()=>{
+      localStorage.removeItem("Initiate")
+    }
   }, [typeof window !== undefined]);
   const settings = {
     loop: false,
@@ -122,6 +98,7 @@ const PayBySk = ({postPurchase}) => {
                 {recentPurchases && (
                   
                   <PurchasedProductGrid
+                  columnClass="col-3"
                     products={recentPurchases}
                     spaceBottomClass="mb-25"
                   />

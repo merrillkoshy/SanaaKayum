@@ -283,7 +283,7 @@ const TncCtn = ({ spaceTopClass, spaceBottomClass }) => {
 
           <p className="text-justify">
             Please read Privacy Policy.Follow this link :
-            <a href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/privacy-policy"}>
+            <a href={process.env.NEXT_PUBLIC_DOMAIN + "/privacy-policy"}>
               Privacy Policy
             </a>
           </p>

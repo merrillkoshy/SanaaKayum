@@ -167,11 +167,14 @@ const Wishlist = ({
                                     wishlistItem.stock > 0 ? (
                                     <button
                                       onClick={() =>
-                                        addToCart(
-                                          wishlistItem,
-                                          addToast,
-                                          userData.user.entryID
-                                        )
+                                        setTimeout(() => {
+                                          
+                                          addToCart(
+                                            wishlistItem,
+                                            addToast,
+                                            userData.user.entryID
+                                          )
+                                        }, 1000)
                                       }
                                       className={
                                         cartItem !== undefined &&
@@ -227,7 +230,7 @@ const Wishlist = ({
                   <div className="col-lg-12">
                     <div className="cart-shiping-update-wrapper">
                       <div className="cart-shiping-update">
-                        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                        <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
                         <a>{`Continue Shopping`}</a>
                           
                         </Link>
@@ -258,7 +261,7 @@ const Wishlist = ({
                     </div>
                     <div className="item-empty-area__text">
                       No items found in wishlist <br />{" "}
-                      <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                      <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
                         <a>{`Add Items`}</a>
                         
                       </Link>

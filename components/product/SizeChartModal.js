@@ -30,9 +30,17 @@ const SizeChartModal=props=>{
           <Container>
           {sizeChart?sizeChart.map((data, key)=>{
               return(
-            <Row key={key}><Col style={{border:"1px solid black"}}>{data.size}</Col><Col style={{border:"1px solid black"}}>{data.measurements}</Col></Row>
-              )
-          }):""}
+            <Row key={key}><Col style={{border:"1px solid black"}}>{data.size}</Col>
+            {data.measurements.Bust?
+            <>
+            <Col style={{border:"1px solid black"}}>{`Bust : `+ data.measurements.Bust}</Col>
+            <Col style={{border:"1px solid black"}}>{`Waist : `+ data.measurements.Waist}</Col>
+            <Col style={{border:"1px solid black"}}>{`Hip : `+ data.measurements.Hip}</Col>
+            </>
+            :<Col style={{border:"1px solid black"}}>{data.measurements}</Col>}
+            </Row>
+            )}):""}
+           
           </Container>
       </Modal.Body>
       <Modal.Footer>

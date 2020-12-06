@@ -12,7 +12,7 @@ const PurchasedProductGridListSingle = forwardRef(
     const { spaceBottomClass } = props;
     const { product } = props;
     const { currency } = props;
-
+const{columnClass}=props;
     const discountedPrice = getDiscountPrice(product.price, product.discount);
     const finalProductPrice = +(product.price * currency.currencyRate).toFixed(
       2
@@ -29,9 +29,9 @@ const PurchasedProductGridListSingle = forwardRef(
     return (
       <Fragment>
         <div
-          className={`col-3 ${sliderClassName ? sliderClassName : ""} ${stamp}`}
+          className={`${columnClass} ${sliderClassName ? sliderClassName : ""} ${stamp}`}
         >
-          <div class='stamp'>
+          <div className='stamp'>
           <div
             className={`product-wrap my-2`}
           >

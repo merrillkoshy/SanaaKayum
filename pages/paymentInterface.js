@@ -35,7 +35,29 @@ const paymentInterface = ({ cartItems, user, postPurchase }) => {
       }
     }
   };
+const getPayDate=(inDate)=>{
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
 
+  const date=new Date(inDate)
+  const today=new Date(inDate)
+let formatted
+    (!inDate==="today")?formatted=`${date.getDate()}${" "} ${monthNames[date.getMonth()]}${" "} ${date.getFullYear()}`:
+    formatted=`${today.getDate()}${" "} ${monthNames[today.getMonth()]}${" "} ${today.getFullYear()}`
+    return formatted
+}
   useEffect(() => {
     if (localStorage.getItem("Initiate")) {
       const checkTrans = JSON.parse(localStorage.getItem("Initiate"));
@@ -50,8 +72,11 @@ const paymentInterface = ({ cartItems, user, postPurchase }) => {
         .post(
           "/api/queryTrans",
           {
-            profile_id: process.env.NEXT_PUBLIC_MID,
-            tran_ref: checkTrans.tran_ref
+            check: {
+              profile_id: process.env.NEXT_PUBLIC_MID,
+              tran_ref: checkTrans.tran_ref
+            },
+            cart: cartItems
           },
           {
             headers: headers
@@ -79,12 +104,13 @@ const paymentInterface = ({ cartItems, user, postPurchase }) => {
                 );
               }
               if (response.data.payment_result.response_code === "0") {
+                postPurchase(userData.entryID);
                 entry.fields.cartData["en-US"] = null;
               }
               return entry.update();
             })
             .then(entry => {
-              postPurchase(userData.entryID);
+              
               entry.publish();
             });
         })
@@ -102,77 +128,79 @@ const paymentInterface = ({ cartItems, user, postPurchase }) => {
         headerTop="visible"
       >
         <Container>
-        <Row  className="d-block d-lg-flex d-xl-flex">
-          
-          {paymentResponseCode === "0" ? (
+          <Row className="d-block d-lg-flex d-xl-flex">
+            {paymentResponseCode === "0" ? (
               <>
-              <Col>
-              
-                <Swiper {...settings}>
-                  <PurchasedProductGrid
-                    products={recentPurchase}
-                    spaceBottomClass="mb-25"
+                <Col>
+                  <Swiper {...settings}>
+                    <PurchasedProductGrid
+                    columnClass="col-6"
+                      products={recentPurchase}
+                      spaceBottomClass="mb-25"
                     />
-                </Swiper>
-                </Col >
-<Col>
-                    <Container className="mt-150">
-              <Table striped bordered  hover variant="dark" size="sm">
-                <tbody>
-                  <tr>
-                    <th>Payment Status:</th>
-                    <td>{paymentResult?.response_status}</td>
-                  </tr>
-                  <tr>
-                    <th>Result</th>
-                    <td>{paymentResult?.response_message}</td>
-                  </tr>
-                  <tr>
-                    <th>Order Placed at:</th>
-                    <td>{paymentResult?.transaction_time}</td>
-                  </tr>
-                </tbody>
-              </Table>
-              </Container>
-              <Link href="/shop">
-              <Button className="justify-content-md-center ml-40">
-                Back to shop
-              </Button>
-            </Link>
-              </Col>
+                  </Swiper>
+                </Col>
+                <Col>
+                  <Container className="mt-150">
+                    <Table striped bordered hover variant="dark" size="sm">
+                      <tbody>
+                        <tr>
+                          <th>Payment Status:</th>
+                          <td>{paymentResult?.response_status}</td>
+                        </tr>
+                        <tr>
+                          <th>Result</th>
+                          <td>{paymentResult?.response_message}</td>
+                        </tr>
+                        <tr>
+                          <th>Order Placed at:</th>
+                          <td>
+                            {paymentResult
+                              ? getPayDate(paymentResult?.transaction_time)
+                              : getPayDate("today")}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Container>
+                  <Link href="/shop">
+                    <Button className="justify-content-md-center ml-40">
+                      Back to shop
+                    </Button>
+                  </Link>
+                </Col>
               </>
-          ) : (
-            <>
-            <Container className="mt-150">
-            <Table>
-              <tbody>
-                <tr>
-                  <th>Payment Status:</th>
-                  <td>{paymentResult?.response_status}</td>
-                </tr>
-                <tr>
-                  <th>Result</th>
-                  <td>{paymentResult?.response_message}</td>
-                </tr>
-                <tr>
-                  <th>Order Placed at:</th>
-                  <td>{paymentResult?.transaction_time}</td>
-                </tr>
-              </tbody>
-            </Table>
-            </Container>
-             <Link href="/shop">
-             <Button className="justify-content-md-center ml-40">
-               Back to shop
-             </Button>
-           </Link>
-           </>
-          )}
-
-          
-           
+            ) : (
+              <>
+                <Container className="mt-150">
+                  <Table>
+                    <tbody>
+                      <tr>
+                        <th>Payment Status:</th>
+                        <td>{paymentResult?.response_status}</td>
+                      </tr>
+                      <tr>
+                        <th>Result</th>
+                        <td>{paymentResult?.response_message}</td>
+                      </tr>
+                      <tr>
+                        <th>Order Placed at:</th>
+                        <td>{paymentResult
+                              ? getPayDate(paymentResult?.transaction_time)
+                              : getPayDate("today")}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Container>
+                <Link href="/shop">
+                  <Button className="justify-content-md-center ml-40">
+                    Back to shop
+                  </Button>
+                </Link>
+              </>
+            )}
           </Row>
-          </Container>
+        </Container>
       </PaymentResponseLayout>
     </Fragment>
   );

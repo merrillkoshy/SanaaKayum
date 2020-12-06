@@ -70,7 +70,7 @@ const Checkout = ({ cartItems, currency, user }) => {
         const uID=response.headers.token
         const date=new Date(response.headers.date)
         const offset=date.getTimezoneOffset()*60*1000
-        const dubaiDate=new Date(date.getTime()+offset)
+        const dubaiDate=new Date(date.getTime()-offset)
         Promise.resolve(
           localStorage.setItem(
             "Initiate",
@@ -400,7 +400,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                     </div>
                     <div className="item-empty-area__text">
                       No items found in cart to checkout <br />{" "}
-                      <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                      <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
                         <a>Shop Now</a>
                       </Link>
                     </div>

@@ -23,6 +23,7 @@ export default async function handler(req, res) {
     if (entry.fields["orderData"] === undefined)
     entry.fields["orderData"] = { "en-US": [orderData] };
     else entry.fields["orderData"]["en-US"].push(orderData);
+    
     return entry.update();
   })
   .then(entry => entry.publish())
@@ -50,7 +51,6 @@ export default async function handler(req, res) {
         }
       )
       .then((response) => {
-        
         res.send(response.data)
     })
     .catch((error) => {

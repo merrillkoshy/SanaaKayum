@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
 
 import Swiper from "react-id-swiper";
+
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import LayoutOne from "../layouts/LayoutOne";
@@ -48,11 +49,18 @@ const MyAccount = ({ user }) => {
   const uID = userData.entryID;
   const transactionsBlob = userData.transactionsData?.map(
     tr => {
-      
-      return{
-        data:tr.purchaseItems,
-        result:[tr.data.payment_result.response_status,new Date(tr.data.payment_result.transaction_time)],
-        ref:tr.data.tran_ref
+      if(tr.tran_class==="cod"){
+        return {
+          data:tr.purchaseItems,
+          result:["Order Placed",new Date(tr.order_time)],
+          ref:tr.cart_description
+        }
+      }else{
+        return{
+          data:tr.purchaseItems,
+          result:[tr.data.payment_result.response_status,new Date(tr.data.payment_result.transaction_time)],
+          ref:tr.data.tran_ref
+        }
       }
       
     }
@@ -89,25 +97,7 @@ const MyAccount = ({ user }) => {
 
   useEffect(() => {
     setRecentPurchases(transactionsBlob)
-    
-    // setRecentPurchases(
-    //   ...userData.transactionsData.map(tr => tr.purchaseItems)
-    // );
-    
-    //   let transact
-    //   client.getEntry(uID)
-    //   .then(function (entry) {
-    //      transact=entry.fields.transactionsData
-
-    //     // setTransactions(purchaseItems)
-    // }).then(()=>{
-    //   transact.forEach(element => {
-    //     return element
-    //   });
-    // })
-    // .then(()=>{
-    //   console.log(transactions)
-    //   })
+console.log(transactionsBlob)
   }, [userData.transactionsData]);
   
   return (
@@ -422,6 +412,7 @@ const MyAccount = ({ user }) => {
                             {recentPurchases.length ? (
                               // <Swiper {...settings}>
                               <PurchasedProductGrid
+                              columnClass={"col-6"}
                                 products={recentPurchases}
                                 spaceBottomClass="mb-25"
                               />

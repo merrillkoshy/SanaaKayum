@@ -37,7 +37,7 @@ const LookbookHeader = ({
           <div className="col-xl-3 col-lg-8 d-lg-block">
             {/* header logo */}
             <div className="logo text-center logo-hm5">
-              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+              <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
               <a
                 className="sticky-none"
                 
@@ -45,10 +45,10 @@ const LookbookHeader = ({
                 <img alt="" src="/assets/img/logo/logo-gold.png" />
               </a>
               </Link>
-              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+              <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
               <a
                 className="sticky-block"
-                href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}
+                href={process.env.NEXT_PUBLIC_DOMAIN + "/"}
               >
                 <img alt="" src="/assets/img/logo/logo-gold.png" />
               </a>

@@ -40,7 +40,7 @@ const IconGroup = ({
   const initInteraction = (
     <ul>
       <li>
-        <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/register"}>
+        <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/register"}>
           <a>Register</a>
         </Link>
       </li>
@@ -83,7 +83,7 @@ const IconGroup = ({
               resetWishlist();
             }}
           >
-            <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+            <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
               <a>Logout</a>
             </Link>
           </li>
@@ -165,7 +165,7 @@ const IconGroup = ({
 
           <Fragment>
             <div className="same-style header-wishlist">
-              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/wishlist"}>
+              <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/wishlist"}>
                 <a>
                   <i className="pe-7s-like" />
                   <span className="count-style">
@@ -195,7 +195,7 @@ const IconGroup = ({
               />
             </div>
             <div className="same-style cart-wrap d-block d-lg-none">
-              <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/cart"}>
+              <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/cart"}>
                 <a className="icon-cart">
                   <i className="pe-7s-shopbag" />
                   <span className="count-style">

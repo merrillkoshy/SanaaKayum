@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
 import Swiper from "react-id-swiper";
+import Skeleton from "react-loading-skeleton";
+import { isSafari, isIE, isFirefox } from "react-device-detect";
+import Image from "antd/lib/image";
 
 const ProductImageGallerySlider = ({ product }) => {
   // swiper slider settings
@@ -45,52 +48,27 @@ const ProductImageGallerySlider = ({ product }) => {
             return (
               <div key={key}>
                 <div className="single-image">
-                  <picture>
-                    <source
-                      type="image/webp"
-                      className="img-fluid"
-                      itemProp="image"
-                      alt={product.collectionName}
-                      loading="lazy"
-                      title={
-                        product.collectionName +
-                        " " +
-                        product.article +
-                        " by Sana'a Kayum"
-                      }
-                      srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                        single.fields.file.url}`}
-                    />
-                    <source
-                      className="img-fluid"
-                      itemProp="image"
-                      alt={product.collectionName}
-                      loading="lazy"
-                      title={
-                        product.collectionName +
-                        " " +
-                        product.article +
-                        " by Sana'a Kayum"
-                      }
-                      type="image/jpeg"
-                      srcSet={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                        single.fields.file.url}?fm=jpg`}
-                    />
-                    <img
-                      className="img-fluid"
-                      itemProp="image"
-                      alt={product.collectionName}
-                      loading="lazy"
-                      title={
-                        product.collectionName +
-                        " " +
-                        product.article +
-                        " by Sana'a Kayum"
-                      }
-                      src={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                        single.fields.file.url}?fm=jpg`}
-                    />
-                  </picture>
+                  
+                <Image
+           width={"100%"}
+           className="default-img"
+           itemProp="image"
+           alt={product.collectionName}
+           title={
+             product.collectionName +
+             " " +
+             product.article +
+             " by Sana'a Kayum"
+           }
+           src={
+             !(isSafari || isIE || isFirefox)
+               ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                   single.fields.file.url}`
+               : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  single.fields.file.url}?fm=jpg`
+           }
+           placeholder={<Skeleton height={150} />}
+         />
                 </div>
               </div>
             );

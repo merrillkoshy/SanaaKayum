@@ -4,12 +4,11 @@ import React, { Fragment, useState, forwardRef } from "react";
 import { getDiscountPrice } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
 import ProductModal from "./ProductModal";
-import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Link from "next/link";
 
 import LoginModal from "./LoginModal";
 import Skeleton from "react-loading-skeleton";
-
+import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Image from "antd/lib/image";
 const slugify = require("@sindresorhus/slugify");
 
@@ -198,7 +197,10 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                     onClick={() => {
                       if(uID !== undefined)
                       {
-                        addToCart(product, addToast, uID)
+                        setTimeout(() => {
+                          
+                          addToCart(product, addToast, uID)
+                        }, 1000);
                         
                       }
                       else{

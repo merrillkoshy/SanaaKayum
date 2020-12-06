@@ -73,28 +73,28 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
-                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/"}>
+                    <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
                     <a>
                       Haute Couture
                     </a>
                     </Link>
                   </li>
                   <li>
-                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/sk"}>
+                    <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/sk"}>
                     <a>
                       Corporate Clothing
                     </a>
                     </Link>
                   </li>
                   <li>
-                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"}>
+                    <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
                     <a>
                       Shop
                     </a>
                     </Link>
                   </li>
                   <li>
-                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/lookbook"}>
+                    <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/lookbook"}>
                     <a>
                       Lookbook
                     </a>
@@ -116,7 +116,7 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
-                    <Link  href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/about"}>
+                    <Link  href={process.env.NEXT_PUBLIC_DOMAIN + "/about"}>
                     <a>
                       About us
                     </a>
@@ -130,7 +130,7 @@ const FooterOne = ({
                     </Link>
                   </li>
                   <li>
-                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/contact"}>
+                    <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/contact"}>
                     <a>
                       Contact
                     </a>
@@ -161,7 +161,7 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
-                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/size-guide"}>
+                    <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/size-guide"}>
                     <a
                       
                     >
@@ -170,7 +170,7 @@ const FooterOne = ({
                     </Link>
                   </li>
                   <li>
-                    <Link href={process.env.NEXT_PUBLIC_PUBLIC_URL + "/delivery"}>
+                    <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/delivery"}>
                     <a >
                       Delivery
                     </a>

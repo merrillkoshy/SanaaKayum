@@ -1,5 +1,5 @@
 module.exports = {
-    siteUrl: "https://sanaa-kayum.netlify.app",
+    siteUrl: "https://sanaa-kayum.vercel.app",
     changefreq: 'daily',
     priority: 0.7,
     sitemapSize: 5000,
