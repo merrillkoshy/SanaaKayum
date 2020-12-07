@@ -43,28 +43,11 @@ const MyAccount = ({ user }) => {
 
   const { addToast } = useToasts();
   const [modalShow, setModalShow] = useState(false);
-  const [recentPurchases, setRecentPurchases] = useState([]);
+  const [recentPurchases, setRecentPurchases] = useState("");
   const RegexExp = /(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,8}\w+/;
   const userData = user.user;
   const uID = userData.entryID;
-  const transactionsBlob = userData.transactionsData?.map(
-    tr => {
-      if(tr.tran_class==="cod"){
-        return {
-          data:tr.purchaseItems,
-          result:["Order Placed",new Date(tr.order_time)],
-          ref:tr.cart_description
-        }
-      }else{
-        return{
-          data:tr.purchaseItems,
-          result:[tr.data.payment_result.response_status,new Date(tr.data.payment_result.transaction_time)],
-          ref:tr.data.tran_ref
-        }
-      }
-      
-    }
-  )
+ 
   
   const settings = {
     loop: false,
@@ -94,12 +77,47 @@ const MyAccount = ({ user }) => {
           autoDismiss: true
         });
   };
+  let blob
+  let RecentPurchasesComp
+   
+  useEffect(()=>{
 
-  useEffect(() => {
-    setRecentPurchases(transactionsBlob)
-console.log(transactionsBlob)
-  }, [userData.transactionsData]);
-  
+    client.getEntry(uID).then(entry=>{
+      blob=entry.fields.transactionsData
+      
+    }).then(()=>{
+      
+      blob=blob.map(
+            tr => {
+              if(tr.tran_class==="cod"){
+                return {
+                  data:tr.purchaseItems,
+                  result:["Order Placed",new Date(tr.order_time)],
+                  ref:tr.cart_description,
+                  cart_id:tr.cart_description
+                }
+              }else{
+                
+                return{
+                  data:tr.purchaseItems,
+                  result:[tr.data.payment_result.response_status,new Date(tr.data.payment_result.transaction_time)],
+                  ref:tr.data.tran_ref,
+                  cart_id:tr.data.cart_id
+                }
+              }
+            })
+
+
+    setRecentPurchases(<PurchasedProductGrid
+      columnClass={"col-6"}
+        products={blob}
+        spaceBottomClass="mb-25"
+      />)
+    
+  }).catch(e=>console.error(e))
+
+    
+  },[blob===undefined])
   return (
     <Fragment>
  <LayoutOne
@@ -409,17 +427,8 @@ console.log(transactionsBlob)
                         <div className="ml-auto mr-auto col-lg-9 py-5 ">
                           <div className="myaccount-wrapper">
                           <div className="row">
-                            {recentPurchases.length ? (
-                              // <Swiper {...settings}>
-                              <PurchasedProductGrid
-                              columnClass={"col-6"}
-                                products={recentPurchases}
-                                spaceBottomClass="mb-25"
-                              />
-                              // </Swiper>
-                            ) : (
-                              <Skeleton />
-                            )}
+                            {recentPurchases}
+                          
                             </div>
                           </div>
                         </div>

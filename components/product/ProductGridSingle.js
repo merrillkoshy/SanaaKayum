@@ -43,7 +43,7 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
   return (
     <Fragment>
       <div
-        className={`col-xl-2 col-md-4 col-lg-3 col-sm-6 ${
+        className={`col ${
           sliderClassName ? sliderClassName : ""
         }`}
       >

@@ -4,6 +4,7 @@ import Swiper from "react-id-swiper";
 import PBanners from "../../components/hero-slider/promoBanners.js";
 import { connect } from "react-redux";
 
+
 const PromotionsSlider = pBannersNow => {
   const params = {
     effect: "fade",
@@ -33,9 +34,11 @@ const PromotionsSlider = pBannersNow => {
   return (
     <div className="slider-area">
       <div className="slider-active-2 nav-style-3">
-        <Swiper {...params}>
+      
+        {/* <Swiper {...params}> */}
           <PBanners pBanners={pBannersNow.pBannersNow.pBanners} sliderClassName="swiper-slide" />
-        </Swiper>
+          
+        {/* </Swiper> */}
       </div>
     </div>
   );

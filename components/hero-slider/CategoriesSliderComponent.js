@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React, { Fragment,useState,useEffect } from "react";
 import Swiper from "react-id-swiper";
 
 import Skeleton from "react-loading-skeleton";
-
+import OwlCarousel from "react-owl-carousel3";
 import Card from "react-bootstrap/Card";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { isMobile, isTablet } from "react-device-detect";
 
 const CategoriesSliderComponent = ({
   swiperParams,
@@ -32,9 +33,28 @@ const CategoriesSliderComponent = ({
     "Pajama",
     "Maxi Gown"
   ];
+  const options = {
+    
+    nav: true,
+    dots:false,
+    responsiveClass: true,
+    mouseDrag: true,
+    navText: [
+      "<i class='pe-7s-angle-left'></i>",
+      "<i class='pe-7s-angle-right'></i>"
+    ]
+  };
+
+  const [display, setDisplay] = useState(false);
+
+  useEffect(()=>{
+    setDisplay(true)
+  })
+
   return (
     <Fragment>
-      <Swiper {...swiperParams}>
+      
+      {display?<OwlCarousel items={isMobile?3:isTablet?5:12}{...options} className="owl-theme" nav>
         {isFallback ? (
           <Skeleton count={5} />
         ) : (
@@ -89,7 +109,7 @@ const CategoriesSliderComponent = ({
             );
           })
         )}
-      </Swiper>
+      </OwlCarousel>:<Skeleton circle={true} height={100} width={100} />}
     </Fragment>
   );
 };

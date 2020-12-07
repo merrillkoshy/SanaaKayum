@@ -5,16 +5,18 @@ import List from "antd/lib/list";
 import Image from "antd/lib/image";
 import Text from "antd/lib/typography/Text";
 import Skeleton from "react-loading-skeleton";
-import { isSafari, isIE, isFirefox } from "react-device-detect";
+import { isSafari, isIE, isFirefox, isMobile } from "react-device-detect";
 import { useRouter } from "next/router";
 import { Button } from "react-bootstrap";
-import { Fragment } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import uuid from "uuid/v4";
+import OwlCarousel from "react-owl-carousel3";
+
 
 const slugify = require("@sindresorhus/slugify");
 
 const ListPurchasedProductGLSingle=({product})=>{
-console.log(product.result[1])
+  
     const monthNames = [
         "January",
         "February",
@@ -39,54 +41,76 @@ console.log(product.result[1])
         if (date2 - date1 > 0) return false;
         return true;
       };
-      
+      const [pr,setProduct]=useState("")
+      const [display, setDisplay] = useState(false);
+
+      useEffect(()=>{
+    setDisplay(true)
+        setProduct(product)
+      },[product])
+      const options = {
+        
+        nav: true,
+        dots:false,
+        responsiveClass: true,
+        mouseDrag: true,
+        navText: [
+          "<i class='pe-7s-angle-left'></i>",
+          "<i class='pe-7s-angle-right'></i>"
+        ]
+      };
       return (
         <Fragment>
 
-              <div className="col-5 mt-3 mr-5" key={uuid()}>
-                <List.Item
+{display?<OwlCarousel items={ isMobile?1:2} {...options} className="owl-theme" nav>
+                { pr.data && pr.data.map(datum=>{
+                  return( 
+                    
+                <div className="col" key={uuid()}>
+                 
+                 <List.Item
                   className="purchased-product-card p-4 "
                   key={
-                    product.data[0].description +
+                    datum.description +
                     " | " +
-                    product.data[0].collectionName
+                    datum.collectionName
                   }
                 >
                   <Row>
                     <Image
                       itemProp="image"
                       className="puchased-image"
-                      alt={product.data[0].collectionName}
+                      alt={datum.collectionName}
                       title={
-                        product.data[0].collectionName +
+                        datum.collectionName +
                         " " +
-                        product.data[0].article +
+                        datum.article +
                         " by Sana'a Kayum"
                       }
                       src={
                         !(isSafari || isIE || isFirefox)
                           ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              product.data[0].images[0].fields.file.url}`
+                              datum.images[0].fields.file.url}`
                           : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
-                              product.data[0].images[0].fields.file.url}?fm=jpg`
+                              datum.images[0].fields.file.url}?fm=jpg`
                       }
                       placeholder={<Skeleton height={150} />}
                     />
                   </Row>
                   <Link
-                    key={product.data[0].serialNumber}
+                    key={datum.serialNumber}
                     href={{
                       pathname: `/product/[pid]/[slug]`,
                       query: {
-                        pid: product.data[0].serialNumber,
-                        slug: slugify(product.data[0].description)
+                        pid: datum.serialNumber,
+                        slug: slugify(datum.description)
                       }
                     }}
                   >
                     <List.Item.Meta
                       className="pt-2"
-                      title={product.data[0].article}
-                      description={product.data[0].description}
+                      title={datum.article}
+                      description={datum.description}
                     />
                   </Link>
                   <Row>
@@ -132,7 +156,7 @@ console.log(product.result[1])
                               router.push(
                                 `/customer-care/refund?t=${window.btoa(
                                   product.ref
-                                )}&s=${window.btoa(product.data[0].serialNumber)}`
+                                )}&s=${window.btoa(datum.serialNumber)}`
                               );
                             }}
                             variant="danger"
@@ -159,8 +183,14 @@ console.log(product.result[1])
                     )}
                   </Row>
                 </List.Item>
-    
               </div>
+              
+                )
+                })}
+                </OwlCarousel>
+                :<Skeleton height={150} />}
+
+
           </Fragment>)
     }
 

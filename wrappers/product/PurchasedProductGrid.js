@@ -14,8 +14,9 @@ import Skeleton from "react-loading-skeleton";
 import { isSafari, isIE, isFirefox } from "react-device-detect";
 
 import { useRouter } from "next/router";
-import { Button } from "react-bootstrap";
+import { Button, Carousel } from "react-bootstrap";
 import ListPurchasedProductGLSingle from "../../components/product/ListPurchasedProductGLSingle";
+import Slider from "react-slick";
 
 const slugify = require("@sindresorhus/slugify");
 
@@ -41,29 +42,35 @@ const PurchasedProductGrid = ({
     "November",
     "December"
   ];
-  const router = useRouter();
-  const calculateSevenDays = date => {
-    const receivedDate=new Date(date).setDate(new Date(date).getDate()+7)
-    return new Date(receivedDate);
-  };
-  
-  const ifEligible = (date1, date2) => {
-    if (date1 - date2 > 0) return false;
-    return true;
-  };
+
   
   return (
     <Fragment>
-      {products.map(product => {
-        return product.data ? 
-        <ListPurchasedProductGLSingle
-        product={product}
-        />
- 
-          :
-          <>
-          
-          <Link
+      {products &&
+        products.map(product => {
+          return product.data ? (
+            <Row className="orders-wrapper mb-5" key={uuid()}>
+              <div className="text-right font-weight-bold pr-3 pt-2 title-card">
+                <div className="text-left pl-3" style={{fontSize:"10px"}}>{product.cart_id}</div>
+                {`  `}
+                {(product.result[0] === "A" || product.result[0] === "Order Placed")?`Ordered On : `:`Attempted On : `}
+                {product.result[1].getDate()}
+                {` `}
+                {monthNames[product.result[1].getMonth()]}
+                {` `}
+                {product.result[1].getFullYear()}
+              </div>
+              <Row className="orders-container">
+                
+                <ListPurchasedProductGLSingle product={product} />
+                
+                
+              </Row>
+            </Row>
+          ) : (
+            <>
+              ""
+              {/* <Link
             href={{
               pathname: `/product/[pid]/[slug]`,
               query: {
@@ -84,10 +91,10 @@ const PurchasedProductGrid = ({
               loginUser={loginUser}
             />
             
-          </Link>
-          
-          </>
-      })}
+          </Link> */}
+            </>
+          );
+        })}
     </Fragment>
   );
 };

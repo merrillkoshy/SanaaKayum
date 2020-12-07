@@ -1,10 +1,34 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
 import { isSafari, isIE, isFirefox } from "react-device-detect";
 import Link from "next/link";
+import OwlCarousel from "react-owl-carousel3";
+
+import Skeleton from "react-loading-skeleton";
 
 const PBanners = ({ pBanners, sliderClassName }) => {
+  const [display, setDisplay] = useState(false);
+
+  useEffect(()=>{
+    setDisplay(true)
+  })
+  const options = {
+    
+    items: 1,
+    loop: true,
+    autoplay: true,
+    nav: true,
+    responsiveClass: true,
+    dots: true,
+    autoplayHoverPause: true,
+    mouseDrag: true,
+    navText: [
+      "<i class='pe-7s-angle-left'></i>",
+      "<i class='pe-7s-angle-right'></i>"
+    ]
+  };
+
   const BannersSlider = () =>
     pBanners &&
     pBanners.map(function(pb, i) {
@@ -29,17 +53,14 @@ const PBanners = ({ pBanners, sliderClassName }) => {
                   <h1 className="animated">{pb.promotionName}</h1>
                   <p className="animated">{pb.about}</p>
                   <div className="slider-btn-5 btn-hover">
-                    <Link href={
+                    <Link
+                      href={
                         pb.redirect
                           ? pb.redirect
                           : process.env.NEXT_PUBLIC_PUBLIC_URL + `/shop`
-                      }>
-                    <a
-                      className="animated"
-                      
+                      }
                     >
-                      {pb.buttonText}
-                    </a>
+                      <a className="animated">{pb.buttonText}</a>
                     </Link>
                   </div>
                 </div>
@@ -53,7 +74,9 @@ const PBanners = ({ pBanners, sliderClassName }) => {
 
   return (
     <Fragment>
-      <BannersSlider />
+     {display?<OwlCarousel {...options} className="owl-theme" nav>
+        <BannersSlider />
+      </OwlCarousel>:<Skeleton height={200} />} 
     </Fragment>
   );
 };

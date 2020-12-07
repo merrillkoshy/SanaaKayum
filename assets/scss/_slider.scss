@@ -1030,6 +1030,7 @@
 /* slider 6 hm7 */
 
 .slider-height-5 {
+    
 	height: 367.578px;
     @media #{$xx-layout}{
         height: 275.6835px;
@@ -1091,8 +1092,32 @@
         }
     }
 }
+.owl-theme{
 
-
+    .owl-nav{
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        color: #000; 
+        & div[class*=owl-]{
+            color: #ddbb74;
+            font-size: 20px;
+            margin: 5px;
+            padding: 4px 7px;
+            background: #000000bf;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 3px;
+            &:hover{
+                color: #000000bf;
+                background: #ddbb74;
+            }
+        }
+    }
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+    background: #000000 !important;
+}
 //Landing Slider
 .nav-style-3.owl-carousel > .owl-nav, .nav-style-3 .ht-swiper-button-nav {
     position: absolute;

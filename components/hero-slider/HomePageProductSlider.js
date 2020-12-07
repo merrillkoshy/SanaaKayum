@@ -1,13 +1,15 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
 import { connect } from "react-redux";
 import { getProducts } from "../../helpers/product";
 import ProductGridSingle from "../../components/product/ProductGridSingle";
 import { addToCart } from "../../redux/actions/cartActions";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
-
+import OwlCarousel from "react-owl-carousel3";
 import Link from "next/link";
+import Skeleton from "react-loading-skeleton";
+import { isMobile } from "react-device-detect";
 const slugify = require("@sindresorhus/slugify");
 
 const HomePageProductSlider = ({
@@ -24,9 +26,27 @@ const HomePageProductSlider = ({
   sliderClassName,
   spaceBottomClass
 }) => {
+
+  const [display, setDisplay] = useState(false);
+
+  useEffect(()=>{
+    setDisplay(true)
+  })
+  const options = {
+    
+    nav: true,
+    dots:false,
+    responsiveClass: true,
+    mouseDrag: true,
+    navText: [
+      "<i class='pe-7s-angle-left'></i>",
+      "<i class='pe-7s-angle-right'></i>"
+    ]
+  };
   return (
     <Fragment>
-      <Swiper {...swiperParams}>
+      {display?<OwlCarousel items={isMobile?2:6} {...options} className="owl-theme" nav>
+      {/* <Swiper {...swiperParams}> */}
         {products &&
           products.map(product => {
             return (
@@ -69,7 +89,8 @@ const HomePageProductSlider = ({
               </Link>
             );
           })}
-      </Swiper>
+      {/* </Swiper> */}
+      </OwlCarousel>:<Skeleton height={150} />}
     </Fragment>
   );
 };
