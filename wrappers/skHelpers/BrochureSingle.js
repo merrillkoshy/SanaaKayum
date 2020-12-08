@@ -15,7 +15,7 @@ const BrochureSingle = ({ brochure }) => {
           <div key={i} className="col-lg-4 col-md-6 col-sm-12">
             <div className="blog-wrap-2 mb-30">
               <div className="blog-img-2">
-                <Link href={process.env.NEXT_PUBLIC_DOMAIN + br.brochurePdf.fields.file.url}>
+                <Link href={"https:/" + br.brochurePdf.fields.file.url}>
                 <a
                   
                 >
