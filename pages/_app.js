@@ -47,8 +47,8 @@ const App = ({ Component, pageProps }) => {
             console.log("Service Worker registration failed: ", err);
           }
         );
-        navigator.serviceWorker.register("/service-worker.js").then(registration=>console.log("NWsW registered with scope : ",registration.scope))
-        .catch(e=>console.log("NWsW registration failed: ", e))
+        // navigator.serviceWorker.register("/service-worker.js").then(registration=>console.log("NWsW registered with scope : ",registration.scope))
+        // .catch(e=>console.log("NWsW registration failed: ", e))
       });
     }
     const handleRouteChange = (url) => {
