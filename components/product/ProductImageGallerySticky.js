@@ -37,9 +37,9 @@ const productImageGallerySticky = ({ product }) => {
            }
            src={
              !(isSafari || isIE || isFirefox)
-               ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+               ? `${
                    single.fields.file.url}`
-               : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+               : `${
                   single.fields.file.url}?fm=jpg`
            }
            placeholder={<Skeleton height={150} />}

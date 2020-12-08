@@ -27,9 +27,9 @@ const BrochureSingle = ({ brochure }) => {
                     title={br.name + " by SK Corporate Clothing"}
                     src={
                       !(isSafari || isIE || isFirefox)
-                        ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        ? 
                           br.brochureImage.fields.file.url
-                        : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        : `${
                             br.brochureImage.fields.file.url}?fm=jpg`
                     }
                   />

@@ -60,10 +60,10 @@ const{columnClass}=props;
                     }
                     src={
                       !(isSafari || isIE || isFirefox)
-                        ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        ? `${
                             product.images[0].fields.file
                               .url}`
-                        : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        : `${
                             product.images[0].fields.file
                               .url}?fm=jpg`
                     }
@@ -83,10 +83,10 @@ const{columnClass}=props;
                       }
                       src={
                         !(isSafari || isIE || isFirefox)
-                          ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          ? `${
                               product.images[1].fields.file
                                 .url}`
-                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          : `${
                               product.images[1].fields.file
                                 .url}?fm=jpg`
                       }

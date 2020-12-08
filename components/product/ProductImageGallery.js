@@ -83,9 +83,9 @@ const ProductImageGallery = ({ product }) => {
                       group="any"
                       src={
                         !(isSafari || isIE || isFirefox)
-                          ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          ? 
                             single.fields.file.url
-                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          : `${
                               single.fields.file.url}?fm=jpg`
                       }
                     >
@@ -107,7 +107,7 @@ const ProductImageGallery = ({ product }) => {
                         }
                         src={
                           !(isSafari || isIE || isFirefox)
-                            ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                            ? `${
                                 single.fields.file
                                   .url}`
                             : `${single.fields.file
@@ -142,7 +142,7 @@ const ProductImageGallery = ({ product }) => {
                         }
                         src={
                           !(isSafari || isIE || isFirefox)
-                            ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                            ? `${
                                 single.fields.file
                                   .url}`
                             : `${single.fields.file

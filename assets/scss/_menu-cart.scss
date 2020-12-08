@@ -1,0 +1,98 @@
+.shopping-cart-content{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+   
+    ul {
+        padding-top: 20px;
+        max-height: 400px;
+        overflow-y: auto;
+        padding-right: 15px;
+        margin-right: -15px;
+        li {
+            border-bottom: 1px solid #ebebeb;
+            display: flex;
+            flex-wrap: nowrap;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            position: relative;
+            .shopping-cart-img {
+                flex: 0 0 82px;
+                margin-right: 15px;
+            }
+            .shopping-cart-title {
+                h4 {
+                    font-size: 15px;
+                    line-height: 16px;
+                    margin: 0;
+                    margin-right: 20px;
+                    a {
+                        color: #000;
+                        line-height: 1.2;
+                        &:hover {
+                            color: $theme-color;
+                        }
+                    }
+                }
+                h6 {
+                    font-size: 13px;
+                    margin: 5px 0 8px;
+                }
+                span {
+                    font-size: 14px;
+                }
+            }
+            .shopping-cart-delete {
+                position: absolute;
+                
+                right: 0;
+                @media #{$xx-layout},#{$xl-layout},#{$lg-layout}{
+                    top: 0;
+                    a, button {
+                        font-size: 16px;
+                        color: $theme-color;
+                        &:hover {
+                            color: #333;
+                        }
+                    }
+                }
+
+                @media #{$md-layout},#{$xs-layout}{
+                    bottom: 0;
+                    a, button {
+                        font-size: 16px;
+                        color: #ffffff;
+                        border-radius: 10px;
+                        background:#ff0000;
+                        &:hover {
+                            color: #333;
+                        }
+                    }
+                }
+                
+                
+            }
+        }
+    }
+    .shopping-cart-total {
+        h4 {
+            font-size: 14px;
+            margin-top: 17px;
+            margin-bottom: 17px;
+            span {
+                float: right;
+                
+            }
+        }
+    }
+    .shopping-cart-btn {
+        margin-top: 23px;
+        a {
+            margin-bottom: 20px;
+            padding: 16px 40px 17px;
+            font-weight: 500;
+            font-size: 14px;
+            display: block;
+        }
+    }
+}

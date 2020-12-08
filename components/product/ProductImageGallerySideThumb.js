@@ -111,7 +111,7 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                       <div key={key}>
                         <LightgalleryItem
                           group="any"
-                          src={`${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          src={`${
                             single.fields.file.url}?fm=jpg`}
                         >
                           <button>
@@ -132,7 +132,7 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                         }
                         src={
                           !(isSafari || isIE || isFirefox)
-                            ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                            ? `${
                                 single.fields.file
                                   .url}`
                             : `${single.fields.file
@@ -175,7 +175,7 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                         }
                         src={
                           !(isSafari || isIE || isFirefox)
-                            ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                            ? `${
                                 single.fields.file
                                   .url}`
                             : `${single.fields.file

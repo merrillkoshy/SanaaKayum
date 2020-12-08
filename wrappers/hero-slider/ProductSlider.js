@@ -131,7 +131,7 @@ const ProductSlider = props => {
                             href={
                               slider.featureSlideData.action
                                 ? slider.featureSlideData.action
-                                : process.env.NEXT_PUBLIC_PUBLIC_URL + `/shop`
+                                : process.env.NEXT_PUBLIC_DOMAIN + `/shop`
                             }
                           >
                             <a>{slider.featureSlideData.button}</a>
@@ -157,7 +157,7 @@ const ProductSlider = props => {
                       >
                         <Link
                           href={
-                            process.env.NEXT_PUBLIC_PUBLIC_URL +
+                            process.env.NEXT_PUBLIC_DOMAIN +
                             `/shop?search=` +
                             slider.filterValue
                           }

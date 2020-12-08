@@ -6,8 +6,10 @@ import { useRouter } from "next/router";
 import PaymentResponseLayout from "../layouts/PaymentResponseLayout";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import PurchasedProductGrid from "../wrappers/product/PurchasedProductGrid";
-import Swiper from "react-id-swiper";
+import OwlCarousel from "react-owl-carousel3";
+import { isMobile, isTablet } from "react-device-detect";
 import Link from "next/link";
+import Skeleton from "react-loading-skeleton";
 
 const PayBySk = ({postPurchase}) => {
   const router = useRouter();
@@ -18,10 +20,13 @@ const PayBySk = ({postPurchase}) => {
 
   const [recentPurchases, setRecentPurchases] = useState([]);
   const [cartDescription, setCartDescription] = useState("");
+  const [display, setDisplay] = useState(false);
+
   useEffect(() => {
     setDate( window.atob(pa));    
     const orderData = JSON.parse(localStorage.getItem("Initiate"));
     if(orderData){
+      setDisplay(true)
       setRecentPurchases(orderData.cartData),
       setCartDescription(orderData.cart_description),
       postPurchase(window.atob(ui))
@@ -32,24 +37,16 @@ const PayBySk = ({postPurchase}) => {
       localStorage.removeItem("Initiate")
     }
   }, [typeof window !== undefined]);
-  const settings = {
-    loop: false,
-    slidesPerView: 4,
-    grabCursor: true,
-    breakpoints: {
-      1024: {
-        slidesPerView: 4
-      },
-      768: {
-        slidesPerView: 3
-      },
-      640: {
-        slidesPerView: 2
-      },
-      320: {
-        slidesPerView: 1
-      }
-    }
+  const options = {
+    
+    nav: true,
+    dots:false,
+    responsiveClass: true,
+    mouseDrag: true,
+    navText: [
+      "<i class='pe-7s-angle-left'></i>",
+      "<i class='pe-7s-angle-right'></i>"
+    ]
   };
 
   return (
@@ -94,7 +91,8 @@ const PayBySk = ({postPurchase}) => {
               </Container>
           <Row className={` d-block d-lg-flex d-xl-flex`}>
             <Col>
-              <Swiper {...settings}>
+            {display?<OwlCarousel items={isMobile?3:isTablet?5:12}{...options} className="owl-theme" nav>
+              
                 {recentPurchases && (
                   
                   <PurchasedProductGrid
@@ -104,7 +102,8 @@ const PayBySk = ({postPurchase}) => {
                   />
                   
                 )}
-              </Swiper>
+              
+              </OwlCarousel>:<Skeleton height={150} />}
             </Col>
 
            

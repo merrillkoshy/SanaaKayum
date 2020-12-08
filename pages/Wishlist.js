@@ -88,7 +88,7 @@ const Wishlist = ({
                                 <td className="product-thumbnail">
                                   <Link
                                     href={`${
-                                      process.env.NEXT_PUBLIC_PUBLIC_URL
+                                      process.env.NEXT_PUBLIC_DOMAIN
                                     }/product/${slugify(
                                       wishlistItem.description
                                     )}`}
@@ -97,10 +97,10 @@ const Wishlist = ({
                                       className="img-fluid"
                                       src={
                                         !(isSafari || isIE || isFirefox)
-                                          ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                          ? 
                                             wishlistItem.images[0].fields.file
                                               .url
-                                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                          : `${
                                               wishlistItem.images[0].fields.file
                                                 .url}?fm=jpg`
                                       }
@@ -112,7 +112,7 @@ const Wishlist = ({
                                 <td className="product-name text-center">
                                   <Link
                                     href={`${
-                                      process.env.NEXT_PUBLIC_PUBLIC_URL
+                                      process.env.NEXT_PUBLIC_DOMAIN
                                     }/product/${slugify(
                                       wishlistItem.description
                                     )}`}
@@ -155,7 +155,7 @@ const Wishlist = ({
                                     wishlistItem.variation.length >= 1 ? (
                                     <Link
                                       href={`${
-                                        process.env.NEXT_PUBLIC_PUBLIC_URL
+                                        process.env.NEXT_PUBLIC_DOMAIN
                                       }/product/${slugify(
                                         wishlistItem.description
                                       )}`}

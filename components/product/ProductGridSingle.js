@@ -75,10 +75,10 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   }
                   src={
                     !(isSafari || isIE || isFirefox)
-                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      ? `${
                           product.images[0].fields.file
                             .url}`
-                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      : `${
                           product.images[0].fields.file
                             .url}?fm=jpg`
                   }
@@ -99,12 +99,12 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   
                   src={
                     !(isSafari || isIE || isFirefox)
-                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      ? `${
                           product.images[0].fields.file
                             .url}` || (
                           <Skeleton count={5} />
                         )
-                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      : `${
                           product.images[0].fields.file
                             .url}?fm=jpg` || (
                           <Skeleton count={5} />
@@ -127,12 +127,12 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   //   }
                   //   src={
                   //     !(isSafari || isIE || isFirefox)
-                  //       ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //       ? `${
                   //           product.images[1].fields.file
                   //             .url}` || (
                   //           <Skeleton count={5} />
                   //         )
-                  //       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //       : `${
                   //           product.images[1].fields.file
                   //             .url}?fm=jpg` || (
                   //           <Skeleton count={5} />
@@ -152,10 +152,10 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   }
                   src={
                     !(isSafari || isIE || isFirefox)
-                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      ? `${
                           product.images[1].fields.file
                             .url}`
-                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      : `${
                           product.images[1].fields.file
                             .url}?fm=jpg`
                   }

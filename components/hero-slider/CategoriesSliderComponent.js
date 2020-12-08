@@ -3,11 +3,11 @@ import React, { Fragment,useState,useEffect } from "react";
 import Swiper from "react-id-swiper";
 
 import Skeleton from "react-loading-skeleton";
-import OwlCarousel from "react-owl-carousel3";
 import Card from "react-bootstrap/Card";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
+import OwlCarousel from "react-owl-carousel3";
 import { isMobile, isTablet } from "react-device-detect";
 
 const CategoriesSliderComponent = ({
@@ -69,7 +69,7 @@ const CategoriesSliderComponent = ({
                   <Card.Body className="p-3">
                     <Link
                       href={
-                        process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        process.env.NEXT_PUBLIC_DOMAIN +
                         `/shop?search=` +
                         product
                       }

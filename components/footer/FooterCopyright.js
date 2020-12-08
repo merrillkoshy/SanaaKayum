@@ -9,7 +9,7 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass }) => {
         <a href={process.env.NEXT_PUBLIC_DOMAIN + "/"}>
           <img
             alt=""
-            src={process.env.NEXT_PUBLIC_PUBLIC_URL + footerLogo}
+            src={ footerLogo}
             loading="lazy"
           />
         </a>

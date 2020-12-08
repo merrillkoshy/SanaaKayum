@@ -73,9 +73,9 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   }
                   src={
                     !(isSafari || isIE || isFirefox)
-                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      ? `${
                           product.images[0].fields.file.url}`
-                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      : `${
                           product.images[0].fields.file.url}?fm=jpg`
                   }
                   placeholder={<Skeleton height={150} />}
@@ -95,12 +95,12 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   
                   src={
                     !(isSafari || isIE || isFirefox)
-                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      ? `${
                           product.images[0].fields.file
                             .url}` || (
                           <Skeleton count={5} />
                         )
-                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      : `${
                           product.images[0].fields.file
                             .url}?fm=jpg` || (
                           <Skeleton count={5} />
@@ -123,12 +123,12 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   //   }
                   //   src={
                   //     !(isSafari || isIE || isFirefox)
-                  //       ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //       ? `${
                   //           product.images[1].fields.file
                   //             .url}` || (
                   //           <Skeleton count={5} />
                   //         )
-                  //       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  //       : `${
                   //           product.images[1].fields.file
                   //             .url}?fm=jpg` || (
                   //           <Skeleton count={5} />
@@ -148,9 +148,9 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                     }
                     src={
                       !(isSafari || isIE || isFirefox)
-                        ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        ? `${
                             product.images[1].fields.file.url}`
-                        : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        : `${
                             product.images[1].fields.file.url}?fm=jpg`
                     }
                     placeholder={<Skeleton height={150} />}
@@ -210,7 +210,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                     onClick={() =>
                       global.window &&
                       (global.window.location.href = ` ${
-                        process.env.NEXT_PUBLIC_PUBLIC_URL
+                        process.env.NEXT_PUBLIC_DOMAIN
                       }/product/${product.serialNumber}/${slugify(
                         product.description
                       )}`)
@@ -308,9 +308,9 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                     }
                     src={
                       !(isSafari || isIE || isFirefox)
-                        ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        ? `${
                             product.images[0].fields.file.url}`
-                        : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        : `${
                             product.images[0].fields.file.url}?fm=jpg`
                     }
                     placeholder={<Skeleton height={150} />}
@@ -330,12 +330,12 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   
                   src={
                     !(isSafari || isIE || isFirefox)
-                      ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      ? `${
                           product.images[0].fields.file
                             .url}` || (
                           <Skeleton count={5} />
                         )
-                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      : `${
                           product.images[0].fields.file
                             .url}?fm=jpg` || (
                           <Skeleton count={5} />
@@ -358,12 +358,12 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                     //   }
                     //   src={
                     //     !(isSafari || isIE || isFirefox)
-                    //       ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                    //       ? `${
                     //           product.images[1].fields.file
                     //             .url}` || (
                     //           <Skeleton count={5} />
                     //         )
-                    //       : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                    //       : `${
                     //           product.images[1].fields.file
                     //             .url}?fm=jpg` || (
                     //           <Skeleton count={5} />
@@ -383,9 +383,9 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                       }
                       src={
                         !(isSafari || isIE || isFirefox)
-                          ? `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          ? `${
                               product.images[1].fields.file.url}`
-                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          : `${
                               product.images[1].fields.file.url}?fm=jpg`
                       }
                       placeholder={<Skeleton height={150} />}

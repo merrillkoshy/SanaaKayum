@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 
 import { useToasts } from "react-toast-notifications";
-import { isSafari, isIE, isFirefox } from "react-device-detect";
+import { isSafari, isIE, isFirefox, isMobile } from "react-device-detect";
 import Link from "next/link";
 const slugify = require("@sindresorhus/slugify");
 const MenuCart = ({ cartData, uID, deleteFromCart }) => {
@@ -43,9 +43,9 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
                             alt=""
                             src={
                               !(isSafari || isIE || isFirefox)
-                                ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                ? 
                                   single.images[0].fields.file.url
-                                : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                : `${
                                     single.images[0].fields.file.url}?fm=jpg`
                             }
                             className="img-fluid"
@@ -57,7 +57,7 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
                       <h4>
                         <Link
                           href={`${
-                            process.env.NEXT_PUBLIC_PUBLIC_URL
+                            process.env.NEXT_PUBLIC_DOMAIN
                           }/product/${single.serialNumber}/${slugify(
                             single.description
                           )}`}
@@ -87,7 +87,7 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
                         aria-label="delete-cart"
                         onClick={() => deleteFromCart(single, addToast, uID)}
                       >
-                        <i className="fa fa-times-circle" />
+                        {isMobile?<i className="fa fa-times-circle" />:<i className="fa fa-times-circle" />} 
                       </button>
                     </div>
                   </li>
@@ -104,10 +104,10 @@ const MenuCart = ({ cartData, uID, deleteFromCart }) => {
           </div>
           <div className="shopping-cart-btn btn-hover text-center">
             <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/cart"}>
-              <a className="default-btn">view cart</a>
+              <a className="skButton">View Cart</a>
             </Link>
             <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/checkout"}>
-              <a className="default-btn">checkout</a>
+              <a className="skButton">Checkout</a>
             </Link>
           </div>
         </Fragment>

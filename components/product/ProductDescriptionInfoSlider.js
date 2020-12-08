@@ -221,7 +221,7 @@ const ProductDescriptionInfo = ({
           <ul>
             <li key={product.serialNumber}>
               <Link href={
-                  process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  process.env.NEXT_PUBLIC_DOMAIN +
                   "/shop?search=" +
                   product.article.toLowerCase()
                 }>
@@ -236,7 +236,7 @@ const ProductDescriptionInfo = ({
               return (
                 <li key={key}>
                   <Link href={
-                      process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"
+                      process.env.NEXT_PUBLIC_DOMAIN + "/shop"
                     }>
                   <a
                     
@@ -260,7 +260,7 @@ const ProductDescriptionInfo = ({
               return (
                 <li key={key}>
                   <Link href={
-                      process.env.NEXT_PUBLIC_PUBLIC_URL + "/shop"
+                      process.env.NEXT_PUBLIC_DOMAIN + "/shop"
                     }>
                   <a
                     

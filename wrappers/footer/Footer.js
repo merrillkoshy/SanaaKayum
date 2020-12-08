@@ -178,7 +178,7 @@ const FooterOne = ({
                   </li>
                   <li>
                     <Link href={
-                        process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        process.env.NEXT_PUBLIC_DOMAIN +
                         "/returns-and-exchanges"
                       }>
                     <a
@@ -190,7 +190,7 @@ const FooterOne = ({
                   </li>
                   <li>
                     <Link href={
-                        process.env.NEXT_PUBLIC_PUBLIC_URL +
+                        process.env.NEXT_PUBLIC_DOMAIN +
                         "/terms-and-conditions"
                       }>
                     <a
@@ -202,7 +202,7 @@ const FooterOne = ({
                   </li>
                   <li>
                     <Link  href={
-                        process.env.NEXT_PUBLIC_PUBLIC_URL + "/privacy-policy"
+                        process.env.NEXT_PUBLIC_DOMAIN + "/privacy-policy"
                       }>
                     <a
                      

@@ -103,7 +103,7 @@ const Cart = ({
                                 <td className="product-thumbnail">
                                   <Link
                                     href={`${
-                                      process.env.NEXT_PUBLIC_PUBLIC_URL
+                                      process.env.NEXT_PUBLIC_DOMAIN
                                     }/product/${cartItem.serialNumber}/${slugify(
                                       cartItem.description
                                     )}`}
@@ -112,9 +112,9 @@ const Cart = ({
                                       className="img-fluid"
                                       src={
                                         !(isSafari || isIE || isFirefox)
-                                          ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                          ? 
                                             cartItem.images[0].fields.file.url
-                                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                                          : `${
                                               cartItem.images[0].fields.file
                                                 .url}?fm=jpg`
                                       }
@@ -126,7 +126,7 @@ const Cart = ({
                                 <td className="product-name">
                                   <Link
                                     href={`${
-                                      process.env.NEXT_PUBLIC_PUBLIC_URL
+                                      process.env.NEXT_PUBLIC_DOMAIN
                                     }/product/${cartItem.serialNumber}/${slugify(
                                       cartItem.description
                                     )}`}

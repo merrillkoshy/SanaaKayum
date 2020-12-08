@@ -67,7 +67,7 @@ const Product = ({ staticProduct }) => {
               `${staticProduct.article}, ` +
               `${staticProduct.description}`
             }
-            url={`${process.env.NEXT_PUBLIC_PUBLIC_URL}/product/${
+            url={`${process.env.NEXT_PUBLIC_DOMAIN}/product/${
               staticProduct.serialNumber
             }/${slugify(staticProduct.description)}`}
             color={

@@ -40,9 +40,9 @@ const PBanners = ({ pBanners, sliderClassName }) => {
           }`}
           style={{
             backgroundImage: !(isSafari || isIE || isFirefox)
-              ? `url(${process.env.NEXT_PUBLIC_PUBLIC_URL +
+              ? `url(${
                   pb.image.fields.file.url})`
-              : `url(${process.env.NEXT_PUBLIC_PUBLIC_URL +
+              : `url(${
                   pb.image.fields.file.url}?fm=jpg)`
           }}
         >
@@ -57,7 +57,7 @@ const PBanners = ({ pBanners, sliderClassName }) => {
                       href={
                         pb.redirect
                           ? pb.redirect
-                          : process.env.NEXT_PUBLIC_PUBLIC_URL + `/shop`
+                          : process.env.NEXT_PUBLIC_DOMAIN + `/shop`
                       }
                     >
                       <a className="animated">{pb.buttonText}</a>

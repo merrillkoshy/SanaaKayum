@@ -110,7 +110,7 @@ const HeaderOne = ({
               {/* Icon group */}
               <IconGroup />
             </div>
-            <div className="col-2"></div>
+            {/* <div className="col-2"></div> */}
           </div>
         </div>
         {/* mobile menu */}

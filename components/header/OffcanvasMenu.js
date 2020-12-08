@@ -23,7 +23,7 @@ const OffcanvasMenu = ({ activeState, getActiveState }) => {
           <img
             alt=""
             src={
-              process.env.NEXT_PUBLIC_PUBLIC_URL + "/assets/img/logo/logo-black.png"
+               "/assets/img/logo/logo-black.png"
             }
             loading="lazy"
           />

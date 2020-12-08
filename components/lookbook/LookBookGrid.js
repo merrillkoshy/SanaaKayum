@@ -63,9 +63,9 @@ const LookBookGrid=props=>{
               title={item.collectionName + " " + item.article + " by Sana'a Kayum"}
               src={
                 !(isSafari || isIE || isFirefox)
-                  ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  ? 
                     item.image[0].fields.file.url
-                  : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  : `${
                       item.image[0].fields.file.url}?fm=jpg`
               }
             />
@@ -81,9 +81,9 @@ const LookBookGrid=props=>{
                 }
                 src={
                   !(isSafari || isIE || isFirefox)
-                    ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                    ? 
                       item.image[1].fields.file.url
-                    : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                    : `${
                         item.image[1].fields.file.url}?fm=jpg`
                 }
               />
@@ -118,9 +118,9 @@ return comp ?
                     title={`${lkbkChild.collectionName}${lkbkChild.article} by Sana'a Kayum`}
                     src={
                       !(isSafari || isIE || isFirefox)
-                      ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      ? 
                         lkbkChild.image[1].fields.file.url
-                      : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      : `${
                           lkbkChild.image[1].fields.file
                             .url}?fm=jpg`
                     }
@@ -140,9 +140,9 @@ return comp ?
                       }
                       src={
                         !(isSafari || isIE || isFirefox)
-                          ? process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          ? 
                             lkbkChild.image[1].fields.file.url
-                          : `${process.env.NEXT_PUBLIC_PUBLIC_URL +
+                          : `${
                               lkbkChild.image[1].fields.file
                                 .url}?fm=jpg`
                       }
@@ -186,7 +186,7 @@ return comp ?
             <div className="col-6 span-3 text-center">
               <Link
                 href={
-                  process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  process.env.NEXT_PUBLIC_DOMAIN +
                   "shop?search=" +
                   lkbkChild.collectionName.toLowerCase()
                 }

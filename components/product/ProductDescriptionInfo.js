@@ -342,7 +342,7 @@ const ProductDescriptionInfo = ({
             <li key={product.serialNumber}>
               <Link
                 to={
-                  process.env.NEXT_PUBLIC_PUBLIC_URL +
+                  
                   "/shop?search=" +
                   product.article.toLowerCase()
                 }
@@ -365,7 +365,7 @@ const ProductDescriptionInfo = ({
                 <li key={key}>
                   <Link
                     to={
-                      process.env.NEXT_PUBLIC_PUBLIC_URL +
+                      
                       "/shop?search=" +
                       single.toLowerCase()
                     }

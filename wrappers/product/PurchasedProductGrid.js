@@ -43,7 +43,6 @@ const PurchasedProductGrid = ({
     "December"
   ];
 
-  
   return (
     <Fragment>
       {products &&
@@ -51,9 +50,14 @@ const PurchasedProductGrid = ({
           return product.data ? (
             <Row className="orders-wrapper mb-5" key={uuid()}>
               <div className="text-right font-weight-bold pr-3 pt-2 title-card">
-                <div className="text-left pl-3" style={{fontSize:"10px"}}>{product.cart_id}</div>
+                <div className="text-left pl-3" style={{ fontSize: "10px" }}>
+                  {product.cart_id}
+                </div>
                 {`  `}
-                {(product.result[0] === "A" || product.result[0] === "Order Placed")?`Ordered On : `:`Attempted On : `}
+                {product.result[0] === "A" ||
+                product.result[0] === "Order Placed"
+                  ? `Ordered On : `
+                  : `Attempted On : `}
                 {product.result[1].getDate()}
                 {` `}
                 {monthNames[product.result[1].getMonth()]}
@@ -61,37 +65,42 @@ const PurchasedProductGrid = ({
                 {product.result[1].getFullYear()}
               </div>
               <Row className="orders-container">
-                
                 <ListPurchasedProductGLSingle product={product} />
-                
-                
               </Row>
             </Row>
           ) : (
             <>
-              ""
-              {/* <Link
-            href={{
-              pathname: `/product/[pid]/[slug]`,
-              query: {
-                pid: product.serialNumber,
-                slug: slugify(product.description)
-              }
-            }}
-            passHref
-          >
-            
-            <PurchasedProductGridListSingle
-              sliderClassName={sliderClassName}
-              columnClass={columnClass}
-              spaceBottomClass={spaceBottomClass}
-              product={product}
-              currency={currency}
-              entryID={userData.user.entryID}
-              loginUser={loginUser}
-            />
-            
-          </Link> */}
+              <Skeleton height={150} />
+              {setTimeout(() => {
+                return (
+                  products &&
+                  products.map(product => {
+                  <Row className="orders-wrapper mb-5" key={uuid()}>
+                    <div className="text-right font-weight-bold pr-3 pt-2 title-card">
+                      <div
+                        className="text-left pl-3"
+                        style={{ fontSize: "10px" }}
+                      >
+                        {product.cart_id}
+                      </div>
+                      {`  `}
+                      {product.result[0] === "A" ||
+                      product.result[0] === "Order Placed"
+                        ? `Ordered On : `
+                        : `Attempted On : `}
+                      {product.result[1].getDate()}
+                      {` `}
+                      {monthNames[product.result[1].getMonth()]}
+                      {` `}
+                      {product.result[1].getFullYear()}
+                    </div>
+                    <Row className="orders-container">
+                      <ListPurchasedProductGLSingle product={product} />
+                    </Row>
+                  </Row>
+                  })
+                )
+              }, 500)}
             </>
           );
         })}
