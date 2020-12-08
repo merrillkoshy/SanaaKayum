@@ -89,7 +89,7 @@ const PayBySk = ({ postPurchase }) => {
               </tbody>
             </Table>
           </Container>
-          <Row className={` d-block d-lg-flex d-xl-flex`}>
+          <Row className={`d-flex`}>
             <Col>
                 {recentPurchases && (
                   <PurchasedProductGrid

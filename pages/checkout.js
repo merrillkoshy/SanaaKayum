@@ -19,75 +19,78 @@ import { document } from "ssr-window";
 import { useRouter } from "next/router";
 import { Container } from "react-bootstrap";
 import { Radio } from "antd";
+import Spin from "antd/lib/spin";
 
 const axios = require("axios").default;
 const Checkout = ({ cartItems, currency, user }) => {
   const [country, selectCountry] = useState("");
   const [region, selectRegion] = useState("");
-  const[method,setMethod]=useState("ptb")
+  const [spin, setSpin] = useState(false);
+  const [method, setMethod] = useState("ptb");
   const router = useRouter();
   var userData = user.user;
 
   let cartTotalPrice = 0;
   const options = [
-    { label: 'Secure Online Payment', value: 'ptb' },
-    { label: 'Cash/Card on Delivery', value: 'cod' },
+    { label: "Secure Online Payment", value: "ptb" },
+    { label: "Cash/Card on Delivery", value: "cod" }
   ];
-  const makeCod=(userData,cartTotalPrice)=>{
-    const orderData={
-      "tran_class": "cod",
-      "cart_amount": cartTotalPrice.toFixed(2),
-      "cart_currency": "AED",
-      "cart_description": "Order#"+uuid()+"SKCA",
-      "customer_details": {
-          "city": userData.addressDetails.region,
-          "customer_name":userData.firstName+" "+userData.lastName,
-          "email":userData.email,
-          "phone":userData.mobile,
-          "state": userData.addressDetails.region,
-          "country": userData.addressDetails.country,
-          "street1": userData.addressDetails.addressLine
+  const makeCod = (userData, cartTotalPrice) => {
+    const orderData = {
+      tran_class: "cod",
+      cart_amount: cartTotalPrice.toFixed(2),
+      cart_currency: "AED",
+      cart_description: "Order#" + uuid() + "SKCA",
+      customer_details: {
+        city: userData.addressDetails.region,
+        customer_name: userData.firstName + " " + userData.lastName,
+        email: userData.email,
+        phone: userData.mobile,
+        state: userData.addressDetails.region,
+        country: userData.addressDetails.country,
+        street1: userData.addressDetails.addressLine
       },
-      
-      "cartData":cartItems
-    }
+
+      cartData: cartItems
+    };
     const headers = {
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
       Token: userData?.entryID
-    }
+    };
 
     axios
-      .post(
-        "/api/cod",
-        orderData,
-        {
-          headers: headers
-        }
-      )
+      .post("/api/cod", orderData, {
+        headers: headers
+      })
       .then(response => {
-
-        const uID=response.headers.token
-        const date=new Date(response.headers.date)
-        const offset=date.getTimezoneOffset()*60*1000
-        const dubaiDate=new Date(date.getTime()-offset)
+        const uID = response.headers.token;
+        const date = new Date(response.headers.date);
+        const offset = date.getTimezoneOffset() * 60 * 1000;
+        const dubaiDate = new Date(date.getTime() - offset);
         Promise.resolve(
-          localStorage.setItem(
-            "Initiate",
-            JSON.stringify(response.data)
-          )
+          localStorage.setItem("Initiate", JSON.stringify(response.data))
         ).then(() => {
-          if(response.data.orderStatus==="placed") router.push("/paybysk?pa="+window.btoa(dubaiDate)+"&ui="+window.btoa(uID))
+          if (response.data.orderStatus === "placed")
+            router.push(
+              "/paybysk?pa=" +
+                window.btoa(dubaiDate) +
+                "&ui=" +
+                window.btoa(uID)
+            );
         });
-        
       })
       .catch(error => {
         console.log(error);
       });
-    console.log(userData)
- 
-  }
-
+    console.log(userData);
+    
+  };
+  useEffect(() => {
+    return () => {
+      setSpin(false);
+    };
+  });
   return (
     <Fragment>
       <LayoutOne
@@ -289,103 +292,119 @@ const Checkout = ({ cartItems, currency, user }) => {
                       <div className="payment-method p-2">
                         <Container>
                           <h4>Choose your preferred payment method</h4>
-                          <Radio.Group options={options} defaultValue="ptb" onChange={e=>setMethod(e.target.value)}/>
-                          
+                          <Radio.Group
+                            options={options}
+                            defaultValue="ptb"
+                            onChange={e => setMethod(e.target.value)}
+                          />
                         </Container>
-                        {method=="ptb"?
-                        <div className="place-order mt-25">
-                              <button
-                                className="btn-hover"
-                                onClick={() => {
-                                  const headers = {
-                                    "Access-Control-Allow-Headers":
-                                      "Content-Type, Authorization",
-                                    Authorization: process.env.NEXT_PUBLIC_SVK,
-                                    "Access-Control-Allow-Origin": "*",
-                                    "Content-Type": "application/json",
-                                    Token: userData?.entryID
-                                  };
-
-                                  axios
-                                    .post(
-                                      "/api/pay",
-                                      {
-                                        profile_id: process.env.NEXT_PUBLIC_MID,
-                                        tran_type: "sale",
-                                        tran_class: "ecom",
-                                        cart_description:
-                                          "Order#" + uuid() + "SKCA",
-                                        cart_id: uuid(),
-                                        cart_currency: currency.currencySymbol,
-                                        cart_amount: cartTotalPrice.toFixed(2),
-                                        callback: `${process.env.NEXT_PUBLIC_DOMAIN}/api/response`,
-                                        return: `${process.env.NEXT_PUBLIC_DOMAIN}/api/response`,
-                                        customer_details: {
-                                          name:
-                                            userData?.firstName +
-                                            " " +
-                                            userData?.lastName,
-                                          email: userData?.email,
-                                          phone: userData?.mobile
-                                            ? userData?.mobile
-                                            : document.querySelector(
-                                                "input [name='phone']"
-                                              ).value,
-                                          street1:
-                                            userData &&
-                                            userData?.addressDetails?.addressLine.concat(
-                                              ", P.O.Box : " +
-                                                document.querySelector(
-                                                  'input[name="postcode"]'
-                                                )
-                                                ? document.querySelector(
-                                                    'input[name="postcode"]'
-                                                  ).value
-                                                : ""
-                                            ),
-                                          city: userData?.addressDetails.region,
-                                          state:
-                                            userData?.addressDetails.region,
-                                          country:
-                                            userData?.addressDetails.country,
-                                          ip: ""
-                                        },
-                                        framed: true,
-                                        hide_shipping: true
-                                      },
-                                      {
-                                        headers: headers
-                                      }
-                                    )
-                                    .then(response => {
-                                      Promise.resolve(
-                                        localStorage.setItem(
-                                          "Initiate",
-                                          JSON.stringify(response.data)
-                                        )
-                                      ).then(() => {
-                                        router.push(response.data.redirect_url);
-                                      });
-                                    })
-                                    .catch(error => {
-                                      console.log(error);
-                                    });
-                                }}
-                              >
-                                Place Order <i className="fa fa-credit-card"></i>
-                              </button>
-                            </div>
-                          :
+                        {method == "ptb" ? (
                           <div className="place-order mt-25">
-                           <button
-                                className="btn-hover" onClick={e=>{
-                                  e.preventDefault()
-                                  makeCod(userData,cartTotalPrice)
-                                }
-                                  
-                                }>Deliver to this Address <i className="fa fa-truck"></i></button> 
+                            <button
+                              className="btn-hover"
+                              onClick={() => {
+                                setSpin(true);
+                                const headers = {
+                                  "Access-Control-Allow-Headers":
+                                    "Content-Type, Authorization",
+                                  Authorization: process.env.NEXT_PUBLIC_SVK,
+                                  "Access-Control-Allow-Origin": "*",
+                                  "Content-Type": "application/json",
+                                  Token: userData?.entryID
+                                };
+
+                                axios
+                                  .post(
+                                    "/api/pay",
+                                    {
+                                      profile_id: process.env.NEXT_PUBLIC_MID,
+                                      tran_type: "sale",
+                                      tran_class: "ecom",
+                                      cart_description:
+                                        "Order#" + uuid() + "SKCA",
+                                      cart_id: uuid(),
+                                      cart_currency: currency.currencySymbol,
+                                      cart_amount: cartTotalPrice.toFixed(2),
+                                      callback: `${process.env.NEXT_PUBLIC_DOMAIN}/api/response`,
+                                      return: `${process.env.NEXT_PUBLIC_DOMAIN}/api/response`,
+                                      customer_details: {
+                                        name:
+                                          userData?.firstName +
+                                          " " +
+                                          userData?.lastName,
+                                        email: userData?.email,
+                                        phone: userData?.mobile
+                                          ? userData?.mobile
+                                          : document.querySelector(
+                                              "input [name='phone']"
+                                            ).value,
+                                        street1:
+                                          userData &&
+                                          userData?.addressDetails?.addressLine.concat(
+                                            ", P.O.Box : " +
+                                              document.querySelector(
+                                                'input[name="postcode"]'
+                                              )
+                                              ? document.querySelector(
+                                                  'input[name="postcode"]'
+                                                ).value
+                                              : ""
+                                          ),
+                                        city: userData?.addressDetails.region,
+                                        state: userData?.addressDetails.region,
+                                        country:
+                                          userData?.addressDetails.country,
+                                        ip: ""
+                                      },
+                                      framed: true,
+                                      hide_shipping: true
+                                    },
+                                    {
+                                      headers: headers
+                                    }
+                                  )
+                                  .then(response => {
+                                    Promise.resolve(
+                                      localStorage.setItem(
+                                        "Initiate",
+                                        JSON.stringify(response.data)
+                                      )
+                                    ).then(() => {
+                                      router.push(response.data.redirect_url);
+                                    });
+                                  })
+                                  .catch(error => {
+                                    console.log(error);
+                                  });
+                              }}
+                            >
+                              Place Order{" "}
+                              {!spin ? (
+                                <i className="fa fa-credit-card"></i>
+                              ) : (
+                                <Spin />
+                              )}
+                            </button>
                           </div>
-                          }
+                        ) : (
+                          <div className="place-order mt-25">
+                            <button
+                              className="btn-hover"
+                              onClick={e => {
+                                setSpin(true);
+                                e.preventDefault();
+                                makeCod(userData, cartTotalPrice);
+                              }}
+                            >
+                              Deliver to this Address
+                              {!spin ? (
+                                <i className="fa fa-truck"></i>
+                              ) : (
+                                <Spin />
+                              )}
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

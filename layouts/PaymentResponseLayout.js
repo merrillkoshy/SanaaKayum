@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import PaymentResponseHeader from "../wrappers/header/PaymentResponseHeader";
 import Footer from "../wrappers/footer/Footer";
+import Head from "next/head";
 
 const PaymentResponseLayout = ({
   children,
@@ -11,6 +12,9 @@ const PaymentResponseLayout = ({
 }) => {
   return (
     <Fragment>
+      <Head>
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" key="vp" />
+      </Head>
       <PaymentResponseHeader
         layout={headerContainerClass}
         top={headerTop}
