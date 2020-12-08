@@ -7,9 +7,10 @@ import PurchasedProductGridListSingle from "../../components/product/PurchasedPr
 import Link from "next/link";
 import Row from "antd/lib/row";
 
-
+import OwlCarousel from "react-owl-carousel3";
 import ListPurchasedProductGLSingle from "../../components/product/ListPurchasedProductGLSingle";
 import { isMobile, isTablet } from "react-device-detect";
+import Skeleton from "react-loading-skeleton";
 
 const slugify = require("@sindresorhus/slugify");
 
@@ -35,6 +36,18 @@ const PurchasedProductGrid = ({
     "November",
     "December"
   ];
+  const options = {
+    
+    nav: true,
+    dots:false,
+    responsiveClass: true,
+    mouseDrag: true,
+    navText: [
+      "<i class='pe-7s-angle-left'></i>",
+      "<i class='pe-7s-angle-right'></i>"
+    ]
+  };
+  
   const [display, setDisplay] = useState(false);
   useEffect(()=>{
     setDisplay(true);
