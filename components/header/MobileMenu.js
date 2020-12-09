@@ -46,7 +46,7 @@ const MobileMenu = () => {
   };
 
   return (
-    <div className="offcanvas-mobile-menu d-lg-none d-xl-none" id="offcanvas-mobile-menu">
+    <div className="offcanvas-mobile-menu d-lg-none d-xl-none d-sm-none d-md-none" id="offcanvas-mobile-menu">
       <button
         aria-label="menu-close"
         className="offcanvas-menu-close"
