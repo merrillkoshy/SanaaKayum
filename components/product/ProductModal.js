@@ -338,7 +338,7 @@ function ProductModal(props) {
                                 )
                               }, 1000)
                               
-                              : setloginModal("true")}
+                              : setloginModal(true)}
                              
                               
                             }
@@ -364,7 +364,7 @@ function ProductModal(props) {
                           onClick={() => {
                             uID !== undefined?
                             addToWishlist(product, addToast, uID):
-                            setloginModal("true")
+                            setloginModal(true)
                           }}
                         >
                           <i className="pe-7s-like" />

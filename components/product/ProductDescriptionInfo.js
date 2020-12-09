@@ -4,8 +4,13 @@ import React, { Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
 import { addToCart } from "../../redux/actions/cartActions";
-import { loginPrompt } from "../../redux/actions/userActions";
-import { addToWishlist } from "../../redux/actions/wishlistActions";
+
+import { loginUser } from "../../redux/actions/userActions";
+import { loadCart } from "../../redux/actions/cartActions";
+import {
+  addToWishlist,
+  loadWishlist
+} from "../../redux/actions/wishlistActions";
 
 import Rating from "./sub-components/ProductRating";
 import whatsAppthis from "../../constants/whatsappHelper";
@@ -84,7 +89,7 @@ const ProductDescriptionInfo = ({
         <Row>
           <Col className={"col-7"}>
             <h1 className="product-page-header">{product.collectionName}</h1>
-            <h2>{product.article}</h2>
+            <h2><strong>{product.article}</strong></h2>
           </Col>
           <Col>
             {product.rating && product.rating > 0 ? (
@@ -213,7 +218,8 @@ const ProductDescriptionInfo = ({
       )}
       <Card className="mt-5">
         <ListGroup variant="flush">
-          {userData.user ? (
+          
+          {userData.user.addressDetails!==undefined ? (
             <>
               <ListGroup.Item>
                 {`Deliver to `}
@@ -232,7 +238,6 @@ const ProductDescriptionInfo = ({
               </ListGroup.Item>
             </>
           )}
-          
         </ListGroup>
       </Card>
       <Fragment>
@@ -272,16 +277,16 @@ const ProductDescriptionInfo = ({
                 onClick={() => {
                   uID !== undefined
                     ? setTimeout(() => {
-                      addToCart(
-                        product,
-                        addToast,
-                        uID,
-                        quantityCount,
-                        selectedProductColor,
-                        selectedProductSize
-                      )
-                    }, 1000)
-                    : setloginModal("true");
+                        addToCart(
+                          product,
+                          addToast,
+                          uID,
+                          quantityCount,
+                          selectedProductColor,
+                          selectedProductSize
+                        );
+                      }, 1000)
+                    : setloginModal(true);
                 }}
                 disabled={productCartQty >= productStock}
               >
@@ -312,7 +317,7 @@ const ProductDescriptionInfo = ({
               onClick={() => {
                 uID !== undefined
                   ? addToWishlist(product, addToast)
-                  : setloginModal("true");
+                  : setloginModal(true);
               }}
             >
               <i className="pe-7s-like" />

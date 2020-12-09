@@ -51,7 +51,7 @@ const IconGroup = ({
   const initUname = (
     <Button
       className="interaction-button"
-      onClick={() => setloginModal("true")}
+      onClick={() => setloginModal(true)}
     >
       <a>Login</a>
     </Button>

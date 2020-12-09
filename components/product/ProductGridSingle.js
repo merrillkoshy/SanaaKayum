@@ -180,7 +180,7 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                   onClick={() => {
                     uID !== undefined
                         ?  addToWishlist(product, addToast, uID)
-                        : setloginModal("true");
+                        : setloginModal(true);
                    
                   }}
                 >
@@ -204,7 +204,7 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
                         
                       }
                       else{
-                        setloginModal("true")
+                        setloginModal(true)
                       }
 
                     }}

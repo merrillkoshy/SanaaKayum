@@ -3,16 +3,15 @@ import { Modal, Container, Row, Col, Button, Form } from "react-bootstrap";
 import client from "../../constants/config";
 import Link from "next/link";
 
-const LoginModal = ({
-  loadCart,
+const LoginModal = (props) => {
   
-  loadWishlist,
-  loginUser,
-  addToast,
-  ...props
-}) => {
+  const {loadCart}=props;
+  const {loadWishlist}=props;
+  const {loginUser}=props;
+  const {addToast}=props;
   const [loginError, setLoginError] = useState("");
   const checkUser = (eve, username, password, addToast) => {
+    
     eve.preventDefault();
     let error;
     client
@@ -26,7 +25,8 @@ const LoginModal = ({
             ent.fields.password === password
           ) {
             error = false;
-            loginUser(ent.fields, addToast, ent.sys.id, ent.fields.loginInfo);
+            
+            loginUser(ent.fields, addToast, ent.sys.id);
             
             (ent.fields["cartData"]=== undefined || ent.fields["cartData"][0]===null)
               ? loadCart([])
@@ -61,6 +61,7 @@ const LoginModal = ({
               <Form.Control
                 type="text"
                 name="user-name"
+                autoComplete="username"
                 placeholder="Username"
               />
             </Form.Group>
@@ -70,6 +71,7 @@ const LoginModal = ({
               <Form.Control
                 type="password"
                 name="user-password"
+                autoComplete="current-password"
                 placeholder="Password"
               />
             </Form.Group>

@@ -74,7 +74,6 @@ export const deleteAllFromCart = (addToast, uID) => {
 
 //load on login
 export const loadCart = item => {
-  console.log(item)
   return dispatch => {
     dispatch({ type: LOAD_CART_FROM_PROFILE, payload: item });
   };

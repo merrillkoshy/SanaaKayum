@@ -28,22 +28,22 @@ const RelatedProductSlider = ({ spaceBottomClass, category }) => {
         items: 3
       },
       600: {
-        items: 4
+        items: 3
       },
       850: {
-        items: 5
+        items: 4
       },
       1000: {
-        items: 6
+        items: 5
       },
       1200: {
-        items: 7
+        items: 6
       },
       1300: {
-        items: 8
+        items: 5
       },
       1600: {
-        items: 8
+        items: 5
       }
     },
     mouseDrag: true,

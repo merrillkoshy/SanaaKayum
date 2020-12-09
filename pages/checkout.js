@@ -81,9 +81,9 @@ const Checkout = ({ cartItems, currency, user }) => {
         });
       })
       .catch(error => {
-        console.log(error);
+        console.error(error);
       });
-    console.log(userData);
+    
     
   };
   useEffect(() => {
@@ -374,7 +374,7 @@ const Checkout = ({ cartItems, currency, user }) => {
                                     });
                                   })
                                   .catch(error => {
-                                    console.log(error);
+                                    console.error(error);
                                   });
                               }}
                             >
