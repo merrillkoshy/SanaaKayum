@@ -277,42 +277,7 @@ const Cart = ({
                 </div>
 
                 <div className="row">
-                  <div className="col-lg-4 col-md-6">
-                    <div className="cart-tax">
-                      <div className="title-wrap">
-                        <h4 className="cart-bottom-title section-bg-gray">
-                          Estimate Shipping And Tax
-                        </h4>
-                      </div>
-                      <div className="tax-wrapper">
-                        <p>
-                          Enter your destination to get a shipping estimate.
-                        </p>
-                        <div className="tax-select-wrapper">
-                          <div className="tax-select">
-                            <label>* Country</label>
-                            <CountryDropdown
-                              value={country}
-                              onChange={val => selectCountry(val)}
-                            />
-                            <RegionDropdown
-                              country={country}
-                              value={region}
-                              onChange={val => selectRegion(val)}
-                            />
-                          </div>
-                          <div className="tax-select">
-                            <label>* Zip/Postal Code</label>
-                            <input type="text" />
-                          </div>
-                          <button className="cart-btn-2" type="submit">
-                            Get A Quote
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
+                  
                   <div className="col-lg-4 col-md-6">
                     <div className="discount-code-wrapper">
                       <div className="title-wrap">
