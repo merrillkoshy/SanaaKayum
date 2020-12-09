@@ -92,10 +92,10 @@ const HeaderSix = ({ user, layout, headerPaddingClass, headerBgClass }) => {
         getActiveState={getActiveState}
       /> */}
       {/* mobile menu */}
-      <MobileMenu 
+      {/* <MobileMenu 
       activeState={offcanvasActive}
       getActiveState={getActiveState}
-      user={user} />
+      user={user} /> */}
     </header>
   );
 };

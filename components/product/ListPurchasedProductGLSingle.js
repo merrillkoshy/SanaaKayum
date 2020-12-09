@@ -49,10 +49,40 @@ const ListPurchasedProductGLSingle=({product})=>{
         setProduct(product)
       },[product])
       const options = {
-        
         nav: true,
-        dots:false,
+        dots: false,
+        center: false,
+        touchDrag: true,
         responsiveClass: true,
+        responsive: {
+          0: {
+            items: 2
+          },
+          330: {
+            items: 2
+          },
+          460: {
+            items: 3
+          },
+          600: {
+            items: 4
+          },
+          850: {
+            items: 5
+          },
+          1000: {
+            items: 6
+          },
+          1200: {
+            items: 7
+          },
+          1300: {
+            items: 8
+          },
+          1600: {
+            items: 8
+          }
+        },
         mouseDrag: true,
         navText: [
           "<i class='pe-7s-angle-left'></i>",
@@ -62,7 +92,7 @@ const ListPurchasedProductGLSingle=({product})=>{
       return (
         <Fragment>
 
-{display?<OwlCarousel items={ isMobile?1:2} {...options} className="owl-theme" nav>
+{display?<OwlCarousel {...options} className="owl-theme" nav>
                 { pr.data && pr.data.map(datum=>{
                   return( 
                     

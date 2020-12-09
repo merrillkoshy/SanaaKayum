@@ -22,7 +22,7 @@ const MobileWidgets = () => {
         </div>
       </div>
       {/*Off Canvas Widget Social Start*/}
-      <div className="off-canvas-widget-social">
+      <div className="off-canvas-widget-social ">
         <a href="//twitter.com/SKClothingart">
           <i className="fa fa-twitter" /> SKClothingart
         </a>

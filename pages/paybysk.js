@@ -1,15 +1,13 @@
 import { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import { postPurchase } from "../redux/actions/cartActions";
-import clientMgr from "../constants/contentManager";
+
 import { useRouter } from "next/router";
 import PaymentResponseLayout from "../layouts/PaymentResponseLayout";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import PurchasedProductGrid from "../wrappers/product/PurchasedProductGrid";
-import OwlCarousel from "react-owl-carousel3";
 
 import Link from "next/link";
-import Skeleton from "react-loading-skeleton";
 
 const PayBySk = ({ postPurchase }) => {
   const router = useRouter();
@@ -20,13 +18,11 @@ const PayBySk = ({ postPurchase }) => {
 
   const [recentPurchases, setRecentPurchases] = useState([]);
   const [cartDescription, setCartDescription] = useState("");
-  
 
   useEffect(() => {
     setDate(window.atob(pa));
     const orderData = JSON.parse(localStorage.getItem("Initiate"));
     if (orderData) {
-      
       setRecentPurchases(orderData.cartData),
         setCartDescription(orderData.cart_description),
         postPurchase(window.atob(ui));
@@ -37,16 +33,6 @@ const PayBySk = ({ postPurchase }) => {
       localStorage.removeItem("Initiate");
     };
   }, [typeof window !== undefined]);
-  const options = {
-    nav: true,
-    dots: false,
-    responsiveClass: true,
-    mouseDrag: true,
-    navText: [
-      "<i class='pe-7s-angle-left'></i>",
-      "<i class='pe-7s-angle-right'></i>"
-    ]
-  };
 
   return (
     <Fragment>
@@ -91,14 +77,14 @@ const PayBySk = ({ postPurchase }) => {
           </Container>
           <Row className={`d-flex`}>
             <Col>
-                {recentPurchases && (
-                  <PurchasedProductGrid
-                    columnClass="col"
-                    sliderClassName={"mt-5"}
-                    products={recentPurchases}
-                    spaceBottomClass="mb-25"
-                  />
-                )}
+              {recentPurchases && (
+                <PurchasedProductGrid
+                  columnClass="col"
+                  sliderClassName={"mt-5"}
+                  products={recentPurchases}
+                  spaceBottomClass="mb-25"
+                />
+              )}
             </Col>
           </Row>
         </Container>

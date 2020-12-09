@@ -4,8 +4,9 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useToasts } from "react-toast-notifications";
 import { connect } from "react-redux";
 import MenuCart from "./sub-components/MenuCart";
-
-import { useHistory } from "react-router-dom";
+import IconButton from "@material-ui/core/IconButton";
+import Drawer from "@material-ui/core/Drawer";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { logoutUser, loginUser } from "../../redux/actions/userActions";
 import {
   deleteFromCart,
@@ -21,6 +22,8 @@ import Link from "next/link";
 import { Button, Modal, InputGroup, FormControl, Form } from "react-bootstrap";
 import LoginModal from "../product/LoginModal";
 import { useRouter } from "next/router";
+import OffcanvasMenu from "./OffcanvasMenu";
+
 const IconGroup = ({
   loadCart,
 
@@ -38,6 +41,13 @@ const IconGroup = ({
   logoutUser
 }) => {
   const [loginModal, setloginModal] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const showDrawer = () => {
+    setVisible(true);
+  };
+  const onClose = () => {
+    setVisible(false);
+  };
   const initUname = (
     <Button
       className="interaction-button"
@@ -63,6 +73,33 @@ const IconGroup = ({
   const [interaction, setInteraction] = useState(initInteraction);
   const { addToast } = useToasts();
 
+  // Drawer Styles
+  const drawerWidth = "90%";
+
+  const useStyles = makeStyles(theme => ({
+    root: {
+      display: "flex"
+    },
+    drawer: {
+      [theme.breakpoints.up("sm")]: {
+        width: drawerWidth,
+        flexShrink: 0
+      }
+    },
+
+    // necessary for content to be below app bar
+    drawerPaper: {
+      width: drawerWidth,
+      borderRadius:"10px 0px 0px 10px",
+      padding:"2%",
+      height: "100vh"
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3)
+    }
+  }));
+  const classes = useStyles();
   useEffect(() => {
     if (userData.user.firstName !== undefined) {
       setLoggedIn(true);
@@ -187,17 +224,30 @@ const IconGroup = ({
                 </a>
               </Link>
             </div> */}
-            <div
-              className="same-style mobile-off-canvas d-block d-lg-none"
-              style={{ zIndex: 1 }}
-            >
+            <div className="same-style mobile-off-canvas d-block d-lg-none">
               <button
                 aria-label="search-button"
                 className="mobile-aside-button"
-                onClick={() => triggerMobileMenu()}
+                onClick={showDrawer}
               >
                 <i className="pe-7s-menu" />
               </button>
+              {/* Mobile Drawer */}
+              <Drawer
+                className={classes.drawer}
+                variant="persistent"
+                anchor="right"
+                open={visible}
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+              >
+                <div className="close-drawer-wrapper" onClick={onClose}>
+
+                <i className="fa fa-close" style={{fontSize:"30px"}}  />
+                </div>
+                <OffcanvasMenu/>
+              </Drawer>
             </div>
           </Fragment>
         </div>
@@ -236,18 +286,17 @@ const IconGroup = ({
       </Modal>
       {/* Search Modal */}
       <Modal
-      className="search-modal"
+        className="search-modal"
         size="sm"
         show={smShow}
         onHide={() => setSmShow(false)}
         aria-labelledby="search-modal"
-        
       >
-        <Modal.Body className="py-1 px-2" >
+        <Modal.Body className="py-1 px-2">
           <div className="search-content">
             <InputGroup>
               <Form
-              style={{width:"100%",display:"flex"}}
+                style={{ width: "100%", display: "flex" }}
                 onSubmit={e => {
                   e.preventDefault();
                   router.push(
@@ -262,31 +311,13 @@ const IconGroup = ({
                   aria-label="search-area"
                   aria-describedby="search-area"
                 />
-              <InputGroup.Append>
-                <Button className="button-search">
-                  <i className="pe-7s-search" />
-                </Button>
-              </InputGroup.Append>
+                <InputGroup.Append>
+                  <Button className="button-search">
+                    <i className="pe-7s-search" />
+                  </Button>
+                </InputGroup.Append>
               </Form>
             </InputGroup>
-            {/* <form
-                onSubmit={e => {
-                  e.preventDefault();
-                  router.push(
-                    "/shop?search=" +
-                      document.querySelector("#searchHome").value
-                  );
-                }}
-              >
-                <input type="text" id="searchHome" placeholder="Search" />
-                <button
-                  aria-label="search-button"
-                  type="submit"
-                  className="button-search"
-                >
-                  <i className="pe-7s-search" />
-                </button>
-              </form> */}
           </div>
         </Modal.Body>
       </Modal>

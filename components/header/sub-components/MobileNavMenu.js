@@ -52,8 +52,22 @@ const MobileNavMenu = ({
 
       setUname(
         <Fragment>
-          <div className="row">{"Hello, " + userData.user.firstName}</div>
-          <hr></hr>
+          
+          <Link
+          href={{
+            pathname: `/my-account`,
+            query: {
+              userAccount: userData.user.firstName
+            }
+          }}
+        >
+          <a className="username-row">
+          {"Hello, " + userData.user.firstName}
+          </a>
+          </Link>
+          
+          
+          <hr />
         </Fragment>
       );
 
@@ -86,7 +100,11 @@ const MobileNavMenu = ({
 
   return (
     <nav className="offcanvas-navigation" id="offcanvas-navigation">
+      <ul>
+      <li className="menu-item-has-children">
       {uName}
+      </li>
+      </ul>
 
       <ul>
         <li className="menu-item-has-children">
@@ -104,14 +122,14 @@ const MobileNavMenu = ({
         <li>
           <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/lookbook"}>
           <a>
-            {"Lookbook"}
+          {"Lookbook"}
           </a>
           </Link>
         </li>
         <li>
           <Link  href={process.env.NEXT_PUBLIC_DOMAIN + "/about"}>
           <a>
-            {"About Us"}
+          {"About Us"}
           </a>
           </Link>
         </li>
