@@ -63,9 +63,7 @@ const ProductGrid = ({
                     wishlistItem => wishlistItem.id === product.serialNumber
                   )[0]
                 }
-                loadCart={loadCart}
-                loadWishlist={loadWishlist}
-                loginUser={loginUser}
+                
               />
             </Link>
           );

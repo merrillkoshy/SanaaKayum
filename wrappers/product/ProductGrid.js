@@ -73,10 +73,7 @@ const ProductGrid = ({
                 }
 
                 key={product.serialNumber}
-                loadCart={loadCart}
                 
-                loadWishlist={loadWishlist}
-                loginUser={loginUser}
                 
               />
             </Link>

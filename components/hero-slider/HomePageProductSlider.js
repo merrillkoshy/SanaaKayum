@@ -120,7 +120,11 @@ const HomePageProductSlider = ({
             );
           })}
       {/* </Swiper> */}
-      </OwlCarousel>:<Skeleton height={150} />}
+      </OwlCarousel>:<>
+                <Skeleton height={150} />
+                <Skeleton height={150} />
+                <Skeleton height={150} />
+              </>}
     </Fragment>
   );
 };

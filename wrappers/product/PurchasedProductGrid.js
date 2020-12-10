@@ -77,68 +77,74 @@ const PurchasedProductGrid = ({
       "<i class='pe-7s-angle-right'></i>"
     ]
   };
-  
+
   const [display, setDisplay] = useState(false);
-  useEffect(()=>{
+  useEffect(() => {
     setDisplay(true);
-  })
+  });
   return (
     <Fragment>
       {products &&
         products.map(product => {
           return product.data ? (
-            display?<OwlCarousel
-                
-                {...options}
-                className="owl-theme"
-                nav
+            display ? (
+              <OwlCarousel {...options} className="owl-theme" nav>
+                <Row className="orders-wrapper mb-5" key={uuid()}>
+                  <div className="text-right font-weight-bold pr-3 pt-2 title-card">
+                    <div
+                      className="text-left pl-3"
+                      style={{ fontSize: "10px" }}
+                    >
+                      {product.cart_id}
+                    </div>
+                    {`  `}
+                    {product.result[0] === "A" ||
+                    product.result[0] === "Order Placed"
+                      ? `Ordered On : `
+                      : `Attempted On : `}
+                    {product.result[1].getDate()}
+                    {` `}
+                    {monthNames[product.result[1].getMonth()]}
+                    {` `}
+                    {product.result[1].getFullYear()}
+                  </div>
+                  <Row className="orders-container">
+                    <ListPurchasedProductGLSingle product={product} />
+                  </Row>
+                </Row>
+              </OwlCarousel>
+            ) : (
+              <Skeleton height={150} />
+            )
+          ) : display ? (
+            <OwlCarousel {...options} className="owl-theme" nav>
+              <Link
+                href={{
+                  pathname: `/product/[pid]/[slug]`,
+                  query: {
+                    pid: product.serialNumber,
+                    slug: slugify(product.description)
+                  }
+                }}
+                passHref
               >
-            <Row className="orders-wrapper mb-5" key={uuid()}>
-              <div className="text-right font-weight-bold pr-3 pt-2 title-card">
-                <div className="text-left pl-3" style={{ fontSize: "10px" }}>
-                  {product.cart_id}
-                </div>
-                {`  `}
-                {product.result[0] === "A" ||
-                product.result[0] === "Order Placed"
-                  ? `Ordered On : `
-                  : `Attempted On : `}
-                {product.result[1].getDate()}
-                {` `}
-                {monthNames[product.result[1].getMonth()]}
-                {` `}
-                {product.result[1].getFullYear()}
-              </div>
-              <Row className="orders-container">
-                <ListPurchasedProductGLSingle product={product} />
-              </Row>
-            </Row>
-            </OwlCarousel>:<Skeleton height={150}/>
+                <PurchasedProductGridListSingle
+                  sliderClassName={sliderClassName}
+                  columnClass={columnClass}
+                  sliderClassName={sliderClassName}
+                  spaceBottomClass={spaceBottomClass}
+                  product={product}
+                  currency={currency}
+                  entryID={userData.user.entryID}
+                  loginUser={loginUser}
+                />
+              </Link>
+            </OwlCarousel>
           ) : (
             <>
-              <Link
-            href={{
-              pathname: `/product/[pid]/[slug]`,
-              query: {
-                pid: product.serialNumber,
-                slug: slugify(product.description)
-              }
-            }}
-            passHref
-          >
-            
-            <PurchasedProductGridListSingle
-              sliderClassName={sliderClassName}
-              columnClass={columnClass}
-              sliderClassName={sliderClassName}
-              spaceBottomClass={spaceBottomClass}
-              product={product}
-              currency={currency}
-              entryID={userData.user.entryID}
-              loginUser={loginUser}
-            />
-            
-          </Link> 
+              <Skeleton height={150} />
+              <Skeleton height={150} />
+              <Skeleton height={150} />
             </>
           );
         })}

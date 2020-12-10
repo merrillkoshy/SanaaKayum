@@ -18,11 +18,7 @@ function ProductModal(props) {
   const { discountedprice } = props;
   const { finalproductprice } = props;
   const { finaldiscountedprice } = props;
-  
-  const { loadCart } = props;
-  
-  const { loadWishlist } = props;
-  const { loginUser } = props;
+
 
   const [gallerySwiper, getGallerySwiper] = useState(null);
   const [thumbnailSwiper, getThumbnailSwiper] = useState(null);
@@ -39,11 +35,9 @@ function ProductModal(props) {
   const [quantityCount, setQuantityCount] = useState(1);
 
   const wishlistItem = props.wishlistitem;
-  
 
   const addToCart = props.addtocart;
   const addToWishlist = props.addtowishlist;
-  
 
   const addToast = props.addtoast;
   const cartItems = props.cartitems;
@@ -118,26 +112,24 @@ function ProductModal(props) {
                       return (
                         <div key={key}>
                           <div className="single-image">
-                          <Image
-           width={"100%"}
-           className="default-img"
-           itemProp="image"
-           alt={product.collectionName}
-           title={
-             product.collectionName +
-             " " +
-             product.article +
-             " by Sana'a Kayum"
-           }
-           src={
-             !(isSafari || isIE || isFirefox)
-               ? `${
-                   single.fields.file.url}`
-               : `${
-                  single.fields.file.url}?fm=jpg`
-           }
-           placeholder={<Skeleton height={150} />}
-         />
+                            <Image
+                              width={"100%"}
+                              className="default-img"
+                              itemProp="image"
+                              alt={product.collectionName}
+                              title={
+                                product.collectionName +
+                                " " +
+                                product.article +
+                                " by Sana'a Kayum"
+                              }
+                              src={
+                                !(isSafari || isIE || isFirefox)
+                                  ? `${single.fields.file.url}`
+                                  : `${single.fields.file.url}?fm=jpg`
+                              }
+                              placeholder={<Skeleton height={150} />}
+                            />
                           </div>
                         </div>
                       );
@@ -151,26 +143,24 @@ function ProductModal(props) {
                       return (
                         <div key={key}>
                           <div className="single-image">
-                          <Image
-           width={"100%"}
-           className="default-img"
-           itemProp="image"
-           alt={product.collectionName}
-           title={
-             product.collectionName +
-             " " +
-             product.article +
-             " by Sana'a Kayum"
-           }
-           src={
-             !(isSafari || isIE || isFirefox)
-               ? `${
-                   single.fields.file.url}`
-               : `${
-                  single.fields.file.url}?fm=jpg`
-           }
-           placeholder={<Skeleton height={150} />}
-         />
+                            <Image
+                              width={"100%"}
+                              className="default-img"
+                              itemProp="image"
+                              alt={product.collectionName}
+                              title={
+                                product.collectionName +
+                                " " +
+                                product.article +
+                                " by Sana'a Kayum"
+                              }
+                              src={
+                                !(isSafari || isIE || isFirefox)
+                                  ? `${single.fields.file.url}`
+                                  : `${single.fields.file.url}?fm=jpg`
+                              }
+                              placeholder={<Skeleton height={150} />}
+                            />
                           </div>
                         </div>
                       );
@@ -324,24 +314,20 @@ function ProductModal(props) {
                       <div className="pro-details-cart btn-hover">
                         {productStock && productStock > 0 ? (
                           <button
-                            onClick={() =>{ 
-                              
+                            onClick={() => {
                               uID !== undefined
-                              ? setTimeout(() => {
-                                addToCart(
-                                  product,
-                                  addToast,
-                                  uID,
-                                  quantityCount,
-                                  selectedProductColor,
-                                  selectedProductSize
-                                )
-                              }, 1000)
-                              
-                              : setloginModal(true)}
-                             
-                              
-                            }
+                                ? setTimeout(() => {
+                                    addToCart(
+                                      product,
+                                      addToast,
+                                      uID,
+                                      quantityCount,
+                                      selectedProductColor,
+                                      selectedProductSize
+                                    );
+                                  }, 1000)
+                                : setloginModal(true);
+                            }}
                             disabled={productCartQty >= productStock}
                           >
                             {" "}
@@ -362,9 +348,9 @@ function ProductModal(props) {
                               : "Add to wishlist"
                           }
                           onClick={() => {
-                            uID !== undefined?
-                            addToWishlist(product, addToast, uID):
-                            setloginModal(true)
+                            uID !== undefined
+                              ? addToWishlist(product, addToast, uID)
+                              : setloginModal(true);
                           }}
                         >
                           <i className="pe-7s-like" />
@@ -392,17 +378,8 @@ function ProductModal(props) {
             </div>
           </div>
         </div>
-        
       </Modal>
-      <LoginModal
-                show={loginModal}
-                onHide={() => setloginModal(false)}
-                loadCart={loadCart}
-                
-                loadWishlist={loadWishlist}
-                loginUser={loginUser}
-                addtoast={addToast}
-              />
+      <LoginModal show={loginModal} onHide={() => setloginModal(false)} />
     </Fragment>
   );
 }
@@ -410,10 +387,10 @@ function ProductModal(props) {
 ProductModal.propTypes = {
   addtoast: PropTypes.func,
   addtocart: PropTypes.func,
-  
+
   addtowishlist: PropTypes.func,
   cartitems: PropTypes.array,
-  
+
   currency: PropTypes.object,
   discountedprice: PropTypes.number,
   finaldiscountedprice: PropTypes.number,

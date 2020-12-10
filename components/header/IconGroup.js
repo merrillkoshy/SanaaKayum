@@ -259,10 +259,7 @@ const IconGroup = ({
       <LoginModal
         show={loginModal}
         onHide={() => setloginModal(false)}
-        loadCart={loadCart}
-        loadWishlist={loadWishlist}
-        loginUser={loginUser}
-        addtoast={addToast}
+       
       />
       {/* MenuCart Modal */}
       <Modal

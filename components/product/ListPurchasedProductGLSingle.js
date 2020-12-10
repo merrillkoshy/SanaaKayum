@@ -218,7 +218,11 @@ const ListPurchasedProductGLSingle=({product})=>{
                 )
                 })}
                 </OwlCarousel>
-                :<Skeleton height={150} />}
+                :<>
+                <Skeleton height={150} />
+                <Skeleton height={150} />
+                <Skeleton height={150} />
+              </>}
 
 
           </Fragment>)

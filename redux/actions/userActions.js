@@ -2,9 +2,10 @@ export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
 export const LOGOUT_USER = "LOGOUT_USER_SUCCESS";
 
 // login
-export const loginUser = (userDetails, addToast, entryID, loginInfo) => {
+export const loginUser = (userDetails, addToast, entryID) => {
   
   userDetails.entryID = entryID;
+  
   return dispatch => {
     if (addToast) {
       addToast("Logged in as " + userDetails.username, {

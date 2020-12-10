@@ -43,6 +43,8 @@ export default async function handler(req, res) {
       if (entry.fields["transactionsData"] === undefined) entry.fields["transactionsData"] = {"en-US": [transactionResponse]}
       else entry.fields["transactionsData"]["en-US"].push(transactionResponse)
       entry.fields.cartData["en-US"] = null;
+
+      
       return entry.update();
     })
     .then(entry => entry.publish())

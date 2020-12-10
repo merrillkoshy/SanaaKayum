@@ -140,7 +140,11 @@ const CategoriesSliderComponent = ({
           )}
         </OwlCarousel>
       ) : (
+        <>
         <Skeleton circle={true} height={100} width={100} />
+        <Skeleton circle={true} height={100} width={100} />
+        <Skeleton circle={true} height={100} width={100} />
+        </>
       )}
     </Fragment>
   );

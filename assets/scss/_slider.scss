@@ -1115,8 +1115,20 @@
         }
     }
 }
-.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+.owl-theme .owl-dots {
+.owl-theme .owl-dots .owl-dot span{
+    width: 15px;
+    height: 5px;
+    margin: 7px;
+    background: #D6D6D6;
+    display: block;
+    -webkit-backface-visibility: visible;
+    transition: opacity .2s ease;
+}
+.owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
     background: #000000 !important;
+    border: 1px solid #ddbb74;
+}
 }
 //Landing Slider
 .nav-style-3.owl-carousel > .owl-nav, .nav-style-3 .ht-swiper-button-nav {

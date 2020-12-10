@@ -1194,16 +1194,25 @@
     font-size: 18px;
     color: #010101;
     background: none;
-    border: none;
-    &:hover,
-    &.active {
-      color: $theme-color;
-    }
+    border: none; 
+    
     i {
       font-size: 14px;
       background: transparent;
     }
   }
+  &:hover,
+   &:active{
+      color: $theme-color;
+      background: $black;
+   }
+   &:focus{
+    color: $theme-color;
+    background: $black;
+    border-color: #3c3c3c;
+    box-shadow:0 0 0 0.2rem #b3b3b3;
+ }
+
   &:hover,
   &.active {
     color: $theme-color;

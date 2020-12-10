@@ -148,11 +148,7 @@ const MobileNavMenu = ({
       <LoginModal 
       show={loginModal} 
       onHide={() => setloginModal(false)} 
-      loadCart={loadCart}
- 
-      loadWishlist={loadWishlist}
-      loginUser={loginUser}
-      addtoast={addToast}/>
+      />
     </nav>
   );
 };

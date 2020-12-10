@@ -233,11 +233,7 @@ const ProductGridSingle = forwardRef(({ onClick, href, ...props }, ref) => {
               <LoginModal
                 show={loginModal}
                 onHide={() => setloginModal(false)}
-                loadCart={loadCart}
-                
-                loadWishlist={loadWishlist}
-                loginUser={loginUser}
-                addtoast={addToast}
+               
               />
               <div className="pro-same-action pro-quickview">
                 <button onClick={() => setModalShow(true)} title="Quick View">

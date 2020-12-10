@@ -89,7 +89,9 @@ const ProductDescriptionInfo = ({
         <Row>
           <Col className={"col-7"}>
             <h1 className="product-page-header">{product.collectionName}</h1>
-            <h2><strong>{product.article}</strong></h2>
+            <h2>
+              <strong>{product.article}</strong>
+            </h2>
           </Col>
           <Col>
             {product.rating && product.rating > 0 ? (
@@ -218,8 +220,7 @@ const ProductDescriptionInfo = ({
       )}
       <Card className="mt-5">
         <ListGroup variant="flush">
-          
-          {userData.user.addressDetails!==undefined ? (
+          {userData.user.addressDetails !== undefined ? (
             <>
               <ListGroup.Item>
                 {`Deliver to `}
@@ -297,14 +298,7 @@ const ProductDescriptionInfo = ({
               <button disabled>Out of Stock</button>
             )}
           </div>
-          <LoginModal
-            show={loginModal}
-            onHide={() => setloginModal(false)}
-            loadCart={loadCart}
-            loadWishlist={loadWishlist}
-            loginUser={loginUser}
-            addtoast={addToast}
-          />
+          <LoginModal show={loginModal} onHide={() => setloginModal(false)} />
           <div className="pro-details-wishlist">
             <button
               className={wishlistItem !== undefined ? "active" : ""}

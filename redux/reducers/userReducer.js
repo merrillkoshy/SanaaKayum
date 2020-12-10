@@ -5,7 +5,6 @@ const initState = {
 };
 
 const userReducer = (state = initState, action) => {
-  
   if (action.type === FETCH_USER_SUCCESS) {
     return {
       ...state,

@@ -530,9 +530,7 @@ const ProductGridListSingle = forwardRef(({ onClick, href, ...props }, ref) => {
         addtocart={addToCart}
         addtowishlist={addToWishlist}
         addtoast={addToast}
-        loadCart={loadCart}
-        loadWishlist={loadWishlist}
-        loginUser={loginUser}
+        
       />
     </Fragment>
   );
