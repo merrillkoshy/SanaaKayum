@@ -4,10 +4,10 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useToasts } from "react-toast-notifications";
 import { connect } from "react-redux";
 import MenuCart from "./sub-components/MenuCart";
-import IconButton from "@material-ui/core/IconButton";
+
 import Drawer from "@material-ui/core/Drawer";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { logoutUser, loginUser } from "../../redux/actions/userActions";
+import { makeStyles } from "@material-ui/core/styles";
+import { logoutUser } from "../../redux/actions/userActions";
 import {
   deleteFromCart,
   resetCart,
@@ -23,19 +23,14 @@ import { Button, Modal, InputGroup, FormControl, Form } from "react-bootstrap";
 import LoginModal from "../product/LoginModal";
 import { useRouter } from "next/router";
 import OffcanvasMenu from "./OffcanvasMenu";
+import Skeleton from "react-loading-skeleton";
 
 const IconGroup = ({
-  loadCart,
-
-  loadWishlist,
-  loginUser,
   userData,
   cartData,
   wishlistData,
-
   deleteFromCart,
   resetCart,
-
   resetWishlist,
   iconWhiteClass,
   logoutUser
@@ -49,10 +44,7 @@ const IconGroup = ({
     setVisible(false);
   };
   const initUname = (
-    <Button
-      className="interaction-button"
-      onClick={() => setloginModal(true)}
-    >
+    <Button className="interaction-button" onClick={() => setloginModal(true)}>
       <a>Login</a>
     </Button>
   );
@@ -66,7 +58,7 @@ const IconGroup = ({
       <li></li>
     </ul>
   );
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [display, setDisplay] = useState(false);
   const [show, setShow] = useState(false);
   const [smShow, setSmShow] = useState(false);
   const [uName, setUname] = useState(initUname);
@@ -90,8 +82,8 @@ const IconGroup = ({
     // necessary for content to be below app bar
     drawerPaper: {
       width: drawerWidth,
-      borderRadius:"10px 0px 0px 10px",
-      padding:"2%",
+      borderRadius: "10px 0px 0px 10px",
+      padding: "2%",
       height: "100vh"
     },
     content: {
@@ -101,9 +93,8 @@ const IconGroup = ({
   }));
   const classes = useStyles();
   useEffect(() => {
+    setDisplay(true);
     if (userData.user.firstName !== undefined) {
-      setLoggedIn(true);
-
       setUname(
         <Link
           href={{
@@ -124,7 +115,6 @@ const IconGroup = ({
               setLoggedIn(false);
               setUname(initUname);
               setInteraction(initInteraction);
-
               resetCart();
               resetWishlist();
             }}
@@ -233,21 +223,44 @@ const IconGroup = ({
                 <i className="pe-7s-menu" />
               </button>
               {/* Mobile Drawer */}
-              <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="right"
-                open={visible}
-                classes={{
-                  paper: classes.drawerPaper
-                }}
-              >
-                <div className="close-drawer-wrapper" onClick={onClose}>
-
-                <i className="fa fa-close" style={{fontSize:"30px"}}  />
-                </div>
-                <OffcanvasMenu/>
-              </Drawer>
+              {display ? (
+                <Drawer
+                  className={classes.drawer}
+                  variant="persistent"
+                  anchor="right"
+                  open={visible}
+                  classes={{
+                    paper: classes.drawerPaper
+                  }}
+                >
+                  <div className="close-drawer-wrapper" onClick={onClose}>
+                    <i className="fa fa-close" style={{ fontSize: "30px" }} />
+                  </div>
+                  {display ? (
+                    <OffcanvasMenu />
+                  ) : (
+                    <ul>
+                      <li>
+                        <Skeleton />
+                      </li>
+                      <li>
+                        <Skeleton />
+                      </li>
+                      <li>
+                        <Skeleton />
+                      </li>
+                      <li>
+                        <Skeleton />
+                      </li>
+                      <li>
+                        <Skeleton />
+                      </li>
+                    </ul>
+                  )}
+                </Drawer>
+              ) : (
+                <Skeleton height={"100vh"} width={"90%"} />
+              )}
             </div>
           </Fragment>
         </div>
@@ -256,11 +269,7 @@ const IconGroup = ({
         <div className="col text-right ">{uName}</div>
       </div>
       {/* Login Modal */}
-      <LoginModal
-        show={loginModal}
-        onHide={() => setloginModal(false)}
-       
-      />
+      <LoginModal show={loginModal} onHide={() => setloginModal(false)} />
       {/* MenuCart Modal */}
       <Modal
         size="sm"
@@ -343,15 +352,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser: (userDetails, addToast, entryID) => {
-      dispatch(loginUser(userDetails, addToast, entryID));
-    },
-    loadCart: item => {
-      dispatch(loadCart(item));
-    },
-    loadWishlist: item => {
-      dispatch(loadWishlist(item));
-    },
     logoutUser: addToast => {
       dispatch(logoutUser(addToast));
     },

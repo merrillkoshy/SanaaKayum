@@ -1901,14 +1901,15 @@ a.default-btn {
   position: relative;
   
   &:after {
-    border: solid 0.1em #08520bb3;
+    border: .1em solid rgba(8,82,11,.7);
+    -moz-border-radius: .2em;
     border-radius: .2em;
-    color: #08520bb3;
-    content: 'Order Placed';
-    font-size: 50px;
-    font-weight: bold;
+    text-align: center;
+    color: rgba(8,82,11,.7);
+    content: "Order Placed";
+    font-size: 192%;
+    font-weight: 700;
     line-height: 1;
-    opacity: 0;
     position: absolute;
     padding: .1em .5em;
     margin: 0 auto;

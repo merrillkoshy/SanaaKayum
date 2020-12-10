@@ -119,7 +119,7 @@ const CategoriesSliderComponent = ({
                           ) : (
                             <Card.Img
                               variant="top"
-                              src={`/assets/categories/careless.png`}
+                              src={`/assets/categories/Careless.png`}
                               onError={e => {
                                 e.target.onerror = null;
                                 e.target.src = `/assets/categories/placeholder.png`;
