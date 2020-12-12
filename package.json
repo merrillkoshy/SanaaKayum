@@ -54,5 +54,9 @@
     "swiper": "^6.3.5",
     "uuid": "^3.3.3"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-plugin-react": "^7.21.5"
+  }
 }

@@ -1,9 +1,8 @@
 /*------- 6. Product style  --------*/
-.landing-product-button{
+.landing-product-button {
   background-color: transparent;
   border-color: black;
-  &:hover{
-    
+  &:hover {
     background-color: black;
     border-color: $theme-color;
   }
@@ -137,7 +136,7 @@
   @media #{$xs-layout} {
     &.pt-35,
     &.pt-60 {
-      padding: 10px 0 10px;
+      padding: 10px 0;
     }
   }
   a {
@@ -220,7 +219,7 @@
     overflow: hidden;
     img {
       width: 100%;
-      border-radius: 20px 20px 0px 0px;
+      border-radius: 20px 20px00;
     }
 
     &-badges {
@@ -447,7 +446,7 @@
   h2 {
     color: #010101;
     font-size: 1.5rem;
-    margin: 0 0 0px;
+    margin: 0 00;
     line-height: 1;
   }
   .product-details-price {
@@ -535,7 +534,7 @@
         margin-bottom: 20px;
       }
       @media #{$sm-layout} {
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
       span {
         display: block;
@@ -556,7 +555,7 @@
             transition: all 0.4s ease 0s;
             width: 14px;
             &:last-child {
-              margin-right: 0px;
+              margin-right: 0;
             }
             &.blue {
               background-color: #4798f3;
@@ -878,55 +877,52 @@
       }
     }
     .wapp {
-        margin: 0 25px 0 10px;
-        button {
-            padding: 13px 18px 13px;
-            border-radius: 10px;
-            color: #25d366;
-            font-weight: bold;
-            text-transform: uppercase;
-            background: none;
-            border: none;
-            background-color:none;
-            display: inline-block;
-            line-height: 1;
-            @media #{$xs-layout, $md-layout}{
-                color: white;
-                font-weight: bold;
-                text-transform: uppercase;
-                background: none;
-                border: 1px solid #25d366;
-                background-color: #25d366;
-            }
-          }
-        @media #{$xs-layout,$md-layout} {
-          
-          border-radius: 10px;
-          background: #25d366;
-          border: 1px solid #25d366;
+      margin: 0 25px 0 10px;
+      button {
+        padding: 13px 18px 13px;
+        border-radius: 10px;
+        color: #25d366;
+        font-weight: bold;
+        text-transform: uppercase;
+        background: none;
+        border: none;
+        background-color: none;
+        display: inline-block;
+        line-height: 1;
+        @media #{$xs-layout, $md-layout} {
           color: white;
-        
-        }
-        
-        z-index: 99;
-        &:hover {
-            color: white;
-          border: none;
-        }
-
-        &:disabled {
-          cursor: not-allowed;
-          &:before,
-          &:after {
-            display: none;
-          }
+          font-weight: bold;
+          text-transform: uppercase;
+          background: none;
+          border: 1px solid #25d366;
+          background-color: #25d366;
         }
       }
+      @media #{$xs-layout,$md-layout} {
+        border-radius: 10px;
+        background: #25d366;
+        border: 1px solid #25d366;
+        color: white;
+      }
+
+      z-index: 99;
+      &:hover {
+        color: white;
+        border: none;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        &:before,
+        &:after {
+          display: none;
+        }
+      }
+    }
 
     .pro-details-cart {
       margin: 0 25px 0 10px;
 
-      
       @media #{$xs-layout} {
         margin: 0 10px 0 10px;
       }
@@ -1030,7 +1026,7 @@
       li {
         margin-right: 40px;
         &:last-child {
-          margin-right: 0px;
+          margin-right: 0;
         }
         a {
           font-size: 16px;
@@ -1096,12 +1092,12 @@
   .nav-style-1.owl-carousel > .owl-nav div {
     font-size: 20px;
     color: #333;
-    left: 0px;
+    left: 0;
     &:hover {
       color: $theme-color;
     }
     &.owl-next {
-      right: 0px;
+      right: 0;
       left: auto;
     }
   }
@@ -1136,7 +1132,7 @@
     margin: 0 0 10px;
   }
   @media #{$sm-layout} {
-    margin: 0 0 0px;
+    margin: 0 00;
   }
 
   .nav-item {
@@ -1156,7 +1152,7 @@
       margin: 0 23px 10px 0;
     }
     @media #{$sm-layout} {
-      margin: 0 23px 0px 0;
+      margin: 0 23px0 0;
     }
     &:last-child {
       margin-right: 0;
@@ -1194,24 +1190,24 @@
     font-size: 18px;
     color: #010101;
     background: none;
-    border: none; 
-    
+    border: none;
+
     i {
       font-size: 14px;
       background: transparent;
     }
   }
   &:hover,
-   &:active{
-      color: $theme-color;
-      background: $black;
-   }
-   &:focus{
+  &:active {
+    color: $theme-color;
+    background: $black;
+  }
+  &:focus {
     color: $theme-color;
     background: $black;
     border-color: #3c3c3c;
-    box-shadow:0 0 0 0.2rem #b3b3b3;
- }
+    box-shadow: 0 0 0 0.2rem #b3b3b3;
+  }
 
   &:hover,
   &.active {
@@ -1287,7 +1283,7 @@
       li {
         margin-bottom: 6px;
         &:last-child {
-          margin-bottom: 0px;
+          margin-bottom: 0;
         }
         input {
           width: 20px;
@@ -1439,9 +1435,9 @@
     }
     & .hover-img {
       position: absolute;
-      top: 0px;
+      top: 0;
       visibility: hidden;
-      left: 0px;
+      left: 0;
       width: 100%;
       opacity: 0;
       transition: all 0.5s ease-in-out;
@@ -1701,8 +1697,8 @@
       text-transform: capitalize;
       line-height: 1;
       background-color: #c61a32;
-      border-radius: 34px 34px 34px 34px;
-      padding: 16px 40px 16px 40px;
+      border-radius: 34px;
+      padding: 16px 40px;
 
       &:hover {
         background-color: $theme-color;
@@ -1715,8 +1711,8 @@
 
 .hm5-section-padding {
   .container-fluid {
-    padding-right: 0px;
-    padding-left: 0px;
+    padding-right: 0;
+    padding-left: 0;
     @media #{$xs-layout} {
       padding-right: 15px;
       padding-left: 15px;
@@ -2484,7 +2480,7 @@
 .pro-view-more {
   margin-top: 30px;
   @media #{$xs-layout} {
-    margin-top: 0px;
+    margin-top: 0;
   }
   a {
     display: inline-block;

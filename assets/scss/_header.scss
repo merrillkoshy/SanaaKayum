@@ -97,10 +97,10 @@
 .logo {
 	margin-top: 32px;
     @media #{$md-layout}{
-        margin-top: 0px;
+        margin-top: 0;
     }
     @media #{$xs-layout}{
-        margin-top: 0px;
+        margin-top: 0;
     }
     &.logo-hm5 {
         
@@ -267,13 +267,13 @@
                                         }
                                     }
                                     &:hover a {
-                                        padding-left: 0px;
+                                        padding-left: 0;
                                     }
                                 }
                                 li {
                                     display: block;
                                     float: inherit;
-                                    padding: 0px;
+                                    padding: 0;
                                     a {
                                         color: #333;
                                         display: block;
@@ -282,7 +282,7 @@
                                         line-height: 32px;
                                         text-align: left;
                                         text-transform: capitalize;
-                                        padding-top: 0px;
+                                        padding-top: 0;
                                         &:hover {
                                             color: $theme-color;
                                         }
@@ -291,7 +291,7 @@
                                             border-radius: 50%;
                                             content: "";
                                             height: 7px;
-                                            left: 0px;
+                                            left: 0;
                                             opacity: 0;
                                             position: absolute;
                                             top: 13px;
@@ -302,7 +302,7 @@
                                     }
                                     &.mega-menu-img {
                                         &:hover a {
-                                            padding-left: 0px;
+                                            padding-left: 0;
                                         }
                                         a{
                                            &::before {
@@ -320,9 +320,9 @@
                             }
                         }
                         &.mega-menu-padding {
-                            padding: 40px 40px 36px 40px;
+                            padding: 40px 40px 36px ;
                             @media #{$lg-layout}{
-                                left: 0px;
+                                left: 0;
                             }
                         }
                     }
@@ -351,7 +351,7 @@
                         font-size: 15px;
                         margin-left: 1px;
                         position: relative;
-                        top: 0px;
+                        top: 0;
                     }
                 }
                 &:hover a {
@@ -444,13 +444,13 @@
 .stick .header-right-wrap {
 	margin-top: 22px;
     @media #{$md-layout}{
-        margin-top: 0px;
+        margin-top: 0;
     }
     @media #{$xs-layout}{
-        margin-top: 0px;
+        margin-top: 0;
     }
     @media #{$md-layout}{
-        margin-top: 0px;
+        margin-top: 0;
     }
 }
 .stick .header-right-wrap .same-style.cart-wrap .shopping-cart-content ,
@@ -501,7 +501,7 @@
             border: none;
         }
         &:first-child {
-            margin-left: 0px;
+            margin-left: 0;
         }
         &:hover > a, &:hover > button {
             color: $theme-color;
@@ -835,8 +835,8 @@
         }
         @media #{$sm-layout}{
             display: flex;
-            margin-bottom: 0px;
-            margin-top: 0px;
+            margin-bottom: 0;
+            margin-top: 0;
         }
     }
     &.border-none {
@@ -973,14 +973,14 @@
 	transition: all 0.3s ease 0s;
 	width: 375px;
 	z-index: 7;
-	padding: 72px 0 40px 0px;
+	padding: 72px 0 40px 0;
     @media #{$xx-layout}{
         width: 300px;
-        padding:50px 0 30px 0px;
+        padding:50px 0 30px 0;
     }
     @media #{$xl-layout}{
         width: 300px;
-        padding:50px 0 30px 0px;
+        padding:50px 0 30px 0;
     }
     @media #{$xl-layout}{
         width: 280px;
@@ -996,42 +996,42 @@
     }
     .logo {
         margin-top: 0;
-        padding: 0px 0 0px 108px;
+        padding: 0 0 0 108px;
         @media #{$xx-layout}{
-            padding: 0px 0 0px 50px;
+            padding: 0 0 0 50px;
         }
         @media #{$xl-layout}{
-            padding: 0px 0 0px 30px;
+            padding: 0 0 0 30px;
         }
         @media #{$lg-layout}{
-            padding: 0px 0 0px 15px;
+            padding: 0 0 0 15px;
         }
         @media #{$md-layout}{
-            padding: 0px 0 0px 30px;
+            padding: 0 0 0 30px;
         }
     }
     .header-right-wrap {
         justify-content: flex-start;
         margin-top: 46px;
         margin-bottom: 67px;
-        padding: 0px 0 0px 108px;
+        padding: 0 0 0 108px;
         @media #{$xx-layout}{
-            padding: 0px 0 0px 50px;
+            padding: 0 0 0 50px;
             margin-top: 26px;
             margin-bottom: 27px;
         }
         @media #{$xl-layout}{
-            padding: 0px 0 0px 30px;
+            padding: 0 0 0 30px;
             margin-top: 26px;
             margin-bottom: 27px;
         }
         @media #{$lg-layout}{
-            padding: 0px 0 0px 15px;
+            padding: 0 0 0 15px;
             margin-top: 30px;
             margin-bottom: 30px;
         }
         @media #{$md-layout}{
-            padding: 0px 0 0px 30px;
+            padding: 0 0 0 30px;
             margin-top: 30px;
             margin-bottom: 30px;
         }
@@ -1092,28 +1092,28 @@
         margin-left: 250px;
     }
     @media #{$md-layout}{
-        margin-left: 0px;
+        margin-left: 0;
     }
     @media #{$xs-layout}{
-        margin-left: 0px;
+        margin-left: 0;
     }
 }
 
 
 
 .sidebar-menu {
-    padding: 0px 0 0px 108px;
+    padding: 0 0 0 108px;
     @media #{$xx-layout}{
-        padding: 0px 0 0px 50px;
+        padding: 0 0 0 50px;
     }
     @media #{$xl-layout}{
-        padding: 0px 0 0px 30px;
+        padding: 0 0 0 30px;
     }
     @media #{$lg-layout}{
-        padding: 0px 0 0px 15px;
+        padding: 0 0 0 15px;
     }
     @media #{$md-layout}{
-        padding: 0px 0 0px 30px;
+        padding: 0 0 0 30px;
     }
     nav{
         ul {
@@ -1140,7 +1140,7 @@
                     box-shadow: 0 0 7px 0.5px rgba(0, 0, 0, 0.15);
                     display: block;
                     left: 100%;
-                    padding: 20px 0px 22px;
+                    padding: 20px 0 22px;
                     position: absolute;
                     top: 0;
                     transform: rotateX(90deg);
@@ -1156,7 +1156,7 @@
                     li {
                         display: block;
                         padding: 0 20px;
-                        margin-left: 0px;
+                        margin-left: 0;
                         a {
                             color: #333;
                             display: block;
@@ -1165,7 +1165,7 @@
                             line-height: 32px;
                             text-align: left;
                             text-transform: capitalize;
-                            padding-top: 0px;
+                            padding-top: 0;
                             &:hover {
                                 color: $theme-color;
                             }
@@ -1199,7 +1199,7 @@
                     background-color: #fff;
                     display: block;
                     left: 100%;
-                    padding: 40px 40px 0px 40px;
+                    padding: 40px 40px 0 ;
                     position: absolute;
                     text-align: left;
                     top: 0;
@@ -1240,13 +1240,13 @@
                                     }
                                 }
                                 &:hover a {
-                                    padding-left: 0px;
+                                    padding-left: 0;
                                 }
                             }
                             li {
                                 display: block;
                                 float: inherit;
-                                padding: 0px;
+                                padding: 0;
                                 a {
                                     color: #333;
                                     display: block;
@@ -1255,7 +1255,7 @@
                                     line-height: 32px;
                                     text-align: left;
                                     text-transform: capitalize;
-                                    padding-top: 0px;
+                                    padding-top: 0;
                                     &:hover {
                                         color: $theme-color;
                                     }
@@ -1264,7 +1264,7 @@
                                         border-radius: 50%;
                                         content: "";
                                         height: 7px;
-                                        left: 0px;
+                                        left: 0;
                                         opacity: 0;
                                         position: absolute;
                                         top: 13px;
@@ -1275,7 +1275,7 @@
                                 }
                                 &.mega-menu-img {
                                     &:hover a {
-                                        padding-left: 0px;
+                                        padding-left: 0;
                                     }
                                     a{
                                        &::before {
@@ -1293,7 +1293,7 @@
                         }
                     }
                     &.mega-menu-padding {
-                        padding: 40px 40px 36px 40px;
+                        padding: 40px 40px 36px ;
                     }
                 }
                 &:hover > ul.mega-menu {
@@ -1355,15 +1355,23 @@
 
 .transparent-bar {
 	left: 0;
-    right: 0;
-    top: 0;
+	right: 0;
 	position: absolute;
 	width: 100%;
     z-index: 999;
+    
+    @media #{$md-layout, $xs-layout, $sm-layout}{
+        position: relative;
+    }
+
+    .header-top{
+        display: none !important;
+    }
     .stick{
         position: fixed;
     }
 }
+
 header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.transparent-bar.header-hm-7.stick{
     position: fixed;
     backdrop-filter: blur(20px);
@@ -1566,10 +1574,10 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
             }
         }
         @media #{$md-layout}{
-            margin-top: 0px;
+            margin-top: 0;
         }
         @media #{$xs-layout}{
-            margin-top: 0px;
+            margin-top: 0;
         }
     }
     .logo {
@@ -1577,11 +1585,11 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
         margin-bottom: 18px;
         @media #{$md-layout}{
             margin-top: 2px;
-            margin-bottom: 0px;
+            margin-bottom: 0;
         }
         @media #{$xs-layout}{
             margin-top: 2px;
-            margin-bottom: 0px;
+            margin-bottom: 0;
         }
     }
     .header-right-wrap {
@@ -1589,11 +1597,11 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
         margin-bottom: 18px;
         @media #{$md-layout}{
             margin-top: 2px;
-            margin-bottom: 0px;
+            margin-bottom: 0;
         }
         @media #{$xs-layout}{
             margin-top: 2px;
-            margin-bottom: 0px;
+            margin-bottom: 0;
         }
     }
 }
@@ -1610,7 +1618,7 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
             &.cart-wrap {
                 .shopping-cart-content {
                     @media #{$xs-layout}{
-                        right: 0px;
+                        right: 0;
                     }
                 }
             }
@@ -1660,14 +1668,14 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
                     right: -150px; 
                 }
                 @media #{$sm-layout}{
-                    right: 0px; 
+                    right: 0; 
                 }
             } 
         }
     }
     @media #{$md-layout}{
         .header-res-padding {
-            padding: 20px 0 20px;
+            padding: 20px 0;
         }
         .mean-container a.meanmenu-reveal {
             top: -26px;
@@ -1675,7 +1683,7 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
     }
     @media #{$xs-layout}{
         .header-res-padding {
-            padding: 20px 0 20px;
+            padding: 20px 0;
         }
         .mean-container a.meanmenu-reveal {
             top: -26px;
@@ -1771,7 +1779,7 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
             }
         }
         .header-res-padding {
-            padding: 20px 0 20px;
+            padding: 20px 0;
         }
     }
     @media #{$xs-layout}{
@@ -1781,7 +1789,7 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
             }
         }
         .header-res-padding {
-            padding: 20px 0 20px;
+            padding: 20px 0;
         }
     }
 }
@@ -1913,7 +1921,7 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
     position: absolute;
     left: 0;
     top: 0;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 10px 0 0 10px;
     background: $black;
     box-shadow: 20px 20px 60px #2c2d305e, -20px -20px 60px #3c3d406b;
     z-index: 9;
@@ -1958,7 +1966,7 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
       position: fixed;
     overflow: hidden;
     height: 100vh;
-    border-radius: 50px 0px 0px 50px;
+    border-radius: 50px 0 0 50px;
     
     
   }
@@ -1971,7 +1979,7 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
   .offcanvas-mobile-search-area{
     border-radius: 10px 10px 10px 10px;
     background: #e6e6e6;
-    box-shadow: 1px 1px 0px #c4c4c4, -20px -20px 0px #ffffff54;
+    box-shadow: 1px 1px 0 #c4c4c4, -20px -20px 0 #ffffff54;
     padding: 10px;
     position: fixed;
     top: 3vmin;
@@ -2015,7 +2023,7 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
   }
   
   .offcanvas-inner-content{
-    padding: 0px 35px 0;
+    padding: 0 35px 0;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -2026,7 +2034,7 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
   }
   
   .offcanvas-navigation{
-    margin: 100px 0px 0px 0px;
+    margin: 100px 0 0 0;
     .username-row{
         text-transform: none;
         font-family: "Helvetica Neue";
@@ -2206,24 +2214,6 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
   }
   
   
-.transparent-bar {
-	left: 0;
-	right: 0;
-	position: absolute;
-	width: 100%;
-    z-index: 999;
-    
-    @media #{$md-layout, $xs-layout, $sm-layout}{
-        position: relative;
-    }
-
-    .header-top{
-        display: none !important;
-    }
-    .stick{
-        position: fixed;
-    }
-}
 
 
 .mobile-menu-middle{

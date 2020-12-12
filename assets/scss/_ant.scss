@@ -11,8 +11,6 @@
   -webkit-font-feature-settings: 'tnum';
           font-feature-settings: 'tnum';
   display: inline-block;
-  font-size: 0;
-  line-height: unset;
 }
 .ant-radio-group .ant-badge-count {
   z-index: 1;
@@ -51,9 +49,9 @@
   -webkit-font-feature-settings: 'tnum';
           font-feature-settings: 'tnum';
   position: relative;
-  top: 0px;
+  top: 0;
   display: inline-block;
-  line-height: 1;
+  
   white-space: nowrap;
   vertical-align: sub;
   outline: none;
@@ -716,7 +714,7 @@ span.ant-radio + * {
 			background: none;
 			border: 0;
 			>.ant-steps-icon {
-				top: 0px;
+				top: 0;
 				left: 0.5px;
 				width: 32px;
 				height: 32px;
