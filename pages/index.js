@@ -1,10 +1,10 @@
+import React from "react";
 import LayoutOne from "../layouts/LayoutOne";
 import ProductSlider from "../wrappers/hero-slider/ProductSlider";
 import CategoriesSlider from "../wrappers/hero-slider/CategoriesSlider";
 import PromotionsSlider from "../wrappers/hero-slider/PromotionsSlider";
-import { connect } from "react-redux";
 
-const Index = props => {
+const Index = () => {
   return (
     <>
       <LayoutOne
@@ -15,7 +15,7 @@ const Index = props => {
         }
         image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
         keywords={`Sana\'a Kayum, Dubai, Fashion `}
-        url={"https://sanaakayum.com"}
+        url={`${process.env.NEXT_PUBLIC_DOMAIN}`}
         color={"#000000"}
         headerTop="visible"
         headerContainerClass="container-fluid"
@@ -33,7 +33,4 @@ const Index = props => {
   );
 };
 
-function mapStateToProps(state) {
-  return { products: state.productData };
-}
-export default connect(mapStateToProps)(Index);
+export default Index;

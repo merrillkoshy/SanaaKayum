@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
-import  Link  from "next/link";
+import Link from "next/link";
 
 import { useToasts } from "react-toast-notifications";
 
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
 import { getDiscountPrice } from "../helpers/product";
 import {
@@ -14,13 +13,13 @@ import {
 } from "../redux/actions/wishlistActions";
 import { addToCart } from "../redux/actions/cartActions";
 import LayoutOne from "../layouts/LayoutOne";
-import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
+
 import { isSafari, isIE, isFirefox } from "react-device-detect";
 const slugify = require("@sindresorhus/slugify");
-import HeaderMeta from "../components/header/HeaderMeta";
+
 const Wishlist = ({
   userData,
-  
+
   cartItems,
   currency,
   addToCart,
@@ -29,24 +28,23 @@ const Wishlist = ({
   deleteAllFromWishlist
 }) => {
   const { addToast } = useToasts();
- 
 
   return (
     <Fragment>
       <LayoutOne
-      article={"Exquisite Wardrobe"}
-      title={"Haute Couture & High-Street Fashion"}
-      description={
-        "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-      }
-      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
-      keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com/wishlist"}
-      color={"#000000"}
-      headerTop="visible"
-      headerContainerClass="container-fluid"
-      headerPaddingClass="header-padding-2"
-    >
+        article={"Exquisite Wardrobe"}
+        title={"Haute Couture & High-Street Fashion"}
+        description={
+          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+        }
+        image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={`${process.env.NEXT_PUBLIC_DOMAIN}/wishlist`}
+        color={"#000000"}
+        headerTop="visible"
+        headerContainerClass="container-fluid"
+        headerPaddingClass="header-padding-2"
+      >
         {/* breadcrumb */}
 
         <div className="cart-main-area pt-90 pb-100">
@@ -97,12 +95,9 @@ const Wishlist = ({
                                       className="img-fluid"
                                       src={
                                         !(isSafari || isIE || isFirefox)
-                                          ? 
-                                            wishlistItem.images[0].fields.file
+                                          ? wishlistItem.images[0].fields.file
                                               .url
-                                          : `${
-                                              wishlistItem.images[0].fields.file
-                                                .url}?fm=jpg`
+                                          : `${wishlistItem.images[0].fields.file.url}?fm=jpg`
                                       }
                                       alt=""
                                     />
@@ -161,19 +156,17 @@ const Wishlist = ({
                                       )}`}
                                     >
                                       <a>{`Select option`}</a>
-                                      
                                     </Link>
                                   ) : wishlistItem.stock &&
                                     wishlistItem.stock > 0 ? (
                                     <button
                                       onClick={() =>
                                         setTimeout(() => {
-                                          
                                           addToCart(
                                             wishlistItem,
                                             addToast,
                                             userData.user.entryID
-                                          )
+                                          );
                                         }, 1000)
                                       }
                                       className={
@@ -231,8 +224,7 @@ const Wishlist = ({
                     <div className="cart-shiping-update-wrapper">
                       <div className="cart-shiping-update">
                         <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
-                        <a>{`Continue Shopping`}</a>
-                          
+                          <a>{`Continue Shopping`}</a>
                         </Link>
                       </div>
                       <div className="cart-clear">
@@ -254,8 +246,13 @@ const Wishlist = ({
             ) : (
               <div className="row">
                 <div className="col-lg-12">
-                <div className={wishlistItems?`${"table-content table-responsive cart-table-content"}`:`${"item-empty-area text-center"}`}>
-                  
+                  <div
+                    className={
+                      wishlistItems
+                        ? `${"table-content table-responsive cart-table-content text-center"}`
+                        : `${"item-empty-area text-center"}`
+                    }
+                  >
                     <div className="item-empty-area__icon mb-30">
                       <i className="pe-7s-like"></i>
                     </div>
@@ -263,7 +260,6 @@ const Wishlist = ({
                       No items found in wishlist <br />{" "}
                       <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/shop"}>
                         <a>{`Add Items`}</a>
-                        
                       </Link>
                     </div>
                   </div>

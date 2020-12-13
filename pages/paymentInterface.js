@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import clientMgr from "../constants/contentManager";
@@ -6,13 +6,12 @@ import { postPurchase } from "../redux/actions/cartActions";
 import Link from "next/link";
 import { Button, Container, Row, Table, Col } from "react-bootstrap";
 import PaymentResponseLayout from "../layouts/PaymentResponseLayout";
-import { useRouter } from "next/router";
 import PurchasedProductGrid from "../wrappers/product/PurchasedProductGrid";
 import Swiper from "react-id-swiper";
 
 const paymentInterface = ({ cartItems, user, postPurchase }) => {
   const [paymentResult, setPaymentResult] = useState("");
-  const [recentPurchase, setPurchase] = useState(cartItems);
+
   const [paymentResponseCode, setPaymentResponseCode] = useState("");
 
   const userData = user.user;
@@ -35,29 +34,34 @@ const paymentInterface = ({ cartItems, user, postPurchase }) => {
       }
     }
   };
-const getPayDate=(inDate)=>{
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
+  const getPayDate = inDate => {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
 
-  const date=new Date(inDate)
-  const today=new Date(inDate)
-let formatted
-    (!inDate==="today")?formatted=`${date.getDate()}${" "} ${monthNames[date.getMonth()]}${" "} ${date.getFullYear()}`:
-    formatted=`${today.getDate()}${" "} ${monthNames[today.getMonth()]}${" "} ${today.getFullYear()}`
-    return formatted
-}
+    const date = new Date(inDate);
+    const today = new Date(inDate);
+    let formatted;
+    !inDate === "today"
+      ? (formatted = `${date.getDate()}${" "} ${
+          monthNames[date.getMonth()]
+        }${" "} ${date.getFullYear()}`)
+      : (formatted = `${today.getDate()}${" "} ${
+          monthNames[today.getMonth()]
+        }${" "} ${today.getFullYear()}`);
+    return formatted;
+  };
   useEffect(() => {
     if (localStorage.getItem("Initiate")) {
       const checkTrans = JSON.parse(localStorage.getItem("Initiate"));
@@ -89,7 +93,7 @@ let formatted
 
           const transactionResponse = {
             ...response,
-            ...{ purchaseItems: recentPurchase }
+            ...{ purchaseItems: cartItems }
           };
           clientMgr
             .then(environment => environment.getEntry(userData.entryID))
@@ -110,7 +114,6 @@ let formatted
               return entry.update();
             })
             .then(entry => {
-              
               entry.publish();
             });
         })
@@ -134,8 +137,8 @@ let formatted
                 <Col>
                   <Swiper {...settings}>
                     <PurchasedProductGrid
-                    columnClass="col-6"
-                      products={recentPurchase}
+                      columnClass="col-6"
+                      products={cartItems}
                       spaceBottomClass="mb-25"
                     />
                   </Swiper>
@@ -185,9 +188,11 @@ let formatted
                       </tr>
                       <tr>
                         <th>Order Placed at:</th>
-                        <td>{paymentResult
-                              ? getPayDate(paymentResult?.transaction_time)
-                              : getPayDate("today")}</td>
+                        <td>
+                          {paymentResult
+                            ? getPayDate(paymentResult?.transaction_time)
+                            : getPayDate("today")}
+                        </td>
                       </tr>
                     </tbody>
                   </Table>

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import client from "../../constants/config";
 import PurchasedProductGrid from "../../wrappers/product/PurchasedProductGrid";
 import { Container, Row, Col } from "react-bootstrap";

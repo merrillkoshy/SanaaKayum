@@ -24,9 +24,11 @@ const OffcanvasMenu = () => {
 <Card className="m-auto">
 <Card.Img variant="top" src="/assets/img/banner/sk-corporate-clothing-banner.jpg" />
 <Card.Body>
-  <a href="/sk">
+<Link href="/sk">
+  <a>
       <Card.Title className="h6">Corporate Clothing | SK</Card.Title>
   </a>
+  </Link>
   <Link href="/sk">
   <a >
       <Card.Text>

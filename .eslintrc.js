@@ -1,8 +1,10 @@
-{
+module.exports = {
     "env": {
         "browser": true,
         "es2021": true,
-        "node": true
+        "node": true,
+        "commonjs": true,
+        "es6": true,
     },
     "extends": [
         "eslint:recommended",
@@ -15,25 +17,15 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "16.9"
+        }
+    },
     "plugins": [
         "react"
     ],
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "never"
-        ]
     }
-}
+};

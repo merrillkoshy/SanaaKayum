@@ -4,7 +4,7 @@ export const COMPANY_JSONLD = {
   "name": "Sana'a Kayum Clothing Art",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://sanaakayum.com/shop?search={search_term_string}",
+    "target": process.env.NEXT_PUBLIC_DOMAIN+"/shop?search={search_term_string}",
     "query-input": "required name=search_term_string"
   },
   "address": {
@@ -14,10 +14,10 @@ export const COMPANY_JSONLD = {
     "addressRegion": "Dubai",
     "postalCode": "114127"
   },
-  "image": "https://sanaakayum.com/assets/pwa/icons/icon-512x512.png",
+  "image": process.env.NEXT_PUBLIC_DOMAIN+"/assets/pwa/icons/icon-512x512.png",
   "email": "Hello@SanaaKayum.com",
   "telePhone": "+971523331757",
-  "url": "https://sanaakayum.com",
+  "url": process.env.NEXT_PUBLIC_DOMAIN,
   "paymentAccepted": [ "cash", "check", "credit card", "invoice" ],
   "openingHours": "Mo,Tu,We,Th,Sa,Su 10:00-20:00",
   "openingHoursSpecification": [ {
@@ -43,8 +43,8 @@ export const COMPANY_JSONLD = {
 export const ORG_DET = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "url": "https://sanaakayum.com",
-  "logo": "https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"
+  "url": process.env.NEXT_PUBLIC_DOMAIN,
+  "logo": process.env.NEXT_PUBLIC_DOMAIN+"/assets/pwa/icons/icon-512x512.png"
 };
 
 export const googleHead = 
@@ -54,7 +54,7 @@ export const googleHead =
       "name": "Sana'a Kayum",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://sanaakayum.com/shop?search={search_term_string}",
+        "target": process.env.NEXT_PUBLIC_DOMAIN+"/shop?search={search_term_string}",
         "query-input": "required name=search_term_string"
       },
       "@id": "https://g.page/Sana-kayum",
@@ -66,10 +66,10 @@ export const googleHead =
         "postalCode": "114127",
         "addressCountry": "AE"
       },
-      "image": "https://sanaakayum.com/assets/pwa/icons/icon-512x512.png",
+      "image": process.env.NEXT_PUBLIC_DOMAIN+"/assets/pwa/icons/icon-512x512.png",
       "email": "Hello@SanaaKayum.com",
       "telePhone": "+971523331757",
-      "url": "https://sanaakayum.com",
+      "url": process.env.NEXT_PUBLIC_DOMAIN,
       "paymentAccepted": ["cash", "check", "credit card", "invoice"],
       "openingHours": "Mo,Tu,We,Th,Sa,Su 9:30-19:30",
       "openingHoursSpecification": [
@@ -101,8 +101,8 @@ export const googleHead =
       "@type": "Organization",
       "name": "Sana'a Kayum",
       "legalName": "Sana'a Kayum Clothing Art L.L.C",
-      "url": "https://sanaakayum.com",
-      "logo": "https://sanaakayum.com/assets/pwa/icons/icon-512x512.png",
+      "url": process.env.NEXT_PUBLIC_DOMAIN,
+      "logo": process.env.NEXT_PUBLIC_DOMAIN+"/assets/pwa/icons/icon-512x512.png",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "209, Al Asmawi Building, Umm Al Sheif, Sheikh Zayed Road",

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -10,25 +10,16 @@ import { loadWishlist } from "../redux/actions/wishlistActions";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 import { connect } from "react-redux";
-import Link from "next/link";
 
 import { useToasts } from "react-toast-notifications";
 import client from "../constants/config";
 import clientMgr from "../constants/contentManager";
 import LayoutOne from "../layouts/LayoutOne";
-
-import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
-import HeaderMeta from "../components/header/HeaderMeta";
 import { useRouter } from "next/router";
 
-const LoginRegister = ({
-  loginUser,
-  loadCart,
-  loadWishlist,
-  userData
-}) => {
+const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
   const { addToast } = useToasts();
-const router=useRouter()
+  const router = useRouter();
   const [getNextIndex, setNextIndex] = useState(0);
   const [country, selectCountry] = useState("");
   const [region, selectRegion] = useState("");
@@ -71,7 +62,7 @@ const router=useRouter()
         });
       })
       .then(() => {
-        router.push('/')
+        router.push("/");
       })
       .catch(err => console.error(err));
   };
@@ -152,19 +143,19 @@ const router=useRouter()
   return (
     <Fragment>
       <LayoutOne
-      article={"Exquisite Wardrobe"}
-      title={"Haute Couture & High-Street Fashion"}
-      description={
-        "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-      }
-      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
-      keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com/register"}
-      color={"#000000"}
-      headerTop="visible"
-      headerContainerClass="container-fluid"
-      headerPaddingClass="header-padding-2"
-    >
+        article={"Exquisite Wardrobe"}
+        title={"Haute Couture & High-Street Fashion"}
+        description={
+          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+        }
+        image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={`${process.env.NEXT_PUBLIC_DOMAIN}/register`}
+        color={"#000000"}
+        headerTop="visible"
+        headerContainerClass="container-fluid"
+        headerPaddingClass="header-padding-2"
+      >
         {/* breadcrumb */}
 
         <div className="login-register-area pt-100 pb-100">

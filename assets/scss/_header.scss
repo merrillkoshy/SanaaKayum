@@ -28,48 +28,7 @@
     background-color: rgba(21, 21, 21, 0.3);
     backdrop-filter: blur(20px);
 }
-.stick {
-	animation: 700ms ease-in-out 0s normal none 1 running fadeInDown;
-	background-color: #fff;
-	border-bottom: 0 solid #4a90e2;
-	box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.06);
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 999;
-	left: 0;
-    transition: all .3s ease 0s;
-    
-    .center-menu-logo{
-        display: none;
-        @media #{$md-layout}{
-		    display: block;
-        }
-        @media #{$xs-layout}{
-            display: block;
-        }
-    }
 
-    .header-right-wrap-white{
-        .same-style {
-            > a {
-                color: #000;
-            }
-            
-            &.cart-wrap, &.header-compare, &.header-wishlist, &.account-setting, &.header-search {
-                > button, & > a {
-                    color: #000;
-                        span{
-                        &.count-style {
-                            background-color: #000;
-                            color: #fff;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 }
 .header-padding-1 .container-fluid {
     padding: 0 80px;
@@ -135,28 +94,7 @@
     }
 }
 
-.stick {
-   .logo-hm5 {
-        a.sticky-block {
-            display: block;
-            img{
-                max-width: 20vmin;
-            }
-        }
-        a.sticky-none {
-            display: none;
-            img{
-                max-width: 20vmin;
-            }
-        }
-    } 
-    .shop-mobile{
-        border:1px solid $black;
-        a{
-            color: $black !important;
-        }
-    }
-}
+
 .shop-mobile{
     border:1px solid $theme-color;
     a{
@@ -393,7 +331,65 @@
 }
 
 .stick {
+    animation: 700ms ease-in-out 0s normal none 1 running fadeInDown;
+	background-color: #fff;
+	border-bottom: 0 solid #131313;
+	box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.06);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+	left: 0;
+    transition: all .3s ease 0s;
+    .logo-hm5 {
+        a.sticky-block {
+            display: block;
+            img{
+                max-width: 20vmin;
+            }
+        }
+        a.sticky-none {
+            display: none;
+            img{
+                max-width: 20vmin;
+            }
+        }
+    } 
+    .shop-mobile{
+        border:1px solid $black;
+        a{
+            color: $black !important;
+        }
+    }
+    .center-menu-logo{
+        display: none;
+        @media #{$md-layout}{
+		    display: block;
+        }
+        @media #{$xs-layout}{
+            display: block;
+        }
+    }
 
+    .header-right-wrap-white{
+        .same-style {
+            > a {
+                color: #000;
+            }
+            
+            &.cart-wrap, &.header-compare, &.header-wishlist, &.account-setting, &.header-search {
+                > button, & > a {
+                    color: #000;
+                        span{
+                        &.count-style {
+                            background-color: #000;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
     .main-menu {
         nav ul li a {
         line-height: 75px;
@@ -435,8 +431,8 @@
             color:$black !important;
         }
         .count-style{
-            background-color: $theme-color !important;;
-            color: $black !important;;
+            background-color: $theme-color !important;
+            color: $black !important;
         }
     }
 }
@@ -973,7 +969,7 @@
 	transition: all 0.3s ease 0s;
 	width: 375px;
 	z-index: 7;
-	padding: 72px 0 40px 0;
+	padding: 72px 0 40px;
     @media #{$xx-layout}{
         width: 300px;
         padding:50px 0 30px 0;
@@ -1404,9 +1400,12 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
 
 
 
-/* home 7 */
 
 .clickable-mainmenu {
+	background: rgba(255, 255, 255, 1) none repeat scroll 0 0;
+	color: #353535;
+	
+	transition: transform 0.5s ease-in-out 0s;
     margin-top: 35px;
     a, button {
         color: #fff;
@@ -1429,13 +1428,6 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
     .sidebar-menu{
         padding-left: 0;
     }
-}
-.clickable-mainmenu {
-	background: rgba(255, 255, 255, 1) none repeat scroll 0 0;
-	color: #353535;
-	
-	transition: transform 0.5s ease-in-out 0s;
-
     .clickable-mainmenu-icon {
         button {
             background: transparent none repeat scroll 0 0;
@@ -1713,86 +1705,8 @@ header.header-area.sticky-bar.header-padding-3.header-res-padding.clearfix.trans
     
 }
 
-.header-hm8 {
-    .main-menu {
-        padding-bottom: 8px;
-        nav {
-            ul {
-                li {
-                    > a {
-                       line-height: 60px; 
-                    }
-                }
-            }
-        }
-    }
-}
-
-/* home 9 */
 
 
-
-.header-hm9 {
-    .main-menu {
-        nav {
-            ul {
-                li {
-                    a {
-                        line-height: 72px;
-                    }
-                }
-            }
-        }
-    } 
-    .header-top-area {
-        padding: 22px 0;
-        border-bottom: 1px solid #cecece;
-        &.header-top-border17 {
-            border-bottom: 1px solid #9f9f9f;
-        }
-    }
-    .header-right-wrap {
-        margin-top: 13px;
-        @media #{$md-layout}{
-            margin-right: 0;
-            margin-top: 0;
-        }
-        @media #{$xs-layout}{
-            margin-right: 0;
-            margin-top: 0;
-        }
-        @media #{$xs-layout}{
-            .same-style.cart-wrap {
-                .shopping-cart-content {
-                    right: -97px;
-                }
-            }
-        }
-    }
-    .logo-hm9 {
-        margin-top: 12px;
-    }
-    @media #{$md-layout}{
-        .mean-container {
-            a.meanmenu-reveal {
-                top: -26px;
-            }
-        }
-        .header-res-padding {
-            padding: 20px 0;
-        }
-    }
-    @media #{$xs-layout}{
-        .mean-container {
-            a.meanmenu-reveal {
-                top: -26px;
-            }
-        }
-        .header-res-padding {
-            padding: 20px 0;
-        }
-    }
-}
 
 
 /* header hm10 */

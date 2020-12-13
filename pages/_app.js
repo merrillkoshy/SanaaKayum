@@ -1,12 +1,9 @@
 import "../assets/scss/style.scss";
-
 import { Provider } from "react-redux";
 import { useStore } from "../store";
 import ScrollToTop from "../helpers/scroll-top";
 import { ToastProvider } from "react-toast-notifications";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
-
-import Head from "next/head"
 import {
   fetchProducts,
   fetchLingerie,
@@ -16,23 +13,18 @@ import {
   fetchSliders
 } from "../redux/actions/productActions";
 import client from "../constants/config";
-import { useRouter } from 'next/router'
-
+import { useRouter } from "next/router";
 
 import { firebaseCloudMessaging } from "../utils/webPush";
 
 import LoadingScreen from "../helpers/LoadingScreen";
-import { Fragment, useEffect,useState } from "react";
-
-
-
+import React, { Fragment, useEffect, useState } from "react";
 
 const App = ({ Component, pageProps }) => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const [isLoading, setIsLoading]=useState(null)
+  const [isLoading, setIsLoading] = useState(null);
   useEffect(() => {
-    
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function() {
         navigator.serviceWorker.register("/firebase-messaging-sw.js").then(
@@ -51,18 +43,17 @@ const App = ({ Component, pageProps }) => {
         // .catch(e=>console.log("NWsW registration failed: ", e))
       });
     }
-    const handleRouteChange = (url) => {
-      setIsLoading(true)
-    }
-    const completion = (url) => {
-      setIsLoading(false)
-    }
-    router.events.on('routeChangeStart', handleRouteChange)
-    router.events.on('routeChangeComplete', completion)
-    
+    const handleRouteChange = () => {
+      setIsLoading(true);
+    };
+    const completion = () => {
+      setIsLoading(false);
+    };
+    router.events.on("routeChangeStart", handleRouteChange);
+    router.events.on("routeChangeComplete", completion);
   }, [isLoading]);
   const store = useStore(pageProps.initialReduxState);
-  let preloadedState;
+  
   var productMap = [];
   var lowerCords = [];
   var lingeries = [];
@@ -98,18 +89,6 @@ const App = ({ Component, pageProps }) => {
     .then(fetchEntry("brochures", 100, brochures))
     .then(fetchEntry("lookbook", 100, lookbooks))
     .then(fetchEntry("landingPageSliders", 100, lpSliders))
-    .then(async () => {
-      return Promise.resolve(
-        (preloadedState = {
-          productData: [productMap, lowerCords, lingeries].flat(),
-          lingerieData: lingeries,
-          brochuresData: brochures,
-          lookbookData: lookbooks,
-          pBannersData: promotionBanners,
-          sliderData: lpSliders
-        })
-      );
-    })
     .then(() => {
       store.dispatch(fetchProducts([productMap, lowerCords, lingeries].flat()));
       store.dispatch(fetchLingerie(lingeries));
@@ -117,34 +96,20 @@ const App = ({ Component, pageProps }) => {
       store.dispatch(fetchLookbooks(lookbooks));
       store.dispatch(fetchPbanners(promotionBanners));
       store.dispatch(fetchSliders(lpSliders));
-    })
-    .then(async () => {
-      return Promise.resolve(
-        (preloadedState = {
-          productData: [productMap, lowerCords, lingeries].flat(),
-          lingerieData: lingeries,
-          brochuresData: brochures,
-          lookbookData: lookbooks,
-          pBannersData: promotionBanners,
-          sliderData: lpSliders
-        })
-      );
     });
   return (
-    
     <Provider store={store}>
       <ToastProvider placement="bottom-left">
         <BreadcrumbsProvider>
           <ScrollToTop>
             <Fragment>
-            {/* <Component {...pageProps} /> */}
-              {isLoading?<LoadingScreen/>:<Component {...pageProps} />}
+              {/* <Component {...pageProps} /> */}
+              {isLoading ? <LoadingScreen /> : <Component {...pageProps} />}
             </Fragment>
           </ScrollToTop>
         </BreadcrumbsProvider>
       </ToastProvider>
     </Provider>
-    
   );
 };
 

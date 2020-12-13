@@ -71,7 +71,7 @@ const ShopGridFullWidth = ({ products, lingerie }) => {
         }
         image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
         keywords={`Sana\'a Kayum, Dubai, Fashion `}
-        url={"https://sanaakayum.com/shop"}
+        url={`${process.env.NEXT_PUBLIC_DOMAIN}/shop`}
         color={"#000000"}
         headerTop="visible"
         headerContainerClass="container-fluid"

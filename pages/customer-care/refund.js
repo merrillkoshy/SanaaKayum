@@ -3,7 +3,7 @@ import Steps from "antd/lib/steps";
 
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 import uuid from "uuid/v4";

@@ -46,7 +46,10 @@ const MobileMenu = () => {
   };
 
   return (
-    <div className="offcanvas-mobile-menu d-lg-none d-xl-none d-sm-none d-md-none" id="offcanvas-mobile-menu">
+    <div
+      className="offcanvas-mobile-menu d-lg-none d-xl-none d-sm-none d-md-none"
+      id="offcanvas-mobile-menu"
+    >
       <button
         aria-label="menu-close"
         className="offcanvas-menu-close"
@@ -65,23 +68,30 @@ const MobileMenu = () => {
 
           {/* mobile language and currency */}
           {/* <MobileLangCurChange /> */}
-<>
-<Card>
-<Card.Img variant="top" src="/assets/img/banner/sk-corporate-clothing-banner.jpg" />
-<Card.Body>
-  <a href="/sk">
-      <Card.Title className="h6">Corporate Clothing | SK</Card.Title>
-  </a>
-  <Link href="/sk">
-  <a >
-      <Card.Text>
-      Represent YOUR brand identity in style and comfort
-      </Card.Text>
-      </a>
-      </Link>
-    </Card.Body>
-</Card>
-</>
+          <>
+            <Card>
+              <Card.Img
+                variant="top"
+                src="/assets/img/banner/sk-corporate-clothing-banner.jpg"
+              />
+              <Card.Body>
+                <Link href="/sk">
+                  <a>
+                    <Card.Title className="h6">
+                      Corporate Clothing | SK
+                    </Card.Title>
+                  </a>
+                </Link>
+                <Link href="/sk">
+                  <a>
+                    <Card.Text>
+                      Represent YOUR brand identity in style and comfort
+                    </Card.Text>
+                  </a>
+                </Link>
+              </Card.Body>
+            </Card>
+          </>
           {/* mobile widgets */}
           <MobileWidgets />
         </div>

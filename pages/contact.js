@@ -1,12 +1,22 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
-
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+import React, { useEffect } from "react";
 import LayoutOne from "../layouts/LayoutOne";
-import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
-import HeaderMeta from "../components/header/HeaderMeta";
+import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { useToasts } from "react-toast-notifications";
 
 const Contact = ({}) => {
+  const { addToast } = useToasts();
+  useEffect(() => {
+    const script = document.createElement("script");
+
+    script.src =
+      "https://www.google.com/recaptcha/api.js?render=" +
+      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    script.async = true;
+const footer=document.querySelector(".footer-area")
+footer.appendChild(script);
+  },[typeof document!==undefined]);
   return (
     <LayoutOne
       article={"Exquisite Wardrobe"}
@@ -14,7 +24,7 @@ const Contact = ({}) => {
       description={"Contact us | +971 52 333 1757 | Hello@SanaaKayum.com "}
       image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
       keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com/contact"}
+      url={`${process.env.NEXT_PUBLIC_DOMAIN}/contact`}
       color={"#000000"}
       headerTop="visible"
     >
@@ -140,7 +150,7 @@ const Contact = ({}) => {
             <div className="col-lg-8 col-md-7">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.3061732889173!2d55.20128221500807!3d25.12533768392962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f731236970a37%3A0xdcacf3ce87e2e05e!2sSana&#39;a%20Kayum!5e0!3m2!1sen!2sae!4v1592681412866!5m2!1sen!2sae"
-                width="600"
+                width="100%"
                 height="450"
                 frameBorder="0"
                 style={{ border: 0 }}
@@ -152,38 +162,79 @@ const Contact = ({}) => {
                 <div className="contact-title mb-30">
                   <h2>Get In Touch</h2>
                 </div>
-                <form
-                  action="mailto:hello@sanaakayum.com"
-                  className="contact-form-style"
-                  method="post"
-                  encType="text/plain"
+                <Form
+                  onSubmit={e => {
+                    e.preventDefault();
+
+                    const formData = new FormData(e.target),
+                      formDataObj = Object.fromEntries(formData.entries());
+
+                    grecaptcha.ready(function() {
+                      grecaptcha
+                        .execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, {
+                          action: "submit"
+                        })
+                        .then(function(token) {
+                          const headers = {
+                            "Access-Control-Allow-Headers":
+                              "Content-Type, Authorization",
+                            "Access-Control-Allow-Origin": "*",
+                            "Content-Type": "application/json",
+                            Token: token
+                          };
+                          const data = {
+                            google: {
+                              secret:
+                                process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY,
+                              response: token
+                            },
+                            formDataObj
+                          };
+                          axios
+                            .post("/api/recaptchaCheck", data, headers)
+                            .then(response => {
+                              if (response.status === 200)
+                                addToast("Email Sent !", {
+                                  appearance: "success",
+                                  autoDismiss: true
+                                });
+                            });
+                        });
+                    });
+                  }}
                 >
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <input name="Name" placeholder="Name*" type="text" />
-                    </div>
-                    <div className="col-lg-6">
-                      <input name="Email" placeholder="Email*" type="email" />
-                    </div>
-                    <div className="col-lg-12">
-                      <input
-                        name="Subject"
-                        placeholder="Subject*"
-                        type="text"
-                      />
-                    </div>
-                    <div className="col-lg-12">
-                      <textarea
-                        name="Message"
-                        placeholder="Your Message*"
-                        defaultValue={""}
-                      />
-                      <button className="submit" type="submit">
-                        SEND
-                      </button>
-                    </div>
-                  </div>
-                </form>
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Your Name"
+                    name="name"
+                  />
+
+                  <Form.Group controlId="exampleForm.ControlInput1">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="name@example.com"
+                      name="email"
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="exampleForm.ControlInput2">
+                    <Form.Label>Subject</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Your Subject"
+                      name="subject"
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Your Message</Form.Label>
+                    <Form.Control as="textarea" rows={3} name="textarea" />
+                  </Form.Group>
+                  <Button type="submit" className="skButton">
+                    SEND
+                  </Button>
+                </Form>
                 <p className="form-messege" />
               </div>
             </div>

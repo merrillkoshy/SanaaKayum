@@ -1,40 +1,28 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
-
 import { connect } from "react-redux";
 import { getProductCartQuantity } from "../../helpers/product";
 import { addToCart } from "../../redux/actions/cartActions";
-
 import { loginUser } from "../../redux/actions/userActions";
 import { loadCart } from "../../redux/actions/cartActions";
 import {
   addToWishlist,
   loadWishlist
 } from "../../redux/actions/wishlistActions";
-
 import Rating from "./sub-components/ProductRating";
 import whatsAppthis from "../../constants/whatsappHelper";
 import { Container, Row, Col, Button, Card, ListGroup } from "react-bootstrap";
-import { useToasts } from "react-toast-notifications";
-
 import SizeChartModal from "./SizeChartModal";
 import LoginModal from "./LoginModal";
 import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
-import Link from "next/link";
 const ProductDescriptionInfo = ({
-  loadCart,
-
-  loadWishlist,
-  loginUser,
   product,
   userData,
   discountedPrice,
-  currency,
   finalDiscountedPrice,
   finalProductPrice,
   cartItems,
   wishlistItem,
-
   addToast,
   addToCart,
   addToWishlist
@@ -79,7 +67,6 @@ const ProductDescriptionInfo = ({
     monthNames[date.getMonth()] +
     " " +
     date.getFullYear();
-
   useEffect(() => {
     setUid(userData.user.entryID);
   }, [userData.user?.entryID]);
@@ -108,8 +95,7 @@ const ProductDescriptionInfo = ({
             )}
           </Col>
         </Row>
-      </Container>
-
+      </Container>{" "}
       <div className="product-details-price ml-10 my-3">
         {discountedPrice !== null ? (
           <Container fluid>
@@ -126,37 +112,12 @@ const ProductDescriptionInfo = ({
         ) : (
           <span itemProp="price">{`AED ` + finalProductPrice} </span>
         )}
-      </div>
-
+      </div>{" "}
       {product.color ? (
         <div className="pro-details-size-color">
           <span style={{ display: "none" }} itemProp="color">
             {product.color}
           </span>
-          {/* <div className="pro-details-color-wrap">
-            <span>Color</span>
-            <div className="pro-details-color-content">
-              <label
-                className={`pro-details-color-content--single ${product.color}`}
-              >
-                <input
-                  type="radio"
-                  value={product.color}
-                  name="product-color"
-                  checked={
-                    product.color === selectedProductColor ? "checked" : ""
-                  }
-                  onChange={() => {
-                    setSelectedProductColor(product.color);
-                    setSelectedProductSize(product.size[0].name);
-                    setProductStock(product.size[0].stock);
-                    setQuantityCount(1);
-                  }}
-                />
-                <span className="checkmark"></span>
-              </label>
-            </div>
-          </div> */}
           <Container fluid>
             <div className="pro-details-size">
               <span>Size</span>
@@ -175,8 +136,7 @@ const ProductDescriptionInfo = ({
                             </span>
                           ) : (
                             ""
-                          )}
-
+                          )}{" "}
                           <input
                             type="radio"
                             value={sz.name}
@@ -190,8 +150,7 @@ const ProductDescriptionInfo = ({
                               setProductStock(sz.stock);
                               setQuantityCount(1);
                             }}
-                          />
-
+                          />{" "}
                           <span className="size-name">{sz.name}</span>
                         </label>
                       );
@@ -270,8 +229,7 @@ const ProductDescriptionInfo = ({
             >
               +
             </button>
-          </div>
-
+          </div>{" "}
           <div className="pro-details-cart btn-hover">
             {productStock && productStock > 0 ? (
               <button
@@ -332,8 +290,7 @@ const ProductDescriptionInfo = ({
           </div>
         </div>
       </Fragment>
-      <ProductDescriptionTab spaceBottomClass="pb-90" product={product} />
-
+      <ProductDescriptionTab spaceBottomClass="pb-90" product={product} />{" "}
       {/* {product.article ? (
         <div className="pro-details-meta">
           <span>Categories :</span>
@@ -378,8 +335,7 @@ const ProductDescriptionInfo = ({
         </div>
       ) : (
         ""
-      )} */}
-
+      )} */}{" "}
       <div className="pro-details-social">
         <ul>
           <li>
@@ -412,14 +368,11 @@ const ProductDescriptionInfo = ({
     </div>
   );
 };
-
 ProductDescriptionInfo.propTypes = {
   addToCart: PropTypes.func,
-
   addToWishlist: PropTypes.func,
   addToast: PropTypes.func,
   cartItems: PropTypes.array,
-
   currency: PropTypes.object,
   discountedPrice: PropTypes.number,
   finalDiscountedPrice: PropTypes.number,
@@ -427,7 +380,6 @@ ProductDescriptionInfo.propTypes = {
   product: PropTypes.object,
   wishlistItem: PropTypes.object
 };
-
 const mapStateToProps = state => {
   return {
     userData: state.userData
@@ -441,7 +393,6 @@ const mapDispatchToProps = dispatch => {
     loadCart: item => {
       dispatch(loadCart(item));
     },
-
     loadWishlist: item => {
       dispatch(loadWishlist(item));
     },
@@ -472,7 +423,6 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps

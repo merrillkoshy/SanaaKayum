@@ -3,7 +3,6 @@ import React, { Fragment } from "react";
 import HeaderOne from "../wrappers/header/HeaderOne";
 import Footer from "../wrappers/footer/Footer";
 import Head from "next/head";
-import siteIcons from "../constants/siteIcons";
 const LayoutOne = ({
   children,
   headerContainerClass,

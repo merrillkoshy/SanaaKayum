@@ -155,7 +155,7 @@ const HeaderMeta = ({
         
         <meta name="apple-mobile-web-app-capable" content="yes" />
       <title>{title}</title>
-      <link rel="canonical" href={`${process.env.NEXT_PUBLIC_DOMAIN}${url}`} />
+      <link rel="canonical" href={`${url}`} />
       <base target="_blank" />
       <link href="https://images.ctfassets.net/" rel="dns-prefetch" />
       <meta

@@ -112,7 +112,7 @@ const IconGroup = ({
           <li
             onClick={() => {
               logoutUser(addToast);
-              setLoggedIn(false);
+              
               setUname(initUname);
               setInteraction(initInteraction);
               resetCart();

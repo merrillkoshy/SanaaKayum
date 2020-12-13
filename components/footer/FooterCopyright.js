@@ -3,6 +3,7 @@ import React from "react";
 
 
 const FooterCopyright = ({ footerLogo, spaceBottomClass }) => {
+  const year=new Date().getFullYear()
   return (
     <div className={`copyright ${spaceBottomClass ? spaceBottomClass : ""}`}>
       <div className="footer-logo">
@@ -15,7 +16,7 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass }) => {
         </a>
       </div>
       <p>
-        © 2020{" "}
+        © {`${year} - ${(year+1).toString().substr(-2)}  `}
         <a href="/" rel="noopener noreferrer" target="_blank">
           Sana'a Kayum Clothing Art LLC
         </a>

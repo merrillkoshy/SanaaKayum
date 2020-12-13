@@ -101,7 +101,7 @@ const Checkout = ({ cartItems, currency, user }) => {
         }
         image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
         keywords={`Sana\'a Kayum, Dubai, Fashion `}
-        url={"https://sanaakayum.com/checkout"}
+        url={`${process.env.NEXT_PUBLIC_DOMAIN}/checkout`}
         color={"#000000"}
         headerTop="visible"
       >

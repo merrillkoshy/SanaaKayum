@@ -1,29 +1,22 @@
-import PropTypes from "prop-types";
 import React, { Fragment } from "react";
-import  Link  from "next/link";
-
-
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+import Link from "next/link";
 import LayoutOne from "../layouts/LayoutOne";
-import HeaderMeta from "../components/header/HeaderMeta";
+
 import { useRouter } from "next/router";
 const NotFound = ({}) => {
-  const router=useRouter()
+  const router = useRouter();
   return (
-
     <Fragment>
-          <LayoutOne
-      article={"Exquisite Wardrobe"}
-      title={"404? That's unstitched.."}
-      description={"404? That's unstitched.."}
-      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
-      keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com"}
-      color={"#000000"}
-      headerTop="visible"
-    >
-        {/* breadcrumb */}
-
+      <LayoutOne
+        article={"Exquisite Wardrobe"}
+        title={"404? That's unstitched.."}
+        description={"404? That's unstitched.."}
+        image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={"https://sanaakayum.com"}
+        color={"#000000"}
+        headerTop="visible"
+      >
         <div className="error-area pt-40 pb-100">
           <div className="container">
             <div className="row justify-content-center">
@@ -57,11 +50,7 @@ const NotFound = ({}) => {
                     </button>
                   </form>
                   <Link href={process.env.RAZZLE_PUBLIC_URL + "/"}>
-                  <a
-                    className="error-btn"
-                  >
-                    Back to home page
-                  </a>
+                    <a className="error-btn">Back to home page</a>
                   </Link>
                 </div>
               </div>
@@ -73,8 +62,5 @@ const NotFound = ({}) => {
   );
 };
 
-NotFound.propTypes = {
-  location: PropTypes.object
-};
 
 export default NotFound;

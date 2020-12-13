@@ -1,12 +1,8 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState, useEffect } from "react";
-
-import Swiper from "react-id-swiper";
-
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import LayoutOne from "../layouts/LayoutOne";
-import HeaderMeta from "../components/header/HeaderMeta";
 import { connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import clientMgr from "../constants/contentManager";
@@ -47,28 +43,7 @@ const MyAccount = ({ user }) => {
   const RegexExp = /(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,8}\w+/;
   const userData = user.user;
   const uID = userData.entryID;
- 
-  
-  const settings = {
-    loop: false,
-    slidesPerView: 4,
-    grabCursor: true,
-    breakpoints: {
-      1024: {
-        slidesPerView: 4
-      },
-      768: {
-        slidesPerView: 3
-      },
-      640: {
-        slidesPerView: 2
-      },
-      320: {
-        slidesPerView: 1
-      }
-    }
-  };
-  const [transactions, setTransactions] = useState("");
+
   const changePassword = newPassword => {
     userData.password !== newPassword
       ? uploadToContentful("password", newPassword, uID, addToast)
@@ -77,63 +52,62 @@ const MyAccount = ({ user }) => {
           autoDismiss: true
         });
   };
-  let blob
-  let RecentPurchasesComp
-   
-  useEffect(()=>{
+  let blob;
 
-    client.getEntry(uID).then(entry=>{
-      blob=entry.fields.transactionsData
-      
-    }).then(()=>{
-      
-      blob=blob.map(
-            tr => {
-              if(tr.tran_class==="cod"){
-                return {
-                  data:tr.purchaseItems,
-                  result:["Order Placed",new Date(tr.order_time)],
-                  ref:tr.cart_description,
-                  cart_id:tr.cart_description
-                }
-              }else{
-                
-                return{
-                  data:tr.purchaseItems,
-                  result:[tr.data.payment_result.response_status,new Date(tr.data.payment_result.transaction_time)],
-                  ref:tr.data.tran_ref,
-                  cart_id:tr.data.cart_id
-                }
-              }
-            })
+  useEffect(() => {
+    client
+      .getEntry(uID)
+      .then(entry => {
+        blob = entry.fields.transactionsData;
+      })
+      .then(() => {
+        blob = blob.map(tr => {
+          if (tr.tran_class === "cod") {
+            return {
+              data: tr.purchaseItems,
+              result: ["Order Placed", new Date(tr.order_time)],
+              ref: tr.cart_description,
+              cart_id: tr.cart_description
+            };
+          } else {
+            return {
+              data: tr.purchaseItems,
+              result: [
+                tr.data.payment_result.response_status,
+                new Date(tr.data.payment_result.transaction_time)
+              ],
+              ref: tr.data.tran_ref,
+              cart_id: tr.data.cart_id
+            };
+          }
+        });
 
-
-    setRecentPurchases(<PurchasedProductGrid
-      columnClass={"col-6"}
-        products={blob}
-        spaceBottomClass="mb-25"
-      />)
-    
-  }).catch(e=>console.error(e))
-
-    
-  },[blob===undefined])
+        setRecentPurchases(
+          <PurchasedProductGrid
+            columnClass={"col-6"}
+            products={blob}
+            spaceBottomClass="mb-25"
+          />
+        );
+      })
+      .catch(e => console.error(e));
+  }, [blob === undefined]);
   return (
     <Fragment>
- <LayoutOne
-      article={"Exquisite Wardrobe"}
-      title={"Haute Couture & High-Street Fashion"}
-      description={
-        "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-      }
-      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
-      keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com/"}
-      color={"#000000"}
-      headerTop="visible"
-      headerContainerClass="container-fluid"
-      headerPaddingClass="header-padding-2"
-    >
+      <LayoutOne
+        article={"Exquisite Wardrobe"}
+        title={"Haute Couture & High-Street Fashion"}
+        description={
+          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+        }
+        image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={`${process.env.NEXT_PUBLIC_DOMAIN}`}
+        color={"#000000"}
+        headerTop="visible"
+        headerContainerClass="container-fluid"
+        headerPaddingClass="header-padding-2"
+      >
         {/* breadcrumb */}
         <Tab.Container defaultActiveKey="first">
           <Row className="account-page">
@@ -141,18 +115,20 @@ const MyAccount = ({ user }) => {
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
                   <Nav.Link className="userarea-pill" eventKey="first">
-                    
-                    {userAccount || <Skeleton />}{"'s Account"}
+                    {userAccount || <Skeleton />}
+                    {"'s Account"}
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link className="userarea-pill" eventKey="second">
-                  {userAccount || <Skeleton />}{"'s Orders"}
+                    {userAccount || <Skeleton />}
+                    {"'s Orders"}
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link className="userarea-pill" eventKey="third">
-                    {userAccount || <Skeleton />}{"'s Address Book"}
+                    {userAccount || <Skeleton />}
+                    {"'s Address Book"}
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
@@ -180,7 +156,10 @@ const MyAccount = ({ user }) => {
                                     <div className="myaccount-info-wrapper">
                                       <div className="account-info-wrapper">
                                         <h4>My Account Information</h4>
-                                        <h5>{userData.firstName||<Skeleton/>}'s Details</h5>
+                                        <h5>
+                                          {userData.firstName || <Skeleton />}'s
+                                          Details
+                                        </h5>
                                       </div>
                                       <div className="row">
                                         <div className="col-lg-6 col-md-6">
@@ -412,7 +391,6 @@ const MyAccount = ({ user }) => {
                                   </Card.Body>
                                 </Accordion.Collapse>
                               </Card>
-                              
                             </Accordion>
                           </div>
                         </div>
@@ -426,18 +404,14 @@ const MyAccount = ({ user }) => {
                       <div className="row">
                         <div className="ml-auto mr-auto col-lg-9 py-5 ">
                           <div className="myaccount-wrapper">
-                          <div className="row">
-                            {recentPurchases}
-                          
-                            </div>
+                            <div className="row">{recentPurchases}</div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </Tab.Pane>
-                <Tab.Pane className="single-my-account my-20"eventKey="third">
-                
+                <Tab.Pane className="single-my-account my-20" eventKey="third">
                   <div className="myaccount-info-wrapper">
                     <div className="account-info-wrapper">
                       <h4>Address Book Entries</h4>
@@ -467,10 +441,7 @@ const MyAccount = ({ user }) => {
                         <div className="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
                           {userData.addressDetails ? (
                             <div className="entries-edit-delete text-center">
-                              <button
-                                onClick={() => setModalShow(true)}
-                                
-                              >
+                              <button onClick={() => setModalShow(true)}>
                                 Edit
                               </button>
                               <button
@@ -489,9 +460,7 @@ const MyAccount = ({ user }) => {
                             </div>
                           ) : (
                             <div className="entries-edit-delete text-center">
-                              <button  disabled>
-                                Edit
-                              </button>
+                              <button disabled>Edit</button>
                               <button disabled>Delete</button>
                             </div>
                           )}

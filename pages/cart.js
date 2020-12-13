@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState, useEffect } from "react";
-import  Link  from "next/link";
-import HeaderMeta from "../components/header/HeaderMeta";
+import React, { Fragment, useState } from "react";
+import Link from "next/link";
+
 import { useToasts } from "react-toast-notifications";
 
 import { connect } from "react-redux";
@@ -14,18 +14,14 @@ import {
   deleteAllFromCart
 } from "../redux/actions/cartActions";
 import LayoutOne from "../layouts/LayoutOne";
-import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
+
 import { isSafari, isIE, isFirefox } from "react-device-detect";
-import {
-  CountryDropdown,
-  RegionDropdown,
-  CountryRegionData
-} from "react-country-region-selector";
+import Image from "antd/lib/image";
+import Skeleton from "react-loading-skeleton";
+
 const slugify = require("@sindresorhus/slugify");
 
-
 const Cart = ({
-  
   cartItems,
   currency,
   decreaseQuantity,
@@ -35,32 +31,27 @@ const Cart = ({
   user
 }) => {
   const [quantityCount] = useState(1);
-  const [country, selectCountry] = useState("");
-  const [region, selectRegion] = useState("");
+
   const { addToast } = useToasts();
-  
+
   let cartTotalPrice = 0;
-
-
-  
-  
 
   return (
     <Fragment>
       <LayoutOne
-       article={"Exquisite Wardrobe"}
-       title={"Haute Couture & High-Street Fashion"}
-       description={
-         "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
-       }
-      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
-      keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={"https://sanaakayum.com/cart"}
-      color={"#000000"}
-      headerTop="visible"
-    >
+        article={"Exquisite Wardrobe"}
+        title={"Haute Couture & High-Street Fashion"}
+        description={
+          "Specialized in creating extremely intricate wardrobes, even for those with asymmetrical size dimensions."
+        }
+        image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/meta-img/skstore.jpg`}
+        keywords={`Sana\'a Kayum, Dubai, Fashion `}
+        url={`${process.env.NEXT_PUBLIC_DOMAIN}/cart`}
+        color={"#000000"}
+        headerTop="visible"
+      >
         {/* breadcrumb */}
-       
+
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
             {cartItems && cartItems.length >= 1 ? (
@@ -104,21 +95,18 @@ const Cart = ({
                                   <Link
                                     href={`${
                                       process.env.NEXT_PUBLIC_DOMAIN
-                                    }/product/${cartItem.serialNumber}/${slugify(
-                                      cartItem.description
-                                    )}`}
+                                    }/product/${
+                                      cartItem.serialNumber
+                                    }/${slugify(cartItem.description)}`}
                                   >
-                                    <img
-                                      className="img-fluid"
+                                    <Image
                                       src={
                                         !(isSafari || isIE || isFirefox)
-                                          ? 
-                                            cartItem.images[0].fields.file.url
-                                          : `${
-                                              cartItem.images[0].fields.file
-                                                .url}?fm=jpg`
+                                          ? cartItem.images[0].fields.file.url
+                                          : `${cartItem.images[0].fields.file.url}?fm=jpg`
                                       }
-                                      alt=""
+                                      alt={cartItem.description}
+                                      placeholder={<Skeleton height={150} />}
                                     />
                                   </Link>
                                 </td>
@@ -127,15 +115,15 @@ const Cart = ({
                                   <Link
                                     href={`${
                                       process.env.NEXT_PUBLIC_DOMAIN
-                                    }/product/${cartItem.serialNumber}/${slugify(
-                                      cartItem.description
-                                    )}`}
+                                    }/product/${
+                                      cartItem.serialNumber
+                                    }/${slugify(cartItem.description)}`}
                                   >
                                     {cartItem.collectionName}
                                   </Link>
-                                    <div className="cart-item-variation">
-                                      {cartItem.description}
-                                    </div>
+                                  <div className="cart-item-variation">
+                                    {cartItem.description}
+                                  </div>
                                   {cartItem.selectedProductColor &&
                                   cartItem.selectedProductSize ? (
                                     <div className="cart-item-variation">
@@ -198,13 +186,12 @@ const Cart = ({
                                       className="inc qtybutton"
                                       onClick={() =>
                                         setTimeout(() => {
-                                          
                                           addToCart(
                                             cartItem,
                                             addToast,
                                             user.user.entryID,
                                             quantityCount
-                                          )
+                                          );
                                         }, 1000)
                                       }
                                       disabled={
@@ -277,7 +264,6 @@ const Cart = ({
                 </div>
 
                 <div className="row">
-                  
                   <div className="col-lg-4 col-md-6">
                     <div className="discount-code-wrapper">
                       <div className="title-wrap">
@@ -313,8 +299,7 @@ const Cart = ({
                         <span>{`AED ` + cartTotalPrice.toFixed(2)}</span>
                       </h4>
                       <Link href={process.env.NEXT_PUBLIC_DOMAIN + "/checkout"}>
-                      <a>{`Proceed to Checkout`}</a>
-                        
+                        <a>{`Proceed to Checkout`}</a>
                       </Link>
                     </div>
                   </div>
@@ -323,7 +308,13 @@ const Cart = ({
             ) : (
               <div className="row">
                 <div className="col-lg-12">
-                  <div className={cartItems?`${"table-content table-responsive cart-table-content"}`:`${"item-empty-area text-center"}`}>
+                  <div
+                    className={
+                      cartItems
+                        ? `${"table-content table-responsive cart-table-content text-center"}`
+                        : `${"item-empty-area text-center"}`
+                    }
+                  >
                     <div className="item-empty-area__icon mb-30">
                       <i className="pe-7s-cart"></i>
                     </div>

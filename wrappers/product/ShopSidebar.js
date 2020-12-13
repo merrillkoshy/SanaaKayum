@@ -4,17 +4,14 @@ import {
   getIndividualCategories,
   getIndividualTags,
   getIndividualColors,
-  getProductsIndividualSizes,
-  getSearchQuery
+  getProductsIndividualSizes
 } from "../../helpers/product";
 import ShopSearch from "../../components/product/ShopSearch";
 import ShopCategories from "../../components/product/ShopCategories";
 import ShopColor from "../../components/product/ShopColor";
 import ShopSize from "../../components/product/ShopSize";
 import ShopTag from "../../components/product/ShopTag";
-import ProductgridList from "./ProductgridList";
-import { connect } from "react-redux";
-import { useLocation } from "react-router-dom";
+
 import { window } from "ssr-window";
 import { isMobile } from "react-device-detect";
 

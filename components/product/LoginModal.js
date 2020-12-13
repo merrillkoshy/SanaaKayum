@@ -31,7 +31,7 @@ const LoginModal = ({loginUser,loadCart,loadWishlist,...props}) => {
             loginUser(ent.fields, addToast, ent.sys.id);
 
             ent.fields["cartData"] === undefined ||
-            ent.fields["cartData"] === null
+            ent.fields["cartData"][0] === null
               ? loadCart([])
               : loadCart(ent.fields.cartData.flat())(
                   ent.fields["wishlistData"] === undefined ||

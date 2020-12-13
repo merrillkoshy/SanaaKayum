@@ -1,13 +1,14 @@
-import PropTypes from "prop-types";
-import React, { Fragment } from "react";
-
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import LayoutOne from "../layouts/LayoutOne";
-import Breadcrumb from "../wrappers/breadcrumb/Breadcrumb";
+import SkPage from "../components/section-title/SkPage";
 import BrochureSingle from "../wrappers/skHelpers/BrochureSingle";
-import HeaderMeta from "../components/header/HeaderMeta";
 
-const Sk = () => {
+const Sk = ({ brochure }) => {
+  const [elems, setElems] = useState([]);
+  useEffect(() => {
+    setElems(brochure);
+  }, [brochure.length]);
   return (
     <LayoutOne
       article={"SK™ by Sana'a Kayum® | Sana'a Kayum"}
@@ -15,9 +16,9 @@ const Sk = () => {
       description={
         "Bespoke solutions for Corporate Clothing, Work-wear and Uniforms to represent YOUR brand identity in style and comfort."
       }
-      image={"https://sanaakayum.com/assets/pwa/icons/icon-512x512.png"}
+      image={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/pwa/icons/icon-512x512.png`}
       keywords={`Sana\'a Kayum, Dubai, Fashion `}
-      url={""}
+      url={`${process.env.NEXT_PUBLIC_DOMAIN}/sk`}
       color={"#000000"}
       headerTop="visible"
     >
@@ -29,8 +30,12 @@ const Sk = () => {
             <div className="col-lg-12">
               <div className="mr-20">
                 <div className="row">
-                  {/* blog posts */}
-                  <BrochureSingle />
+                  <SkPage spaceBottomClass="pb-90" />
+
+                  {elems &&
+                    elems.map(br => {
+                      return <BrochureSingle item={br} />;
+                    })}
                 </div>
               </div>
             </div>
@@ -40,5 +45,9 @@ const Sk = () => {
     </LayoutOne>
   );
 };
-
-export default Sk;
+const mapStateToProps = state => {
+  return {
+    brochure: state.brochuresData.brochures
+  };
+};
+export default connect(mapStateToProps)(Sk);

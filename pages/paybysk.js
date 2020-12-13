@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from "react";
+import React,{ useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import { postPurchase } from "../redux/actions/cartActions";
 
