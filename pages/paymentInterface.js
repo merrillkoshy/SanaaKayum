@@ -11,29 +11,11 @@ import Swiper from "react-id-swiper";
 
 const paymentInterface = ({ cartItems, user, postPurchase }) => {
   const [paymentResult, setPaymentResult] = useState("");
-
+  const [recentPurchases, setRecentPurchases] = useState(cartItems);
   const [paymentResponseCode, setPaymentResponseCode] = useState("");
 
   const userData = user.user;
-  const settings = {
-    loop: false,
-    slidesPerView: 4,
-    grabCursor: true,
-    breakpoints: {
-      1024: {
-        slidesPerView: 4
-      },
-      768: {
-        slidesPerView: 3
-      },
-      640: {
-        slidesPerView: 2
-      },
-      320: {
-        slidesPerView: 1
-      }
-    }
-  };
+  
   const getPayDate = inDate => {
     const monthNames = [
       "January",
@@ -125,26 +107,14 @@ const paymentInterface = ({ cartItems, user, postPurchase }) => {
 
   return (
     <Fragment>
+      
       <PaymentResponseLayout
         headerContainerClass="container-fluid"
         headerPaddingClass="header-padding-2"
         headerTop="visible"
       >
         <Container>
-          <Row className="d-block d-lg-flex d-xl-flex">
-            {paymentResponseCode === "0" ? (
-              <>
-                <Col>
-                  <Swiper {...settings}>
-                    <PurchasedProductGrid
-                      columnClass="col-6"
-                      products={cartItems}
-                      spaceBottomClass="mb-25"
-                    />
-                  </Swiper>
-                </Col>
-                <Col>
-                  <Container className="mt-150">
+        <Container className="mt-50">
                     <Table striped bordered hover variant="dark" size="sm">
                       <tbody>
                         <tr>
@@ -166,6 +136,21 @@ const paymentInterface = ({ cartItems, user, postPurchase }) => {
                       </tbody>
                     </Table>
                   </Container>
+
+          <Row className={`d-flex`}>
+            {paymentResponseCode === "0" ? (
+              <>
+                <Col>
+                  
+                    <PurchasedProductGrid
+                      columnClass="col"
+                      products={recentPurchases}
+                      spaceBottomClass="mb-25"
+                    />
+                  
+                </Col>
+                <Col>
+                  
                   <Link href="/shop">
                     <Button className="justify-content-md-center ml-40">
                       Back to shop

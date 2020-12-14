@@ -77,7 +77,19 @@ const PurchasedProductGrid = ({
       "<i class='pe-7s-angle-right'></i>"
     ]
   };
-
+  const optionsPay = {
+    nav: true,
+    items: 2,
+    dots: false,
+    center: false,
+    touchDrag: true,
+    responsiveClass: true,
+    mouseDrag: true,
+    navText: [
+      "<i class='pe-7s-angle-left'></i>",
+      "<i class='pe-7s-angle-right'></i>"
+    ]
+  };
   const [display, setDisplay] = useState(false);
   useEffect(() => {
     setDisplay(true);
@@ -88,7 +100,7 @@ const PurchasedProductGrid = ({
         products.map(product => {
           return product.data ? (
             display ? (
-              <OwlCarousel {...options} className="owl-theme" nav>
+              // <OwlCarousel {...optionsPay} className="owl-theme" nav>
                 <Row className="orders-wrapper mb-5" key={uuid()}>
                   <div className="text-right font-weight-bold pr-3 pt-2 title-card">
                     <div
@@ -112,12 +124,12 @@ const PurchasedProductGrid = ({
                     <ListPurchasedProductGLSingle product={product} />
                   </Row>
                 </Row>
-              </OwlCarousel>
+              /* </OwlCarousel> */
             ) : (
               <Skeleton height={150} />
             )
           ) : display ? (
-            <OwlCarousel {...options} className="owl-theme" nav>
+            <OwlCarousel {...optionsPay} className="owl-theme" nav>
               <Link
                 href={{
                   pathname: `/product/[pid]/[slug]`,

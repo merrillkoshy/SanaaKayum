@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
   var mailOptions = {
     from: "hello@sanaakayum.com",
-    to: "merrill@sanaakayum.com",
+    to: "hello@sanaakayum.com",
     subject: enquiry.subject + " from " + enquiry.email,
     html: enquiry.textarea
   };

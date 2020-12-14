@@ -36,7 +36,7 @@ const mailBody='<html xmlns:v="urn:schemas-microsoft-com:vml" style="width: 100%
   await cors(req, res);
   var mailOptions = {
     from: "hello@sanaakayum.com",
-    to: "merrill@sanaakayum.com",
+    to: "hello@sanaakayum.com",
     subject: "Refund request " ,
     // req.body
     html: mailBody

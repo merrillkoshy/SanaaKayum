@@ -113,7 +113,7 @@ const ProductImageGallery = ({ product }) => {
                             : `${single.fields.file
                               .url}?fm=jpg`
                         }
-                        placeholder={<Skeleton height={150} />}
+                        
                       />
                     </div>
                   </div>

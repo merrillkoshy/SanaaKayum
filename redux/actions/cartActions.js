@@ -86,7 +86,7 @@ export const resetCart = () => {
   };
 };
 export const postPurchase = uID => {
-  
+  console.log(uID)
   return dispatch => {
     dispatch({ type: POST_PURCHASE,payload:uID });
   };

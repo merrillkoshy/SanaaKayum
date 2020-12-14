@@ -84,7 +84,7 @@ const MyAccount = ({ user }) => {
 
         setRecentPurchases(
           <PurchasedProductGrid
-            columnClass={"col-6"}
+            columnClass={"col"}
             products={blob}
             spaceBottomClass="mb-25"
           />
@@ -402,7 +402,7 @@ const MyAccount = ({ user }) => {
                   <div className="myaccount-area pb-80">
                     <div className="container">
                       <div className="row">
-                        <div className="ml-auto mr-auto col-lg-9 py-5 ">
+                        <div className="col py-5 ">
                           <div className="myaccount-wrapper">
                             <div className="row">{recentPurchases}</div>
                           </div>

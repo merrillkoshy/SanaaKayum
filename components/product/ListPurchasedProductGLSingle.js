@@ -56,31 +56,31 @@ const ListPurchasedProductGLSingle=({product})=>{
         responsiveClass: true,
         responsive: {
           0: {
-            items: 2
+            items: 1
           },
           330: {
-            items: 2
+            items: 1
           },
           460: {
-            items: 3
+            items: 2
           },
           600: {
-            items: 4
+            items: 2
           },
           850: {
-            items: 5
+            items: 2
           },
           1000: {
-            items: 6
+            items: 2
           },
           1200: {
-            items: 7
+            items: 2
           },
           1300: {
-            items: 8
+            items: 2
           },
           1600: {
-            items: 8
+            items: 2
           }
         },
         mouseDrag: true,
