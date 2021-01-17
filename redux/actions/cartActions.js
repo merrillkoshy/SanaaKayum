@@ -4,7 +4,7 @@ export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const DELETE_ALL_FROM_CART = "DELETE_ALL_FROM_CART";
 export const RESET_CART = "RESET_CART";
 export const LOAD_CART_FROM_PROFILE = "LOAD_CART_FROM_PROFILE";
-export const POST_PURCHASE="POST_PURCHASE";
+export const POST_PURCHASE = "POST_PURCHASE";
 //add to cart
 export const addToCart = (
   item,
@@ -86,9 +86,8 @@ export const resetCart = () => {
   };
 };
 export const postPurchase = uID => {
-  console.log(uID)
   return dispatch => {
-    dispatch({ type: POST_PURCHASE,payload:uID });
+    dispatch({ type: POST_PURCHASE, payload: uID });
   };
 };
 

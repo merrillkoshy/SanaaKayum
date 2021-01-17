@@ -13,7 +13,7 @@ const cors = initMiddleware(
   })
 );
 let transporter = nodemailer.createTransport({
-  host: "sanaakayum.com",
+  host: "securesgp95.sgcpanel.com",
   port: 465,
   secure: true,
   auth: {
