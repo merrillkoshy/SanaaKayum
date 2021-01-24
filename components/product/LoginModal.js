@@ -9,7 +9,7 @@ import { loginUser } from "../../redux/actions/userActions";
 import { loadCart } from "../../redux/actions/cartActions";
 import { loadWishlist } from "../../redux/actions/wishlistActions";
 
-const LoginModal = ({loginUser,loadCart,loadWishlist,...props}) => {
+const LoginModal = ({ loginUser, loadCart, loadWishlist, ...props }) => {
   const { addToast } = useToasts();
 
   const [loginError, setLoginError] = useState("");
@@ -27,16 +27,16 @@ const LoginModal = ({loginUser,loadCart,loadWishlist,...props}) => {
             ent.fields.password === password
           ) {
             error = false;
-            
-            loginUser(ent.fields, addToast, ent.sys.id);
 
-            ent.fields["cartData"] === undefined ||
-            ent.fields["cartData"][0] === null
+            loginUser(ent.fields, addToast, ent.sys.id);
+            ent.fields["cartData"] === undefined
               ? loadCart([])
-              : loadCart(ent.fields.cartData.flat())(
-                  ent.fields["wishlistData"] === undefined ||
-                    ent.fields["wishlistData"][0] === null
-                )
+              : ent.fields["cartData"][0] === null
+              ? loadCart([])
+              : loadCart(ent.fields.cartData.flat());
+
+            ent.fields["wishlistData"] === undefined ||
+            ent.fields["wishlistData"][0] === null
               ? loadWishlist([])
               : loadWishlist(ent.fields.wishlistData.flat());
           }
@@ -49,9 +49,7 @@ const LoginModal = ({loginUser,loadCart,loadWishlist,...props}) => {
               {"Incorrect username or password. Please try again"}
             </Row>
           );
-        } 
-        
-        else return props.onHide()
+        } else return props.onHide();
       })
       .catch(err => console.error(err));
   };

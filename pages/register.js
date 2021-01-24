@@ -25,7 +25,7 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
   const [region, selectRegion] = useState("");
   const [addressLine, setAddressLine] = useState("");
   const [validated, setValidated] = useState(false);
-  const [contentfulErrorHit, setContentfulErrorHit] = useState(false);
+
   useEffect(() => {
     client
       .getEntries({
@@ -67,6 +67,7 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
       .catch(err => console.error(err));
   };
   const createEntry = () => {
+    let error;
     clientMgr
       .then(environment =>
         environment.createEntry("users", {
@@ -111,18 +112,16 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
       )
 
       .then(entry => {
+        console.log(entry);
         return entry.publish();
       })
       .catch(err => {
-        setContentfulErrorHit(true);
+        error = true;
+
         console.error(err);
-        addToast(" Username already taken! Please choose another username", {
-          appearance: "error",
-          autoDismiss: true
-        });
       })
       .finally(() => {
-        if (!contentfulErrorHit) {
+        if (!error) {
           addToast(
             " Welcome " +
               document.querySelector("input[name='username']").value +
@@ -136,6 +135,8 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
             document.querySelector("input[name='username']").value,
             document.querySelector("input[name='user-password']").value
           );
+        } else {
+          return false;
         }
       });
   };
@@ -339,8 +340,8 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
                               required
                               type="password"
                               name="user-password"
-                              pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}"
-                              placeholder="Password should contain atleast eight characters of
+                              pattern="((?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{5,})"
+                              placeholder="Password should contain atleast five characters of
                                 atleast one uppercase, one lowercase and a number"
                             />
 
@@ -348,9 +349,9 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
                               Looks good!
                             </Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">
-                              Password should contain atleast eight characters
-                              of atleast one uppercase, one lowercase and a
-                              number. Please do not put any special characters.
+                              Password should contain atleast five characters of
+                              atleast one uppercase, one lowercase and a number.
+                              Please do not put any special characters.
                             </Form.Control.Feedback>
                           </Form.Group>
                         </Form.Row>
@@ -412,6 +413,16 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
                                 setValidated(true);
                                 event.preventDefault();
                                 createEntry();
+
+                                // else {
+                                //   addToast(
+                                //     " Username already taken! Please choose another username",
+                                //     {
+                                //       appearance: "error",
+                                //       autoDismiss: true
+                                //     }
+                                //   );
+                                // }
                               }
                             }}
                             type="submit"
