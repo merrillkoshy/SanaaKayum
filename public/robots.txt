@@ -1,4 +1,9 @@
+# *
 User-agent: *
 Allow: /
+
+# Host
 Host: https://sanaakayum.com
+
+# Sitemaps
 Sitemap: https://sanaakayum.com/sitemap.xml
