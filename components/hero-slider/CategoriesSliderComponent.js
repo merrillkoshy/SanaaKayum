@@ -32,9 +32,11 @@ const CategoriesSliderComponent = ({
     "Pajama",
     "Maxi Gown"
   ];
+  const filteredCats = products.filter(prod => !carelessArray.includes(prod));
   const options = {
     nav: true,
     dots: false,
+    loop: true,
     center: false,
     touchDrag: true,
     responsiveClass: true,
@@ -83,28 +85,25 @@ const CategoriesSliderComponent = ({
   return (
     <Fragment>
       {display ? (
-        <OwlCarousel {...options} className="owl-theme" nav>
-          {isFallback ? (
-            <Skeleton count={5} />
-          ) : (
-            products &&
-            products.map((product, i) => {
-              return (
-                <div
-                  key={i}
-                  className={`col ${sliderClassName ? sliderClassName : ""}`}
-                >
-                  <Card style={{ width: "130px", border: "none" }}>
-                    <Card.Body className="p-3">
-                      <Link
-                        href={
-                          process.env.NEXT_PUBLIC_DOMAIN +
-                          `/shop?search=` +
-                          product
-                        }
-                      >
-                        <a>
-                          {!carelessArray.includes(product) ? (
+        <div>
+          <OwlCarousel {...options} className="owl-theme" nav>
+            {filteredCats &&
+              filteredCats.map((product, i) => {
+                return (
+                  <div
+                    key={i}
+                    className={`col ${sliderClassName ? sliderClassName : ""}`}
+                  >
+                    <Card style={{ width: "130px", border: "none" }}>
+                      <Card.Body className="p-3">
+                        <Link
+                          href={
+                            process.env.NEXT_PUBLIC_DOMAIN +
+                            `/shop?search=` +
+                            product
+                          }
+                        >
+                          <a>
                             <Card.Img
                               variant="top"
                               src={`/assets/categories/${product.replace(
@@ -116,34 +115,44 @@ const CategoriesSliderComponent = ({
                                 e.target.src = `/assets/categories/placeholder.png`;
                               }}
                             />
-                          ) : (
-                            <Card.Img
-                              variant="top"
-                              src={`/assets/categories/Careless.png`}
-                              onError={e => {
-                                e.target.onerror = null;
-                                e.target.src = `/assets/categories/placeholder.png`;
-                              }}
-                            />
-                          )}
-                        </a>
-                        {/* <Card.Text>
-                  <strong>sanaa_kayum</strong> Shop {product} #{product}{" "}
-                  #sanaakayum
-                </Card.Text> */}
-                      </Link>
-                    </Card.Body>
-                  </Card>
-                </div>
-              );
-            })
-          )}
-        </OwlCarousel>
+                          </a>
+                        </Link>
+                      </Card.Body>
+                    </Card>
+                  </div>
+                );
+              })}
+            {
+              <Card style={{ width: "130px", border: "none" }}>
+                <Card.Body className="p-3">
+                  <Link
+                    href={
+                      process.env.NEXT_PUBLIC_DOMAIN +
+                      `/shop?search=` +
+                      "lingerie"
+                    }
+                  >
+                    <a>
+                      <Card.Img
+                        variant="top"
+                        src={`/assets/categories/Careless.png`}
+                        onError={e => {
+                          e.target.onerror = null;
+                          e.target.src = `/assets/categories/placeholder.png`;
+                        }}
+                      />
+                    </a>
+                  </Link>
+                </Card.Body>
+              </Card>
+            }
+          </OwlCarousel>
+        </div>
       ) : (
         <>
-        <Skeleton circle={true} height={100} width={100} />
-        <Skeleton circle={true} height={100} width={100} />
-        <Skeleton circle={true} height={100} width={100} />
+          <Skeleton circle={true} height={100} width={100} />
+          <Skeleton circle={true} height={100} width={100} />
+          <Skeleton circle={true} height={100} width={100} />
         </>
       )}
     </Fragment>

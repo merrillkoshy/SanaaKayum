@@ -67,7 +67,7 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
       .catch(err => console.error(err));
   };
   const createEntry = () => {
-    let error;
+    var error = false;
     clientMgr
       .then(environment =>
         environment.createEntry("users", {
@@ -112,12 +112,10 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
       )
 
       .then(entry => {
-        console.log(entry);
         return entry.publish();
       })
       .catch(err => {
         error = true;
-
         console.error(err);
       })
       .finally(() => {
@@ -136,6 +134,11 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
             document.querySelector("input[name='user-password']").value
           );
         } else {
+          addToast(" Username already taken! Please choose another username", {
+            appearance: "error",
+            autoDismiss: true
+          });
+
           return false;
         }
       });
@@ -413,16 +416,6 @@ const LoginRegister = ({ loginUser, loadCart, loadWishlist, userData }) => {
                                 setValidated(true);
                                 event.preventDefault();
                                 createEntry();
-
-                                // else {
-                                //   addToast(
-                                //     " Username already taken! Please choose another username",
-                                //     {
-                                //       appearance: "error",
-                                //       autoDismiss: true
-                                //     }
-                                //   );
-                                // }
                               }
                             }}
                             type="submit"
