@@ -52,7 +52,8 @@
     "sass": "^1.30.0",
     "ssr-window": "^2.0.0",
     "swiper": "^6.3.5",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "webpack": "^4.46.0"
   },
   "license": "MIT",
   "devDependencies": {
