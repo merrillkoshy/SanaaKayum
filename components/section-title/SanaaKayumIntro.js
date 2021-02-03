@@ -2,6 +2,11 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const SectionTitleWithText = ({ spaceTopClass, spaceBottomClass }) => {
+  console.log(
+    "%cDesigned and Developed by \nMerrill Koshy Thomas\nGitHub: /merrillkoshy\nLinkedIn: /in/merrill-koshy-thomas/ ",
+    "background: black; color: white; font-size: 16px"
+  );
+
   return (
     <div
       className={`welcome-area ${spaceTopClass ? spaceTopClass : ""} ${
@@ -41,6 +46,40 @@ const SectionTitleWithText = ({ spaceTopClass, spaceBottomClass }) => {
             and have a look at our collections. You will find that every item
             that leaves our production floor celebrates the power of femininity,
             and exudes ultra-fine craftsmanship.
+          </p>
+        </div>
+        <div className="welcome-content text-center pt-100 pb-95">
+          <h5>Sana'a Kayum</h5>
+          <h1>Meet The Designer</h1>
+          <p>
+            Sana’a has been applying design and aesthetics to wardrobes for over
+            22 years, creating unique exquisite styles in a wide range of
+            Ready-to-Wear and Made-to-Order categories. She is highly versatile
+            and flexible in her approach, with in-depth knowledge and experience
+            of contemporary, ethnic and modest fashion trends. She is driven by
+            her passion for art-inspired clothing. Her signature creations have
+            amassed traction from high net worth clientele spanning over 40
+            nationalities.{" "}
+          </p>
+          <p>
+            Sana’a gained her fashion designing credentials from Fashion
+            Institute of Technology in New York, and a diploma in Apparel
+            Manufacture & Design from SNDT University in Mumbai. She joined
+            prominent fashion house ‘AJSK’ and worked under the tutelage of
+            designers Abu Jani and Sandeep Khosla as an Assistant Designer and
+            Quality Control Head for both their Mumbai and London branches. She
+            has designed costumes for film celebrities to feature in Hindi
+            feature films and Bollywood’s red-carpet events, assisted for
+            extravagant high-profile weddings, and participated in annual
+            couture show projects.{" "}
+          </p>
+          <p>
+            Sana'a does what she does because of her belief in her brand
+            statement. And that is to create a unique clothing experience for
+            the sophisticated fashionista across all age and size categories.
+            This is a profound claim because she guarantees that every item that
+            leaves her production floor celebrates the power of femininity, and
+            exudes ultrafine craftsmanship.{" "}
           </p>
         </div>
       </div>
