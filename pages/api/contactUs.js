@@ -17,11 +17,9 @@ let transporter = nodemailer.createTransport({
   auth: {
     type: "OAuth2",
     user: "hello@sanaakayum.com",
-    clientId:
-      "388749780390-0kr63ilrrtk1sf9cd323422npndb6ol5.apps.googleusercontent.com",
-    clientSecret: "B2fBpLV1NtUb5Mn4TUJVBzU2",
-    refreshToken:
-      "1//04ZsONVHRYFlkCgYIARAAGAQSNwF-L9IrHc8atdCmvXGqA8EaUWpzBoF4UBXKkq6wiVvt6Zhbo8OhJRaLjpU7po0HYwix919solg"
+    clientId: process.env.NEXT_PUBLIC_GCID,
+    clientSecret: process.env.NEXT_PUBLIC_GSEC,
+    refreshToken: process.env.NEXT_PUBLIC_RTK
   }
 });
 export default async function handler(req, res) {

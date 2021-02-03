@@ -1,7 +1,7 @@
 const contentful = require("contentful");
 const client = contentful.createClient({
-  space: "calc8uiajr6g",
-  accessToken: "sn5JM4r2sLCCMtQFQ536eMZDVEBXHJ6tOMrnQq64QT4"
+  space: process.env.NEXT_PUBLIC_CDA_SPACE,
+  accessToken: process.env.NEXT_PUBLIC_CDA_ACCESS
 });
 
 export default client;
